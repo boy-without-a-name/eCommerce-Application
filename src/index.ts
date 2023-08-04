@@ -1,2 +1,2 @@
-var qwer='qwe'    ;
-let q =223
+var qwer ='qwe'                   ;
+let q =223 

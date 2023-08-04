@@ -34,12 +34,12 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
-    },
-    "lint-staged": {
-      "*.ts": [
-        "npm run format",
-        "git add"
-      ]
     }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run format",
+      "git add"
+    ]
   }
 }
