@@ -36,7 +36,7 @@
       "pre-commit": "lint-staged"
     },
     "lint-staged": {
-      ".ts": [
+      "*.ts": [
         "npm run format",
         "git add"
       ]
