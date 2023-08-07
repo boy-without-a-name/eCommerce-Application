@@ -14,5 +14,11 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint"]
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/explicit-function-return-type": "error",
+    "prefer-arrow/prefer-arrow-functions": "warn",
+    "no-multiple-empty-lines": "error"
+  }
 }
