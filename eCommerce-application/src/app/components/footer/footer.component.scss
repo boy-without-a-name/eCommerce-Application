@@ -1,0 +1,14 @@
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.3rem 0.5rem;
+  background-color: #131921;
+  color: #fff;
+
+  &__logo {
+    height: 2.5rem;
+    border-radius: 4px;
+  }
+}
