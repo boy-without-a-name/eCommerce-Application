@@ -7,7 +7,7 @@ platformBrowserDynamic()
   .catch((err) => console.error(err));
 
 // тест husky
-let test = function (): void {
-  console.log('тест хаски');
+let test=function ():           void        {
+              console.log('тест хаски');
 };
 test();
