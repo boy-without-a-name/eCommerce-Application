@@ -8,6 +8,7 @@ platformBrowserDynamic()
 
 // тест husky
 let test=function ():           void        {
-              console.log('тест хаски');
+              console.log('тест хаски')      ;
+              console.log('test')
 };
 test();
