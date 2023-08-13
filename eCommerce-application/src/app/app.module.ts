@@ -10,9 +10,10 @@ import { HeaderSearchComponent } from './components/header-search/header-search.
 import { FooterComponent } from './components/footer/footer.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { SocialsComponent } from './components/socials/socials.component';
+import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
-  declarations: [AppComponent, MainComponent, HeaderComponent, CartComponent, HeaderSearchComponent, FooterComponent, LogoComponent, SocialsComponent],
+  declarations: [AppComponent, MainComponent, HeaderComponent, CartComponent, HeaderSearchComponent, FooterComponent, LogoComponent, SocialsComponent, ButtonComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
