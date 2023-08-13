@@ -1,8 +1,11 @@
+:host {
+  width: 60%;
+}
+
 .search {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 30rem;
   height: 2.5rem;
   background-color: #febd69;
   border-radius: 4px;

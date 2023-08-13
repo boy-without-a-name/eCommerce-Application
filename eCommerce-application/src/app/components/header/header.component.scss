@@ -11,3 +11,21 @@
   background-color: #131921;
   height: 60px;
 }
+
+.logo {
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 1rem;
+}
