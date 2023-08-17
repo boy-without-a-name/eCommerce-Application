@@ -8,7 +8,7 @@ describe('HeaderSearchComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HeaderSearchComponent]
+      declarations: [HeaderSearchComponent],
     });
     fixture = TestBed.createComponent(HeaderSearchComponent);
     component = fixture.componentInstance;
