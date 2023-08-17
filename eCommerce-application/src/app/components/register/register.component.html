@@ -10,21 +10,20 @@
     </button>
   </div>
   <div class='register__form'>
-    <form class='register__background'>
+    <form (submit)='onSubmit($event)' class='register__background'>
       <div class='register__wrapper'>
         <h2>Register</h2>
         <p *ngIf='error'>Error message</p>
-        <input type='text' placeholder='First Name' />
-        <input type='text' placeholder='Last Name' />
-        <input type='email' placeholder='Email' />
-        <input type='text' placeholder='Type your nickname' />
-        <input type='password' placeholder='Type password' />
+        <input type='text' placeholder='First Name' [(ngModel)]='data.firstName' />
+        <input type='text' placeholder='Last Name' [(ngModel)]='data.lastName' />
+        <input type='email' placeholder='Email' [(ngModel)]='data.email' />
+        <input type='password' placeholder='Type password' [(ngModel)]='data.password' />
         <div class='button__register__wrapper'>
           <button>Back</button>
-          <button type='submit' (click)='service.register()'>Sign in</button>
+          <button (click)='service.register(data)'>Sign in</button>
         </div>
       </div>
     </form>
   </div>
 </div>
-<button type='submit' (click)='service.register()'>Sign in</button>
+

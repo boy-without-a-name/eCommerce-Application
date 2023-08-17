@@ -4,3 +4,10 @@ export interface AccessTokenResponse {
   scope?: string;
   token_type?: string;
 }
+
+export interface IRegisterData {
+  email: string,
+  firstName: string,
+  lastName: string,
+  password: string
+}
