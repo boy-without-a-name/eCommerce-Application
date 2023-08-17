@@ -5,16 +5,16 @@ import { Component } from '@angular/core';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class AppLogin {
-  linkImg: string[] = [
+export class AppLoginComponent {
+  linkImg = [
     '../../../assets/img/password/free-icon-eye-159604.png',
     '../../../assets/img/password/free-icon-hide-2767146.png',
   ];
-  typeInput: string[] = ['password', 'text'];
-  showPasswordBoolean: boolean = false;
-  showErrorEmail: boolean = false;
-  textErrorPasword: string = '';
-  text: string = '';
+  typeInput = ['password', 'text'];
+  showPasswordBoolean = false;
+  showErrorEmail = false;
+  textErrorPasword = '';
+  text = '';
 
   showPassword(a: string[]): string {
     if (this.showPasswordBoolean) {
@@ -24,7 +24,7 @@ export class AppLogin {
   }
 
   checkEmail(value: string): void {
-    let str = value.split('@');
+    const str = value.split('@');
     if (
       str.length != 2 ||
       str[0].length == 0 ||
@@ -40,12 +40,12 @@ export class AppLogin {
   }
   checkPassword(value: string): string | void {
     this.textErrorPasword = 'Неправильный формат пароля.';
-    let checkRulesPassword: boolean = false;
+    let checkRulesPassword = false;
     if (value.length < 8) {
       this.textErrorPasword += ' Пароль должен быть не менее 8 символов.';
       checkRulesPassword = true;
     }
-    let str = value.split('');
+    const str = value.split('');
     for (let i = 0; i < str.length; i++) {
       if (str[i] == str[i].toUpperCase() && str[i] != ' ' && typeof str[i] != 'number') {
         break;
