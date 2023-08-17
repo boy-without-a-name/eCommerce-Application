@@ -34,17 +34,6 @@ export class RegisterService {
         .set('Content-Type', 'application/x-www-form-urlencoded');
 
       return this.http.post(tokenUrl, data.toString(), { headers });
-
-      // if ('access_token' in this.answer) {
-      //
-      //   const accessToken = this.answer['access_token'];
-      //   console.log(accessToken);
-      //   console.log('Токен доступа:', accessToken);
-      //   return accessToken;
-      // } else {
-      //   console.log('Ошибка при запросе токена доступа:', response);
-      //   return null;
-      // }
     } catch (error) {
       console.error('Ошибка при выполнении запроса', error);
       return null;
