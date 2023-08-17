@@ -16,7 +16,18 @@ import { SocialsComponent } from './components/socials/socials.component';
 import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
-  declarations: [AppComponent, AppLogin, MainComponent, HeaderComponent, CartComponent, HeaderSearchComponent, FooterComponent, LogoComponent, SocialsComponent, ButtonComponent],
+  declarations: [
+    AppComponent,
+    AppLogin,
+    MainComponent,
+    HeaderComponent,
+    CartComponent,
+    HeaderSearchComponent,
+    FooterComponent,
+    LogoComponent,
+    SocialsComponent,
+    ButtonComponent,
+  ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],

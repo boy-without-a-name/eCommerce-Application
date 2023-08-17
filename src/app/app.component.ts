@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IRegisterData } from './services/types';
 
 @Component({
   selector: 'app-root',
