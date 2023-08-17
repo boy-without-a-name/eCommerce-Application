@@ -1,0 +1,38 @@
+:host {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 0.5rem;
+  background-color: #131921;
+
+  @media screen and (max-width: 481px) {
+    flex-direction: column-reverse;
+  }
+}
+
+.logo {
+  display: none;
+
+  @media screen and (min-width: 769px) {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 1rem;
+
+  @media screen and (max-width: 481px) {
+    align-self: flex-end;
+  }
+}
