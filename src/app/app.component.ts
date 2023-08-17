@@ -7,5 +7,5 @@ import { IRegisterData } from './services/types';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'eCommerce-application';
+  title = 'log-in';
 }
