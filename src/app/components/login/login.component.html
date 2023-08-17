@@ -1,0 +1,33 @@
+<div class="login-wrapper">
+  <div class="information-wrapper">
+    <div class="information-wrapper__background"></div>
+    <img class="information-wrapper__img" src="../../../assets/img/im-fine.svg" alt="">
+    <p class="information-wrapper__text">Hi there, do you have money? Tell me how much, i will give you things you need</p>
+    <button class="return-main-page">
+      <img src="../../../assets/img/Vector.svg">
+      <p>Вернуться на главную страницу</p>
+    </button>
+  </div>
+  <div class = "login-form">
+    <div class="form-wrapper">
+    <form class="form">
+      <div class="email">
+        <input class="form-wrapper__email" #login_email type="text" placeholder="Email"
+        (blur)="checkEmail(login_email.value)">
+        <p class="error-email" *ngIf="showErrorEmail">Некорректный адрес Email. Проверьте что Ваша почта соответствукт образцу "user@example.com"</p>
+      </div>
+        <div class="password">
+          <input class="password__input" #login_password [type]=showPassword(typeInput) placeholder="Пароль"
+          (blur)="checkPassword(login_password.value)">
+          <img class="password__img" [src] = showPassword(linkImg)
+          (click)="showPasswordBoolean = !showPasswordBoolean"
+        >
+        </div>
+        <div class="error-email">{{[text]}}</div>
+      <button class="form-wrapper__btn" type="submit"
+      >Войти</button>
+    </form>
+    <p class="link-registration">Зарегистрироваться на сайте</p>
+    </div>
+  </div>
+</div>

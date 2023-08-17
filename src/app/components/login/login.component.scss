@@ -1,0 +1,253 @@
+.login-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1920px;
+  max-height: 100vh;
+
+}
+.information-wrapper {
+  width: 50%;
+  overflow: hidden;
+  position: relative;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.information-wrapper__background {
+  position: absolute;
+  top: -325px;
+  right: 0;
+  background-color: #FFE259;
+  display: flex;
+  width: 1500px;
+  height: 1500px;
+  border-radius: 50%;
+}
+
+.information-wrapper__img {
+  z-index: 1;
+  width: 300px;
+  height: auto;
+}
+
+.information-wrapper__text {
+  z-index: 1;
+  font:bold 2em Roboto, sans-serif ;
+  color: #4F4F4F;
+  width: 100%;
+  max-width: 75%;
+}
+
+.return-main-page {
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  margin-top: 60px;
+  margin-right: 40%;
+  gap: 5px;
+  outline: none;
+  background-color: transparent;
+  border: 0;
+  font: 1.3em sans-serif;
+  cursor: pointer;
+}
+
+.return-main-page:hover {
+  color:#1840c4
+}
+
+.login-form {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5%;
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border: 0px solid;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 595px;
+  height: 795px;
+  background: linear-gradient(to right, #FFE259, #FFA751);
+}
+
+.email {
+  width: 100%;
+  max-width: 456px;
+  margin-bottom: 100px;
+}
+
+.error-email {
+  color: #f00101;
+  max-width: 456px;
+}
+
+.form {
+  display: flex;
+  padding: 10% 3% 0 3%;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.password {
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 456px;
+  height: 90px;
+  border: 2px solid #000000;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+
+.form-wrapper__email,
+.password__input {
+  padding-left: 3%;
+  width: 100%;
+  height: 90px;
+  font-size: 1.8em;
+  line-height: 2.1em;
+  border-radius: 10px;
+}
+.form-wrapper__email {
+  margin-bottom: 5px;
+  max-width: 456px;
+}
+
+.password__input {
+  max-width: 406px;
+  height: 85px;
+  border: none;
+  resize: none;
+  outline: none;
+}
+
+.password__img {
+  width: 32px;
+  margin-right: 3%;
+  cursor: pointer;
+}
+
+.form-wrapper__btn {
+  width: 100%;
+  max-width: 397px;
+  height: 95px;
+  margin-top: 100px;
+  border-radius: 50px;
+  border: 1px;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 35px;
+  cursor: pointer;
+}
+
+.link-registration {
+  margin-top: 50px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #000000;
+  cursor: pointer;
+}
+.link-registration:hover {
+  color:#1840c4
+}
+
+@media (max-width: 768px) {
+
+  .login-wrapper {
+    flex-direction: column-reverse;
+    align-items: center;
+   padding: 2%;
+  }
+
+  .information-wrapper {
+    width: 100%;
+    max-width: 780px;
+    padding: 1% 5%;
+  }
+
+  .information-wrapper__background  {
+    opacity: 0;
+  }
+
+  .form-wrapper {
+    height: 520px;
+  }
+
+  .form {
+    padding-top: 5%;
+  }
+
+  .email {
+    margin-bottom: 35px;
+  }
+
+  .form-wrapper__email,
+  .password {
+    height: 50px;
+    font-size: 1.5em;
+    line-height: 1.8em;
+  }
+
+  .password__input {
+    height: 45px;
+    font-size: 1em;
+    line-height: 1.3em;
+  }
+
+  .form-wrapper__btn {
+    height: 45px;
+    max-width: 300px;
+    font-size: 1.3em;
+    line-height: 1.5em;
+    margin-top: 30px;
+  }
+
+  .information-wrapper {
+    flex-direction: column-reverse;
+  }
+
+  .information-wrapper__img {
+    width: 250px;
+  }
+
+  .information-wrapper__text {
+   display: none;
+  }
+
+  .return-main-page {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px 0;
+    font-size: 1rem;
+    justify-content: center;
+  }
+
+  .link-registration {
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  .login-form {
+    width: 100%;
+    height: 60%;
+  }
+ }
+
+ @media (max-width: 380px) {
+  .form-wrapper__email,
+  .password__input {
+    font-size: 1rem;
+  }
+ }
