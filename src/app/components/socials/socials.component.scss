@@ -1,0 +1,21 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: end;
+  padding: 0 1rem;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #febd69;
+
+  &__item {
+    text-decoration: none;
+    &:visited {
+      color: #febd69;
+    }
+  }
+}

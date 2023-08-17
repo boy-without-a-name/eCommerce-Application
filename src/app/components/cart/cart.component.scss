@@ -1,0 +1,43 @@
+.cart {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 3.2rem;
+  height: 100%;
+
+  &:hover {
+    cursor: pointer;
+
+    .cart__icon {
+      > g {
+        fill: #febd69;
+      }
+    }
+  }
+
+  &__items-amount {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 16px;
+    line-height: 1;
+    padding: 0 8px;
+    color: #fff;
+    background-color: #f91155;
+    border-radius: 8px;
+    user-select: none;
+  }
+
+  &__icon {
+    width: 2.5rem;
+    height: 2.5rem;
+
+    > g {
+      fill: #fff;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+}
