@@ -48,5 +48,5 @@ ng lint
 ### Sets up Husky
 
 ```
-ng prepare
+husky install
 ```

@@ -3,6 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AppLogin } from './components/login/login.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { MainComponent } from './components/main/main.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CartComponent } from './components/cart/cart.component';
@@ -13,7 +16,7 @@ import { SocialsComponent } from './components/socials/socials.component';
 import { ButtonComponent } from './components/button/button.component';
 
 @NgModule({
-  declarations: [AppComponent, MainComponent, HeaderComponent, CartComponent, HeaderSearchComponent, FooterComponent, LogoComponent, SocialsComponent, ButtonComponent],
+  declarations: [AppComponent, AppLogin, MainComponent, HeaderComponent, CartComponent, HeaderSearchComponent, FooterComponent, LogoComponent, SocialsComponent, ButtonComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
