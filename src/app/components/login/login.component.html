@@ -6,7 +6,7 @@
       Hi there, do you have money? Tell me how much, i will give you things you need
     </p>
     <button class="return-main-page">
-      <img src="../../../assets/img/Vector.svg" />
+      <img src="../../../assets/img/Vector.svg" alt="" />
       <p>Вернуться на главную страницу</p>
     </button>
   </div>
@@ -36,7 +36,8 @@
           <img
             class="password__img"
             [src]="showPassword(linkImg)"
-            (click)="showPasswordBoolean = !showPasswordBoolean"
+            (mousedown)="showPasswordBoolean = !showPasswordBoolean"
+            alt=""
           />
         </div>
         <div class="error-email">{{ [text] }}</div>
