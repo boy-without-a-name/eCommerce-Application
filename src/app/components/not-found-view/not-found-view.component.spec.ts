@@ -8,7 +8,7 @@ describe('NotFoundViewComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [NotFoundViewComponent]
+      declarations: [NotFoundViewComponent],
     });
     fixture = TestBed.createComponent(NotFoundViewComponent);
     component = fixture.componentInstance;
