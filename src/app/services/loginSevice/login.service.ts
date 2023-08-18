@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+import { DataUser } from 'src/app/models/interface/dataUser.interface';
 import { AccessTokenResponse } from 'src/app/models/interface/AnswerTokenResponseInterface';
 import { scope, clientId, clientSecret, tokenUrlLogin } from 'src/app/models/constants/constants';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class LoginService {
   answer: AccessTokenResponse = {
     access_token: '',
@@ -28,7 +31,13 @@ export class LoginService {
       .set('Authorization', `Basic ${btoa(`${clientId}:${clientSecret}`)}`)
       .set('Content-Type', 'application/x-www-form-urlencoded');
 
-    const token = this.http.post(tokenUrlLogin, data.toString(), { headers });
-    return token;
+    return this.http.post(tokenUrlLogin, data.toString(), { headers });
   }
+
+  getUserData(authToken: string | null): Observable<DataUser> | null {
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${authToken}`);
+      return this.http.get('https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/me', { headers });
+  }
+
 }
