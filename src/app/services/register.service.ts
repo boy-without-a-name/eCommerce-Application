@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {AccessTokenResponse, IRegisterData} from './types';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AccessTokenResponse, IRegisterData } from './types';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +15,7 @@ export class RegisterService {
 
   apiUrl = 'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/customers -i';
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getToken() {
     const clientId = 'nW_nTeh94asuW0LieFf0ZmY-';
@@ -33,7 +32,7 @@ export class RegisterService {
         .set('Authorization', `Basic ${btoa(`${clientId}:${clientSecret}`)}`)
         .set('Content-Type', 'application/x-www-form-urlencoded');
 
-      return this.http.post(tokenUrl, data.toString(), {headers});
+      return this.http.post(tokenUrl, data.toString(), { headers });
     } catch (error) {
       console.error('Ошибка при выполнении запроса', error);
       return null;
