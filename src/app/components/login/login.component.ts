@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from 'src/app/services/loginSevice/login.service';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -89,10 +88,10 @@ export class AppLoginComponent {
   }
   clickButtonSubmit(email: string, password: string): void {
     this.token.getToken(email, password)?.subscribe({
-      next: responce=>{console.log(responce.access_token)},
-      error: ()=>alert("Неверный логин или пароль")
-
-    })
+      next: (responce) => {
+        console.log(responce.access_token);
+      },
+      error: () => alert('Неверный логин или пароль'),
+    });
   }
-
 }
