@@ -25,5 +25,4 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // data = this.service.register();
 }
