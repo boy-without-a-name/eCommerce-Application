@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../../services/register.service';
-import { IRegisterData } from '../../services/types';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -10,23 +9,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 })
 export class RegisterComponent implements OnInit {
   error: boolean = false;
-  date: any;
   registrationForm: FormGroup;
-
-  // data: IRegisterData = {
-  //   firstName: '',
-  //   lastName: '',
-  //   email: '',
-  //   password: '',
-  //   date: '',
-  //   address: {
-  //     streetName: '',
-  //     streetNumber: '',
-  //     postalCode: '',
-  //     city: '',
-  //     country: 'BY'
-  //   }
-  // };
 
   constructor(
     public service: RegisterService,
@@ -60,7 +43,7 @@ export class RegisterComponent implements OnInit {
     if (this.registrationForm.valid) {
       console.log(this.registrationForm.value);
       console.log('Valid? ', this.registrationForm.valid);
-      this.service.register(this.registrationForm.value).then(r => console.log(r));
+      this.service.register(this.registrationForm.value).then((r) => console.log(r));
     } else {
       this.error = true;
     }
