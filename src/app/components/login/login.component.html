@@ -41,7 +41,9 @@
           />
         </div>
         <div class="error-email">{{ [text] }}</div>
-        <button class="form-wrapper__btn">Войти</button>
+        <button class="form-wrapper__btn" (mousedown)="clickButtonSubmit(login_email.value, login_password.value)">
+          Войти
+        </button>
       </div>
       <p class="link-registration">Зарегистрироваться на сайте</p>
     </div>
