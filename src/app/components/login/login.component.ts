@@ -18,7 +18,10 @@ export class AppLoginComponent {
   textErrorPasword = '';
   text = '';
 
-  constructor(private token: LoginService, private router: Router) {}
+  constructor(
+    private token: LoginService,
+    private router: Router,
+  ) {}
 
   showPassword(a: string[]): string {
     if (this.showPasswordBoolean) {
@@ -95,7 +98,7 @@ export class AppLoginComponent {
           localStorage.setItem('email', `${responce.email}`);
           localStorage.setItem('firstName', `${responce.firstName}`);
           localStorage.setItem('lastName', `${responce.lastName}`);
-          this.router.navigate(['/'])
+          this.router.navigate(['/']);
         });
       },
       error: () => alert('Неверный логин или пароль'),
