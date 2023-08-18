@@ -16,6 +16,7 @@ import { SocialsComponent } from './components/socials/socials.component';
 import { ButtonComponent } from './components/button/button.component';
 import { MainViewComponent } from './components/main-view/main-view.component';
 import { RegisterComponent } from './components/register/register.component';
+import { NotFoundViewComponent } from './components/not-found-view/not-found-view.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { RegisterComponent } from './components/register/register.component';
     ButtonComponent,
     MainViewComponent,
     RegisterComponent,
+    NotFoundViewComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
