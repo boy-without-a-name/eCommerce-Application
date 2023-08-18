@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/loginSevice/login.service';
 
 @Component({
@@ -17,7 +18,7 @@ export class AppLoginComponent {
   textErrorPasword = '';
   text = '';
 
-  constructor(public token: LoginService) {}
+  constructor(private token: LoginService, private router: Router) {}
 
   showPassword(a: string[]): string {
     if (this.showPasswordBoolean) {
@@ -94,6 +95,7 @@ export class AppLoginComponent {
           localStorage.setItem('email', `${responce.email}`);
           localStorage.setItem('firstName', `${responce.firstName}`);
           localStorage.setItem('lastName', `${responce.lastName}`);
+          this.router.navigate(['/'])
         });
       },
       error: () => alert('Неверный логин или пароль'),
