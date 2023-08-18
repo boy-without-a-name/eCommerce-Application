@@ -13,7 +13,6 @@ export class RegisterComponent implements OnInit {
   date: any;
   registrationForm: FormGroup;
 
-
   // data: IRegisterData = {
   //   firstName: '',
   //   lastName: '',
@@ -29,11 +28,13 @@ export class RegisterComponent implements OnInit {
   //   }
   // };
 
-  constructor(public service: RegisterService,
-              private fb: FormBuilder) {
+  constructor(
+    public service: RegisterService,
+    private fb: FormBuilder
+  ) {
     this.registrationForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
-      lastName: ['', [Validators.required, Validators.pattern(/^[A-Za-z]+$/)]],
+      firstName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
+      lastName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
       email: ['', [Validators.required, Validators.email]],
       password: [
         '',
@@ -49,10 +50,7 @@ export class RegisterComponent implements OnInit {
         city: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
         streetName: ['', [Validators.required]],
         streetNumber: ['', [Validators.required]],
-        postalCode: [
-          '',
-          [Validators.required]
-        ]
+        postalCode: ['', [Validators.required]]
       })
     });
   }
