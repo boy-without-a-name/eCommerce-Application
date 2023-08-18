@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { LoginService } from 'src/app/services/loginSevice/login.service';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,8 @@ export class AppLoginComponent {
   showErrorEmail = false;
   textErrorPasword = '';
   text = '';
+
+  constructor(public token: LoginService) {}
 
   showPassword(a: string[]): string {
     if (this.showPasswordBoolean) {
@@ -82,5 +85,18 @@ export class AppLoginComponent {
     } else {
       this.text = '';
     }
+  }
+  clickButtonSubmit(email: string, password: string): void {
+    this.token.getToken(email, password)?.subscribe({
+      next: (responce) => {
+        localStorage.setItem('token', `${responce.access_token}`);
+        this.token.getUserData(localStorage.getItem('token'))?.subscribe((responce) => {
+          localStorage.setItem('email', `${responce.email}`);
+          localStorage.setItem('firstName', `${responce.firstName}`);
+          localStorage.setItem('lastName', `${responce.lastName}`);
+        });
+      },
+      error: () => alert('Неверный логин или пароль'),
+    });
   }
 }
