@@ -1,37 +1,57 @@
-<div class="register__layout">
-  <div class="information-wrapper">
-    <div class="information-wrapper__background"></div>
-    <img class="information-wrapper__img" src="../../../assets/img/im-fine.svg" alt="" />
-    <p class="information-wrapper__text">
+<div class='register__layout'>
+  <div class='information-wrapper'>
+    <div class='information-wrapper__background'></div>
+    <img class='information-wrapper__img' src='../../../assets/img/im-fine.svg' alt='' />
+    <p class='information-wrapper__text'>
       Hi there, do you have money? Tell me how much, i will give you things you need
     </p>
-    <button class="return-main-page">
-      <img src="../../../assets/img/Vector.svg" alt="vector" />
+    <button class='return-main-page'>
+      <img src='../../../assets/img/Vector.svg' alt='vector' />
       <p>Вернуться на главную страницу</p>
     </button>
   </div>
-  <div class="register__form">
-    <form (submit)="onSubmit($event)" class="register__background">
-      <div class="register__wrapper">
+  <div class='register__form'>
+    <form [formGroup]='registrationForm' (ngSubmit)='onSubmit($event)' class='register__background'>
+      <div class='register__wrapper'>
         <h2>Register</h2>
-        <p *ngIf="error">Error message</p>
-        <input type="text" placeholder="First Name" [(ngModel)]="data.firstName" name="firstName" />
-        <input type="text" placeholder="Last Name" [(ngModel)]="data.lastName" name="lastName" />
-        <input type="email" placeholder="Email" [(ngModel)]="data.email" name="email" />
-        <p style="color: white">Дата рождения</p>
-        <input type="date" [(ngModel)]="data.date" name="date" />
-        <p style="color: white">Укажите город:</p>
-        <input type="text" [(ngModel)]="data.address.city" name="city" />
-        <p style="color: white">Улица:</p>
-        <input type="text" [(ngModel)]="data.address.streetName" name="streetName" />
-        <p style="color: white">Номер дома:</p>
-        <input type="text" [(ngModel)]="data.address.streetNumber" name="streetName" />
-        <p style="color: white">Индекс:</p>
-        <input type="number" [(ngModel)]="data.address.postalCode" name="postalCode" />
-        <input type="password" placeholder="Type password" [(ngModel)]="data.password" name="password" />
-        <div class="button__register__wrapper">
-          <button>Back</button>
-          <button (click)="service.register(data)">Sign in</button>
+        <p *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
+          Please enter a valid email address.
+        </p>
+        <p *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
+          Password must have at least 8 characters, 1 uppercase letter, 1 lowercase letter, and 1 number.
+        </p>
+        <input type='text' placeholder='First Name' formControlName='firstName' />
+        <div *ngIf="registrationForm.get('firstName')?.invalid && registrationForm.get('firstName')?.touched">
+          Invalid first name.
+        </div>
+        <input type='text' placeholder='Last Name' formControlName='lastName' />
+        <div *ngIf="registrationForm.get('lastName')?.invalid && registrationForm.get('lastName')?.touched">
+          Invalid last name.
+        </div>
+        <input type='email' placeholder='Email' formControlName='email' />
+        <p style='color: white'>Date of birth</p>
+        <input type='date' formControlName='date' />
+        <div formGroupName='address'>
+          <p style='color: white'>Specify city:</p>
+          <input type='text' formControlName='city' />
+          <div *ngIf="registrationForm.get('address.city')?.invalid && registrationForm.get('address.city')?.touched">
+            Invalid city name.
+          </div>
+          <p style='color: white'>Street:</p>
+          <input type='text' formControlName='streetName' />
+          <p style='color: white'>Street number:</p>
+          <input type='text' formControlName='streetNumber' />
+          <p style='color: white'>Postal code:</p>
+          <input type='text' formControlName='postalCode' />
+          <div
+            *ngIf="registrationForm.get('address.postalCode')?.invalid && registrationForm.get('address.postalCode')?.touched">
+            Invalid postal code.
+          </div>
+        </div>
+        <input type='password' placeholder='Type password' formControlName='password' />
+        <div class='button__register__wrapper'>
+          <button type='button'>Back</button>
+          <button type='submit'>Sign in</button>
         </div>
       </div>
     </form>
