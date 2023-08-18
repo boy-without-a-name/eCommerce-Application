@@ -10,6 +10,7 @@ export interface IRegisterData {
   firstName: string;
   lastName: string;
   password: string;
+  date?: string;
   address?: {
     streetName: string;
     streetNumber: string;

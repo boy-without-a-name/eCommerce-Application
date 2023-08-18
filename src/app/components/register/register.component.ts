@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { RegisterService } from '../../services/register.service';
-import { IRegisterData } from '../../services/types';
+import {Component, OnInit} from '@angular/core';
+import {RegisterService} from '../../services/register.service';
+import {IRegisterData} from '../../services/types';
 
 @Component({
   selector: 'app-register',
@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
     lastName: '',
     email: '',
     password: '',
+    date: '',
     address: {
       streetName: '',
       streetNumber: '',
@@ -23,11 +24,13 @@ export class RegisterComponent implements OnInit {
     },
   };
 
-  constructor(public service: RegisterService) {}
+  constructor(public service: RegisterService) {
+  }
 
   onSubmit(event: Event) {
     event.preventDefault();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }
