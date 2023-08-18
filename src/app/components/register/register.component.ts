@@ -5,7 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
   error: boolean = false;
@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     public service: RegisterService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {
     this.registrationForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
@@ -25,16 +25,16 @@ export class RegisterComponent implements OnInit {
           Validators.required,
           Validators.minLength(8),
           Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/),
-          Validators.pattern(/^[^\s].*[^\s]$/)
-        ]
+          Validators.pattern(/^[^\s].*[^\s]$/),
+        ],
       ],
       date: ['', [Validators.required]],
       address: this.fb.group({
         city: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
         streetName: ['', [Validators.required]],
         streetNumber: ['', [Validators.required]],
-        postalCode: ['', [Validators.required]]
-      })
+        postalCode: ['', [Validators.required]],
+      }),
     });
   }
 
@@ -53,6 +53,5 @@ export class RegisterComponent implements OnInit {
     console.log(value);
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }
