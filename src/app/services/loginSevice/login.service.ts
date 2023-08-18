@@ -9,7 +9,6 @@ import { scope, clientId, clientSecret, tokenUrlLogin } from 'src/app/models/con
 @Injectable({
   providedIn: 'root',
 })
-
 export class LoginService {
   answer: AccessTokenResponse = {
     access_token: '',
@@ -35,9 +34,7 @@ export class LoginService {
   }
 
   getUserData(authToken: string | null): Observable<DataUser> | null {
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${authToken}`);
-      return this.http.get('https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/me', { headers });
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
+    return this.http.get('https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/me', { headers });
   }
-
 }
