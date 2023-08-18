@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { RegisterService } from '../../services/register.service';
-import { IRegisterData } from '../../services/types';
+import {Component, OnInit} from '@angular/core';
+import {RegisterService} from '../../services/register.service';
+import {IRegisterData} from '../../services/types';
 
 @Component({
   selector: 'app-register',
@@ -9,6 +9,7 @@ import { IRegisterData } from '../../services/types';
 })
 export class RegisterComponent implements OnInit {
   error: boolean = false;
+  date: any;
   data: IRegisterData = {
     firstName: '',
     lastName: '',
@@ -18,17 +19,23 @@ export class RegisterComponent implements OnInit {
     address: {
       streetName: '',
       streetNumber: '',
-      postalCode: 213800,
+      postalCode: '',
       city: '',
       country: 'BY',
     },
   };
 
-  constructor(public service: RegisterService) {}
+  constructor(public service: RegisterService) {
+  }
 
   onSubmit(event: Event) {
     event.preventDefault();
   }
 
-  ngOnInit(): void {}
+  onConsole(value: any) {
+    console.log(value)
+  }
+
+  ngOnInit(): void {
+  }
 }

@@ -1,12 +1,12 @@
 <div class="register__layout">
   <div class="information-wrapper">
     <div class="information-wrapper__background"></div>
-    <img class="information-wrapper__img" src="../../../assets/img/im-fine.svg" alt="" />
+    <img class="information-wrapper__img" src="../../../assets/img/im-fine.svg" alt=""/>
     <p class="information-wrapper__text">
       Hi there, do you have money? Tell me how much, i will give you things you need
     </p>
     <button class="return-main-page">
-      <img src="../../../assets/img/Vector.svg" alt="vector" />
+      <img src="../../../assets/img/Vector.svg" alt="vector"/>
       <p>Вернуться на главную страницу</p>
     </button>
   </div>
@@ -15,20 +15,20 @@
       <div class="register__wrapper">
         <h2>Register</h2>
         <p *ngIf="error">Error message</p>
-        <input type="text" placeholder="First Name" [(ngModel)]="data.firstName" name="firstName" />
-        <input type="text" placeholder="Last Name" [(ngModel)]="data.lastName" name="lastName" />
-        <input type="email" placeholder="Email" [(ngModel)]="data.email" name="email" />
+        <input type="text" placeholder="First Name" [(ngModel)]="data.firstName" name="firstName"/>
+        <input type="text" placeholder="Last Name" [(ngModel)]="data.lastName" name="lastName"/>
+        <input type="email" placeholder="Email" [(ngModel)]="data.email" name="email"/>
         <p style="color: white">Дата рождения</p>
-        <input type="date" />
+        <input type="date" [(ngModel)]="data.date" name="date"/>
         <p style="color: white">Укажите город:</p>
-        <input type="text" [(ngModel)]="data.address.city" name="city" />
+        <input type="text" [(ngModel)]="data.address.city" name="city"/>
         <p style="color: white">Улица:</p>
-        <input type="text" [(ngModel)]="data.address.streetName" name="streetName" />
+        <input type="text" [(ngModel)]="data.address.streetName" name="streetName"/>
         <p style="color: white">Номер дома:</p>
-        <input type="text" [(ngModel)]="data.address.streetNumber" name="streetName" />
+        <input type="text" [(ngModel)]="data.address.streetNumber" name="streetName"/>
         <p style="color: white">Индекс:</p>
-        <input type="number" [(ngModel)]="data.address.postalCode" name="postalCode" />
-        <input type="password" placeholder="Type password" [(ngModel)]="data.password" name="password" />
+        <input type="number" [(ngModel)]="data.address.postalCode" name="postalCode"/>
+        <input type="password" placeholder="Type password" [(ngModel)]="data.password" name="password"/>
         <div class="button__register__wrapper">
           <button>Back</button>
           <button (click)="service.register(data)">Sign in</button>

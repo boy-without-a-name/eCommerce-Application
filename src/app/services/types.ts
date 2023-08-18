@@ -14,7 +14,7 @@ export interface IRegisterData {
   address: {
     streetName: string;
     streetNumber: string;
-    postalCode: number;
+    postalCode: string;
     city: string;
     country: string;
   };
