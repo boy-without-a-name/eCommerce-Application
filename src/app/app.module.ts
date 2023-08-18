@@ -14,6 +14,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LogoComponent } from './components/logo/logo.component';
 import { SocialsComponent } from './components/socials/socials.component';
 import { ButtonComponent } from './components/button/button.component';
+import { MainViewComponent } from './components/main-view/main-view.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ButtonComponent } from './components/button/button.component';
     LogoComponent,
     SocialsComponent,
     ButtonComponent,
+    MainViewComponent,
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
