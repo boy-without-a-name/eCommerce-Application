@@ -57,8 +57,13 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(event: Event) {
     event.preventDefault();
-    console.log(this.registrationForm.value);
-    console.log('Valid? ', this.registrationForm.valid);
+    if (this.registrationForm.valid) {
+      console.log(this.registrationForm.value);
+      console.log('Valid? ', this.registrationForm.valid);
+      this.service.register(this.registrationForm.value).then(r => console.log(r));
+    } else {
+      this.error = true;
+    }
   }
 
   onConsole(value: any) {
