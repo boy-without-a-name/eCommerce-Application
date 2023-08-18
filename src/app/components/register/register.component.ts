@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../../services/register.service';
 import { IRegisterData } from '../../services/types';
-import { HttpClient } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-register',
@@ -24,5 +24,4 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-
 }
