@@ -28,9 +28,7 @@ import { ButtonComponent } from './components/button/button.component';
     SocialsComponent,
     ButtonComponent,
   ],
-  imports: [BrowserModule,
-  AppRoutingModule,
-HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
