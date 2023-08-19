@@ -46,8 +46,6 @@
     color: #f2f2f2;
     text-align: center;
   }
-
-
 }
 
 .address {
@@ -57,7 +55,7 @@
     border-radius: 0.3rem;
     margin: 10px 0;
   }
-  p{
+  p {
     color: white;
   }
 }
@@ -140,8 +138,9 @@
 
 .information-wrapper__text {
   z-index: 1;
-  font: bold 2em Roboto,
-  sans-serif;
+  font:
+    bold 2em Roboto,
+    sans-serif;
   color: #4f4f4f;
   width: 100%;
   max-width: 75%;
