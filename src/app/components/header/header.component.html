@@ -1,7 +1,12 @@
 <app-logo class="logo"></app-logo>
 <app-header-search></app-header-search>
+
 <div class="buttons">
-  <app-button routerLink="/login" text="Sign In"></app-button>
-  <app-button routerLink="/registration" text="Sign Up"></app-button>
+  <app-button *ngIf="!isSignedIn" routerLink="/login" text="Sign In"></app-button>
+  <app-button *ngIf="!isSignedIn" routerLink="/registration" text="Sign Up"></app-button>
+
+  <app-button *ngIf="isSignedIn" text="Sign Out"></app-button>
+  <app-user-icon *ngIf="isSignedIn"></app-user-icon>
+
   <app-cart></app-cart>
 </div>
