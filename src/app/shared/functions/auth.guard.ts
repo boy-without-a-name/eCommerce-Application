@@ -1,12 +1,12 @@
-import {  CanActivateFn, Router} from "@angular/router";
-import {  inject } from "@angular/core";
+import { CanActivateFn, Router } from '@angular/router';
+import { inject } from '@angular/core';
 
 export function authenticationGuard(): CanActivateFn {
   return () => {
-    if(!localStorage.getItem('token')) {
+    if (!localStorage.getItem('token')) {
       return true;
     }
-    inject(Router).navigate(['/'])
+    inject(Router).navigate(['/']);
     return false;
   };
 }
