@@ -19,11 +19,12 @@
             #login_email
             type="text"
             placeholder="Email"
+            (focus)="showErrorEmail = false"
             (blur)="checkEmail(login_email.value)"
           />
-          <p class="error-email" *ngIf="showErrorEmail">
+          <div class="error-email" *ngIf="showErrorEmail">
             Некорректный адрес Email. Проверьте что Ваша почта соответствукт образцу "user@example.com"
-          </p>
+          </div>
         </div>
         <div class="password">
           <input
@@ -40,7 +41,7 @@
             alt=""
           />
         </div>
-        <div class="error-email">{{ [text] }}</div>
+        <div class="error-password">{{ [text] }}</div>
 
         <button class="form-wrapper__btn" (mousedown)="clickButtonSubmit(login_email.value, login_password.value)">
           Войти

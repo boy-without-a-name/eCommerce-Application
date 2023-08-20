@@ -82,14 +82,21 @@
 }
 
 .email {
+  position: relative;
   width: 100%;
   max-width: 456px;
   margin-bottom: 100px;
 }
 
 .error-email {
+  position: absolute;
+  top: -95px;
+  z-index: 1;
+  padding: 2%;
   color: #f00101;
   max-width: 456px;
+  background-color: #ffffff;
+  border-radius: 5px;
 }
 
 .form {
@@ -246,8 +253,13 @@
 }
 
 @media (max-width: 380px) {
+
   .form-wrapper__email,
   .password__input {
     font-size: 1rem;
+  }
+
+  .error-email {
+    padding: 0;
   }
 }
