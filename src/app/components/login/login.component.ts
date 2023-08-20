@@ -18,6 +18,7 @@ export class AppLoginComponent {
   textErrorPasword = '';
   text = '';
   checkRulesPassword = false;
+  englishAlphabet = 'abcdefghijklmnopqrstuvwxyz'
 
   constructor(
     private token: LoginService,
@@ -53,23 +54,35 @@ export class AppLoginComponent {
       this.textErrorPasword += ' Пароль должен быть не менее 8 символов.';
       this.checkRulesPassword = true;
     }
+    if (value.length === 0) {
+      this.textErrorPasword += ' Пароль должен содержать хотя бы одну заглавную букву (A-Z).' +
+      ' Пароль должен содержать хотя бы одну строчную букву (a-z).' +
+      ' Пароль должен содержать как минимум одну цифру.';
+      this.checkRulesPassword = true;
+    }
     const str = value.split('');
+    const englishAlphabetUpper = this.englishAlphabet.toUpperCase().split('');
+    const englishAlphabetLower = this.englishAlphabet.split('')
     for (let i = 0; i < str.length; i++) {
-      if (str[i] == str[i].toUpperCase() && str[i] != ' ' && typeof str[i] != 'number') {
+      for (let y = 0; y < englishAlphabetUpper.length; y++) {
+      if (str[i] === englishAlphabetUpper[y]) {
         break;
       }
-      if (i + 1 == str.length) {
-        this.textErrorPasword += ' Пароль должен содержать хотя бы одну заглавную букву.';
+      if (i + 1 == str.length && y + 1 === englishAlphabetUpper.length) {
+        this.textErrorPasword += ' Пароль должен содержать хотя бы одну заглавную букву (A-Z).';
         this.checkRulesPassword = true;
       }
     }
+    }
     for (let i = 0; i < str.length; i++) {
-      if (str[i] == str[i].toLowerCase() && str[i] != ' ') {
-        break;
-      }
-      if (i + 1 == str.length) {
-        this.textErrorPasword += ' Пароль должен содержать хотя бы одну строчную букву.';
-        this.checkRulesPassword = true;
+      for (let y = 0; y < englishAlphabetLower.length; y++) {
+        if (str[i] === englishAlphabetLower[y]) {
+          break;
+        }
+        if (i + 1 == str.length && y + 1 ===englishAlphabetLower.length) {
+          this.textErrorPasword += ' Пароль должен содержать хотя бы одну строчную букву (a-z).';
+          this.checkRulesPassword = true;
+        }
       }
     }
     for (let i = 0; i < str.length; i++) {

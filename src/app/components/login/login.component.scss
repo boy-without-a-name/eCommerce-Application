@@ -90,7 +90,16 @@
 
 .error-email {
   position: absolute;
-  top: -95px;
+  z-index: 1;
+  padding: 2%;
+  color: #f00101;
+  max-width: 456px;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
+.error-password {
+  margin-top: 5px;
   z-index: 1;
   padding: 2%;
   color: #f00101;
@@ -200,6 +209,15 @@
     margin-bottom: 35px;
   }
 
+  .error-email {
+    font-size: 12px;
+    top: -63px;
+  }
+
+  .error-password {
+    font-size: 12px;
+  }
+
   .form-wrapper__email,
   .password {
     height: 50px;
@@ -259,6 +277,6 @@
   }
 
   .error-email {
-    padding: 0;
+    top: -50px;
   }
 }

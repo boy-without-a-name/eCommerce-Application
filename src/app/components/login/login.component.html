@@ -32,6 +32,7 @@
             #login_password
             [type]="showPassword(typeInput)"
             placeholder="Пароль"
+            (focus)="checkRulesPassword = false"
             (blur)="checkPassword(login_password.value)"
           />
           <img
@@ -41,11 +42,14 @@
             alt=""
           />
         </div>
-        <div class="error-password">{{ [text] }}</div>
+        <div class="error-password" *ngIf="checkRulesPassword">{{ [text] }}</div>
 
-        <button class="form-wrapper__btn"
-        [disabled]="showErrorEmail === true || checkRulesPassword === true"
-        (mousedown)="clickButtonSubmit(login_email.value, login_password.value)">
+        <button
+          class="form-wrapper__btn"
+          [disabled]="showErrorEmail === true || checkRulesPassword === true ||
+          login_email.value === '' || login_password.value === ''"
+          (mousedown)="clickButtonSubmit(login_email.value, login_password.value)"
+        >
           Войти
         </button>
       </div>
