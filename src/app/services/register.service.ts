@@ -5,15 +5,14 @@ import { catchError, throwError } from 'rxjs';
 import { RegisterComponent } from '../components/register/register.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RegisterService {
   errorMsg = '';
 
   apiUrl = 'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/customers -i';
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
 
   getToken() {
     const clientId = 'nW_nTeh94asuW0LieFf0ZmY-';
@@ -37,9 +36,7 @@ export class RegisterService {
     }
   }
 
-  async register(data: IRegisterData) {
-
-  }
+  async register(data: IRegisterData) {}
 
   getError(msg: string) {
     // this.comp.setErrorMsg(msg);
