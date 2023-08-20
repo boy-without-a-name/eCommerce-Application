@@ -130,7 +130,8 @@ export class AppLoginComponent {
       error: () => {
         this.text = 'Неверный логин или пароль';
         this.checkClickBtnSubmit = false;
-        this.checkRulesPassword = true}
+        this.checkRulesPassword = true;
+      },
     });
   }
 }
