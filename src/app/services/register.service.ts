@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { AccessTokenResponse, IRegisterData } from './types';
-import { catchError, throwError } from 'rxjs';
-import { RegisterComponent } from '../components/register/register.component';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class RegisterService {
-  errorMsg = '';
 
   apiUrl = 'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/customers -i';
 
@@ -38,11 +36,4 @@ export class RegisterService {
 
   async register(data: IRegisterData) {}
 
-  getError(msg: string) {
-    // this.comp.setErrorMsg(msg);
-  }
-
-  getMsg() {
-    return this.errorMsg;
-  }
 }

@@ -50,7 +50,6 @@ export class RegisterComponent implements OnInit {
       const authToken = this.service.getToken();
       authToken?.subscribe((token: AccessTokenResponse) => {
         const access_token = token.access_token;
-        console.log(token.access_token);
         const apiUrl = 'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/customers';
         const headers: HttpHeaders = new HttpHeaders({
           Authorization: `Bearer ${access_token}`,
@@ -61,7 +60,6 @@ export class RegisterComponent implements OnInit {
         });
         resp.subscribe(
           (resp) => {
-            console.log(resp);
             this.router.navigate(['']);
           },
           (error) => {
