@@ -17,6 +17,7 @@ export class AppLoginComponent {
   showErrorEmail = false;
   textErrorPasword = '';
   text = '';
+  checkRulesPassword = false;
 
   constructor(
     private token: LoginService,
@@ -46,11 +47,11 @@ export class AppLoginComponent {
     }
   }
   checkPassword(value: string): string | void {
+    this.checkRulesPassword = false;
     this.textErrorPasword = 'Неправильный формат пароля.';
-    let checkRulesPassword = false;
     if (value.length < 8) {
       this.textErrorPasword += ' Пароль должен быть не менее 8 символов.';
-      checkRulesPassword = true;
+      this.checkRulesPassword = true;
     }
     const str = value.split('');
     for (let i = 0; i < str.length; i++) {
@@ -59,7 +60,7 @@ export class AppLoginComponent {
       }
       if (i + 1 == str.length) {
         this.textErrorPasword += ' Пароль должен содержать хотя бы одну заглавную букву.';
-        checkRulesPassword = true;
+        this.checkRulesPassword = true;
       }
     }
     for (let i = 0; i < str.length; i++) {
@@ -68,7 +69,7 @@ export class AppLoginComponent {
       }
       if (i + 1 == str.length) {
         this.textErrorPasword += ' Пароль должен содержать хотя бы одну строчную букву.';
-        checkRulesPassword = true;
+        this.checkRulesPassword = true;
       }
     }
     for (let i = 0; i < str.length; i++) {
@@ -77,14 +78,14 @@ export class AppLoginComponent {
       }
       if (i + 1 == str.length) {
         this.textErrorPasword += ' Пароль должен содержать как минимум одну цифру.';
-        checkRulesPassword = true;
+        this.checkRulesPassword = true;
       }
     }
     if (value.trim().length !== value.length) {
       this.textErrorPasword += ' Пароль не должен содержать начальные или конечные пробелы.';
-      checkRulesPassword = true;
+      this.checkRulesPassword = true;
     }
-    if (checkRulesPassword === true) {
+    if (this.checkRulesPassword === true) {
       return (this.text = this.textErrorPasword);
     } else {
       this.text = '';
