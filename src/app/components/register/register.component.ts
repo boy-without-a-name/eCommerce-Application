@@ -9,7 +9,7 @@ import { LoginService } from '../../services/loginSevice/login.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
   error: boolean = false;
@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private login: LoginService,
-    private router: Router
+    private router: Router,
   ) {
     this.registrationForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
@@ -33,16 +33,16 @@ export class RegisterComponent implements OnInit {
           Validators.required,
           Validators.minLength(8),
           Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/),
-          Validators.pattern(/^[^\s].*[^\s]$/)
-        ]
+          Validators.pattern(/^[^\s].*[^\s]$/),
+        ],
       ],
       date: ['', [Validators.required]],
       address: this.fb.group({
         city: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
         streetName: ['', [Validators.required]],
         streetNumber: ['', [Validators.required]],
-        postalCode: ['', [Validators.required]]
-      })
+        postalCode: ['', [Validators.required]],
+      }),
     });
   }
 
@@ -56,10 +56,10 @@ export class RegisterComponent implements OnInit {
         const apiUrl = 'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/customers';
         const headers: HttpHeaders = new HttpHeaders({
           Authorization: `Bearer ${access_token}`,
-          'Content-type': 'application/json'
+          'Content-type': 'application/json',
         });
         const resp = this.http.post(apiUrl, this.registrationForm.value, {
-          headers
+          headers,
         });
         resp.subscribe(
           (resp) => {
@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
           (error) => {
             this.errorMsg = error.error.message;
             this.error = true;
-          }
+          },
         );
       });
     }
@@ -83,7 +83,5 @@ export class RegisterComponent implements OnInit {
     this.error = true;
   }
 
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 }
