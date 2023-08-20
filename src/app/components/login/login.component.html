@@ -50,9 +50,11 @@
             showErrorEmail === true ||
             checkRulesPassword === true ||
             login_email.value === '' ||
-            login_password.value === ''
+            login_password.value === '' ||
+            checkClickBtnSubmit === true
           "
           (mousedown)="clickButtonSubmit(login_email.value, login_password.value)"
+          (mouseup)="checkClickBtnSubmit = true"
         >
           Войти
         </button>

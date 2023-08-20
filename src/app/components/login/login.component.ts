@@ -19,6 +19,7 @@ export class AppLoginComponent {
   text = '';
   checkRulesPassword = false;
   englishAlphabet = 'abcdefghijklmnopqrstuvwxyz';
+  checkClickBtnSubmit = false;
 
   constructor(
     private token: LoginService,
@@ -68,7 +69,7 @@ export class AppLoginComponent {
       let symbol = false;
       for (let y = 0; y < englishAlphabetUpper.length; y++) {
         if (str[i] === englishAlphabetUpper[y]) {
-          symbol =true;
+          symbol = true;
           break;
         }
         if (i + 1 == str.length && y + 1 === englishAlphabetUpper.length) {
@@ -76,7 +77,7 @@ export class AppLoginComponent {
           this.checkRulesPassword = true;
         }
       }
-      if(symbol) {
+      if (symbol) {
         break;
       }
     }
@@ -84,7 +85,7 @@ export class AppLoginComponent {
       let symbol = false;
       for (let y = 0; y < englishAlphabetLower.length; y++) {
         if (str[i] === englishAlphabetLower[y]) {
-          symbol =true;
+          symbol = true;
           break;
         }
         if (i + 1 == str.length && y + 1 === englishAlphabetLower.length) {
@@ -92,7 +93,7 @@ export class AppLoginComponent {
           this.checkRulesPassword = true;
         }
       }
-      if(symbol) {
+      if (symbol) {
         break;
       }
     }
@@ -126,7 +127,10 @@ export class AppLoginComponent {
           this.router.navigate(['/']);
         });
       },
-      error: () => alert('Неверный логин или пароль'),
+      error: () => {
+        this.text = 'Неверный логин или пароль';
+        this.checkClickBtnSubmit = false;
+        this.checkRulesPassword = true}
     });
   }
 }
