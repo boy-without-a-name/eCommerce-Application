@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { AccessTokenResponse, IRegisterData } from './types';
+import { catchError, throwError } from 'rxjs';
+import { RegisterComponent } from '../components/register/register.component';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class RegisterService {
-  answer: AccessTokenResponse = {
-    access_token: '',
-    expires_in: 0,
-    scope: '',
-    token_type: '',
-  };
+  errorMsg = '';
 
   apiUrl = 'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/customers -i';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getToken() {
     const clientId = 'nW_nTeh94asuW0LieFf0ZmY-';
@@ -40,22 +38,14 @@ export class RegisterService {
   }
 
   async register(data: IRegisterData) {
-    const authToken = this.getToken();
-    authToken?.subscribe((token: AccessTokenResponse) => {
-      console.log(token);
-      console.log(data);
-      const access_token = token.access_token;
-      const apiUrl = 'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/customers';
-      const headers: HttpHeaders = new HttpHeaders({
-        Authorization: `Bearer ${access_token}`,
-        'Content-type': 'application/json',
-      });
-      const resp = this.http.post(apiUrl, data, {
-        headers,
-      });
-      resp.subscribe((re) => {
-        console.log(re);
-      });
-    });
+
+  }
+
+  getError(msg: string) {
+    // this.comp.setErrorMsg(msg);
+  }
+
+  getMsg() {
+    return this.errorMsg;
   }
 }

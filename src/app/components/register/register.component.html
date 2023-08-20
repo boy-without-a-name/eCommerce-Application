@@ -5,7 +5,7 @@
     <p class='information-wrapper__text'>
       Hi there, do you have money? Tell me how much, i will give you things you need
     </p>
-    <button class='return-main-page'>
+    <button routerLink='' class='return-main-page'>
       <img src='../../../assets/img/Vector.svg' alt='vector' />
       <p>Вернуться на главную страницу</p>
     </button>
@@ -14,7 +14,7 @@
     <form [formGroup]='registrationForm' (ngSubmit)='onSubmit($event)' class='register__background'>
       <div class='register__wrapper'>
         <h2>Register</h2>
-        <p *ngIf='error'>Error validate</p>
+        <p *ngIf='error'>Error validate | {{ this.errorMsg }}</p>
         <p *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
           Please enter a valid email address.
         </p>
@@ -54,7 +54,7 @@
         </div>
         <input type='password' placeholder='Type password' formControlName='password' />
         <div class='button__register__wrapper'>
-          <button type='button'>Back</button>
+          <button routerLink='' type='button'>Back</button>
           <button type='submit'>Sign in</button>
         </div>
       </div>
