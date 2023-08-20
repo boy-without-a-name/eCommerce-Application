@@ -46,8 +46,12 @@
 
         <button
           class="form-wrapper__btn"
-          [disabled]="showErrorEmail === true || checkRulesPassword === true ||
-          login_email.value === '' || login_password.value === ''"
+          [disabled]="
+            showErrorEmail === true ||
+            checkRulesPassword === true ||
+            login_email.value === '' ||
+            login_password.value === ''
+          "
           (mousedown)="clickButtonSubmit(login_email.value, login_password.value)"
         >
           Войти
