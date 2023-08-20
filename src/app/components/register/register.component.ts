@@ -4,11 +4,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccessTokenResponse } from '../../services/types';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { LoginService } from '../../services/loginSevice/login.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
   error: boolean = false;
@@ -19,7 +20,8 @@ export class RegisterComponent implements OnInit {
     public service: RegisterService,
     private fb: FormBuilder,
     private http: HttpClient,
-    private router: Router,
+    private login: LoginService,
+    private router: Router
   ) {
     this.registrationForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
@@ -31,21 +33,22 @@ export class RegisterComponent implements OnInit {
           Validators.required,
           Validators.minLength(8),
           Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/),
-          Validators.pattern(/^[^\s].*[^\s]$/),
-        ],
+          Validators.pattern(/^[^\s].*[^\s]$/)
+        ]
       ],
       date: ['', [Validators.required]],
       address: this.fb.group({
         city: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
         streetName: ['', [Validators.required]],
         streetNumber: ['', [Validators.required]],
-        postalCode: ['', [Validators.required]],
-      }),
+        postalCode: ['', [Validators.required]]
+      })
     });
   }
 
   async onSubmit(event: Event) {
     event.preventDefault();
+    console.log(this.registrationForm.value);
     if (this.registrationForm.valid) {
       const authToken = this.service.getToken();
       authToken?.subscribe((token: AccessTokenResponse) => {
@@ -53,19 +56,21 @@ export class RegisterComponent implements OnInit {
         const apiUrl = 'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/customers';
         const headers: HttpHeaders = new HttpHeaders({
           Authorization: `Bearer ${access_token}`,
-          'Content-type': 'application/json',
+          'Content-type': 'application/json'
         });
         const resp = this.http.post(apiUrl, this.registrationForm.value, {
-          headers,
+          headers
         });
         resp.subscribe(
           (resp) => {
-            this.router.navigate(['']);
+            this.login.getToken(this.registrationForm.value.email, this.registrationForm.value.password)?.subscribe((next) => {
+              this.router.navigate(['']);
+            });
           },
           (error) => {
             this.errorMsg = error.error.message;
             this.error = true;
-          },
+          }
         );
       });
     }
@@ -80,5 +85,6 @@ export class RegisterComponent implements OnInit {
     console.log(value);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  }
 }

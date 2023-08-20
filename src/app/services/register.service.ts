@@ -2,12 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { AccessTokenResponse, IRegisterData } from './types';
 
-
 @Injectable({
   providedIn: 'root',
 })
 export class RegisterService {
-
   apiUrl = 'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/customers -i';
 
   constructor(private http: HttpClient) {}
@@ -35,5 +33,4 @@ export class RegisterService {
   }
 
   async register(data: IRegisterData) {}
-
 }
