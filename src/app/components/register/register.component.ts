@@ -50,34 +50,38 @@ export class RegisterComponent {
       } else {
         delete this.registrationForm.value.defaultShippingAddressId;
       }
-      console.log(this.registrationForm.value);
-      const authToken = this.service.getToken();
-      authToken?.subscribe((token: AccessTokenResponse) => {
-        const access_token = token.access_token;
-        const apiUrl = 'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/customers';
-        const headers: HttpHeaders = new HttpHeaders({
-          Authorization: `Bearer ${access_token}`,
-          'Content-type': 'application/json',
+      if (this.isOld()) {
+        const authToken = this.service.getToken();
+        authToken?.subscribe((token: AccessTokenResponse) => {
+          const access_token = token.access_token;
+          const apiUrl = 'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/customers';
+          const headers: HttpHeaders = new HttpHeaders({
+            Authorization: `Bearer ${access_token}`,
+            'Content-type': 'application/json',
+          });
+          const resp = this.http.post(apiUrl, this.registrationForm.value, {
+            headers,
+          });
+          resp.subscribe(
+            (resp) => {
+              console.log(resp);
+              this.login
+                .getToken(this.registrationForm.value.email, this.registrationForm.value.password)
+                ?.subscribe((next) => {
+                  console.log(next);
+                  this.router.navigate(['']);
+                });
+            },
+            (error) => {
+              this.errorMsg = error.error.message;
+              this.error = true;
+            },
+          );
         });
-        const resp = this.http.post(apiUrl, this.registrationForm.value, {
-          headers,
-        });
-        resp.subscribe(
-          (resp) => {
-            console.log(resp);
-            this.login
-              .getToken(this.registrationForm.value.email, this.registrationForm.value.password)
-              ?.subscribe((next) => {
-                console.log(next);
-                this.router.navigate(['']);
-              });
-          },
-          (error) => {
-            this.errorMsg = error.error.message;
-            this.error = true;
-          },
-        );
-      });
+      } else {
+        this.error = true;
+        this.errorMsg = 'You small :))';
+      }
     }
   }
 
@@ -103,6 +107,15 @@ export class RegisterComponent {
 
   get adresses() {
     return this.registrationForm.get('address') as FormArray;
+  }
+
+  isOld() {
+    const currentAge = 2023 - this.registrationForm.value.date.slice(0, 4);
+    if (currentAge <= 13) {
+      return false;
+    } else {
+      return true;
+    }
   }
 
   setErrorMsg(msg: string): void {
