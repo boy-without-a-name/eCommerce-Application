@@ -18,4 +18,14 @@ describe('HeaderComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should call removeItemsFromLocalStorage when sign out event is triggered', () => {
+    const localStorageSpy = jest.spyOn(localStorage, 'removeItem');
+
+    component.signOutEventHandler();
+
+    expect(localStorageSpy).toHaveBeenCalledTimes(2);
+    expect(localStorageSpy).toHaveBeenCalledWith('name');
+    expect(localStorageSpy).toHaveBeenCalledWith('token');
+  });
 });
