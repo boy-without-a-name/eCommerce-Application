@@ -49,13 +49,14 @@
             <p *ngIf="addressForm.get('postalCode')?.invalid && addressForm.get('postalCode')?.touched">
               Invalid postal code.
             </p>
+            <div *ngIf="i != 1" class="dialogShipping">
+              <input type="checkbox" formControlName="defaultShippingAddressId" />
+              <p>Default shipping address</p>
+            </div>
             <button *ngIf="i === 1" (click)="removeAddress(i)">Remove address</button>
           </div>
         </div>
-        <div class="dialogShipping">
-          <input type="checkbox" formControlName="defaultShippingAddressId" />
-          <p>Default shipping address</p>
-        </div>
+
         <input type="password" placeholder="Type password" formControlName="password" />
         <div class="button__register__wrapper">
           <button *ngIf="showBilling" (click)="addAdress()" type="button">Add Billing address</button>
