@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RegisterService } from '../../services/register.service';
-import { AccessTokenResponse, IRegisterData } from '../../services/types';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AccessTokenResponse } from '../../services/types';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { LoginService } from '../../services/loginSevice/login.service';
 
 @Component({
   selector: 'app-register',
@@ -9,20 +12,86 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  // error: boolean = false;
-  // data: IRegisterData = {
-  //   firstName: '',
-  //   lastName: '',
-  //   email: '',
-  //   password: '',
-  // };
-  // constructor(
-  //   private http: HttpClient,
-  //   public service: RegisterService,
-  // ) {}
-  // onSubmit(event: Event) {
-  //   event.preventDefault();
-  // }
-  // ngOnInit(): void {}
-  // data = this.service.register();
+  error = false;
+  errorMsg = '';
+  registrationForm: FormGroup;
+
+  constructor(
+    public service: RegisterService,
+    private fb: FormBuilder,
+    private http: HttpClient,
+    private login: LoginService,
+    private router: Router,
+  ) {
+    this.registrationForm = this.fb.group({
+      firstName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
+      lastName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/),
+          Validators.pattern(/^[^\s].*[^\s]$/),
+        ],
+      ],
+      date: ['', [Validators.required]],
+      address: this.fb.group({
+        city: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
+        streetName: ['', [Validators.required]],
+        streetNumber: ['', [Validators.required]],
+        postalCode: ['', [Validators.required]],
+      }),
+      defaultShippingAddressId: [''],
+    });
+  }
+
+  async onSubmit(event: Event): Promise<void> {
+    event.preventDefault();
+    if (this.registrationForm.valid) {
+      if (this.registrationForm.value.defaultShippingAddressId) {
+        this.registrationForm.value.defaultShippingAddressId = 0;
+      } else {
+        delete this.registrationForm.value.defaultShippingAddressId;
+      }
+      console.log(this.registrationForm.value);
+      const authToken = this.service.getToken();
+      authToken?.subscribe((token: AccessTokenResponse) => {
+        const access_token = token.access_token;
+        const apiUrl = 'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/customers';
+        const headers: HttpHeaders = new HttpHeaders({
+          Authorization: `Bearer ${access_token}`,
+          'Content-type': 'application/json',
+        });
+        const resp = this.http.post(apiUrl, this.registrationForm.value, {
+          headers,
+        });
+        resp.subscribe(
+          (resp) => {
+            console.log(resp);
+            localStorage.setItem('email', `${this.registrationForm.value.email}`);
+            localStorage.setItem('firstName', `${this.registrationForm.value.firstName}`);
+            localStorage.setItem('lastName', `${this.registrationForm.value.lastName}`);
+            this.router.navigate(['/']);
+            this.login
+              .getToken(this.registrationForm.value.email, this.registrationForm.value.password)
+              ?.subscribe((next) => {
+                console.log(next);
+                this.router.navigate(['']);
+              });
+          },
+          (error) => {
+            this.errorMsg = error.error.message;
+            this.error = true;
+          },
+        );
+      });
+    }
+  }
+
+  setErrorMsg(msg: string): void {
+    this.errorMsg = msg;
+    this.error = true;
+  }
 }

@@ -1,18 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { AccessTokenResponse, IRegisterData } from './types';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RegisterService {
-  answer: AccessTokenResponse = {
-    access_token: '',
-    expires_in: 0,
-    scope: '',
-    token_type: '',
-  };
-
   apiUrl = 'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/customers -i';
 
   constructor(private http: HttpClient) {}
@@ -39,30 +32,5 @@ export class RegisterService {
     }
   }
 
-  async register(data: IRegisterData) {
-    const authToken = this.getToken();
-    authToken?.subscribe((token: AccessTokenResponse) => {
-      console.log(token);
-      console.log(data);
-      const access_token = token.access_token;
-      const apiUrl = 'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/customers';
-      const headers: HttpHeaders = new HttpHeaders({
-        Authorization: `Bearer ${access_token}`,
-        'Content-type': 'application/json',
-      });
-      console.log(headers);
-      const requestData: IRegisterData = {
-        email: data.email,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        password: data.password,
-      };
-      const resp = this.http.post(apiUrl, requestData, {
-        headers,
-      });
-      resp.subscribe((re) => {
-        console.log(re);
-      });
-    });
-  }
+  async register(data: IRegisterData) {}
 }
