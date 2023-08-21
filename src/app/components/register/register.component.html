@@ -1,66 +1,66 @@
-<div class='register__layout'>
-  <div class='information-wrapper'>
-    <div class='information-wrapper__background'></div>
-    <img class='information-wrapper__img' src='../../../assets/img/im-fine.svg' alt='' />
-    <p class='information-wrapper__text'>
+<div class="register__layout">
+  <div class="information-wrapper">
+    <div class="information-wrapper__background"></div>
+    <img class="information-wrapper__img" src="../../../assets/img/im-fine.svg" alt="" />
+    <p class="information-wrapper__text">
       Hi there, do you have money? Tell me how much, i will give you things you need
     </p>
-    <button routerLink='' class='return-main-page'>
-      <img src='../../../assets/img/Vector.svg' alt='vector' />
+    <button routerLink="" class="return-main-page">
+      <img src="../../../assets/img/Vector.svg" alt="vector" />
       <p>Вернуться на главную страницу</p>
     </button>
   </div>
-  <div class='register__form'>
-    <form [formGroup]='registrationForm' (ngSubmit)='onSubmit($event)' class='register__background'>
-      <div class='register__wrapper'>
+  <div class="register__form">
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit($event)" class="register__background">
+      <div class="register__wrapper">
         <h2>Register</h2>
-        <p *ngIf='error'>Error validate | {{ this.errorMsg }}</p>
+        <p *ngIf="error">Error validate | {{ this.errorMsg }}</p>
         <p *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
           Please enter a valid email address.
         </p>
         <p *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
           Password must have at least 8 characters, 1 uppercase letter, 1 lowercase letter, and 1 number.
         </p>
-        <input type='text' placeholder='First Name' formControlName='firstName' />
+        <input type="text" placeholder="First Name" formControlName="firstName" />
         <p *ngIf="registrationForm.get('firstName')?.invalid && registrationForm.get('firstName')?.touched">
           Invalid first name.
         </p>
-        <input type='text' placeholder='Last Name' formControlName='lastName' />
+        <input type="text" placeholder="Last Name" formControlName="lastName" />
         <p *ngIf="registrationForm.get('lastName')?.invalid && registrationForm.get('lastName')?.touched">
           Invalid last name.
         </p>
-        <input type='email' placeholder='Email' formControlName='email' />
-        <p style='color: white'>Date of birth</p>
-        <input type='date' formControlName='date' />
-        <div formArrayName='address'>
-          <div *ngFor='let addressForm of adresses.controls; let i = index' [formGroupName]='i' class='address'>
+        <input type="email" placeholder="Email" formControlName="email" />
+        <p style="color: white">Date of birth</p>
+        <input type="date" formControlName="date" />
+        <div formArrayName="address">
+          <div *ngFor="let addressForm of adresses.controls; let i = index" [formGroupName]="i" class="address">
             <h2>Adress {{ i + 1 }}</h2>
-            <p style='color: white'>Specify city:</p>
-            <input type='text' formControlName='city' />
+            <p style="color: white">Specify city:</p>
+            <input type="text" formControlName="city" />
             <p *ngIf="addressForm.get('address.city')?.invalid && addressForm.get('address.city')?.touched">
               Invalid city name.
             </p>
-            <p style='color: white'>Street:</p>
-            <input type='text' formControlName='streetName' />
-            <p style='color: white'>Street number:</p>
-            <input type='text' formControlName='streetNumber' />
-            <p style='color: white'>Postal code:</p>
-            <input type='text' formControlName='postalCode' />
+            <p style="color: white">Street:</p>
+            <input type="text" formControlName="streetName" />
+            <p style="color: white">Street number:</p>
+            <input type="text" formControlName="streetNumber" />
+            <p style="color: white">Postal code:</p>
+            <input type="text" formControlName="postalCode" />
             <p *ngIf="addressForm.get('postalCode')?.invalid && addressForm.get('postalCode')?.touched">
               Invalid postal code.
             </p>
-            <button (click)='removeAddress(i)'>Remove address</button>
+            <button (click)="removeAddress(i)">Remove address</button>
           </div>
         </div>
-        <div class='dialogShipping'>
-          <input type='checkbox' formControlName='defaultShippingAddressId' />
+        <div class="dialogShipping">
+          <input type="checkbox" formControlName="defaultShippingAddressId" />
           <p>Default shipping address</p>
         </div>
-        <input type='password' placeholder='Type password' formControlName='password' />
-        <div class='button__register__wrapper'>
-          <button (click)='addAdress()' type='button'>Add address</button>
-          <button routerLink='/login' type='button'>Sign in</button>
-          <button type='submit'>Sign up</button>
+        <input type="password" placeholder="Type password" formControlName="password" />
+        <div class="button__register__wrapper">
+          <button (click)="addAdress()" type="button">Add address</button>
+          <button routerLink="/login" type="button">Sign in</button>
+          <button type="submit">Sign up</button>
         </div>
       </div>
     </form>
