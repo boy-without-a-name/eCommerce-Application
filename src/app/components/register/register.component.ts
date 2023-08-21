@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RegisterService } from '../../services/register.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccessTokenResponse } from '../../services/types';
@@ -11,9 +11,9 @@ import { LoginService } from '../../services/loginSevice/login.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
-  error: boolean = false;
-  errorMsg: string = '';
+export class RegisterComponent {
+  error = false;
+  errorMsg = '';
   registrationForm: FormGroup;
 
   constructor(
@@ -43,13 +43,19 @@ export class RegisterComponent implements OnInit {
         streetNumber: ['', [Validators.required]],
         postalCode: ['', [Validators.required]],
       }),
+      defaultShippingAddressId: [''],
     });
   }
 
-  async onSubmit(event: Event) {
+  async onSubmit(event: Event): Promise<void> {
     event.preventDefault();
-    console.log(this.registrationForm.value);
     if (this.registrationForm.valid) {
+      if (this.registrationForm.value.defaultShippingAddressId) {
+        this.registrationForm.value.defaultShippingAddressId = 0;
+      } else {
+        delete this.registrationForm.value.defaultShippingAddressId;
+      }
+      console.log(this.registrationForm.value);
       const authToken = this.service.getToken();
       authToken?.subscribe((token: AccessTokenResponse) => {
         const access_token = token.access_token;
@@ -80,10 +86,8 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  setErrorMsg(msg: string) {
+  setErrorMsg(msg: string): void {
     this.errorMsg = msg;
     this.error = true;
   }
-
-  ngOnInit(): void {}
 }
