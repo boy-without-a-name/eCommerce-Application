@@ -7,7 +7,7 @@
     </p>
     <button routerLink="" class="return-main-page">
       <img src="../../../assets/img/Vector.svg" alt="" />
-      <p>Вернуться на главную страницу</p>
+      <p>Go back to main page</p>
     </button>
   </div>
   <div class="login-form">
@@ -19,19 +19,23 @@
             #login_email
             type="text"
             placeholder="Email"
-            (blur)="checkEmail(login_email.value)"
+            (focus)="showErrorEmail = false"
+            (focus)="errorAuthText = false"
+            (input)="checkEmail(login_email.value)"
           />
-          <p class="error-email" *ngIf="showErrorEmail">
-            Некорректный адрес Email. Проверьте что Ваша почта соответствукт образцу "user@example.com"
-          </p>
+          <div class="error-email" *ngIf="showErrorEmail">
+            {{ [textErrorEmail] }}
+          </div>
         </div>
         <div class="password">
           <input
             class="password__input"
             #login_password
             [type]="showPassword(typeInput)"
-            placeholder="Пароль"
-            (blur)="checkPassword(login_password.value)"
+            placeholder="Password"
+            (input)="checkPassword(login_password.value)"
+            (focus)="checkRulesPassword = false"
+            (focus)="errorAuthText = false"
           />
           <img
             class="password__img"
@@ -40,13 +44,25 @@
             alt=""
           />
         </div>
-        <div class="error-email">{{ [text] }}</div>
+        <div class="error-password" *ngIf="checkRulesPassword">{{ [text] }}</div>
+        <p class="errorAuth" *ngIf="errorAuthText">Неверный логин или пароль</p>
 
-        <button class="form-wrapper__btn" (mousedown)="clickButtonSubmit(login_email.value, login_password.value)">
-          Войти
+        <button
+          class="form-wrapper__btn"
+          [disabled]="
+            showErrorEmail === true ||
+            checkRulesPassword === true ||
+            login_email.value === '' ||
+            login_password.value === '' ||
+            checkClickBtnSubmit === true
+          "
+          (mousedown)="clickButtonSubmit(login_email.value, login_password.value)"
+          (mouseup)="checkClickBtnSubmit = true"
+        >
+          Sign in
         </button>
       </div>
-      <p routerLink="/registration" class="link-registration">Зарегистрироваться на сайте</p>
+      <p routerLink="/registration" class="link-registration">Register on the site</p>
     </div>
   </div>
 </div>

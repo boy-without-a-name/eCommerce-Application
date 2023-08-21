@@ -36,7 +36,7 @@ import { UserIconComponent } from './components/user-icon/user-icon.component';
     NotFoundViewComponent,
     UserIconComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })
