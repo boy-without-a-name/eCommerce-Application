@@ -25,7 +25,15 @@
   height: 1500px;
   border-radius: 50%;
 }
-
+.errorAuth {
+  background-color: #ffffff;
+  margin-top: 10px;
+  padding: 3%;
+  color: #f00101;
+  font-weight: 700;
+  font-size: 1.5 rem;
+  border-radius: 5px;
+}
 .information-wrapper__img {
   z-index: 1;
   width: 300px;
@@ -82,14 +90,30 @@
 }
 
 .email {
+  position: relative;
   width: 100%;
   max-width: 456px;
   margin-bottom: 100px;
 }
 
 .error-email {
+  position: absolute;
+  z-index: 1;
+  padding: 2%;
   color: #f00101;
   max-width: 456px;
+  background-color: #ffffff;
+  border-radius: 5px;
+}
+
+.error-password {
+  margin-top: 5px;
+  z-index: 1;
+  padding: 2%;
+  color: #f00101;
+  max-width: 456px;
+  background-color: #ffffff;
+  border-radius: 5px;
 }
 
 .form {
@@ -193,6 +217,15 @@
     margin-bottom: 35px;
   }
 
+  .error-email {
+    font-size: 12px;
+    top: -63px;
+  }
+
+  .error-password {
+    font-size: 12px;
+  }
+
   .form-wrapper__email,
   .password {
     height: 50px;
@@ -249,5 +282,9 @@
   .form-wrapper__email,
   .password__input {
     font-size: 1rem;
+  }
+
+  .error-email {
+    top: -50px;
   }
 }
