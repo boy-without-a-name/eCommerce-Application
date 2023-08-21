@@ -38,52 +38,51 @@ export class AppLoginComponent {
   checkEmail(value: string): string | void {
     const str = value.split('@');
     this.showErrorEmail = false;
-      this.textErrorEmail = '';
+    this.textErrorEmail = '';
     if (str.length === 1) {
       this.showErrorEmail = true;
       if (str[0].length === 0 || str[0] === '') {
         this.textErrorEmail = 'Поле до символа @ должно содержать минимум 1 символ';
         return this.textErrorEmail;
       }
-      if(str[0].split('').filter((i) => i === '.').length > 0) {
+      if (str[0].split('').filter((i) => i === '.').length > 0) {
         this.textErrorEmail = 'Поле до символа @ не должно содержать точку';
         return this.textErrorEmail;
       }
-      if(str[0].length !== str[0].trim().length) {
+      if (str[0].length !== str[0].trim().length) {
         this.textErrorEmail = 'Поле не должно содержать пробелы в начале или конце';
         return this.textErrorEmail;
       }
-      return this.textErrorEmail = 'Заполните поле по образу user@example.com'
+      return (this.textErrorEmail = 'Заполните поле по образу user@example.com');
     } else if (str.length === 2) {
       if (str[0].length === 0) {
         this.textErrorEmail = 'Поле до символа @ должно содержать минимум 1 символ';
         this.showErrorEmail = true;
         return this.textErrorEmail;
       }
-      if(str[0].split('').filter((i) => i === '.').length > 0) {
+      if (str[0].split('').filter((i) => i === '.').length > 0) {
         this.textErrorEmail = 'Поле до символа @ не должно содержать точку';
         this.showErrorEmail = true;
         return this.textErrorEmail;
       }
-        const domen = str[1].split('.')
-        if(domen.length ===1 || domen[0].length === 0 ||
-          domen[1].length === 0) {
-            this.textErrorEmail = 'Заполните имя домена по образцу example.com'
-            this.showErrorEmail = true;
-            return this.textErrorEmail
-          } else {
-            this.showErrorEmail = false;
-          }
-          if (value.length !== value.trim().length) {
-            this.textErrorEmail = 'Поле не должно содержать пробелы в начале или конце';
-            this.showErrorEmail = true;
-            return this.textErrorEmail;
-          }
-          if(str[1].split('.').length != 2) {
-            this.textErrorEmail = 'Имя домена должно содеражать только 1 точку';
-            this.showErrorEmail = true;
-            return this.textErrorEmail;
-          }
+      const domen = str[1].split('.');
+      if (domen.length === 1 || domen[0].length === 0 || domen[1].length === 0) {
+        this.textErrorEmail = 'Заполните имя домена по образцу example.com';
+        this.showErrorEmail = true;
+        return this.textErrorEmail;
+      } else {
+        this.showErrorEmail = false;
+      }
+      if (value.length !== value.trim().length) {
+        this.textErrorEmail = 'Поле не должно содержать пробелы в начале или конце';
+        this.showErrorEmail = true;
+        return this.textErrorEmail;
+      }
+      if (str[1].split('.').length != 2) {
+        this.textErrorEmail = 'Имя домена должно содеражать только 1 точку';
+        this.showErrorEmail = true;
+        return this.textErrorEmail;
+      }
     } else if (str.length > 2) {
       this.textErrorEmail = 'Поле не должно содержать более одного символа @';
       this.showErrorEmail = true;
@@ -92,7 +91,6 @@ export class AppLoginComponent {
       this.showErrorEmail = false;
     }
   }
-
 
   checkPassword(value: string): string | void {
     this.checkRulesPassword = false;
