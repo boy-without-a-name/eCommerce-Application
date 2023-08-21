@@ -49,7 +49,7 @@
             <p *ngIf="addressForm.get('postalCode')?.invalid && addressForm.get('postalCode')?.touched">
               Invalid postal code.
             </p>
-            <button (click)="removeAddress(i)">Remove address</button>
+            <button *ngIf="i === 1" (click)="removeAddress(i)">Remove address</button>
           </div>
         </div>
         <div class="dialogShipping">
@@ -58,7 +58,7 @@
         </div>
         <input type="password" placeholder="Type password" formControlName="password" />
         <div class="button__register__wrapper">
-          <button (click)="addAdress()" type="button">Add address</button>
+          <button *ngIf="showBilling" (click)="addAdress()" type="button">Add Billing address</button>
           <button routerLink="/login" type="button">Sign in</button>
           <button type="submit">Sign up</button>
         </div>

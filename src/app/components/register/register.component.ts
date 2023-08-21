@@ -15,6 +15,7 @@ export class RegisterComponent {
   error = false;
   errorMsg = '';
   registrationForm: FormGroup;
+  showBilling = true;
 
   constructor(
     public service: RegisterService,
@@ -37,7 +38,7 @@ export class RegisterComponent {
         ],
       ],
       date: ['', [Validators.required]],
-      address: this.fb.array([]),
+      address: this.fb.array([this.createAddressFormGroup()]),
       defaultShippingAddressId: [''],
     });
   }
@@ -96,12 +97,12 @@ export class RegisterComponent {
 
   addAdress() {
     const newAddress = this.createAddressFormGroup();
-    console.log(this.adresses.controls);
+    this.showBilling = false;
     this.adresses.push(newAddress);
   }
 
   removeAddress(index: number) {
-    console.log(this.registrationForm.value.address);
+    this.showBilling = true;
     this.adresses.removeAt(index);
   }
 
