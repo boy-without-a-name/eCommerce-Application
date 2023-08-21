@@ -17,6 +17,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { MainViewComponent } from './components/main-view/main-view.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NotFoundViewComponent } from './components/not-found-view/not-found-view.component';
+import { UserIconComponent } from './components/user-icon/user-icon.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { NotFoundViewComponent } from './components/not-found-view/not-found-vie
     MainViewComponent,
     RegisterComponent,
     NotFoundViewComponent,
+    UserIconComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   providers: [],
