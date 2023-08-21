@@ -34,7 +34,8 @@ import { NotFoundViewComponent } from './components/not-found-view/not-found-vie
     RegisterComponent,
     NotFoundViewComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule,
+  FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

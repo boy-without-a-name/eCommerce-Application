@@ -25,7 +25,15 @@
   height: 1500px;
   border-radius: 50%;
 }
-
+.errorAuth {
+  background-color: #ffffff;
+  margin-top: 10px;
+  padding: 3%;
+  color: #f00101;
+  font-weight: 700;
+  font-size: 1.5 rem;
+  border-radius: 5px;
+}
 .information-wrapper__img {
   z-index: 1;
   width: 300px;

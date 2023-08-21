@@ -7,7 +7,7 @@
     </p>
     <button routerLink="" class="return-main-page">
       <img src="../../../assets/img/Vector.svg" alt="" />
-      <p>Вернуться на главную страницу</p>
+      <p>Go back to main page</p>
     </button>
   </div>
   <div class="login-form">
@@ -20,10 +20,11 @@
             type="text"
             placeholder="Email"
             (focus)="showErrorEmail = false"
-            (blur)="checkEmail(login_email.value)"
+            (focus)="errorAuthText = false"
+            (input)="checkEmail(login_email.value)"
           />
           <div class="error-email" *ngIf="showErrorEmail">
-            Некорректный адрес Email. Проверьте что Ваша почта соответствукт образцу "user@example.com"
+            {{ [textErrorEmail] }}
           </div>
         </div>
         <div class="password">
@@ -31,9 +32,10 @@
             class="password__input"
             #login_password
             [type]="showPassword(typeInput)"
-            placeholder="Пароль"
+            placeholder="Password"
+            (input)="checkPassword(login_password.value)"
             (focus)="checkRulesPassword = false"
-            (blur)="checkPassword(login_password.value)"
+            (focus)="errorAuthText = false"
           />
           <img
             class="password__img"
@@ -43,6 +45,7 @@
           />
         </div>
         <div class="error-password" *ngIf="checkRulesPassword">{{ [text] }}</div>
+        <p class="errorAuth" *ngIf="errorAuthText">Неверный логин или пароль</p>
 
         <button
           class="form-wrapper__btn"
@@ -56,10 +59,10 @@
           (mousedown)="clickButtonSubmit(login_email.value, login_password.value)"
           (mouseup)="checkClickBtnSubmit = true"
         >
-          Войти
+          Sign in
         </button>
       </div>
-      <p routerLink="/registration" class="link-registration">Зарегистрироваться на сайте</p>
+      <p routerLink="/registration" class="link-registration">Register on the site</p>
     </div>
   </div>
 </div>
