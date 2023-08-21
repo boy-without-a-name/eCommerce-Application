@@ -1,70 +1,88 @@
 @import url(normalize.scss.css);
 
-.register__layout {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1920px;
-  max-height: 100vh;
+.register {
+  &__layout {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1920px;
+
+    @media screen and (max-width: 1280px) {
+      flex-direction: column-reverse;
+    }
+  }
+
+  &__form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__background {
+    display: flex;
+    flex-direction: column;
+    background: #333333;
+    border-radius: 1rem;
+    padding: 1rem 2rem;
+    width: 70%;
+    max-width: 500px;
+    margin: 1rem;
+
+    @media screen and (max-width: 768px) {
+      padding: 1rem;
+      width: 90%;
+    }
+  }
 }
 
 .information__wrapper {
+  display: none;
   width: 40%;
   height: 100%;
   display: flex;
   flex-direction: column;
-}
 
-.register__background {
-  margin: 0 auto;
-  width: 70%;
-  height: 100%;
-  background: #333333;
-  border-radius: 1rem;
-  display: flex;
-  flex-direction: row;
-}
-
-.register__wrapper {
-  display: flex;
-  flex-direction: column;
-  width: 742px;
-  margin: 0 10%;
-
-  p {
-    color: white;
+  @media screen and (min-width: 1280px) {
+    display: block;
   }
 
-  input {
-    width: 100%;
-    height: 30px;
-    border-radius: 0.3rem;
-    margin: 10px 0;
-  }
-
-  h2 {
-    color: #f2f2f2;
-    text-align: center;
+  &__img {
+    margin: 0 auto;
+    width: 250px;
   }
 }
 
-.address {
-  input {
-    width: 100%;
-    height: 30px;
-    border-radius: 0.3rem;
-    margin: 10px 0;
-  }
+h2 {
+  color: #fff;
+}
 
-  p {
-    color: white;
-  }
+p {
+  color: white;
+}
+
+p.error-message {
+  color: red;
+}
+
+input {
+  width: 100%;
+  height: 30px;
+  border-radius: 0.3rem;
+  margin: 5px 0;
+  padding: 0 0.5rem;
+  border: none;
+}
+
+h2 {
+  color: #f2f2f2;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .button__register__wrapper {
-  width: 100%;
   display: flex;
   flex-direction: row;
+  margin-top: 1rem;
 
   button {
     background: linear-gradient(rgba(255, 226, 89, 1), rgba(255, 167, 81, 1));
@@ -81,79 +99,74 @@
   z-index: 1;
   display: flex;
   align-items: center;
-  margin-top: 60px;
-  margin-right: 40%;
+  margin: 2rem 1rem;
   gap: 5px;
   outline: none;
   background-color: transparent;
   border: 0;
   font: 1.3em sans-serif;
   cursor: pointer;
-}
 
-.return-main-page:hover {
-  color: #1840c4;
-}
-
-.information-wrapper__img {
-  margin: 0 auto;
-  width: 250px;
+  &:hover {
+    color: #1840c4;
+  }
 }
 
 .information-wrapper {
-  width: 50%;
-  overflow: hidden;
   position: relative;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+  gap: 1rem;
+  overflow: hidden;
 
-.information-wrapper__background {
-  position: absolute;
-  top: -325px;
-  right: 0;
-  background-color: #ffe259;
-  display: flex;
-  width: 1500px;
-  height: 1500px;
-  border-radius: 50%;
-}
+  @media screen and (max-width: 1280px) {
+    height: initial;
+    flex-direction: column-reverse;
+  }
 
-.information-wrapper__img {
-  z-index: 1;
-  width: 300px;
-  height: auto;
-}
+  p {
+    color: #000;
+  }
 
-.information-wrapper__text {
-  z-index: 1;
-  font:
-    bold 2em Roboto,
-    sans-serif;
-  color: #4f4f4f;
-  width: 100%;
-  max-width: 75%;
-}
+  &__background {
+    position: absolute;
+    top: -325px;
+    right: 0;
+    background-color: #ffe259;
+    display: flex;
+    width: 80vw;
+    height: 150vh;
+    border-radius: 50%;
 
-.return-main-page {
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  margin-top: 60px;
-  margin-right: 40%;
-  gap: 5px;
-  outline: none;
-  background-color: transparent;
-  border: 0;
-  font: 1.3em sans-serif;
-  cursor: pointer;
-}
+    @media screen and (max-width: 1280px) {
+      display: none;
+    }
+  }
 
-.return-main-page:hover {
-  color: #1840c4;
+  &__img {
+    z-index: 1;
+    width: calc(200px + 10vw);
+    height: auto;
+  }
+
+  &__text {
+    z-index: 1;
+    font:
+      bold 2em Roboto,
+      sans-serif;
+    color: #4f4f4f;
+    width: 100%;
+    max-width: 75%;
+    padding: 0 3rem;
+    text-align: center;
+
+    @media screen and (max-width: 1280px) {
+      display: none;
+    }
+  }
 }
 
 .login-form {
@@ -165,18 +178,15 @@
 }
 
 .dialogShipping {
-  input {
-    position: relative;
-    left: 0;
-    margin-left: 0;
-  }
-
-  p {
-    white-space: nowrap;
-  }
-
   display: flex;
   flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+
+  input {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 .address {
