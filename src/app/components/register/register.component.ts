@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RegisterService } from '../../services/register.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccessTokenResponse } from '../../services/types';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -37,12 +37,7 @@ export class RegisterComponent {
         ],
       ],
       date: ['', [Validators.required]],
-      address: this.fb.group({
-        city: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
-        streetName: ['', [Validators.required]],
-        streetNumber: ['', [Validators.required]],
-        postalCode: ['', [Validators.required]],
-      }),
+      address: this.fb.array([]),
       defaultShippingAddressId: [''],
     });
   }
@@ -70,10 +65,6 @@ export class RegisterComponent {
         resp.subscribe(
           (resp) => {
             console.log(resp);
-            localStorage.setItem('email', `${this.registrationForm.value.email}`);
-            localStorage.setItem('firstName', `${this.registrationForm.value.firstName}`);
-            localStorage.setItem('lastName', `${this.registrationForm.value.lastName}`);
-            this.router.navigate(['/']);
             this.login
               .getToken(this.registrationForm.value.email, this.registrationForm.value.password)
               ?.subscribe((next) => {
@@ -88,6 +79,30 @@ export class RegisterComponent {
         );
       });
     }
+  }
+
+  createAddressFormGroup() {
+    return this.fb.group({
+      city: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
+      streetName: ['', [Validators.required]],
+      streetNumber: ['', [Validators.required]],
+      postalCode: ['', [Validators.required]],
+    });
+  }
+
+  addAdress() {
+    const newAddress = this.createAddressFormGroup();
+    console.log(this.adresses.controls);
+    this.adresses.push(newAddress);
+  }
+
+  removeAddress(index: number) {
+    console.log(this.registrationForm.value.address);
+    this.adresses.removeAt(index);
+  }
+
+  get adresses() {
+    return this.registrationForm.get('address') as FormArray;
   }
 
   setErrorMsg(msg: string): void {
