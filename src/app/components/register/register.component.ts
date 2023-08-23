@@ -5,6 +5,7 @@ import { AccessTokenResponse } from '../../services/types';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/loginSevice/login.service';
+import { countries } from '../../models/interface/countries';
 
 @Component({
   selector: 'app-register',
@@ -18,6 +19,7 @@ export class RegisterComponent {
   showBilling = true;
   sumbitted = false;
   defaultShippingAddress = 0;
+  countries = countries;
 
   constructor(
     public service: RegisterService,
@@ -41,7 +43,7 @@ export class RegisterComponent {
         ],
       ],
       date: ['', [Validators.required]],
-      address: this.fb.array([this.createAddressFormGroup()]),
+      addresses: this.fb.array([this.createAddressFormGroup()]),
     });
   }
 
@@ -91,6 +93,7 @@ export class RegisterComponent {
 
   createAddressFormGroup() {
     return this.fb.group({
+      country: ['', Validators.required],
       city: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
       streetName: ['', [Validators.required]],
       streetNumber: ['', [Validators.required]],
@@ -111,7 +114,7 @@ export class RegisterComponent {
   }
 
   get adresses() {
-    return this.registrationForm.get('address') as FormArray;
+    return this.registrationForm.get('addresses') as FormArray;
   }
 
   isOld() {
