@@ -28,6 +28,7 @@ export class RegisterComponent {
       firstName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
       lastName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
       email: ['', [Validators.required, Validators.email]],
+      defaultShippingAddressId: false,
       password: [
         '',
         [
@@ -39,12 +40,12 @@ export class RegisterComponent {
       ],
       date: ['', [Validators.required]],
       address: this.fb.array([this.createAddressFormGroup()]),
-      defaultShippingAddressId: [''],
     });
   }
 
   async onSubmit(event: Event): Promise<void> {
     event.preventDefault();
+    console.log(this.registrationForm.value);
     if (this.registrationForm.valid) {
       if (this.registrationForm.value.defaultShippingAddressId) {
         this.registrationForm.value.defaultShippingAddressId = 0;
