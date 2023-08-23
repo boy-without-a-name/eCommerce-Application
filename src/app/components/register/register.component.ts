@@ -123,9 +123,4 @@ export class RegisterComponent {
     this.registrationForm.value.defaultShippingAddressId = id;
     this.defaultShippingAddress = id;
   }
-
-  setErrorMsg(msg: string): void {
-    this.errorMsg = msg;
-    this.error = true;
-  }
 }
