@@ -15,6 +15,7 @@ import { countries } from '../../models/interface/countries';
 export class RegisterComponent {
   error = false;
   errorMsg = '';
+  errorMsgAge = false;
   registrationForm: FormGroup;
   showBilling = true;
   sumbitted = false;
@@ -32,7 +33,7 @@ export class RegisterComponent {
       firstName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
       lastName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
       email: ['', [Validators.required, Validators.email]],
-      defaultShippingAddressId: [''],
+      shippingAddresses: [''],
       password: [
         '',
         [
@@ -86,6 +87,7 @@ export class RegisterComponent {
         });
       } else {
         this.error = true;
+        this.errorMsgAge = true;
         this.errorMsg = 'You small :))';
       }
     }
@@ -93,6 +95,7 @@ export class RegisterComponent {
 
   createAddressFormGroup() {
     return this.fb.group({
+      key: ['shipping', Validators.required],
       country: ['', Validators.required],
       city: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
       streetName: ['', [Validators.required]],
