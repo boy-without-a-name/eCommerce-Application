@@ -49,7 +49,7 @@
             <p style='color: white'>Postal code:</p>
             <input type='text' formControlName='postalCode' />
             <p *ngIf="sumbitted && addressForm.get('postalCode')?.invalid">Invalid postal code.</p>
-            <button *ngIf='i !== this.defaultShippingAddress' (click)='defaultAddress(i)'>
+            <button (click)='defaultAddress(i)'>
               Set default shipping address
             </button>
             <button *ngIf='i === 1' (click)='removeAddress(i)'>Remove address</button>

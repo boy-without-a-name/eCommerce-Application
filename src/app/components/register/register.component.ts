@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../../services/register.service';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccessTokenResponse } from '../../services/types';
@@ -19,7 +19,7 @@ export class RegisterComponent {
   registrationForm: FormGroup;
   showBilling = true;
   sumbitted = false;
-  defaultShippingAddress = 0;
+  defaultShippingAddress: number = 0;
   countries = countries;
 
   constructor(
@@ -33,7 +33,7 @@ export class RegisterComponent {
       firstName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
       lastName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
       email: ['', [Validators.required, Validators.email]],
-      shippingAddresses: [''],
+      defaultShippingAddressId: [''],
       password: [
         '',
         [
@@ -51,6 +51,7 @@ export class RegisterComponent {
   async onSubmit(event: Event): Promise<void> {
     event.preventDefault();
     this.sumbitted = true;
+    this.registrationForm.value.defaultShippingAddressId = [0];
     console.log(this.registrationForm.value);
     if (this.registrationForm.valid) {
       if (this.isOld()) {
@@ -95,7 +96,6 @@ export class RegisterComponent {
 
   createAddressFormGroup() {
     return this.fb.group({
-      key: ['shipping', Validators.required],
       country: ['', Validators.required],
       city: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
       streetName: ['', [Validators.required]],
@@ -106,6 +106,7 @@ export class RegisterComponent {
 
   addAdress() {
     const newAddress = this.createAddressFormGroup();
+    this.registrationForm.value.defaultBillingAddress = [1];
     this.showBilling = false;
     this.adresses.push(newAddress);
   }
@@ -114,6 +115,7 @@ export class RegisterComponent {
     this.showBilling = true;
     this.adresses.removeAt(index);
     this.defaultShippingAddress = 0;
+    delete this.registrationForm.value.defaultBillingAddress;
   }
 
   get adresses() {
@@ -130,7 +132,7 @@ export class RegisterComponent {
   }
 
   defaultAddress(id: number) {
-    this.registrationForm.value.defaultShippingAddressId = id;
+    this.registrationForm.value.defaultShippingAddressId = [0];
     this.defaultShippingAddress = id;
   }
 }
