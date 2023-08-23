@@ -16,6 +16,7 @@ export class RegisterComponent {
   errorMsg = '';
   registrationForm: FormGroup;
   showBilling = true;
+  sumbitted = false;
 
   constructor(
     public service: RegisterService,
@@ -45,6 +46,7 @@ export class RegisterComponent {
 
   async onSubmit(event: Event): Promise<void> {
     event.preventDefault();
+    this.sumbitted = true;
     console.log(this.registrationForm.value);
     if (this.registrationForm.valid) {
       if (this.registrationForm.value.defaultShippingAddressId) {
