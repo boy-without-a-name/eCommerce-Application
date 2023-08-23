@@ -17,6 +17,7 @@ export class RegisterComponent {
   registrationForm: FormGroup;
   showBilling = true;
   sumbitted = false;
+  defaultShippingAddress = 0;
 
   constructor(
     public service: RegisterService,
@@ -29,7 +30,7 @@ export class RegisterComponent {
       firstName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
       lastName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
       email: ['', [Validators.required, Validators.email]],
-      defaultShippingAddressId: false,
+      defaultShippingAddressId: [''],
       password: [
         '',
         [
@@ -49,11 +50,6 @@ export class RegisterComponent {
     this.sumbitted = true;
     console.log(this.registrationForm.value);
     if (this.registrationForm.valid) {
-      if (this.registrationForm.value.defaultShippingAddressId) {
-        this.registrationForm.value.defaultShippingAddressId = 0;
-      } else {
-        delete this.registrationForm.value.defaultShippingAddressId;
-      }
       if (this.isOld()) {
         const authToken = this.service.getToken();
         authToken?.subscribe((token: AccessTokenResponse) => {
@@ -107,6 +103,7 @@ export class RegisterComponent {
   removeAddress(index: number) {
     this.showBilling = true;
     this.adresses.removeAt(index);
+    this.defaultShippingAddress = 0;
   }
 
   get adresses() {
@@ -120,6 +117,11 @@ export class RegisterComponent {
     } else {
       return true;
     }
+  }
+
+  defaultAddress(id: number) {
+    this.registrationForm.value.defaultShippingAddressId = id;
+    this.defaultShippingAddress = id;
   }
 
   setErrorMsg(msg: string): void {
