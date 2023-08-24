@@ -22,6 +22,7 @@
             (focus)="showErrorEmail = false"
             (focus)="errorAuthText = false"
             (input)="checkEmail(login_email.value)"
+            (blur)="checkEmail(login_email.value)"
           />
           <div class="error-email" *ngIf="showErrorEmail">
             {{ [textErrorEmail] }}
@@ -36,6 +37,7 @@
             (input)="checkPassword(login_password.value)"
             (focus)="checkRulesPassword = false"
             (focus)="errorAuthText = false"
+            (blur)="checkPassword(login_password.value)"
           />
           <img
             class="password__img"

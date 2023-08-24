@@ -19,7 +19,7 @@ export class LoginService {
 
   constructor(private http: HttpClient) {}
 
-   getToken(email: string, password: string): Observable<AccessTokenResponse> | null {
+  getToken(email: string, password: string): Observable<AccessTokenResponse> | null {
     const data = new URLSearchParams();
     data.append('grant_type', 'password');
     data.append('username', `${email}`);
