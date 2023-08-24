@@ -19,6 +19,7 @@ import { MainViewComponent } from './components/main-view/main-view.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NotFoundViewComponent } from './components/not-found-view/not-found-view.component';
 import { UserIconComponent } from './components/user-icon/user-icon.component';
+import { NavLinksComponent } from './components/nav-links/nav-links.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { UserIconComponent } from './components/user-icon/user-icon.component';
     RegisterComponent,
     NotFoundViewComponent,
     UserIconComponent,
+    NavLinksComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
