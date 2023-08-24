@@ -7,7 +7,7 @@ import { NotFoundViewComponent } from './components/not-found-view/not-found-vie
 import { authenticationGuard } from './shared/functions/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: MainViewComponent },
+  { path: '', redirectTo: '/main', pathMatch: 'full' },
   { path: 'main', component: MainViewComponent },
   { path: 'login', component: AppLoginComponent, canActivate: [authenticationGuard()] },
   { path: 'registration', component: RegisterComponent, canActivate: [authenticationGuard()] },
