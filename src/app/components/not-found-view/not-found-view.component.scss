@@ -1,15 +1,10 @@
-:host {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-}
-
 .page-not-found {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-top: 1rem;
 
   &__code {
     font-size: 10vw;

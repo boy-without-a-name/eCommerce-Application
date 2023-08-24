@@ -1,0 +1,26 @@
+.nav-links {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style-type: none;
+  background-color: #000;
+  color: #fff;
+  max-width: 320px;
+  border-radius: 4px;
+  font-weight: 600;
+  overflow: hidden;
+
+  &__link {
+    width: 100%;
+    padding: 0 0.5rem;
+    text-align: center;
+    white-space: nowrap;
+    outline: 1px solid #fff;
+
+    &:hover {
+      background-color: #febd69;
+      color: #000;
+      cursor: pointer;
+    }
+  }
+}

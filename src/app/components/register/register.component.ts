@@ -5,6 +5,7 @@ import { AccessTokenResponse } from '../../services/types';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/loginSevice/login.service';
+import { countries } from '../../models/interface/countries';
 
 @Component({
   selector: 'app-register',
@@ -14,8 +15,12 @@ import { LoginService } from '../../services/loginSevice/login.service';
 export class RegisterComponent {
   error = false;
   errorMsg = '';
+  errorMsgAge = false;
   registrationForm: FormGroup;
   showBilling = true;
+  sumbitted = false;
+  defaultShippingAddress = 0;
+  countries = countries;
 
   constructor(
     public service: RegisterService,
@@ -38,20 +43,24 @@ export class RegisterComponent {
         ],
       ],
       date: ['', [Validators.required]],
-      address: this.fb.array([this.createAddressFormGroup()]),
-      defaultShippingAddressId: [''],
+      addresses: this.fb.array([this.createAddressFormGroup()]),
     });
   }
 
   async onSubmit(event: Event): Promise<void> {
     event.preventDefault();
+    this.sumbitted = true;
+    console.log(this.registrationForm.value);
     if (this.registrationForm.valid) {
-      if (this.registrationForm.value.defaultShippingAddressId) {
-        this.registrationForm.value.defaultShippingAddressId = 0;
-      } else {
-        delete this.registrationForm.value.defaultShippingAddressId;
-      }
       if (this.isOld()) {
+        this.registrationForm.value.shippingAddresses = [this.defaultShippingAddress];
+        if (!this.showBilling) {
+          this.registrationForm.value.billingAddresses = [1];
+        } else {
+          this.registrationForm.value.billingAdresses = [0];
+          this.registrationForm.value.defaultShippingAddress = 0;
+          this.registrationForm.value.defaultBillingAddress = 0;
+        }
         const authToken = this.service.getToken();
         authToken?.subscribe((token: AccessTokenResponse) => {
           const access_token = token.access_token;
@@ -70,6 +79,11 @@ export class RegisterComponent {
                 .getToken(this.registrationForm.value.email, this.registrationForm.value.password)
                 ?.subscribe((next) => {
                   console.log(next);
+                  localStorage.setItem('email', `${this.registrationForm.value.email}`);
+                  localStorage.setItem('firstName', `${this.registrationForm.value.firstName}`);
+                  localStorage.setItem('lastName', `${this.registrationForm.value.lastName}`);
+                  localStorage.setItem('isSignedIn', JSON.stringify(true));
+                  this.router.navigate(['/']);
                   this.router.navigate(['']);
                 });
             },
@@ -81,13 +95,15 @@ export class RegisterComponent {
         });
       } else {
         this.error = true;
+        this.errorMsgAge = true;
         this.errorMsg = 'You small :))';
       }
     }
   }
 
-  createAddressFormGroup() {
+  createAddressFormGroup(): FormGroup {
     return this.fb.group({
+      country: ['', Validators.required],
       city: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
       streetName: ['', [Validators.required]],
       streetNumber: ['', [Validators.required]],
@@ -95,22 +111,24 @@ export class RegisterComponent {
     });
   }
 
-  addAdress() {
+  addAdress(): void {
     const newAddress = this.createAddressFormGroup();
     this.showBilling = false;
     this.adresses.push(newAddress);
   }
 
-  removeAddress(index: number) {
+  removeAddress(index: number): void {
     this.showBilling = true;
     this.adresses.removeAt(index);
+    this.defaultShippingAddress = 0;
+    delete this.registrationForm.value.billingAddresses;
   }
 
-  get adresses() {
-    return this.registrationForm.get('address') as FormArray;
+  get adresses(): FormArray {
+    return this.registrationForm.get('addresses') as FormArray;
   }
 
-  isOld() {
+  isOld(): boolean {
     const currentAge = 2023 - this.registrationForm.value.date.slice(0, 4);
     if (currentAge <= 13) {
       return false;
@@ -119,8 +137,8 @@ export class RegisterComponent {
     }
   }
 
-  setErrorMsg(msg: string): void {
-    this.errorMsg = msg;
-    this.error = true;
+  defaultAddress(id: number): void {
+    this.registrationForm.value.shippingAddresses = [id];
+    this.defaultShippingAddress = id;
   }
 }

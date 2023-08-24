@@ -6,11 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  // TODO: - [] get information of whether user was signed in or not from login component/service & change the isSignedIn condition accordingly
-  isSignedIn = true;
+  isSignedIn = Boolean(localStorage.getItem('isSignedIn'));
 
   signOutEventHandler(): void {
-    this.removeItemsFromLocalStorage('token', 'email', 'firstName', 'lastName');
+    this.removeItemsFromLocalStorage('token', 'email', 'firstName', 'lastName', 'isSignedIn');
     this.isSignedIn = false;
   }
 

@@ -15,53 +15,52 @@
       <div class="register__wrapper">
         <h2>Register</h2>
         <p *ngIf="error">Error validate | {{ this.errorMsg }}</p>
-        <p *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
-          Please enter a valid email address.
-        </p>
-        <p *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
-          Password must have at least 8 characters, 1 uppercase letter, 1 lowercase letter, and 1 number.
-        </p>
+        <p *ngIf="sumbitted && registrationForm.get('email')?.invalid">Please enter a valid email address.</p>
         <input type="text" placeholder="First Name" formControlName="firstName" />
-        <p *ngIf="registrationForm.get('firstName')?.invalid && registrationForm.get('firstName')?.touched">
-          Invalid first name.
-        </p>
+        <p *ngIf="sumbitted && registrationForm.get('firstName')?.invalid">Invalid first name.</p>
         <input type="text" placeholder="Last Name" formControlName="lastName" />
-        <p *ngIf="registrationForm.get('lastName')?.invalid && registrationForm.get('lastName')?.touched">
-          Invalid last name.
-        </p>
+        <p *ngIf="sumbitted && registrationForm.get('lastName')?.invalid">Invalid last name.</p>
         <input type="email" placeholder="Email" formControlName="email" />
         <p style="color: white">Date of birth</p>
+
         <input type="date" formControlName="date" />
-        <div formArrayName="address">
+        <p *ngIf="sumbitted && registrationForm.get('date')?.invalid">Invalid date name.</p>
+        <p *ngIf="errorMsgAge">You are not yet 13 years old</p>
+        <div formArrayName="addresses">
           <div *ngFor="let addressForm of adresses.controls; let i = index" [formGroupName]="i" class="address">
             <h2>Adress {{ i + 1 }}</h2>
+            <p style="color: white">Country:</p>
+            <select formControlName="country">
+              <option *ngFor="let country of countries" [value]="country.code">{{ country.name }}</option>
+            </select>
+            <p *ngIf="sumbitted && addressForm.get('country')?.invalid">Invalid country name.</p>
             <p style="color: white">Specify city:</p>
             <input type="text" formControlName="city" />
-            <p *ngIf="addressForm.get('address.city')?.invalid && addressForm.get('address.city')?.touched">
-              Invalid city name.
-            </p>
+            <p *ngIf="sumbitted && addressForm.get('city')?.invalid">Invalid city name.</p>
             <p style="color: white">Street:</p>
             <input type="text" formControlName="streetName" />
+            <p *ngIf="sumbitted && addressForm.get('streetName')?.invalid">Invalid street.</p>
             <p style="color: white">Street number:</p>
             <input type="text" formControlName="streetNumber" />
+            <p *ngIf="sumbitted && addressForm.get('streetNumber')?.invalid">Invalid street number.</p>
             <p style="color: white">Postal code:</p>
             <input type="text" formControlName="postalCode" />
-            <p *ngIf="addressForm.get('postalCode')?.invalid && addressForm.get('postalCode')?.touched">
-              Invalid postal code.
-            </p>
-            <div *ngIf="i != 1" class="dialogShipping">
-              <input type="checkbox" formControlName="defaultShippingAddressId" />
-              <p>Default shipping address</p>
-            </div>
+            <p *ngIf="sumbitted && addressForm.get('postalCode')?.invalid">Invalid postal code.</p>
+            <button *ngIf="this.defaultShippingAddress !== i" (click)="defaultAddress(i)">
+              Set default shipping address
+            </button>
             <button *ngIf="i === 1" (click)="removeAddress(i)">Remove address</button>
           </div>
         </div>
-
+        <p *ngIf="sumbitted && registrationForm.get('password')?.invalid">
+          Password must have at least 8 characters, 1 uppercase letter, 1 lowercase letter, and 1 number.
+        </p>
         <input type="password" placeholder="Type password" formControlName="password" />
+        <p *ngIf="error">Error validate | {{ this.errorMsg }}</p>
         <div class="button__register__wrapper">
           <button *ngIf="showBilling" (click)="addAdress()" type="button">Add Billing address</button>
           <button routerLink="/login" type="button">Sign in</button>
-          <button type="submit">Sign up</button>
+          <button type="submit" style="background: linear-gradient(rgb(48 255 19), rgb(255, 167, 81))">Sign up</button>
         </div>
       </div>
     </form>
