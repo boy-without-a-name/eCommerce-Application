@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RegisterService } from '../../services/register.service';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AccessTokenResponse } from '../../services/types';
@@ -19,7 +19,7 @@ export class RegisterComponent {
   registrationForm: FormGroup;
   showBilling = true;
   sumbitted = false;
-  defaultShippingAddress: number = 0;
+  defaultShippingAddress = 0;
   countries = countries;
 
   constructor(
@@ -110,24 +110,24 @@ export class RegisterComponent {
     });
   }
 
-  addAdress() {
+  addAdress(): void {
     const newAddress = this.createAddressFormGroup();
     this.showBilling = false;
     this.adresses.push(newAddress);
   }
 
-  removeAddress(index: number) {
+  removeAddress(index: number): void {
     this.showBilling = true;
     this.adresses.removeAt(index);
     this.defaultShippingAddress = 0;
     delete this.registrationForm.value.billingAddresses;
   }
 
-  get adresses() {
+  get adresses(): FormArray {
     return this.registrationForm.get('addresses') as FormArray;
   }
 
-  isOld() {
+  isOld(): boolean {
     const currentAge = 2023 - this.registrationForm.value.date.slice(0, 4);
     if (currentAge <= 13) {
       return false;
@@ -136,7 +136,7 @@ export class RegisterComponent {
     }
   }
 
-  defaultAddress(id: number) {
+  defaultAddress(id: number): void {
     this.registrationForm.value.shippingAddresses = [id];
     this.defaultShippingAddress = id;
   }
