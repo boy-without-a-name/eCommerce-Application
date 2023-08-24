@@ -8,6 +8,7 @@ import { authenticationGuard } from './shared/functions/auth.guard';
 
 const routes: Routes = [
   { path: '', component: MainViewComponent },
+  { path: 'main', component: MainViewComponent },
   { path: 'login', component: AppLoginComponent, canActivate: [authenticationGuard()] },
   { path: 'registration', component: RegisterComponent, canActivate: [authenticationGuard()] },
   { path: '**', component: NotFoundViewComponent },
