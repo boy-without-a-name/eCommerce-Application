@@ -56,6 +56,8 @@ export class RegisterComponent {
         this.registrationForm.value.shippingAddresses = [this.defaultShippingAddress];
         if (!this.showBilling) {
           this.registrationForm.value.billingAddresses = [1];
+        } else {
+          this.registrationForm.value.billingAdresses = [0];
         }
         const authToken = this.service.getToken();
         authToken?.subscribe((token: AccessTokenResponse) => {
