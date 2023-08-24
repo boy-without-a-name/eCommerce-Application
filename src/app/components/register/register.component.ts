@@ -82,6 +82,7 @@ export class RegisterComponent {
                   localStorage.setItem('email', `${this.registrationForm.value.email}`);
                   localStorage.setItem('firstName', `${this.registrationForm.value.firstName}`);
                   localStorage.setItem('lastName', `${this.registrationForm.value.lastName}`);
+                  localStorage.setItem('isSignedIn', JSON.stringify(true));
                   this.router.navigate(['/']);
                   this.router.navigate(['']);
                 });
@@ -100,7 +101,7 @@ export class RegisterComponent {
     }
   }
 
-  createAddressFormGroup() {
+  createAddressFormGroup(): FormGroup {
     return this.fb.group({
       country: ['', Validators.required],
       city: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],

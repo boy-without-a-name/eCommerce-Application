@@ -168,6 +168,7 @@ export class AppLoginComponent {
           localStorage.setItem('email', `${responce.email}`);
           localStorage.setItem('firstName', `${responce.firstName}`);
           localStorage.setItem('lastName', `${responce.lastName}`);
+          localStorage.setItem('isSignedIn', JSON.stringify(true));
           this.router.navigate(['/']);
         });
       },
