@@ -58,6 +58,8 @@ export class RegisterComponent {
           this.registrationForm.value.billingAddresses = [1];
         } else {
           this.registrationForm.value.billingAdresses = [0];
+          this.registrationForm.value.defaultShippingAddress = 0;
+          this.registrationForm.value.defaultBillingAddress = 0;
         }
         const authToken = this.service.getToken();
         authToken?.subscribe((token: AccessTokenResponse) => {
