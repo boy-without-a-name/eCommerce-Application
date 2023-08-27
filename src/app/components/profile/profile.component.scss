@@ -1,0 +1,58 @@
+.nav {
+  display: flex;
+  justify-content: center;
+  margin-top: calc(1rem + 1vw);
+  margin-bottom: calc(1rem + 2vw);
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(1rem + 1vw);
+  padding: 1rem;
+  max-width: calc(900px + 1vw);
+  margin: 1rem auto;
+  color: #000;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    justify-items: center;
+  }
+
+  &__name {
+    font-size: calc(16px + 0.5vw);
+  }
+
+  &__data {
+    display: flex;
+    flex-direction: column;
+    gap: calc(1rem + 0.5vw);
+
+    &-heading {
+      color: #424242;
+      font-size: calc(12px + 0.5vw);
+    }
+
+    &-content {
+      color: #6f6f6f;
+      font-size: calc(10px + 0.5vw);
+    }
+  }
+
+  .shipping::after,
+  .billing::after {
+    font-size: calc(12px + 0.5vw);
+    margin-left: calc(12px + 0.5vw);
+  }
+
+  .shipping::after {
+    content: 'shipping';
+    color: blue;
+  }
+
+  .billing::after {
+    content: 'billing';
+    color: palevioletred;
+  }
+}

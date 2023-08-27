@@ -1,1 +1,21 @@
-<p>profile works!</p>
+<app-nav-links class="nav"></app-nav-links>
+<div class="user">
+
+  <h2 class="user__name">{{user.firstName}} <br> {{user.lastName}}</h2>
+
+  <div class="user__data">
+    <div>
+      <h3 class="user__data-heading">Email</h3>
+      <span class="user__data-content">{{user.email}}</span>
+    </div>
+    <div>
+      <h3 class="user__data-heading shipping">Address</h3>
+      <span class="user__data-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus, expedita.</span>
+    </div>
+    <div>
+      <h3 class="user__data-heading billing ">Address</h3>
+      <span class="user__data-content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse voluptatum eos
+        eligendi nesciunt.</span>
+    </div>
+  </div>
+</div>
