@@ -10,5 +10,7 @@ export class ProfileComponent {
     firstName: localStorage.getItem('firstName'),
     lastName: localStorage.getItem('lastName'),
     email: localStorage.getItem('email'),
+    billingAddresses: JSON.parse(localStorage.getItem('billingAddresses') as string),
+    shippingAddresses: JSON.parse(localStorage.getItem('shippingAddresses') as string),
   };
 }

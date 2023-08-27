@@ -9,7 +9,15 @@ export class HeaderComponent {
   isSignedIn = Boolean(localStorage.getItem('isSignedIn'));
 
   signOutEventHandler(): void {
-    this.removeItemsFromLocalStorage('token', 'email', 'firstName', 'lastName', 'isSignedIn');
+    this.removeItemsFromLocalStorage(
+      'token',
+      'email',
+      'firstName',
+      'lastName',
+      'isSignedIn',
+      'shippingAddresses',
+      'billingAddresses',
+    );
     this.isSignedIn = false;
   }
 

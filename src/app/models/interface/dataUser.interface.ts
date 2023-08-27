@@ -1,3 +1,5 @@
+import { IAddress } from './address.interface';
+
 export interface DataUser {
   id?: string;
   version?: number;
@@ -17,9 +19,9 @@ export interface DataUser {
   firstName?: string;
   lastName?: string;
   password?: string;
-  addresses?: [];
-  shippingAddressIds?: [];
-  billingAddressIds?: [];
+  addresses?: IAddress[];
+  shippingAddressIds?: string[];
+  billingAddressIds?: string[];
   isEmailVerified?: boolean;
   stores?: [];
   authenticationMode?: string;

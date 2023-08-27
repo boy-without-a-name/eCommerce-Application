@@ -43,7 +43,7 @@
   .shipping::after,
   .billing::after {
     font-size: calc(12px + 0.5vw);
-    margin-left: calc(12px + 0.5vw);
+    margin-left: calc(0.5rem + 0.5vw);
   }
 
   .shipping::after {
