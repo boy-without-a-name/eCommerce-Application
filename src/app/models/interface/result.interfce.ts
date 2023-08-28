@@ -1,30 +1,30 @@
 export interface ResultInterface {
   createdAt?: string;
-  createdBy?:{
+  createdBy?: {
     isPlatformClient?: boolean;
-     user?: {
+    user?: {
       id?: string;
       typeId?: string;
-     }
-  }
+    };
+  };
   id?: string;
   lastMessageSequenceNumber?: number;
   lastModifiedAt: string;
-   lastModifiedBy?: {
+  lastModifiedBy?: {
     isPlatformClient: boolean;
     user?: {
       id?: string;
       typeId?: string;
-     }
-   }
-  lastVariantId: number
+    };
+  };
+  lastVariantId: number;
   masterData?: {
     current?: {
       categories?: [];
-      categoryOrderHints?:{string: string};
+      categoryOrderHints?: { string: string };
       description?: {
         'en-US'?: string;
-      }
+      };
       assets?: [];
       attributes: [];
       id?: number;
@@ -36,47 +36,47 @@ export interface ResultInterface {
             fractionDigits?: number;
             centAmount?: number;
             currencyCode?: string;
-          },
+          };
           id?: string;
-        }
+        },
       ];
       metaDescription?: {
         'en-US'?: string;
-        'ru'?: string;
+        ru?: string;
       };
       metaTitle?: {
         'en-US'?: string;
-        'ru'?: string;
+        ru?: string;
       };
       name?: {
         'en-US'?: string;
-        'ru'?: string;
+        ru?: string;
       };
       searchKeywords?: {
         'en-US'?: string;
-        'ru'?: string;
+        ru?: string;
       };
-      slug?:  {
+      slug?: {
         'en-US'?: string;
-        'ru'?: string;
+        ru?: string;
       };
       variants?: [];
-    }
+    };
     hasStagedChanges?: boolean;
     published?: boolean;
     staged?: {
       categories?: [];
-      categoryOrderHints?:{string: string};
+      categoryOrderHints?: { string: string };
       description?: {
         'en-US'?: string;
-      }
+      };
       assets?: [];
       attributes: [];
       id?: number;
       images?: [
         {
           url: string;
-        }
+        },
       ];
       prices?: [
         {
@@ -85,38 +85,38 @@ export interface ResultInterface {
             fractionDigits?: number;
             centAmount?: number;
             currencyCode?: string;
-          },
+          };
           id?: string;
-        }
+        },
       ];
       metaDescription?: {
         'en-US'?: string;
-        'ru'?: string;
+        ru?: string;
       };
       metaTitle?: {
         'en-US'?: string;
-        'ru'?: string;
+        ru?: string;
       };
       name?: {
         'en-US'?: string;
-        'ru'?: string;
+        ru?: string;
       };
       searchKeywords?: {
         'en-US'?: string;
-        'ru'?: string;
+        ru?: string;
       };
-      slug?:  {
+      slug?: {
         'en-US'?: string;
-        'ru'?: string;
+        ru?: string;
       };
       variants?: [];
-    }
-  }
+    };
+  };
   priceMode?: string;
   productType?: {
     id?: string;
     typeId?: string;
-   }
+  };
   version?: string;
   versionModifiedAt?: string;
 }
