@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { DataUser } from 'src/app/models/interface/dataUser.interface';
+import { CatalogInterface } from 'src/app/models/interface/catalog.interface';
 import { AccessTokenResponse } from 'src/app/models/interface/AnswerTokenResponseInterface';
 import { scope, clientId, clientSecret } from 'src/app/models/constants/constants';
 
@@ -33,7 +33,7 @@ export class CatalogService {
     });
   }
 
-  getProgucts(authToken: string | null): Observable<DataUser> | null {
+  getProgucts(authToken: string | null): Observable<CatalogInterface> | null {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
     return this.http.get('https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/products', { headers });
   }
