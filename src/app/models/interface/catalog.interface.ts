@@ -1,10 +1,9 @@
-import { ResultInterface } from "./result.interfce";
+import { ResultInterface } from './result.interfce';
 
-export interface  CatalogInterface {
+export interface CatalogInterface {
   count?: number;
   limit?: number;
   offset?: number;
   results?: ResultInterface[];
   total?: number;
 }
-
