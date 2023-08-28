@@ -7,7 +7,6 @@ import { CatalogService } from 'src/app/services/catalog/catalog.service';
   styleUrls: ['./catalog.component.scss'],
 })
 export class CatalogComponent implements OnInit {
-
   constructor(private catalog: CatalogService) {}
 
   ngOnInit(): void {
@@ -17,13 +16,10 @@ export class CatalogComponent implements OnInit {
           localStorage.setItem('token', `${responce.access_token}`);
         },
         error: () => {
-        console.log('error');
+          console.log('error');
         },
-
       });
     }
-    this.catalog.getProgucts(localStorage.getItem('token'))?.subscribe((res)=>console.log(res))
-
+    this.catalog.getProgucts(localStorage.getItem('token'))?.subscribe((res) => console.log(res));
   }
-
 }

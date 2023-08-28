@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 import { DataUser } from 'src/app/models/interface/dataUser.interface';
 import { AccessTokenResponse } from 'src/app/models/interface/AnswerTokenResponseInterface';
-import { scope, clientId, clientSecret} from 'src/app/models/constants/constants';
+import { scope, clientId, clientSecret } from 'src/app/models/constants/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -28,11 +28,13 @@ export class CatalogService {
       .set('Authorization', `Basic ${btoa(`${clientId}:${clientSecret}`)}`)
       .set('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this.http.post("https://auth.australia-southeast1.gcp.commercetools.com/oauth/token", data.toString(), { headers });
+    return this.http.post('https://auth.australia-southeast1.gcp.commercetools.com/oauth/token', data.toString(), {
+      headers,
+    });
   }
 
   getProgucts(authToken: string | null): Observable<DataUser> | null {
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`)
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
     return this.http.get('https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/products', { headers });
   }
 }
