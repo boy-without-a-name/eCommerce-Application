@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavService } from 'src/app/services/navService/nav.service';
 
 @Component({
   selector: 'app-header',
@@ -6,9 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
+  constructor(private navService: NavService) {
+    if (localStorage.getItem('isSignedIn')) {
+      this.navService.setSignedInState(true);
+    }
+  }
+
   isSignedIn = Boolean(localStorage.getItem('isSignedIn'));
 
   signOutEventHandler(): void {
+    this.navService.setSignedInState(false);
+    this.navService.setSignedInState(false);
     this.removeItemsFromLocalStorage('token', 'email', 'firstName', 'lastName', 'isSignedIn');
     this.isSignedIn = false;
   }
