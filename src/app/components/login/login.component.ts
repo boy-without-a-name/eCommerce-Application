@@ -168,8 +168,6 @@ export class AppLoginComponent {
         localStorage.setItem('token', `${response.access_token}`);
 
         this.token.getUserData(localStorage.getItem('token'))?.subscribe((response: DataUser) => {
-          console.log(response);
-
           const billingAddresses = response.addresses?.filter(
             (addressElement: IAddress) => response.billingAddressIds?.includes(addressElement.id as string),
           );
@@ -183,6 +181,7 @@ export class AppLoginComponent {
           localStorage.setItem('isSignedIn', JSON.stringify(true));
           localStorage.setItem('shippingAddresses', JSON.stringify(shippingAddresses));
           localStorage.setItem('billingAddresses', JSON.stringify(billingAddresses));
+          localStorage.setItem('dateOfBirth', `${response.dateOfBirth}`);
 
           this.router.navigate(['/']);
         });

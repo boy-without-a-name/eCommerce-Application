@@ -44,7 +44,7 @@ export class RegisterComponent {
           Validators.pattern(/^[^\s].*[^\s]$/),
         ],
       ],
-      date: ['', [Validators.required]],
+      dateOfBirth: ['', [Validators.required]],
       addresses: this.fb.array([this.createAddressFormGroup()]),
     });
   }
@@ -86,6 +86,7 @@ export class RegisterComponent {
                   localStorage.setItem('firstName', `${this.registrationForm.value.firstName}`);
                   localStorage.setItem('lastName', `${this.registrationForm.value.lastName}`);
                   localStorage.setItem('isSignedIn', JSON.stringify(true));
+                  localStorage.setItem('dateOfBirth', `${this.registrationForm.value.dateOfBirth}`);
 
                   // store addresses
                   this.login.getUserData(String(response.access_token))?.subscribe((response: DataUser) => {
@@ -144,7 +145,7 @@ export class RegisterComponent {
   }
 
   isOld(): boolean {
-    const currentAge = 2023 - this.registrationForm.value.date.slice(0, 4);
+    const currentAge = 2023 - this.registrationForm.value.dateOfBirth.slice(0, 4);
     if (currentAge <= 13) {
       return false;
     } else {

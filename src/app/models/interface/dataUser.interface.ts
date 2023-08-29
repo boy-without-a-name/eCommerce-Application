@@ -25,4 +25,5 @@ export interface DataUser {
   isEmailVerified?: boolean;
   stores?: [];
   authenticationMode?: string;
+  dateOfBirth?: string;
 }
