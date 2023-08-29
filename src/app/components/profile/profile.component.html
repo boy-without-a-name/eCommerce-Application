@@ -55,35 +55,45 @@
       {{ user.firstName }} <br />
       {{ user.lastName }}
     </h2>
-
-    <app-button text="Edit"></app-button>
   </div>
 
   <div class="user__data">
-    <div>
-      <h3 class="user__data-heading">Email</h3>
-      <span class="user__data-content">{{ user.email }}</span>
+    <div class="user__data-item">
+      <h3 *ngIf="!editMode.email" class="user__data-heading">Email</h3>
+      <span *ngIf="!editMode.email" class="user__data-content">{{ user.email }}</span>
+      <button (click)="switchEmailToEditMode()" class="btn btn-edit" *ngIf="!editMode.email">edit</button>
+
+      <div *ngIf="editMode.email">
+        <label for="">
+          Email:
+          <input [(ngModel)]="user.email" type="text" />
+        </label>
+        <button (click)="saveEditedEmail()" *ngIf="editMode.email" class="btn btn-save">Save</button>
+      </div>
     </div>
 
-    <div>
+    <div class="user__data-item">
       <h3 class="user__data-heading">Date of birth</h3>
       <span class="user__data-content">{{ user.birthday }}</span>
+      <button class="btn btn-edit">edit</button>
     </div>
 
-    <div *ngFor="let shippingAddress of user.shippingAddresses; let i = index">
+    <div *ngFor="let shippingAddress of user.shippingAddresses; let i = index" class="user__data-item">
       <h3 class="user__data-heading shipping">Address {{ i + 1 }}</h3>
       <span class="user__data-content">
         {{ shippingAddress.postalCode }}, {{ shippingAddress.country }}, {{ shippingAddress.city }},
-        {{ shippingAddress.streetName }}, {{ shippingAddress.streetNumber }}</span
-      >
+        {{ shippingAddress.streetName }}, {{ shippingAddress.streetNumber }}
+      </span>
+      <button class="btn btn-edit">edit</button>
     </div>
 
-    <div *ngFor="let billingAddress of user.billingAddresses; let i = index">
+    <div *ngFor="let billingAddress of user.billingAddresses; let i = index" class="user__data-item">
       <h3 class="user__data-heading billing">Address {{ i + 1 }}</h3>
       <span class="user__data-content"
         >{{ billingAddress.postalCode }}, {{ billingAddress.country }}, {{ billingAddress.city }},
-        {{ billingAddress.streetName }}, {{ billingAddress.streetNumber }}</span
-      >
+        {{ billingAddress.streetName }}, {{ billingAddress.streetNumber }}
+      </span>
+      <button class="btn btn-edit">edit</button>
     </div>
   </div>
 </div>

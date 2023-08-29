@@ -14,4 +14,18 @@ export class ProfileComponent {
     billingAddresses: JSON.parse(localStorage.getItem('billingAddresses') as string),
     shippingAddresses: JSON.parse(localStorage.getItem('shippingAddresses') as string),
   };
+
+  editMode = {
+    email: false,
+  };
+
+  switchEmailToEditMode(): void {
+    this.editMode.email = true;
+  }
+
+  saveEditedEmail(): void {
+    // request: update email
+    // validate (use same validation as in register)
+    this.editMode.email = false;
+  }
 }
