@@ -1,9 +1,9 @@
-interface Category {
+export interface Category {
   id: string;
   typeId: string;
 }
 
-interface Image {
+export interface Image {
   dimensions: {
     h: number;
     w: number;
@@ -11,31 +11,31 @@ interface Image {
   url: string;
 }
 
-interface PriceValue {
+export interface PriceValue {
   type: string;
   fractionDigits: number;
   centAmount: number;
   currencyCode: string;
 }
 
-interface Price {
+export interface Price {
   value: PriceValue;
   id: string;
 }
 
-interface Name {
-  en: string;
+export interface Name {
+  'en-US': string;
 }
 
-interface Description {
-  en: string;
+export interface Description {
+  'en-US': string;
 }
 
-interface Slug {
-  en: string;
+export interface Slug {
+  'en-US': string;
 }
 
-interface MasterVariant {
+export interface MasterVariant {
   attributes: string[];
   id: number;
   images: Image[];
@@ -43,7 +43,7 @@ interface MasterVariant {
   sku: string;
 }
 
-interface Current {
+export interface Current {
   categories: Category[];
   description: Description;
   masterVariant: MasterVariant;
@@ -53,24 +53,24 @@ interface Current {
   searchKeywords: Record<string, string>;
 }
 
-interface ProductData {
+export interface ProductData {
   current: Current;
   hasStagedChanges: boolean;
   published: boolean;
   staged: Current;
 }
 
-interface ProductType {
+export interface ProductType {
   id: string;
   typeId: string;
 }
 
-interface TaxCategory {
+export interface TaxCategory {
   id: string;
   typeId: string;
 }
 
-interface IProduct {
+export interface IProduct {
   id: string;
   version: number;
   masterData: ProductData;

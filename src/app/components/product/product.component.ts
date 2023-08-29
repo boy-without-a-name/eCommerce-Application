@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GetProductService } from '../../services/getProduct/get-product.service';
+import { Current, IProduct } from '../../models/interface/product.interface';
 
 @Component({
   selector: 'app-product',
@@ -7,20 +8,23 @@ import { GetProductService } from '../../services/getProduct/get-product.service
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-  productView: Object = {};
+  productView!: Current;
 
   constructor(private product: GetProductService) {}
 
-  getProduct() {
-    this.product.getProduct().subscribe((obj) => {
-      if ('masterData' in obj) {
-        const masterData = JSON.parse(JSON.stringify(obj.masterData));
-        const current = masterData.current;
-        Object.assign(this.productView, current);
-        console.log(current);
-      }
-    });
-  }
+  // getProduct() {
+  //   this.product.getProduct().subscribe((obj) => {
+  //     if ('masterData' in obj) {
+  //       const masterData = JSON.parse(JSON.stringify(obj.masterData));
+  //       const current = masterData.current;
+  //       Object.assign(this.productView, current);
+  //       console.log(current);
+  //     }
+  //   });
+  // }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.productView = <Current>this.product.getProductData();
+    console.log(this.productView);
+  }
 }
