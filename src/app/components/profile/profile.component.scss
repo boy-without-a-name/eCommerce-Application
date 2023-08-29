@@ -12,16 +12,31 @@
   gap: calc(1rem + 1vw);
   padding: 1rem;
   max-width: calc(900px + 1vw);
+  align-items: center;
   margin: 1rem auto;
   color: #000;
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 481px) {
     flex-direction: row;
     justify-items: center;
+    align-items: flex-start;
+  }
+
+  &__icon-and-name {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    align-items: center;
+  }
+
+  &__icon {
+    width: calc(40px + 2vw);
+    height: calc(40px + 2vw);
   }
 
   &__name {
     font-size: calc(16px + 0.5vw);
+    text-align: center;
   }
 
   &__data {
