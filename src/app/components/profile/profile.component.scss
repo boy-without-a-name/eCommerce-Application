@@ -44,6 +44,22 @@
     flex-direction: column;
     gap: calc(1rem + 0.5vw);
 
+    &-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1vw;
+
+      &:hover {
+        background-color: #febd6924;
+
+        // .btn-edit {
+        //   display: block;
+        // }
+      }
+    }
+
     &-heading {
       color: #424242;
       font-size: calc(12px + 0.5vw);
@@ -70,4 +86,41 @@
     content: 'billing';
     color: palevioletred;
   }
+}
+
+.btn {
+  // position: absolute;
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 4px;
+  padding: 0.2rem;
+  font-size: calc(10px + 0.2vw);
+  // top: 0;
+  // right: 0;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &-edit {
+    @media (hover: hover) {
+      // display: none;
+    }
+  }
+
+  // &-save {
+  // }
+}
+
+input {
+  padding: 0 0.2rem;
+}
+
+label {
+  font-weight: 600;
+}
+
+label,
+input {
+  font-size: calc(12px + 0.5vw);
 }
