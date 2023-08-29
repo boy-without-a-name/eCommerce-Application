@@ -45,14 +45,18 @@
     gap: calc(1rem + 0.5vw);
 
     &-item {
-      position: relative;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1vw;
 
       &:hover {
         background-color: #febd6924;
 
-        .btn-edit {
-          display: block;
-        }
+        // .btn-edit {
+        //   display: block;
+        // }
       }
     }
 
@@ -85,14 +89,14 @@
 }
 
 .btn {
-  position: absolute;
+  // position: absolute;
   background-color: #fff;
   border: 1px solid #000;
   border-radius: 4px;
   padding: 0.2rem;
   font-size: calc(10px + 0.2vw);
-  top: 0;
-  right: 0;
+  // top: 0;
+  // right: 0;
 
   &:hover {
     cursor: pointer;
@@ -100,12 +104,12 @@
 
   &-edit {
     @media (hover: hover) {
-      display: none;
+      // display: none;
     }
   }
 
-  &-save {
-  }
+  // &-save {
+  // }
 }
 
 input {
