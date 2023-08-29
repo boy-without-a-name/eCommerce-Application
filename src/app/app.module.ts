@@ -20,7 +20,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { NotFoundViewComponent } from './components/not-found-view/not-found-view.component';
 import { UserIconComponent } from './components/user-icon/user-icon.component';
 import { NavLinksComponent } from './components/nav-links/nav-links.component';
-import { ProductComponent } from './components/product/product/product.component';
+import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
   declarations: [

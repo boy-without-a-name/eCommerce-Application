@@ -5,10 +5,12 @@ import { AppLoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { NotFoundViewComponent } from './components/not-found-view/not-found-view.component';
 import { authenticationGuard } from './shared/functions/auth.guard';
+import { ProductComponent } from './components/product/product.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
   { path: 'main', component: MainViewComponent },
+  { path: 'product', component: ProductComponent },
   { path: 'login', component: AppLoginComponent, canActivate: [authenticationGuard()] },
   { path: 'registration', component: RegisterComponent, canActivate: [authenticationGuard()] },
   { path: '**', component: NotFoundViewComponent },
