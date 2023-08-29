@@ -9,7 +9,7 @@ export class ProfileComponent {
   user = {
     firstName: localStorage.getItem('firstName'),
     lastName: localStorage.getItem('lastName'),
-    birthday: '2000-08-01',
+    dateOfBirth: localStorage.getItem('dateOfBirth'),
     email: localStorage.getItem('email'),
     billingAddresses: JSON.parse(localStorage.getItem('billingAddresses') as string),
     shippingAddresses: JSON.parse(localStorage.getItem('shippingAddresses') as string),
