@@ -8,8 +8,6 @@ import { authenticationGuard } from './shared/functions/auth.guard';
 import { CatalogComponent } from './components/catalog/catalog.component';
 const routes: Routes = [
   { path: '', component: MainViewComponent },
-
-  { path: 'basket', component: MainViewComponent },
   { path: 'catalog', component: CatalogComponent },
   { path: 'main', component: MainViewComponent },
   { path: 'login', component: AppLoginComponent, canActivate: [authenticationGuard()] },
