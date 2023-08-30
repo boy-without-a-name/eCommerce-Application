@@ -6,5 +6,5 @@ import { ResultInterface } from 'src/app/models/interface/result.interfce';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent {
-  @Input() card: ResultInterface;
+  @Input() product: ResultInterface;
 }

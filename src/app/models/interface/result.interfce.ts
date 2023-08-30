@@ -1,6 +1,6 @@
 export interface ResultInterface {
-  createdAt?: string;
-  createdBy?: {
+  createdAt: string;
+  createdBy: {
     isPlatformClient?: boolean;
     user?: {
       id?: string;
@@ -18,18 +18,18 @@ export interface ResultInterface {
     };
   };
   lastVariantId: number;
-  masterData?: {
-    current?: {
+  masterData: {
+    current: {
       categories?: [];
       categoryOrderHints?: { string: string };
       description?: {
         'en-US'?: string;
       };
-      assets?: [];
+      assets: [];
       attributes: [];
-      id?: number;
-      images?: [];
-      prices?: [
+      id: number;
+      images: [];
+      prices: [
         {
           value?: {
             type?: string;
@@ -44,51 +44,53 @@ export interface ResultInterface {
         'en-US'?: string;
         ru?: string;
       };
-      metaTitle?: {
+      metaTitle: {
         'en-US'?: string;
         ru?: string;
       };
-      name?: {
+      name: {
         'en-US'?: string;
         ru?: string;
       };
-      searchKeywords?: {
+      searchKeywords: {
         'en-US'?: string;
         ru?: string;
       };
-      slug?: {
+      slug: {
         'en-US'?: string;
         ru?: string;
       };
-      variants?: [];
+      variants: [];
     };
-    hasStagedChanges?: boolean;
-    published?: boolean;
-    staged?: {
+    hasStagedChanges: boolean;
+    published: boolean;
+    staged: {
       categories?: [];
-      categoryOrderHints?: { string: string };
-      description?: {
+      categoryOrderHints?: { string?: string };
+      description: {
         'en-US'?: string;
       };
-      assets?: [];
-      attributes: [];
-      id?: number;
-      images?: [
-        {
-          url: string;
-        },
-      ];
-      prices?: [
-        {
-          value?: {
-            type?: string;
-            fractionDigits?: number;
-            centAmount?: number;
-            currencyCode?: string;
-          };
-          id?: string;
-        },
-      ];
+      masterVariant: {
+        assets: [];
+        attributes: [];
+        id: number;
+        images: [
+          {
+            url?: string;
+          },
+        ];
+        prices?: [
+          {
+            value?: {
+              type?: string;
+              fractionDigits?: number;
+              centAmount?: number;
+              currencyCode?: string;
+            };
+            id?: string;
+          },
+        ];
+      };
       metaDescription?: {
         'en-US'?: string;
         ru?: string;
@@ -97,7 +99,7 @@ export interface ResultInterface {
         'en-US'?: string;
         ru?: string;
       };
-      name?: {
+      name: {
         'en-US'?: string;
         ru?: string;
       };

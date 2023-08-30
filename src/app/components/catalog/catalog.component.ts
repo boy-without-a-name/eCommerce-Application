@@ -8,7 +8,7 @@ import { ResultInterface } from 'src/app/models/interface/result.interfce';
   styleUrls: ['./catalog.component.scss'],
 })
 export class CatalogComponent implements OnInit {
-  result: ResultInterface [] = [];
+  result: ResultInterface[] = [];
 
   constructor(private catalog: CatalogService) {}
 
@@ -26,6 +26,7 @@ export class CatalogComponent implements OnInit {
     }
     this.catalog.getProgucts(localStorage.getItem('token'))?.subscribe((res) => {
       this.result = res.results;
-      console.log(this.result)});
+      console.log(this.result);
+    });
   }
 }
