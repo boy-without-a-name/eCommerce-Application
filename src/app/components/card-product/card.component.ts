@@ -6,5 +6,11 @@ import { ResultInterface } from 'src/app/models/interface/result.interfce';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent {
+  buttonPosition = false;
+
   @Input() product: ResultInterface;
+
+  clickBtn(): void {
+    this.buttonPosition = true;
+  }
 }

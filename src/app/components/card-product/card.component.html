@@ -10,6 +10,9 @@
       {{ product.masterData.staged.masterVariant.prices[0].value.centAmount }}
       <span style="font-weight: 700">EUR</span>
     </div>
-    <button class="card-btn">Add to cart</button>
+    <button class="card-btn"
+    [style]="buttonPosition ? 'transform:translate(4px, 8px);': ''"
+    (mousedown)="clickBtn()"
+    (mouseup)="buttonPosition = false">Add to cart</button>
   </div>
 </div>
