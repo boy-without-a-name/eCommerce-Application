@@ -1,6 +1,7 @@
 <div class>
-  <div *ngIf="loading" class="product__container">
-    <div class="title__container">
+  <div  class="product__container">
+    <h1 style='color: red' *ngIf="!loading">Loading...</h1>
+    <div *ngIf="loading" class="title__container">
       <p>product works!</p>
       <h2>{{ productView.name['en-US'] }}</h2>
       <img src="{{ productView.masterVariant.images[0].url }}" alt="" />
