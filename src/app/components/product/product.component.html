@@ -1,9 +1,9 @@
 <div class>
-  <div *ngIf='loading' class="product__container">
+  <div *ngIf="loading" class="product__container">
     <div class="title__container">
       <p>product works!</p>
       <h2>{{ productView.name['en-US'] }}</h2>
-      <img src='{{ productView.masterVariant.images[0].url}}' alt=''>
+      <img src="{{ productView.masterVariant.images[0].url }}" alt="" />
       <h2>{{ productView.description['en-US'] }}</h2>
 
       <button>getProducts</button>
