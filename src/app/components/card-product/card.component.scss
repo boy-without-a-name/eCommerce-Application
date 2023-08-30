@@ -1,0 +1,25 @@
+.card-wrapper {
+  padding: 0.3rem 0.5rem;
+  display: flex;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.card-wrapper:hover {
+  background-color: rgb(238, 227, 227);
+  transform: scale(1.2);
+  box-shadow: 10px 5px 5px rgba(51, 50, 50, 0.6);
+}
+
+.card-wrapper__img {
+  width: auto;
+  max-height: 200px;
+  height: 100%;
+  margin-right: 20px;
+}
+
+.card-wrapper__info {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+}

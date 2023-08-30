@@ -79,9 +79,9 @@ export interface ResultInterface {
             url?: string;
           },
         ];
-        prices?: [
+        prices: [
           {
-            value?: {
+            value: {
               type?: string;
               fractionDigits?: number;
               centAmount?: number;
