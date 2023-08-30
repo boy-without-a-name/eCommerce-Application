@@ -23,8 +23,8 @@
         <input type="email" placeholder="Email" formControlName="email" />
         <p style="color: white">Date of birth</p>
 
-        <input type="date" formControlName="date" />
-        <p *ngIf="sumbitted && registrationForm.get('date')?.invalid">Invalid date name.</p>
+        <input type="date" formControlName="dateOfBirth" />
+        <p *ngIf="sumbitted && registrationForm.get('dateOfBirth')?.invalid">Invalid date name.</p>
         <p *ngIf="errorMsgAge">You are not yet 13 years old</p>
         <div formArrayName="addresses">
           <div *ngFor="let addressForm of adresses.controls; let i = index" [formGroupName]="i" class="address">

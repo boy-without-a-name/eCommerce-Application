@@ -42,7 +42,7 @@ export class RegisterComponent {
           Validators.pattern(/^[^\s].*[^\s]$/),
         ],
       ],
-      date: ['', [Validators.required]],
+      dateOfBirth: ['', [Validators.required]],
       addresses: this.fb.array([this.createAddressFormGroup()]),
     });
   }
@@ -130,7 +130,7 @@ export class RegisterComponent {
   }
 
   isOld(): boolean {
-    const currentAge = 2023 - this.registrationForm.value.date.slice(0, 4);
+    const currentAge = 2023 - this.registrationForm.value.dateOfBirth.slice(0, 4);
     if (currentAge <= 13) {
       return false;
     } else {
