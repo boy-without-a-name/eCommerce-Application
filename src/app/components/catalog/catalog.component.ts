@@ -22,6 +22,5 @@ export class CatalogComponent implements OnInit {
       });
     }
     this.catalog.getProgucts(localStorage.getItem('token'))?.subscribe((res) => console.log(res));
-
   }
 }

@@ -35,6 +35,9 @@ export class CatalogService {
 
   getProgucts(authToken: string | null): Observable<CatalogInterface> | null {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
-    return this.http.get('https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/products', { headers });
+    return this.http.get<CatalogInterface>(
+      'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/products',
+      { headers },
+    );
   }
 }
