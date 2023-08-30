@@ -28,6 +28,5 @@ export class CatalogComponent implements OnInit {
       this.result = res.results;
       console.log(this.result);
     });
-
   }
 }
