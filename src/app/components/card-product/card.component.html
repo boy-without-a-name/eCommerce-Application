@@ -5,6 +5,11 @@
   <div class="card-wrapper__info">
     <h3 class="">{{ product.masterData.staged.name['en-US'] }}</h3>
     <p class="">{{ product.masterData.staged.description['en-US'] }}</p>
-    <div class="">Price: {{ product.masterData.staged.masterVariant.prices[0].value.centAmount }} EUR</div>
+    <div class="">
+      <span style="font-weight: 700">Price:</span>
+      {{ product.masterData.staged.masterVariant.prices[0].value.centAmount }}
+      <span style="font-weight: 700">EUR</span>
+    </div>
+    <button class="card-btn">Add to cart</button>
   </div>
 </div>
