@@ -35,14 +35,6 @@ export class GetProductService {
   }
 
   renderProduct(id: string = this.id) {
-    this.getProduct(id).subscribe(
-      (data) => {
-        this.productResp = data.masterData.current;
-        this.router.navigate(['/product', id]);
-      },
-      (error) => {
-        console.log(error);
-      },
-    );
+    this.router.navigate(['/product', id]);
   }
 }
