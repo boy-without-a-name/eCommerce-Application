@@ -10,7 +10,7 @@ import { ProductComponent } from './components/product/product.component';
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
   { path: 'main', component: MainViewComponent },
-  { path: 'product', component: ProductComponent },
+  { path: 'product/:id', component: ProductComponent },
   { path: 'login', component: AppLoginComponent, canActivate: [authenticationGuard()] },
   { path: 'registration', component: RegisterComponent, canActivate: [authenticationGuard()] },
   { path: '**', component: NotFoundViewComponent },

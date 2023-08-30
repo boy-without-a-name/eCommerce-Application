@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GetProductService } from '../../services/getProduct/get-product.service';
 import { Current, IProduct } from '../../models/interface/product.interface';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -9,8 +10,12 @@ import { Current, IProduct } from '../../models/interface/product.interface';
 })
 export class ProductComponent implements OnInit {
   productView!: Current;
-
-  constructor(private product: GetProductService) {}
+  id: string = '';
+  loading = false;
+  constructor(
+    private product: GetProductService,
+    private route: ActivatedRoute,
+  ) {}
 
   // getProduct() {
   //   this.product.getProduct().subscribe((obj) => {
@@ -24,7 +29,13 @@ export class ProductComponent implements OnInit {
   // }
 
   ngOnInit() {
-    this.productView = <Current>this.product.getProductData();
-    console.log(this.productView);
+    this.route.params.subscribe((params) => {
+      this.id = params['id'];
+      console.log(this.id);
+      this.product.getProduct(this.id).subscribe((obj) => {
+        this.productView = <Current>obj.masterData.current;
+        this.loading = true;
+      });
+    });
   }
 }
