@@ -21,7 +21,7 @@ import { NotFoundViewComponent } from './components/not-found-view/not-found-vie
 import { UserIconComponent } from './components/user-icon/user-icon.component';
 import { NavLinksComponent } from './components/nav-links/nav-links.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
-
+import { CardComponent } from './components/card-product/card.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +40,7 @@ import { CatalogComponent } from './components/catalog/catalog.component';
     UserIconComponent,
     NavLinksComponent,
     CatalogComponent,
+    CardComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
