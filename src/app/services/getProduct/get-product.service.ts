@@ -44,6 +44,5 @@ export class GetProductService {
         console.log(error);
       },
     );
-    return this.getProductData();
   }
 }
