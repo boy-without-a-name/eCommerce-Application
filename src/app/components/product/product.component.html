@@ -1,10 +1,22 @@
 <div class>
-  <div class="product__container">
-    <h1 style="color: red" *ngIf="!loading">Loading...</h1>
-    <div *ngIf="loading" class="title__container">
+  <div class='product__container'>
+    <h1 style='color: red' *ngIf='!loading'>Loading...</h1>
+    <div *ngIf='loading' class='title__container'>
       <p>product works!</p>
       <h2>{{ productView.name['en-US'] }}</h2>
-      <img src="{{ productView.masterVariant.images[0].url }}" alt="" />
+      <!--      <div class='swiper-container'>-->
+      <!--        <div class='swiper-wrapper'>-->
+      <!--          <div *ngFor='let img of productView.masterVariant.images; let i = index'>-->
+      <!--            <img src='{{ img.url }}' alt='Product View'>-->
+      <!--          </div>-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <swiper-container  pagination='true' pagination-type='progressbar' navigation='true' initial-slide='0' slides-per-view='1'>
+        <swiper-slide *ngFor='let img of productView.masterVariant.images; let i = index'>
+          <img src='{{ img.url }}' alt='phone'>
+        </swiper-slide>
+      </swiper-container>
+      <!--      <img src="{{ productView.masterVariant.images[0].url }}" alt="" />-->
       <h2>{{ productView.description['en-US'] }}</h2>
 
       <button>getProducts</button>
