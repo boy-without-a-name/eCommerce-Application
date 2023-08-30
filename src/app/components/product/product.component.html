@@ -1,6 +1,6 @@
 <div class>
-  <div  class="product__container">
-    <h1 style='color: red' *ngIf="!loading">Loading...</h1>
+  <div class="product__container">
+    <h1 style="color: red" *ngIf="!loading">Loading...</h1>
     <div *ngIf="loading" class="title__container">
       <p>product works!</p>
       <h2>{{ productView.name['en-US'] }}</h2>
@@ -9,5 +9,6 @@
 
       <button>getProducts</button>
     </div>
+    <button>raised</button>
   </div>
 </div>
