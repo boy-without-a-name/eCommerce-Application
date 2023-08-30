@@ -21,6 +21,7 @@ import { NotFoundViewComponent } from './components/not-found-view/not-found-vie
 import { UserIconComponent } from './components/user-icon/user-icon.component';
 import { NavLinksComponent } from './components/nav-links/nav-links.component';
 import { ProductComponent } from './components/product/product.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { ProductComponent } from './components/product/product.component';
     NavLinksComponent,
     ProductComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule, NgOptimizedImage],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule, NgOptimizedImage, BrowserAnimationsModule],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
