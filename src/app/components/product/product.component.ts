@@ -22,6 +22,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
       this.id = params['id'];
       this.product.getProduct(this.id).subscribe((obj) => {
         this.productView = <Current>obj.masterData.current;
+        console.log(this.productView);
         this.loading = true;
       });
     });
