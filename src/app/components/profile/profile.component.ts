@@ -27,6 +27,8 @@ export class ProfileComponent {
     shippingAddresses: JSON.parse(localStorage.getItem('shippingAddresses') as string) as IAddress[],
   };
 
+  allValid = true;
+
   switchToEditMode(): void {
     this.editMode = true;
   }
@@ -35,27 +37,29 @@ export class ProfileComponent {
     // validate
 
     // make request
-    this.updateCustomer().subscribe({
-      next: (response: DataUser) => {
-        console.log(response);
+    if (this.allValid) {
+      this.updateCustomer().subscribe({
+        next: (response: DataUser) => {
+          console.log(response);
 
-        // update data in store
-        if (response.version) this.customer.version = response.version;
-        localStorage.setItem('email', `${response.email}`);
-        localStorage.setItem('version', `${response.version}`);
-        localStorage.setItem('firstName', `${response.firstName}`);
-        localStorage.setItem('lastName', `${response.lastName}`);
-        localStorage.setItem('dateOfBirth', `${response.dateOfBirth}`);
-        localStorage.setItem('shippingAddresses', JSON.stringify(this.customer.shippingAddresses));
-        localStorage.setItem('billingAddresses', JSON.stringify(this.customer.billingAddresses));
+          // update data in store
+          if (response.version) this.customer.version = response.version;
+          localStorage.setItem('email', `${response.email}`);
+          localStorage.setItem('version', `${response.version}`);
+          localStorage.setItem('firstName', `${response.firstName}`);
+          localStorage.setItem('lastName', `${response.lastName}`);
+          localStorage.setItem('dateOfBirth', `${response.dateOfBirth}`);
+          localStorage.setItem('shippingAddresses', JSON.stringify(this.customer.shippingAddresses));
+          localStorage.setItem('billingAddresses', JSON.stringify(this.customer.billingAddresses));
 
-        // and exit edit mode
-        this.editMode = false;
-      },
-      error: (error) => {
-        console.error('Error updating customer:', error);
-      },
-    });
+          // and exit edit mode
+          this.editMode = false;
+        },
+        error: (error) => {
+          console.error('Error updating customer:', error);
+        },
+      });
+    }
   }
 
   updateCustomer(): Observable<DataUser> {
@@ -72,6 +76,14 @@ export class ProfileComponent {
       {
         action: 'setLastName',
         lastName: this.customer.lastName,
+      },
+      {
+        action: 'changeEmail',
+        email: this.customer.email,
+      },
+      {
+        action: 'setDateOfBirth',
+        dateOfBirth: this.customer.dateOfBirth,
       },
     ];
 
