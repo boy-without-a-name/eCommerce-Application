@@ -165,9 +165,11 @@ export class AppLoginComponent {
   clickButtonSubmit(email: string, password: string): void {
     this.token.getToken(email, password)?.subscribe({
       next: (response) => {
+        console.log(response);
         localStorage.setItem('token', `${response.access_token}`);
 
         this.token.getUserData(localStorage.getItem('token'))?.subscribe((response: DataUser) => {
+          console.log(response);
           const billingAddresses = response.addresses?.filter(
             (addressElement: IAddress) => response.billingAddressIds?.includes(addressElement.id as string),
           );
@@ -175,7 +177,9 @@ export class AppLoginComponent {
             (address: IAddress) => response.shippingAddressIds?.includes(address.id as string),
           );
 
+          localStorage.setItem('id', `${response.id}`);
           localStorage.setItem('email', `${response.email}`);
+          localStorage.setItem('version', `${response.version}`);
           localStorage.setItem('firstName', `${response.firstName}`);
           localStorage.setItem('lastName', `${response.lastName}`);
           localStorage.setItem('isSignedIn', JSON.stringify(true));

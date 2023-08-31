@@ -81,14 +81,10 @@ export class RegisterComponent {
                 .getToken(this.registrationForm.value.email, this.registrationForm.value.password)
                 ?.subscribe((response) => {
                   console.log(response);
-                  localStorage.setItem('token', `${response.access_token}`);
-                  localStorage.setItem('email', `${this.registrationForm.value.email}`);
-                  localStorage.setItem('firstName', `${this.registrationForm.value.firstName}`);
-                  localStorage.setItem('lastName', `${this.registrationForm.value.lastName}`);
-                  localStorage.setItem('isSignedIn', JSON.stringify(true));
-                  localStorage.setItem('dateOfBirth', `${this.registrationForm.value.dateOfBirth}`);
 
-                  // store addresses
+                  localStorage.setItem('token', `${response.access_token}`);
+
+                  // store user data
                   this.login.getUserData(String(response.access_token))?.subscribe((response: DataUser) => {
                     const billingAddresses = response.addresses?.filter(
                       (addressElement: IAddress) => response.billingAddressIds?.includes(addressElement.id as string),
@@ -98,6 +94,13 @@ export class RegisterComponent {
                     );
                     localStorage.setItem('shippingAddresses', JSON.stringify(shippingAddresses));
                     localStorage.setItem('billingAddresses', JSON.stringify(billingAddresses));
+                    localStorage.setItem('id', `${response.id}`);
+                    localStorage.setItem('email', `${response.email}`);
+                    localStorage.setItem('version', `${response.version}`);
+                    localStorage.setItem('firstName', `${response.firstName}`);
+                    localStorage.setItem('lastName', `${response.lastName}`);
+                    localStorage.setItem('isSignedIn', JSON.stringify(true));
+                    localStorage.setItem('dateOfBirth', `${this.registrationForm.value.dateOfBirth}`);
                   });
 
                   this.router.navigate(['/']);

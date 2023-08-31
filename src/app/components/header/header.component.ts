@@ -10,8 +10,10 @@ export class HeaderComponent {
 
   signOutEventHandler(): void {
     this.removeItemsFromLocalStorage(
+      'id',
       'token',
       'email',
+      'version',
       'firstName',
       'lastName',
       'isSignedIn',

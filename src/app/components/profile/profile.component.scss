@@ -44,6 +44,11 @@
     flex-direction: column;
     gap: calc(1rem + 0.5vw);
 
+    &_edit-mode {
+      gap: calc(0.5rem + 0.5vw);
+      max-width: 300px;
+    }
+
     &-item {
       display: flex;
       flex-direction: row;
@@ -51,18 +56,20 @@
       align-items: flex-start;
       gap: 1vw;
 
-      &:hover {
-        background-color: #febd6924;
-
-        // .btn-edit {
-        //   display: block;
-        // }
+      &_edit-mode {
+        flex-direction: column;
+        gap: 0;
       }
     }
 
     &-heading {
       color: #424242;
       font-size: calc(12px + 0.5vw);
+
+      &_edit-mode {
+        color: #6f6f6f;
+        font-size: calc(8px + 0.5vw);
+      }
     }
 
     &-content {
@@ -112,8 +119,10 @@
   // }
 }
 
-input {
+input,
+select {
   padding: 0 0.2rem;
+  width: 100%;
 }
 
 label {
