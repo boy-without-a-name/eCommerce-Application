@@ -8,7 +8,7 @@ describe('PostModalImgComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [PostModalImgComponent]
+      declarations: [PostModalImgComponent],
     });
     fixture = TestBed.createComponent(PostModalImgComponent);
     component = fixture.componentInstance;

@@ -1,21 +1,21 @@
 <div class>
-  <div class='product__container'>
-    <mat-spinner *ngIf='!loading'></mat-spinner>
-    <div *ngIf='loading' class='title__container'>
+  <div class="product__container">
+    <mat-spinner *ngIf="!loading"></mat-spinner>
+    <div *ngIf="loading" class="title__container">
       <h2>{{ productView.name['en-US'] }}</h2>
       <swiper-container
-        pagination='true'
-        pagination-type='progressbar'
-        navigation='true'
-        initial-slide='0'
-        slides-per-view='1'
+        pagination="true"
+        pagination-type="progressbar"
+        navigation="true"
+        initial-slide="0"
+        slides-per-view="1"
       >
-        <swiper-slide *ngFor='let img of productView.masterVariant.images; let i = index'>
-          <img src='{{ img.url }}' alt='phone' (click)='openPostModal(img)'/>
+        <swiper-slide *ngFor="let img of productView.masterVariant.images; let i = index">
+          <img src="{{ img.url }}" alt="phone" (click)="openPostModal(img)" />
         </swiper-slide>
       </swiper-container>
       <p>{{ productView.description['en-US'] }}</p>
-      <h3>{{ productView.masterVariant.prices['0'].value.centAmount | currency: 'EUR' : 'symbol': '1.2-2'}}</h3>
+      <h3>{{ productView.masterVariant.prices['0'].value.centAmount | currency: 'EUR' : 'symbol' : '1.2-2' }}</h3>
     </div>
   </div>
 </div>
