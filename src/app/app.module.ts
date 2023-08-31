@@ -22,6 +22,10 @@ import { UserIconComponent } from './components/user-icon/user-icon.component';
 import { NavLinksComponent } from './components/nav-links/nav-links.component';
 import { ProductComponent } from './components/product/product.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PostModalImgComponent } from './components/post-modal-img/post-modal-img.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     UserIconComponent,
     NavLinksComponent,
     ProductComponent,
+    PostModalImgComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +55,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     NgOptimizedImage,
     BrowserAnimationsModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
