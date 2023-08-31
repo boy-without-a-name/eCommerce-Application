@@ -57,11 +57,18 @@
       {{ customer.lastName }}
     </h2>
 
-    <app-button *ngIf="!editMode" (click)="switchToEditMode()" text="Edit"></app-button>
+    <app-button *ngIf="!editMode && !changePassMode" (click)="switchToEditMode()" text="Edit"></app-button>
     <app-button *ngIf="editMode" (click)="saveFormChanges()" text="Save"></app-button>
+
+    <app-button
+      *ngIf="!editMode && !changePassMode"
+      (click)="switchToChangePassMode()"
+      text="Change password"
+    ></app-button>
+    <app-button *ngIf="changePassMode" (click)="savePasswordChanges()" text="Change password"></app-button>
   </div>
 
-  <div *ngIf="!editMode" class="user__data">
+  <div *ngIf="!editMode && !changePassMode" class="user__data">
     <!-- email -->
     <div class="user__data-item">
       <div>
@@ -107,7 +114,7 @@
     <div class="user__data-item" [ngClass]="{ 'user__data-item_edit-mode': editMode }">
       <h3 class="user__data-heading">First name</h3>
       <input
-        (blur)="firstNameInputBlurEventHandler()"
+        (blur)="validateFirstNameInput()"
         [(ngModel)]="customer.firstName"
         class="user__data-content"
         [ngClass]="{ 'invalid-input': isInvalid.firstName }"
@@ -120,7 +127,7 @@
     <div class="user__data-item" [ngClass]="{ ' user__data-item_edit-mode': editMode }">
       <h3 class="user__data-heading">Last name</h3>
       <input
-        (blur)="lastNameInputBlurEventHandler()"
+        (blur)="validateLastNameInput()"
         [(ngModel)]="customer.lastName"
         class="user__data-content"
         [ngClass]="{ 'invalid-input': isInvalid.lastName }"
@@ -133,7 +140,7 @@
     <div class="user__data-item" [ngClass]="{ 'user__data-item_edit-mode': editMode }">
       <h3 class="user__data-heading">Email</h3>
       <input
-        (blur)="emailInputBlurEventHandler()"
+        (blur)="validateEmailInput()"
         [(ngModel)]="customer.email"
         class="user__data-content"
         [ngClass]="{ 'invalid-input': isInvalid.email }"
@@ -146,7 +153,7 @@
     <div class="user__data-item" [ngClass]="{ 'user__data-item_edit-mode': editMode }">
       <h3 class="user__data-heading">Date of birth</h3>
       <input
-        (blur)="dateOfBirthInputBlurEventHandler()"
+        (blur)="validateDateOfBirthInput()"
         [(ngModel)]="customer.dateOfBirth"
         class="user__data-content"
         [ngClass]="{ 'invalid-input': isInvalid.dateOfBirth }"
@@ -205,6 +212,34 @@
 
       <h4 class="user__data-heading user__data-heading_edit-mode">Building</h4>
       <input class="user__data-content" [(ngModel)]="billingAddress.streetNumber" type="text" />
+    </div>
+  </div>
+
+  <!-- Change pass mode form -->
+  <div *ngIf="changePassMode" class="user__data">
+    <!-- Old pass -->
+    <div class="user__data-item user__data-item_edit-mode">
+      <h3 class="user__data-heading">Current password</h3>
+      <input
+        (blur)="validatePassCurrentInput()"
+        [(ngModel)]="customer.password.current"
+        class="user__data-content"
+        [ngClass]="{ 'invalid-input': isPasswordInvalid.current }"
+        type="password"
+      />
+      <span class="invalid-msg" *ngIf="isPasswordInvalid.current"> {{ isPasswordInvalid.current }}</span>
+    </div>
+    <!-- New pass -->
+    <div class="user__data-item user__data-item_edit-mode">
+      <h3 class="user__data-heading">New password</h3>
+      <input
+        (blur)="validatePassNewInput()"
+        [(ngModel)]="customer.password.new"
+        class="user__data-content"
+        [ngClass]="{ 'invalid-input': isPasswordInvalid.new }"
+        type="password"
+      />
+      <span class="invalid-msg" *ngIf="isPasswordInvalid.new"> {{ isPasswordInvalid.new }}</span>
     </div>
   </div>
 </div>

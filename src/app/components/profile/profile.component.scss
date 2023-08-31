@@ -43,6 +43,7 @@
     display: flex;
     flex-direction: column;
     gap: calc(1rem + 0.5vw);
+    width: calc(250px + 0.5vw);
 
     &_edit-mode {
       gap: calc(0.5rem + 0.5vw);
@@ -137,6 +138,7 @@ input {
 .invalid-msg {
   color: red;
   font-size: calc(8px + 0.5vw);
+  // max-width: 150px;
 }
 
 .invalid-input {

@@ -5,6 +5,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DataUser } from 'src/app/models/interface/dataUser.interface';
 import { Observable } from 'rxjs';
 
+import { validateName, validateDateOfBirth, validateEmail, validatePassword } from './validators';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -15,6 +17,7 @@ export class ProfileComponent {
 
   countries = countries;
   editMode = false;
+  changePassMode = false;
   customer = {
     id: localStorage.getItem('id'),
     token: localStorage.getItem('token'),
@@ -25,6 +28,11 @@ export class ProfileComponent {
     email: localStorage.getItem('email'),
     billingAddresses: JSON.parse(localStorage.getItem('billingAddresses') as string) as IAddress[],
     shippingAddresses: JSON.parse(localStorage.getItem('shippingAddresses') as string) as IAddress[],
+    password: {
+      current: '',
+      new: '',
+      newRepeated: '',
+    },
   };
 
   isInvalid = {
@@ -34,28 +42,41 @@ export class ProfileComponent {
     dateOfBirth: '',
   };
 
-  firstNameInputBlurEventHandler(): void {
-    const validationMsg: string | null = this.validateName('first', this.customer.firstName?.trim() as string);
-    this.isInvalid.firstName = validationMsg;
-  }
+  isPasswordInvalid = {
+    current: '',
+    new: '',
+    newRepeated: '',
+  };
 
-  lastNameInputBlurEventHandler(): void {
-    const validationMsg: string = this.validateName('last', this.customer.lastName?.trim() as string);
-    this.isInvalid.lastName = validationMsg;
-  }
-
-  emailInputBlurEventHandler(): void {
-    const validationMsg: string = this.validateEmail(this.customer.email?.trim() as string);
-    this.isInvalid.email = validationMsg;
-  }
-
-  dateOfBirthInputBlurEventHandler(): void {
-    const validationMsg: string = this.validateDateOfBirth(this.customer.dateOfBirth?.trim() as string);
-    this.isInvalid.dateOfBirth = validationMsg;
+  switchToChangePassMode(): void {
+    this.changePassMode = true;
   }
 
   switchToEditMode(): void {
     this.editMode = true;
+  }
+
+  savePasswordChanges(): void {
+    const allPasswordsValid = !Object.values(this.isPasswordInvalid).some((passInvalidMsg) => passInvalidMsg !== '');
+
+    if (allPasswordsValid)
+      this.changePassword().subscribe({
+        next: (response) => {
+          console.log(response);
+          // update customer version
+          if (response.version) this.customer.version = response.version;
+          this.changePassMode = false;
+          // reset pass data
+          this.customer.password.current = '';
+          this.customer.password.new = '';
+
+          // TODO: re-authentication (new token needed)
+        },
+        error: (errorResponse) => {
+          if (errorResponse.error.statusCode === 400) this.isPasswordInvalid.current = errorResponse.error.message;
+          console.error('Error changing password:', errorResponse);
+        },
+      });
   }
 
   saveFormChanges(): void {
@@ -64,7 +85,7 @@ export class ProfileComponent {
     // Check whether all inputs are valid
     const allFieldsValid = !Object.values(this.isInvalid).some((invalidMsg) => invalidMsg.length !== 0);
 
-    if (allFieldsValid)
+    if (allFieldsValid) {
       // Make request
       this.updateCustomer().subscribe({
         next: (response: DataUser) => {
@@ -87,13 +108,14 @@ export class ProfileComponent {
           console.error('Error updating customer:', error);
         },
       });
+    }
   }
 
   updateCustomer(): Observable<DataUser> {
     const region = 'australia-southeast1';
     const projectKey = 'arandomteam16';
     const customerID = this.customer.id;
-    const bearerToken = this.customer.token;
+    const BEARER_TOKEN = this.customer.token;
 
     const updateActions = [
       {
@@ -122,69 +144,59 @@ export class ProfileComponent {
     const apiUrl = `https://api.${region}.gcp.commercetools.com/${projectKey}/customers/${customerID}`;
 
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${bearerToken}`,
+      Authorization: `Bearer ${BEARER_TOKEN}`,
     });
 
     return this.http.post(apiUrl, requestBody, { headers });
   }
 
-  validateName(nameType: string, name: string): string {
-    const minLength = 2;
-    const maxLength = 50;
+  changePassword(): Observable<DataUser> {
+    const region = 'australia-southeast1';
+    const projectKey = 'arandomteam16';
+    const BEARER_TOKEN = this.customer.token;
 
-    if (!name) {
-      if (nameType === 'first') return 'First name is required.';
-      return 'Last name is required.';
-    }
+    const apiUrl = `https://api.${region}.gcp.commercetools.com/${projectKey}/customers/password`;
+    const requestBody = {
+      id: this.customer.id,
+      version: this.customer.version,
+      currentPassword: String(this.customer.password.current),
+      newPassword: String(this.customer.password.new),
+    };
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${BEARER_TOKEN}`,
+      'Content-Type': 'application / json',
+    });
 
-    if (name.length < minLength || name.length > maxLength) {
-      if (nameType === 'first') return `First name should be between ${minLength} and ${maxLength} characters.`;
-      return `Last name should be between ${minLength} and ${maxLength} characters.`;
-    }
-
-    return '';
+    return this.http.post(apiUrl, requestBody, { headers });
   }
 
-  validateEmail(email: string): string {
-    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-    if (!email) {
-      return 'Email address is required.';
-    }
-
-    if (!emailPattern.test(email)) {
-      return 'Invalid email address format.';
-    }
-
-    return '';
+  validateFirstNameInput(): void {
+    const validationMsg: string | null = validateName('first', this.customer.firstName?.trim() as string);
+    this.isInvalid.firstName = validationMsg;
   }
 
-  validateDateOfBirth(dateOfBirth: string): string {
-    const currentDate = new Date();
-    const minimumAge = 13;
+  validateLastNameInput(): void {
+    const validationMsg: string = validateName('last', this.customer.lastName?.trim() as string);
+    this.isInvalid.lastName = validationMsg;
+  }
 
-    const dob = new Date(dateOfBirth);
+  validateEmailInput(): void {
+    const validationMsg: string = validateEmail(this.customer.email?.trim() as string);
+    this.isInvalid.email = validationMsg;
+  }
 
-    if (!dateOfBirth) {
-      return 'Date of birth is required.';
-    }
+  validateDateOfBirthInput(): void {
+    const validationMsg: string = validateDateOfBirth(this.customer.dateOfBirth?.trim() as string);
+    this.isInvalid.dateOfBirth = validationMsg;
+  }
 
-    if (isNaN(dob.getTime())) {
-      return 'Invalid date of birth format.';
-    }
+  validatePassCurrentInput(): void {
+    const validationMsg: string = validatePassword(this.customer.password.current as string);
+    this.isPasswordInvalid.current = validationMsg;
+  }
 
-    const age =
-      currentDate.getFullYear() -
-      dob.getFullYear() -
-      (currentDate.getMonth() < dob.getMonth() ||
-      (currentDate.getMonth() === dob.getMonth() && currentDate.getDate() < dob.getDate())
-        ? 1
-        : 0);
-
-    if (age < minimumAge) {
-      return `You must be at least ${minimumAge} years old.`;
-    }
-
-    return '';
+  validatePassNewInput(): void {
+    const validationMsg: string = validatePassword(this.customer.password.new as string);
+    this.isPasswordInvalid.new = validationMsg;
   }
 }
