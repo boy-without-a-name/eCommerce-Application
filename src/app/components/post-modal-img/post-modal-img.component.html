@@ -1,14 +1,13 @@
 <mat-dialog-content>
   <swiper-container
     pagination="true"
-    pagination-clickable='true'
+    pagination-clickable="true"
     navigation="true"
-    zoom = 'true'
+    zoom="true"
     initial-slide="0"
     slides-per-view="1"
   >
-    <swiper-slide
-      *ngFor="let img of this.images; let i = index">
+    <swiper-slide *ngFor="let img of this.images; let i = index">
       <img src="{{ img.url }}" alt="phone" />
     </swiper-slide>
   </swiper-container>

@@ -11,6 +11,9 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  p{
+    font-size: 1.25rem;
+  }
 }
 
 swiper-container {
@@ -37,4 +40,10 @@ swiper-slide img {
   position: absolute;
   left: 50%;
   top: 50%;
+}
+.btn__form{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
