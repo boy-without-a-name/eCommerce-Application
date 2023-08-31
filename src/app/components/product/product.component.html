@@ -1,3 +1,4 @@
+<app-header/>
 <div class>
   <div class="product__container">
     <mat-spinner *ngIf="!loading"></mat-spinner>
@@ -11,7 +12,7 @@
         slides-per-view="1"
       >
         <swiper-slide *ngFor="let img of productView.masterVariant.images; let i = index">
-          <img src="{{ img.url }}" alt="phone" (click)="openPostModal(productView.masterVariant.images)" />
+          <img src="{{ img.url }}" alt="phone" (click)="openPostModal(productView.masterVariant.images, i)" />
         </swiper-slide>
       </swiper-container>
       <p>{{ productView.description['en-US'] }}</p>
@@ -23,3 +24,4 @@
     </div>
   </div>
 </div>
+<app-footer/>

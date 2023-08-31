@@ -1,17 +1,15 @@
 <mat-dialog-content>
   <swiper-container
-    pagination="true"
-    pagination-clickable="true"
-    navigation="true"
-    zoom="true"
-    initial-slide="0"
-    slides-per-view="1"
+    pagination='true'
+    pagination-clickable='true'
+    navigation='true'
+    slides-per-view='1'
   >
-    <swiper-slide *ngFor="let img of this.images; let i = index">
-      <img src="{{ img.url }}" alt="phone" />
+    <swiper-slide *ngFor='let img of this.transfer.img; let i = index'>
+      <img src='{{ img.url }}' alt='Phone' />
     </swiper-slide>
   </swiper-container>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button (click)="closeDialog()">Закрыть</button>
+  <button mat-button (click)='closeDialog()'>Закрыть</button>
 </mat-dialog-actions>

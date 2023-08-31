@@ -18,7 +18,7 @@ export class GetProductService {
 
   getProduct(id: string = this.id) {
     const headers = new HttpHeaders({
-      Authorization: `Bearer NxJZQV-vy3Ao2dBwdzSb0_FsJ-vGEXdK`,
+      Authorization: `Bearer lgaRP9fI742jIxhu2SHmPgnGbGkTfm7Q`,
       'Content-type': 'application/json',
     });
     return this.http.get<IProduct>(`${this.apiUrl}${id}`, { headers });

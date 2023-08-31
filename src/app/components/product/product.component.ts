@@ -31,11 +31,15 @@ export class ProductComponent implements OnInit, AfterViewInit {
     });
   }
 
-  openPostModal(img: Image[]) {
+  openPostModal(img: Image[], i: number) {
+    console.log(i);
     const dialogRef = this.dialog.open(PostModalImgComponent, {
       width: '600px',
       height: '500px',
-      data: img,
+      data: {
+        img: img,
+        index: i,
+      },
     });
     dialogRef.afterClosed().subscribe((resp) => {
       console.log(resp);

@@ -1,6 +1,7 @@
-import { Component, Inject } from '@angular/core';
+import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Image } from '../../models/interface/product.interface';
+import { ITransfer } from '../../models/interface/product.interface';
+import Swiper from 'swiper';
 
 @Component({
   selector: 'app-post-modal-img',
@@ -9,7 +10,7 @@ import { Image } from '../../models/interface/product.interface';
 })
 export class PostModalImgComponent {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public images: Image[],
+    @Inject(MAT_DIALOG_DATA) public transfer: ITransfer,
     public dialogRef: MatDialogRef<PostModalImgComponent>,
   ) {}
 
