@@ -10,8 +10,9 @@
         initial-slide="0"
         slides-per-view="1"
       >
-        <swiper-slide *ngFor="let img of productView.masterVariant.images; let i = index">
-          <img src="{{ img.url }}" alt="phone" (click)="openPostModal(img)" />
+        <swiper-slide
+          *ngFor="let img of productView.masterVariant.images; let i = index">
+          <img src="{{ img.url }}" alt="phone" (click)="openPostModal(productView.masterVariant.images)" />
         </swiper-slide>
       </swiper-container>
       <p>{{ productView.description['en-US'] }}</p>

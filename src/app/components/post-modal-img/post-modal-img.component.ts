@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Image } from '../../models/interface/product.interface';
 
@@ -9,7 +9,7 @@ import { Image } from '../../models/interface/product.interface';
 })
 export class PostModalImgComponent {
   constructor(
-    @Inject(MAT_DIALOG_DATA) public img: Image,
+    @Inject(MAT_DIALOG_DATA) public images: Image[],
     public dialogRef: MatDialogRef<PostModalImgComponent>,
   ) {}
 
