@@ -66,6 +66,7 @@
       text="Change password"
     ></app-button>
     <app-button *ngIf="changePassMode" (click)="savePasswordChanges()" text="Change password"></app-button>
+    <app-button *ngIf="changePassMode" (click)="exitChangePassMode()" text=" Back"></app-button>
   </div>
 
   <div *ngIf="!editMode && !changePassMode" class="user__data">

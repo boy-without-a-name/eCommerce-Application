@@ -60,7 +60,7 @@ function validateDateOfBirth(dateOfBirth: string): string {
 
 function validatePassword(pass: string): string {
   let errorMsg = '';
-  if (pass.length === 0) errorMsg = 'Provide password';
+  if (pass.length === 0) errorMsg = "Can't be empty";
   else {
     if (pass.length < 8) errorMsg += 'At least 8 characters. ';
     if (!/[A-Z]/.test(pass)) errorMsg += ' At least 1 uppercase letter. ';

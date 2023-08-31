@@ -45,11 +45,19 @@ export class ProfileComponent {
   isPasswordInvalid = {
     current: '',
     new: '',
-    newRepeated: '',
   };
 
   switchToChangePassMode(): void {
     this.changePassMode = true;
+  }
+
+  exitChangePassMode(): void {
+    this.editMode = false;
+    this.changePassMode = false;
+    this.customer.password.current = '';
+    this.customer.password.new = '';
+    this.isPasswordInvalid.current = '';
+    this.isPasswordInvalid.new = '';
   }
 
   switchToEditMode(): void {
@@ -117,6 +125,7 @@ export class ProfileComponent {
     const customerID = this.customer.id;
     const BEARER_TOKEN = this.customer.token;
 
+    // TODO: update addresses
     const updateActions = [
       {
         action: 'setFirstName',
