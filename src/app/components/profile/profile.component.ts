@@ -27,22 +27,50 @@ export class ProfileComponent {
     shippingAddresses: JSON.parse(localStorage.getItem('shippingAddresses') as string) as IAddress[],
   };
 
-  allValid = true;
+  isInvalid = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    dateOfBirth: '',
+  };
+
+  firstNameInputBlurEventHandler(): void {
+    const validationMsg: string | null = this.validateName('first', this.customer.firstName?.trim() as string);
+    this.isInvalid.firstName = validationMsg;
+  }
+
+  lastNameInputBlurEventHandler(): void {
+    const validationMsg: string = this.validateName('last', this.customer.lastName?.trim() as string);
+    this.isInvalid.lastName = validationMsg;
+  }
+
+  emailInputBlurEventHandler(): void {
+    const validationMsg: string = this.validateEmail(this.customer.email?.trim() as string);
+    this.isInvalid.email = validationMsg;
+  }
+
+  dateOfBirthInputBlurEventHandler(): void {
+    const validationMsg: string = this.validateDateOfBirth(this.customer.dateOfBirth?.trim() as string);
+    this.isInvalid.dateOfBirth = validationMsg;
+  }
 
   switchToEditMode(): void {
     this.editMode = true;
   }
 
   saveFormChanges(): void {
-    // validate
+    // TODO: if there are no changes, do NOT send request & exit edit mode
 
-    // make request
-    if (this.allValid) {
+    // Check whether all inputs are valid
+    const allFieldsValid = !Object.values(this.isInvalid).some((invalidMsg) => invalidMsg.length !== 0);
+
+    if (allFieldsValid)
+      // Make request
       this.updateCustomer().subscribe({
         next: (response: DataUser) => {
           console.log(response);
 
-          // update data in store
+          // Update data in store
           if (response.version) this.customer.version = response.version;
           localStorage.setItem('email', `${response.email}`);
           localStorage.setItem('version', `${response.version}`);
@@ -52,14 +80,13 @@ export class ProfileComponent {
           localStorage.setItem('shippingAddresses', JSON.stringify(this.customer.shippingAddresses));
           localStorage.setItem('billingAddresses', JSON.stringify(this.customer.billingAddresses));
 
-          // and exit edit mode
+          // Exit edit mode
           this.editMode = false;
         },
         error: (error) => {
           console.error('Error updating customer:', error);
         },
       });
-    }
   }
 
   updateCustomer(): Observable<DataUser> {
@@ -99,5 +126,65 @@ export class ProfileComponent {
     });
 
     return this.http.post(apiUrl, requestBody, { headers });
+  }
+
+  validateName(nameType: string, name: string): string {
+    const minLength = 2;
+    const maxLength = 50;
+
+    if (!name) {
+      if (nameType === 'first') return 'First name is required.';
+      return 'Last name is required.';
+    }
+
+    if (name.length < minLength || name.length > maxLength) {
+      if (nameType === 'first') return `First name should be between ${minLength} and ${maxLength} characters.`;
+      return `Last name should be between ${minLength} and ${maxLength} characters.`;
+    }
+
+    return '';
+  }
+
+  validateEmail(email: string): string {
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if (!email) {
+      return 'Email address is required.';
+    }
+
+    if (!emailPattern.test(email)) {
+      return 'Invalid email address format.';
+    }
+
+    return '';
+  }
+
+  validateDateOfBirth(dateOfBirth: string): string {
+    const currentDate = new Date();
+    const minimumAge = 13;
+
+    const dob = new Date(dateOfBirth);
+
+    if (!dateOfBirth) {
+      return 'Date of birth is required.';
+    }
+
+    if (isNaN(dob.getTime())) {
+      return 'Invalid date of birth format.';
+    }
+
+    const age =
+      currentDate.getFullYear() -
+      dob.getFullYear() -
+      (currentDate.getMonth() < dob.getMonth() ||
+      (currentDate.getMonth() === dob.getMonth() && currentDate.getDate() < dob.getDate())
+        ? 1
+        : 0);
+
+    if (age < minimumAge) {
+      return `You must be at least ${minimumAge} years old.`;
+    }
+
+    return '';
   }
 }

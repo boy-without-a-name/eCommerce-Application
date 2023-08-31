@@ -133,3 +133,12 @@ label,
 input {
   font-size: calc(12px + 0.5vw);
 }
+
+.invalid-msg {
+  color: red;
+  font-size: calc(8px + 0.5vw);
+}
+
+.invalid-input {
+  border: 1px solid red;
+}

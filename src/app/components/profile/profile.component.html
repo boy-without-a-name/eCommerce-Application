@@ -101,29 +101,58 @@
     </div>
   </div>
 
+  <!-- Edit mode form -->
   <div *ngIf="editMode" class="user__data" [ngClass]="{ 'user__data_edit-mode': editMode }">
     <!-- first name -->
     <div class="user__data-item" [ngClass]="{ 'user__data-item_edit-mode': editMode }">
       <h3 class="user__data-heading">First name</h3>
-      <input [(ngModel)]="customer.firstName" class="user__data-content" type="text" />
+      <input
+        (blur)="firstNameInputBlurEventHandler()"
+        [(ngModel)]="customer.firstName"
+        class="user__data-content"
+        [ngClass]="{ 'invalid-input': isInvalid.firstName }"
+        type="text"
+      />
+      <span class="invalid-msg" *ngIf="isInvalid.firstName"> {{ isInvalid.firstName }}</span>
     </div>
 
     <!-- last name -->
-    <div class="user__data-item" [ngClass]="{ 'user__data-item_edit-mode': editMode }">
+    <div class="user__data-item" [ngClass]="{ ' user__data-item_edit-mode': editMode }">
       <h3 class="user__data-heading">Last name</h3>
-      <input [(ngModel)]="customer.lastName" class="user__data-content" type="text" />
+      <input
+        (blur)="lastNameInputBlurEventHandler()"
+        [(ngModel)]="customer.lastName"
+        class="user__data-content"
+        [ngClass]="{ 'invalid-input': isInvalid.lastName }"
+        type="text"
+      />
+      <span class="invalid-msg" *ngIf="isInvalid.lastName"> {{ isInvalid.lastName }}</span>
     </div>
 
     <!-- email -->
     <div class="user__data-item" [ngClass]="{ 'user__data-item_edit-mode': editMode }">
       <h3 class="user__data-heading">Email</h3>
-      <input [(ngModel)]="customer.email" class="user__data-content" type="text" />
+      <input
+        (blur)="emailInputBlurEventHandler()"
+        [(ngModel)]="customer.email"
+        class="user__data-content"
+        [ngClass]="{ 'invalid-input': isInvalid.email }"
+        type="text"
+      />
+      <span class="invalid-msg" *ngIf="isInvalid.email"> {{ isInvalid.email }}</span>
     </div>
 
     <!-- date of birth -->
     <div class="user__data-item" [ngClass]="{ 'user__data-item_edit-mode': editMode }">
       <h3 class="user__data-heading">Date of birth</h3>
-      <input [(ngModel)]="customer.dateOfBirth" class="user__data-content" type="date" />
+      <input
+        (blur)="dateOfBirthInputBlurEventHandler()"
+        [(ngModel)]="customer.dateOfBirth"
+        class="user__data-content"
+        [ngClass]="{ 'invalid-input': isInvalid.dateOfBirth }"
+        type="date"
+      />
+      <span class="invalid-msg" *ngIf="isInvalid.dateOfBirth"> {{ isInvalid.dateOfBirth }}</span>
     </div>
 
     <!-- shipping address -->
