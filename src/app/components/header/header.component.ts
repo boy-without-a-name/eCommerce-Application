@@ -17,8 +17,20 @@ export class HeaderComponent implements OnInit {
 
   signOutEventHandler(): void {
     this.navService.setSignedInState(false);
-    this.navService.setSignedInState(false);
-    this.removeItemsFromLocalStorage('token', 'email', 'firstName', 'lastName', 'isSignedIn');
+    
+    this.removeItemsFromLocalStorage(
+      'id',
+      'token',
+      'email',
+      'version',
+      'firstName',
+      'lastName',
+      'isSignedIn',
+      'shippingAddresses',
+      'billingAddresses',
+      'dateOfBirth',
+    );
+    
     this.isSignedIn = false;
   }
 

@@ -27,6 +27,8 @@ import { PostModalImgComponent } from './components/post-modal-img/post-modal-im
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +46,9 @@ import { MatButtonModule } from '@angular/material/button';
     NotFoundViewComponent,
     UserIconComponent,
     NavLinksComponent,
+    ProfileComponent,
+    CatalogComponent,
+    CardComponent,
     ProductComponent,
     PostModalImgComponent,
   ],
