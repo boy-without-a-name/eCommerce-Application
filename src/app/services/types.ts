@@ -11,11 +11,34 @@ export interface IRegisterData {
   lastName: string;
   password: string;
   date: string;
-  address: {
-    streetName: string;
-    streetNumber: string;
-    postalCode: string;
-    city: string;
-    country: string;
-  };
+  address: IAddress;
+}
+
+export interface IAddress {
+  id: string;
+  streetName: string;
+  streetNumber: string;
+  postalCode: string;
+  city: string;
+  country: string;
+
+  key?: string;
+  title?: string;
+  salutation?: string;
+  firstName?: string;
+  lastName?: string;
+  additionalStreetInfo?: string;
+  region?: string;
+  state?: string;
+  company?: string;
+  department?: string;
+  building?: string;
+  apartment?: string;
+  pOBox?: string;
+  phone?: string;
+  mobile?: string;
+  email?: string;
+  fax?: string;
+  additionalAddressInfo?: string;
+  externalId?: string;
 }

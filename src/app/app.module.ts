@@ -20,6 +20,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { NotFoundViewComponent } from './components/not-found-view/not-found-view.component';
 import { UserIconComponent } from './components/user-icon/user-icon.component';
 import { NavLinksComponent } from './components/nav-links/nav-links.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { CardComponent } from './components/card-product/card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -42,10 +43,10 @@ import { ProductComponent } from './components/product/product.component';
     NotFoundViewComponent,
     UserIconComponent,
     NavLinksComponent,
+    ProfileComponent,
     CatalogComponent,
     CardComponent,
     ProductComponent,
-
   ],
   imports: [
     BrowserModule,
