@@ -31,7 +31,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { ProductComponent } from './components/product/product.component';
 import { register } from 'swiper/element/bundle';
 
-register();
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,4 +70,8 @@ register();
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    register();
+  }
+}
