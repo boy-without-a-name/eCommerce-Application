@@ -20,12 +20,15 @@ import { RegisterComponent } from './components/register/register.component';
 import { NotFoundViewComponent } from './components/not-found-view/not-found-view.component';
 import { UserIconComponent } from './components/user-icon/user-icon.component';
 import { NavLinksComponent } from './components/nav-links/nav-links.component';
-import { ProductComponent } from './components/product/product.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { CatalogComponent } from './components/catalog/catalog.component';
+import { CardComponent } from './components/card-product/card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PostModalImgComponent } from './components/post-modal-img/post-modal-img.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
   declarations: [

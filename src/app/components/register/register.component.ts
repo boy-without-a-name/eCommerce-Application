@@ -102,7 +102,7 @@ export class RegisterComponent {
                     localStorage.setItem('isSignedIn', JSON.stringify(true));
                     localStorage.setItem('dateOfBirth', `${this.registrationForm.value.dateOfBirth}`);
                   });
-
+                
                   this.router.navigate(['/']);
                 });
             },
