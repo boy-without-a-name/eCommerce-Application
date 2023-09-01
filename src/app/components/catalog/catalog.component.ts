@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CatalogService } from 'src/app/services/catalog/catalog.service';
+import { ResultInterface } from 'src/app/models/interface/result.interfce';
 
 @Component({
   selector: 'app-catalog',
@@ -7,6 +8,8 @@ import { CatalogService } from 'src/app/services/catalog/catalog.service';
   styleUrls: ['./catalog.component.scss'],
 })
 export class CatalogComponent implements OnInit {
+  result: ResultInterface[] = [];
+
   constructor(private catalog: CatalogService) {}
 
   ngOnInit(): void {
@@ -21,7 +24,9 @@ export class CatalogComponent implements OnInit {
         },
       });
     }
-    this.catalog.getProgucts(localStorage.getItem('token'))?.subscribe((res) => console.log(res));
-
+    this.catalog.getProgucts(localStorage.getItem('token'))?.subscribe((res) => {
+      this.result = res.results;
+      console.log(res.results);
+    });
   }
 }
