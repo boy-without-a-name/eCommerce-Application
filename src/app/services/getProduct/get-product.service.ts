@@ -4,6 +4,7 @@ import { IProduct } from '../../models/interface/product.interface';
 import { Router } from '@angular/router';
 import { RegisterService } from '../register.service';
 import { AccessTokenResponse } from '../../models/interface/AnswerTokenResponseInterface';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,12 +19,12 @@ export class GetProductService {
     private register: RegisterService,
   ) {}
 
-  saveToken() {
+  saveToken(): void {
     this.register.getToken()?.subscribe((obj: AccessTokenResponse) => {
       this.access_token = obj.access_token;
     });
   }
-  getProduct(id: string = this.id) {
+  getProduct(id: string = this.id): Observable<IProduct> {
     this.saveToken();
     const authToken = this.register.getAuthToken();
     console.log(authToken);
@@ -34,7 +35,7 @@ export class GetProductService {
     return this.http.get<IProduct>(`${this.apiUrl}${id}`, { headers });
   }
 
-  renderProduct(id: string = this.id) {
+  renderProduct(id: string = this.id): void {
     this.router.navigate(['/product', id]);
   }
 }
