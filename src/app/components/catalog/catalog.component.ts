@@ -63,17 +63,16 @@ export class CatalogComponent implements OnInit {
   }
 
   clickSave(): void {
-    const filterRes:ResultInterface[] = [];
-    if(this.filterCategory.length > 0) {
+    const filterRes: ResultInterface[] = [];
+    if (this.filterCategory.length > 0) {
       this.catalog.getProgucts(localStorage.getItem('token'))?.subscribe((res) => {
         res.results.forEach((item) => {
-          this.filterCategory.forEach(category => {
-            if(item.productType.id === category) {
+          this.filterCategory.forEach((category) => {
+            if (item.productType.id === category) {
               filterRes.push(item);
             }
-          })
-        }
-        )
+          });
+        });
         this.result = filterRes;
       });
     }

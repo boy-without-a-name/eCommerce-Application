@@ -21,12 +21,11 @@
         Watch
       </div>
     </div>
-    <button
-    (click)="clickSave()">Save</button>
+    <button (click)="clickSave()">Save</button>
     <button>Reset</button>
   </div>
   <div class="test">
-  <app-card *ngFor="let card of result" [product]="card"> </app-card>
+    <app-card *ngFor="let card of result" [product]="card"> </app-card>
   </div>
 </div>
 
