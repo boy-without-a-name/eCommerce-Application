@@ -6,6 +6,7 @@ import { CatalogInterface } from 'src/app/models/interface/catalog.interface';
 import { AccessTokenResponse } from 'src/app/models/interface/AnswerTokenResponseInterface';
 import { scope, clientId, clientSecret } from 'src/app/models/constants/constants';
 
+
 @Injectable({
   providedIn: 'root',
 })

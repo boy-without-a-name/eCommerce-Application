@@ -114,10 +114,10 @@ export interface ResultInterface {
       variants?: [];
     };
   };
-  priceMode?: string;
-  productType?: {
-    id?: string;
-    typeId?: string;
+  priceMode: string;
+  productType: {
+    id: string;
+    typeId: string;
   };
   version?: string;
   versionModifiedAt?: string;
