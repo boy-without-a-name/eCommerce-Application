@@ -10,7 +10,6 @@ import { unauthenticatedGuard } from './shared/functions/unauth.guard';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { ProductComponent } from './components/product/product.component';
 
-
 const routes: Routes = [
   { path: '', component: MainViewComponent },
   { path: 'catalog', component: CatalogComponent },
