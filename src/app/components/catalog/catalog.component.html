@@ -2,7 +2,15 @@
 <div class="main">
   <app-nav-links></app-nav-links>
   <h2>Catalog</h2>
-  <app-card [product]="result[4]"></app-card>
+  <app-card
+    *ngFor="let card of result"
+    [product] = "card">
+  </app-card>
+  <!-- <app-card [product]="result[0]"></app-card> -->
+ <!-- <app-card [product]="result[1]"></app-card> -->
+  <!-- <app-card [product]="result[2]"></app-card>
+  <app-card [product]="result[3]"></app-card>
+  <app-card [product]="result[4]"></app-card> -->
 </div>
 
 <app-footer></app-footer>

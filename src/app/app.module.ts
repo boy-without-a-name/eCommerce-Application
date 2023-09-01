@@ -23,6 +23,7 @@ import { NavLinksComponent } from './components/nav-links/nav-links.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { CardComponent } from './components/card-product/card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavLinksComponent,
     CatalogComponent,
     CardComponent,
+    ProductComponent,
 
   ],
   imports: [
