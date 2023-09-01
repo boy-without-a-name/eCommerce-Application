@@ -7,13 +7,18 @@ import { NotFoundViewComponent } from './components/not-found-view/not-found-vie
 import { ProfileComponent } from './components/profile/profile.component';
 import { authenticatedGuard } from './shared/functions/auth.guard';
 import { unauthenticatedGuard } from './shared/functions/unauth.guard';
+import { CatalogComponent } from './components/catalog/catalog.component';
+import { ProductComponent } from './components/product/product.component';
+
 
 const routes: Routes = [
-  { path: '', redirectTo: '/main', pathMatch: 'full' },
+  { path: '', component: MainViewComponent },
+  { path: 'catalog', component: CatalogComponent },
   { path: 'main', component: MainViewComponent },
   { path: 'login', component: AppLoginComponent, canActivate: [authenticatedGuard()] },
   { path: 'registration', component: RegisterComponent, canActivate: [authenticatedGuard()] },
   { path: 'profile', component: ProfileComponent, canActivate: [unauthenticatedGuard()] },
+  { path: 'product/:id', component: ProductComponent },
   { path: '**', component: NotFoundViewComponent },
 ];
 
