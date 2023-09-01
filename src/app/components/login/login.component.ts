@@ -183,6 +183,8 @@ export class AppLoginComponent {
           localStorage.setItem('firstName', `${response.firstName}`);
           localStorage.setItem('lastName', `${response.lastName}`);
           localStorage.setItem('isSignedIn', JSON.stringify(true));
+          localStorage.setItem('billingAddressesIds', JSON.stringify(response.billingAddressIds));
+          localStorage.setItem('shippingAddressesIds', JSON.stringify(response.shippingAddressIds));
           localStorage.setItem('shippingAddresses', JSON.stringify(shippingAddresses));
           localStorage.setItem('billingAddresses', JSON.stringify(billingAddresses));
           localStorage.setItem('dateOfBirth', `${response.dateOfBirth}`);

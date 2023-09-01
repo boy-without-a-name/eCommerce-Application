@@ -66,8 +66,13 @@ export class ProfileComponent {
 
   savePasswordChanges(): void {
     const allPasswordsValid = !Object.values(this.isPasswordInvalid).some((passInvalidMsg) => passInvalidMsg !== '');
+    const passwordInputsNotEmpty =
+      this.customer.password.current.length !== 0 && this.customer.password.new.length !== 0;
 
-    if (allPasswordsValid)
+    this.validatePassCurrentInput();
+    this.validatePassNewInput();
+
+    if (allPasswordsValid && passwordInputsNotEmpty)
       this.changePassword().subscribe({
         next: (response) => {
           console.log(response);
@@ -106,14 +111,26 @@ export class ProfileComponent {
           localStorage.setItem('firstName', `${response.firstName}`);
           localStorage.setItem('lastName', `${response.lastName}`);
           localStorage.setItem('dateOfBirth', `${response.dateOfBirth}`);
-          localStorage.setItem('shippingAddresses', JSON.stringify(this.customer.shippingAddresses));
-          localStorage.setItem('billingAddresses', JSON.stringify(this.customer.billingAddresses));
+
+          const billingAddresses = response.addresses?.filter(
+            (address) => response.billingAddressIds?.includes(address.id),
+          );
+          const shippingAddresses = response.addresses?.filter(
+            (address) => response.shippingAddressIds?.includes(address.id as string),
+          );
+          localStorage.setItem('shippingAddresses', JSON.stringify(shippingAddresses));
+          localStorage.setItem('billingAddresses', JSON.stringify(billingAddresses));
+          this.customer.shippingAddresses = JSON.parse(localStorage.getItem('shippingAddresses') as string);
+          this.customer.billingAddresses = JSON.parse(localStorage.getItem('billingAddresses') as string);
 
           // Exit edit mode
           this.editMode = false;
         },
         error: (error) => {
           console.error('Error updating customer:', error);
+          if (error.error.message === 'There is already an existing customer with the provided email.') {
+            this.isInvalid.email = 'Email is already registered';
+          }
         },
       });
     }
@@ -142,6 +159,28 @@ export class ProfileComponent {
       {
         action: 'setDateOfBirth',
         dateOfBirth: this.customer.dateOfBirth,
+      },
+      {
+        action: 'changeAddress',
+        addressId: this.customer.billingAddresses['0'].id,
+        address: {
+          postalCode: this.customer.billingAddresses['0'].postalCode,
+          country: this.customer.billingAddresses['0'].country,
+          streetName: this.customer.billingAddresses['0'].streetName,
+          streetNumber: this.customer.billingAddresses['0'].streetNumber,
+          city: this.customer.billingAddresses['0'].city,
+        },
+      },
+      {
+        action: 'changeAddress',
+        addressId: this.customer.shippingAddresses['0'].id,
+        address: {
+          postalCode: this.customer.shippingAddresses['0'].postalCode,
+          country: this.customer.shippingAddresses['0'].country,
+          streetName: this.customer.shippingAddresses['0'].streetName,
+          streetNumber: this.customer.shippingAddresses['0'].streetNumber,
+          city: this.customer.shippingAddresses['0'].city,
+        },
       },
     ];
 
