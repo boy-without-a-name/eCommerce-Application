@@ -11,7 +11,6 @@ export class CatalogComponent implements OnInit {
   result: ResultInterface[] = [];
   filterCategory: number[] = [];
 
-
   constructor(private catalog: CatalogService) {}
 
   ngOnInit(): void {
@@ -33,39 +32,37 @@ export class CatalogComponent implements OnInit {
   }
 
   clickPhone(value: boolean): void {
-    if(value){
-      this.filterCategory.push(1)
+    if (value) {
+      this.filterCategory.push(1);
     } else {
-      this.filterCategory.splice(this.filterCategory.indexOf(1),1)
+      this.filterCategory.splice(this.filterCategory.indexOf(1), 1);
     }
   }
 
   clickTablet(value: boolean): void {
-    if(value){
-      this.filterCategory.push(3)
+    if (value) {
+      this.filterCategory.push(3);
     } else {
-      this.filterCategory.splice(this.filterCategory.indexOf(3),1)
+      this.filterCategory.splice(this.filterCategory.indexOf(3), 1);
     }
   }
 
   clickLaptop(value: boolean): void {
-    if(value){
-      this.filterCategory.push(2)
+    if (value) {
+      this.filterCategory.push(2);
     } else {
-      this.filterCategory.splice(this.filterCategory.indexOf(2),1)
-
+      this.filterCategory.splice(this.filterCategory.indexOf(2), 1);
     }
   }
   clickWatch(value: boolean): void {
-    if(value){
-      this.filterCategory.push(4)
+    if (value) {
+      this.filterCategory.push(4);
     } else {
-      this.filterCategory.splice(this.filterCategory.indexOf(4),1)
-
+      this.filterCategory.splice(this.filterCategory.indexOf(4), 1);
     }
   }
 
-    clickSave(value: boolean): void {
-    console.log(value)
+  clickSave(value: boolean): void {
+    console.log(value);
   }
 }
