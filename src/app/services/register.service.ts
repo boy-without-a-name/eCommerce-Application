@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { AccessTokenResponse, IRegisterData } from './types';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AccessTokenResponse } from './types';
 
 @Injectable({
   providedIn: 'root',
@@ -40,5 +40,4 @@ export class RegisterService {
   getAuthToken() {
     return this.access_token;
   }
-  async register(data: IRegisterData) {}
 }

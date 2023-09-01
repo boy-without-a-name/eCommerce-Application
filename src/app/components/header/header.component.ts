@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NavService } from 'src/app/services/navService/nav.service';
-import { RegisterService } from '../../services/register.service';
 
 @Component({
   selector: 'app-header',
@@ -8,10 +7,7 @@ import { RegisterService } from '../../services/register.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor(
-    private navService: NavService,
-    private registerService: RegisterService,
-  ) {
+  constructor(private navService: NavService) {
     if (localStorage.getItem('isSignedIn')) {
       this.navService.setSignedInState(true);
     }

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Current, IProduct } from '../../models/interface/product.interface';
+import { IProduct } from '../../models/interface/product.interface';
 import { Router } from '@angular/router';
-import { register } from 'swiper/swiper-element';
 import { RegisterService } from '../register.service';
 import { AccessTokenResponse } from '../../models/interface/AnswerTokenResponseInterface';
 

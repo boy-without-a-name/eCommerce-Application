@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, DoCheck, OnInit } from '@angular/core';
-import { IRegisterData } from './services/types';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { RegisterService } from './services/register.service';
 
 @Component({
