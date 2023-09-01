@@ -24,6 +24,10 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { CardComponent } from './components/card-product/card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PostModalImgComponent } from './components/post-modal-img/post-modal-img.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 import { ProductComponent } from './components/product/product.component';
 
 @NgModule({
@@ -47,6 +51,7 @@ import { ProductComponent } from './components/product/product.component';
     CatalogComponent,
     CardComponent,
     ProductComponent,
+    PostModalImgComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +61,9 @@ import { ProductComponent } from './components/product/product.component';
     ReactiveFormsModule,
     NgOptimizedImage,
     BrowserAnimationsModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],

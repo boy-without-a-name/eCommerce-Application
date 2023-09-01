@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavService } from 'src/app/services/navService/nav.service';
 
 @Component({
@@ -6,7 +6,7 @@ import { NavService } from 'src/app/services/navService/nav.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   constructor(private navService: NavService) {
     if (localStorage.getItem('isSignedIn')) {
       this.navService.setSignedInState(true);
@@ -17,7 +17,6 @@ export class HeaderComponent {
 
   signOutEventHandler(): void {
     this.navService.setSignedInState(false);
-    
     this.removeItemsFromLocalStorage(
       'id',
       'token',
@@ -30,7 +29,7 @@ export class HeaderComponent {
       'billingAddresses',
       'dateOfBirth',
     );
-    
+
     this.isSignedIn = false;
   }
 
@@ -39,4 +38,5 @@ export class HeaderComponent {
       localStorage.removeItem(item);
     }
   }
+  ngOnInit() {}
 }

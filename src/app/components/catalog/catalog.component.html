@@ -2,6 +2,10 @@
 <div class="main">
   <app-nav-links></app-nav-links>
   <h2>Catalog</h2>
+ develop-new/detailed-product-page
+  <app-card *ngFor="let card of result" [product]="card"> </app-card>
+  <!-- <app-card [product]="result[0]"></app-card> -->
+  <!-- <app-card [product]="result[1]"></app-card> -->
   <app-card
     *ngFor="let card of result"
     [product] = "card">
