@@ -13,18 +13,7 @@ export class CatalogComponent implements OnInit {
   constructor(private catalog: CatalogService) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('token') == (null || undefined)) {
-      this.catalog.getToken()?.subscribe({
-        next: (responce) => {
-          localStorage.setItem('token', `${responce.access_token}`);
-          this.catalog.getProgucts(localStorage.getItem('token'))?.subscribe((res) => console.log(res));
-        },
-        error: () => {
-          console.log('error');
-        },
-      });
-    }
-    this.catalog.getProgucts(localStorage.getItem('token'))?.subscribe((res) => {
+    this.catalog.getProgucts(localStorage.getItem('authTokenMain'))?.subscribe((res) => {
       this.result = res.results;
       console.log(res.results);
     });
