@@ -7,9 +7,8 @@ import { AccessTokenResponse, IRegisterData } from './types';
 })
 export class RegisterService {
   apiUrl = 'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/customers -i';
-
+  access_token: string | undefined = '';
   constructor(private http: HttpClient) {}
-
   getToken() {
     const clientId = 'nW_nTeh94asuW0LieFf0ZmY-';
     const clientSecret = 'BoJN0ZkMEVNwB-IjGHoDdXfF42CvrdVV';
@@ -31,6 +30,15 @@ export class RegisterService {
       return null;
     }
   }
+  createToken() {
+    this.getToken()?.subscribe((obj: AccessTokenResponse) => {
+      this.access_token = obj.access_token;
+      localStorage.setItem('authTokenMain', `${obj.access_token}`);
+    });
+  }
 
+  getAuthToken() {
+    return this.access_token;
+  }
   async register(data: IRegisterData) {}
 }

@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { register } from 'swiper/element/bundle';
 import { MatDialog } from '@angular/material/dialog';
 import { PostModalImgComponent } from '../post-modal-img/post-modal-img.component';
+import { RegisterService } from '../../services/register.service';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',

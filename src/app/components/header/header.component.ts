@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavService } from 'src/app/services/navService/nav.service';
+import { RegisterService } from '../../services/register.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent {
-  constructor(private navService: NavService) {
+export class HeaderComponent implements OnInit {
+  constructor(
+    private navService: NavService,
+    private registerService: RegisterService,
+  ) {
     if (localStorage.getItem('isSignedIn')) {
       this.navService.setSignedInState(true);
     }
@@ -27,4 +31,5 @@ export class HeaderComponent {
       localStorage.removeItem(item);
     }
   }
+  ngOnInit() {}
 }
