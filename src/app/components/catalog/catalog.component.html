@@ -5,19 +5,24 @@
   <div class="filter-wrapper">
     <div class="category">
       <div>
-        <input type="checkbox" #checkPhone />
+        <input type="checkbox" #checkPhone
+        (click)="clickPhone(checkPhone.checked)"/>
         Phone
       </div>
       <div>
-        <input type="checkbox" #checkTablet />
+        <input type="checkbox" #checkTablet
+        (click)="clickTablet(checkTablet.checked)" />
         Tablet
       </div>
       <div>
-        <input type="checkbox" #checkLaptop />
+        <input type="checkbox" #checkLaptop
+        (click)="clickLaptop(checkLaptop.checked)"  />
         Laptop
       </div>
       <div>
-        <input type="checkbox" #checkWatch />
+        <input type="checkbox" #checkWatch
+        (click)="clickWatch(checkWatch.checked)"
+        />
         Watch
       </div>
     </div>

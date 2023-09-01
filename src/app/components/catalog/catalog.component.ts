@@ -9,6 +9,8 @@ import { ResultInterface } from 'src/app/models/interface/result.interfce';
 })
 export class CatalogComponent implements OnInit {
   result: ResultInterface[] = [];
+  filterCategory: number[] = [];
+
 
   constructor(private catalog: CatalogService) {}
 
@@ -28,5 +30,42 @@ export class CatalogComponent implements OnInit {
       this.result = res.results;
       console.log(res.results);
     });
+  }
+
+  clickPhone(value: boolean): void {
+    if(value){
+      this.filterCategory.push(1)
+    } else {
+      this.filterCategory.splice(this.filterCategory.indexOf(1),1)
+    }
+  }
+
+  clickTablet(value: boolean): void {
+    if(value){
+      this.filterCategory.push(3)
+    } else {
+      this.filterCategory.splice(this.filterCategory.indexOf(3),1)
+    }
+  }
+
+  clickLaptop(value: boolean): void {
+    if(value){
+      this.filterCategory.push(2)
+    } else {
+      this.filterCategory.splice(this.filterCategory.indexOf(2),1)
+
+    }
+  }
+  clickWatch(value: boolean): void {
+    if(value){
+      this.filterCategory.push(4)
+    } else {
+      this.filterCategory.splice(this.filterCategory.indexOf(4),1)
+
+    }
+  }
+
+    clickSave(value: boolean): void {
+    console.log(value)
   }
 }
