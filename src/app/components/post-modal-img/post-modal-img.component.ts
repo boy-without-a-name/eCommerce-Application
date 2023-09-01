@@ -14,7 +14,7 @@ export class PostModalImgComponent {
     public dialogRef: MatDialogRef<PostModalImgComponent>,
   ) {}
 
-  closeDialog() {
+  closeDialog(): void {
     this.dialogRef.close();
   }
 }

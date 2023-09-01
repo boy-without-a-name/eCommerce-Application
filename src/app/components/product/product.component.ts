@@ -23,6 +23,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+    register();
     this.route.params.subscribe((params) => {
       this.id = params['id'];
       this.product.getProduct(this.id).subscribe((obj) => {
@@ -48,7 +49,5 @@ export class ProductComponent implements OnInit, AfterViewInit {
     });
   }
 
-  ngAfterViewInit(): void {
-    register();
-  }
+  ngAfterViewInit(): void {}
 }

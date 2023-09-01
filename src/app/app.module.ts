@@ -29,7 +29,9 @@ import { PostModalImgComponent } from './components/post-modal-img/post-modal-im
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ProductComponent } from './components/product/product.component';
+import { register } from 'swiper/element/bundle';
 
+register();
 @NgModule({
   declarations: [
     AppComponent,
