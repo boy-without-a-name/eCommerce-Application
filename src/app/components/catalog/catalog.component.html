@@ -2,15 +2,32 @@
 <div class="main">
   <app-nav-links></app-nav-links>
   <h2>Catalog</h2>
+  <div class="filter-wrapper">
+    <div class="category">
+      <div>
+        <input type="checkbox" #checkPhone>
+        Phone
+      </div>
+      <div>
+        <input type="checkbox" #checkTablet>
+        Tablet
+      </div>
+      <div>
+        <input type="checkbox" #checkLaptop>
+      Laptop
+      </div>
+      <div>
+        <input type="checkbox" #checkWatch>
+        Watch
+      </div>
+    </div>
+    <button>Save</button>
+    <button>Reset</button>
+  </div>
   <app-card
     *ngFor="let card of result"
     [product] = "card">
   </app-card>
-  <!-- <app-card [product]="result[0]"></app-card> -->
- <!-- <app-card [product]="result[1]"></app-card> -->
-  <!-- <app-card [product]="result[2]"></app-card>
-  <app-card [product]="result[3]"></app-card>
-  <app-card [product]="result[4]"></app-card> -->
 </div>
 
 <app-footer></app-footer>
