@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
 
   signOutEventHandler(): void {
     this.navService.setSignedInState(false);
-    
+
     this.removeItemsFromLocalStorage(
       'id',
       'token',
@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
       'billingAddresses',
       'dateOfBirth',
     );
-    
+
     this.isSignedIn = false;
   }
 
