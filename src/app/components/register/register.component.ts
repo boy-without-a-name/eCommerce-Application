@@ -79,6 +79,7 @@ export class RegisterComponent {
                 .getToken(this.registrationForm.value.email, this.registrationForm.value.password)
                 ?.subscribe((next) => {
                   console.log(next);
+                  localStorage.setItem('token', `${access_token}`);
                   localStorage.setItem('email', `${this.registrationForm.value.email}`);
                   localStorage.setItem('firstName', `${this.registrationForm.value.firstName}`);
                   localStorage.setItem('lastName', `${this.registrationForm.value.lastName}`);
