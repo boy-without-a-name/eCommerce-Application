@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { register } from 'swiper/element/bundle';
 import { MatDialog } from '@angular/material/dialog';
 import { PostModalImgComponent } from '../post-modal-img/post-modal-img.component';
+
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -12,15 +13,16 @@ import { PostModalImgComponent } from '../post-modal-img/post-modal-img.componen
 })
 export class ProductComponent implements OnInit, AfterViewInit {
   productView!: Current;
-  id: string = '';
+  id = '';
   loading = false;
+
   constructor(
     private product: GetProductService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.id = params['id'];
       this.product.getProduct(this.id).subscribe((obj) => {
@@ -31,7 +33,7 @@ export class ProductComponent implements OnInit, AfterViewInit {
     });
   }
 
-  openPostModal(img: Image[], i: number) {
+  openPostModal(img: Image[], i: number): void {
     console.log(i);
     const dialogRef = this.dialog.open(PostModalImgComponent, {
       width: '600px',
@@ -45,7 +47,8 @@ export class ProductComponent implements OnInit, AfterViewInit {
       console.log(resp);
     });
   }
-  ngAfterViewInit() {
+
+  ngAfterViewInit(): void {
     register();
   }
 }
