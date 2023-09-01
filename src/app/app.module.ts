@@ -45,7 +45,6 @@ import { ProductComponent } from './components/product/product.component';
     CatalogComponent,
     CardComponent,
     ProductComponent,
-
   ],
   imports: [
     BrowserModule,

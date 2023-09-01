@@ -5,29 +5,26 @@
   <div class="filter-wrapper">
     <div class="category">
       <div>
-        <input type="checkbox" #checkPhone>
+        <input type="checkbox" #checkPhone />
         Phone
       </div>
       <div>
-        <input type="checkbox" #checkTablet>
+        <input type="checkbox" #checkTablet />
         Tablet
       </div>
       <div>
-        <input type="checkbox" #checkLaptop>
-      Laptop
+        <input type="checkbox" #checkLaptop />
+        Laptop
       </div>
       <div>
-        <input type="checkbox" #checkWatch>
+        <input type="checkbox" #checkWatch />
         Watch
       </div>
     </div>
     <button>Save</button>
     <button>Reset</button>
   </div>
-  <app-card
-    *ngFor="let card of result"
-    [product] = "card">
-  </app-card>
+  <app-card *ngFor="let card of result" [product]="card"> </app-card>
 </div>
 
 <app-footer></app-footer>
