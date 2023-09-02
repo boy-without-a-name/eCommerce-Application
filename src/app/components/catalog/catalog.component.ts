@@ -66,7 +66,7 @@ export class CatalogComponent implements OnInit {
   }
 
   clickSave(): void {
-    const str = 'filter=productType.id:' + this.filterCategory.join(',')
+    const str = 'filter=productType.id:' + this.filterCategory.join(',');
     // for (let i = 0; i < this.filterCategory.length; i++) {
     //   if (i + 1 === this.filterCategory.length) {
     //     str += `"${this.filterCategory[i]}"`;
