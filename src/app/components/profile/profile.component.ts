@@ -4,6 +4,7 @@ import { IAddress } from 'src/app/services/types';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DataUser } from 'src/app/models/interface/dataUser.interface';
 import { Observable } from 'rxjs';
+import Toastify from 'toastify-js';
 
 import { validateName, validateDateOfBirth, validateEmail, validatePassword } from './validators';
 
@@ -125,12 +126,36 @@ export class ProfileComponent {
 
           // Exit edit mode
           this.editMode = false;
+
+          // Show success message
+          Toastify({
+            text: 'Changes saved!',
+            style: {
+              background: 'lightgreen',
+              padding: '0.2rem 0.5rem',
+              'text-align': 'center',
+              'border-radius': '4px',
+              'font-weight': '600',
+            },
+          }).showToast();
         },
         error: (error) => {
           console.error('Error updating customer:', error);
           if (error.error.message === 'There is already an existing customer with the provided email.') {
             this.isInvalid.email = 'Email is already registered';
           }
+
+          // Show error messasge
+          Toastify({
+            text: `${error.error.message}`,
+            style: {
+              background: 'lightcoral',
+              padding: '0.2rem 0.5rem',
+              'text-align': 'center',
+              'border-radius': '4px',
+              'font-weight': '600',
+            },
+          }).showToast();
         },
       });
     }
