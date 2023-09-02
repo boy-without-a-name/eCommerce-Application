@@ -121,8 +121,20 @@ export class ProfileComponent {
 
     // Check whether all inputs are valid
     const allFieldsValid = !Object.values(this.isInvalid).some((invalidMsg) => invalidMsg.length !== 0);
+    // Check for any changes in inputs
+    const fieldsNotChanged =
+      this.customer.firstName?.trim() === localStorage.getItem('firstName')?.trim() &&
+      this.customer.lastName?.trim() === localStorage.getItem('lastName')?.trim() &&
+      this.customer.dateOfBirth?.trim() === localStorage.getItem('dateOfBirth')?.trim() &&
+      this.customer.email?.trim() === localStorage.getItem('email')?.trim() &&
+      JSON.stringify(this.customer.billingAddresses) === localStorage.getItem('billingAddresses') &&
+      JSON.stringify(this.customer.shippingAddresses) === localStorage.getItem('shippingAddresses');
 
-    if (allFieldsValid) {
+    if (fieldsNotChanged) {
+      this.editMode = false;
+    }
+
+    if (allFieldsValid && !fieldsNotChanged) {
       // Make request
       this.updateCustomer().subscribe({
         next: (response: DataUser) => {
@@ -130,11 +142,11 @@ export class ProfileComponent {
 
           // Update data in store
           if (response.version) this.customer.version = response.version;
-          localStorage.setItem('email', `${response.email}`);
+          localStorage.setItem('email', `${response.email?.trim()}`);
           localStorage.setItem('version', `${response.version}`);
-          localStorage.setItem('firstName', `${response.firstName}`);
-          localStorage.setItem('lastName', `${response.lastName}`);
-          localStorage.setItem('dateOfBirth', `${response.dateOfBirth}`);
+          localStorage.setItem('firstName', `${response.firstName?.trim()}`);
+          localStorage.setItem('lastName', `${response.lastName?.trim()}`);
+          localStorage.setItem('dateOfBirth', `${response.dateOfBirth?.trim()}`);
 
           const billingAddresses = response.addresses?.filter(
             (address) => response.billingAddressIds?.includes(address.id),
