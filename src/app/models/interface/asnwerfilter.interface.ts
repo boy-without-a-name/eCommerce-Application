@@ -1,4 +1,4 @@
-import { CardFilterInterface } from "./results.filter.intreface";
+import { CardFilterInterface } from './results.filter.intreface';
 
 export interface AnswerFilterInterface {
   limit: number;
@@ -6,5 +6,5 @@ export interface AnswerFilterInterface {
   count: number;
   total: number;
   results: CardFilterInterface[];
-  facets: {q?: string};
+  facets: { q?: string };
 }
