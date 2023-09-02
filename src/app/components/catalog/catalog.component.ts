@@ -74,9 +74,8 @@ export class CatalogComponent implements OnInit {
     this.catalog.test(localStorage.getItem('token'), str)?.subscribe((res) => (this.productfilter = res.results));
   }
 
-  clickReset():void {
+  clickReset(): void {
     this.filterEnabled = false;
     this.filterCategory = [];
   }
 }
-

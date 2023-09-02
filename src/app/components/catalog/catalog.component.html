@@ -48,8 +48,7 @@
       </div>
     </div>
     <button (click)="clickSave()">Save</button>
-    <button type="reset"
-    (mousedown)="clickReset()">Reset</button>
+    <button type="reset" (mousedown)="clickReset()">Reset</button>
   </form>
   <div class="test" *ngIf="!filterEnabled">
     <app-card *ngFor="let card of result" [product]="card"> </app-card>
