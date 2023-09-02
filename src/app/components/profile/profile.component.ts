@@ -85,10 +85,33 @@ export class ProfileComponent {
           this.customer.password.new = '';
 
           // TODO: re-authentication (new token needed)
+
+          // Show success toast message
+          Toastify({
+            text: 'New password has been set',
+            style: {
+              background: 'lightgreen',
+              padding: '0.2rem 0.5rem',
+              'text-align': 'center',
+              'border-radius': '4px',
+              'font-weight': '600',
+            },
+          }).showToast();
         },
         error: (errorResponse) => {
           if (errorResponse.error.statusCode === 400) this.isPasswordInvalid.current = errorResponse.error.message;
           console.error('Error changing password:', errorResponse);
+          // Show error toast message
+          Toastify({
+            text: errorResponse.error.message,
+            style: {
+              background: 'lightcoral',
+              padding: '0.2rem 0.5rem',
+              'text-align': 'center',
+              'border-radius': '4px',
+              'font-weight': '600',
+            },
+          }).showToast();
         },
       });
   }
@@ -127,7 +150,7 @@ export class ProfileComponent {
           // Exit edit mode
           this.editMode = false;
 
-          // Show success message
+          // Show success toast message
           Toastify({
             text: 'Changes saved!',
             style: {
@@ -145,7 +168,7 @@ export class ProfileComponent {
             this.isInvalid.email = 'Email is already registered';
           }
 
-          // Show error messasge
+          // Show error toast message
           Toastify({
             text: `${error.error.message}`,
             style: {
