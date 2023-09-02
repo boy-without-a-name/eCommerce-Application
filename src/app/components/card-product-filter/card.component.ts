@@ -8,7 +8,7 @@ import { CardFilterInterface } from 'src/app/models/interface/results.filter.int
 export class CardFilterComponent {
   buttonPosition = false;
 
-  @Input() product: CardFilterInterface;
+  @Input() productfilter: CardFilterInterface;
 
   clickBtn(): void {
     this.buttonPosition = true;

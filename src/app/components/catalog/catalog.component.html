@@ -24,9 +24,12 @@
     <button (click)="clickSave()">Save</button>
     <button>Reset</button>
   </div>
-  <div class="test">
+  <div class="test" *ngIf="!filterEnabled">
     <app-card *ngFor="let card of result" [product]="card"> </app-card>
   </div>
+</div>
+<div *ngIf="filterEnabled">
+  <app-card-filter *ngFor="let card of productfilter" [productfilter]="card"> </app-card-filter>
 </div>
 
 <app-footer></app-footer>

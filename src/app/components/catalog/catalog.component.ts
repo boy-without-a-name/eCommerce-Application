@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CatalogService } from 'src/app/services/catalog/catalog.service';
 import { ResultInterface } from 'src/app/models/interface/result.interfce';
+import { CardFilterInterface } from 'src/app/models/interface/results.filter.intreface';
 
 @Component({
   selector: 'app-catalog',
@@ -11,6 +12,7 @@ export class CatalogComponent implements OnInit {
   result: ResultInterface[] = [];
   filterCategory: string[] = [];
   filterEnabled = false;
+  productfilter: CardFilterInterface[]
 
   constructor(private catalog: CatalogService) {}
 
@@ -63,9 +65,13 @@ export class CatalogComponent implements OnInit {
   }
 
   clickSave(): void {
-    let str = '';
+    let str = 'filter=productType.id:'
     for (let i = 0; i < this.filterCategory.length; i++) {
-      str += `filter=productType.id:"${this.filterCategory[i]}"`;
+      if(i+1 === this.filterCategory.length) {
+      str += `"${this.filterCategory[i]}"`;
+    } else {
+      str += `"${this.filterCategory[i]}",`
+    }
     }
     // const filterRes: ResultInterface[] = [];
     // if (this.filterCategory.length > 0) {
@@ -81,6 +87,8 @@ export class CatalogComponent implements OnInit {
     //   });
 
     // }
-    this.catalog.test(localStorage.getItem('token'), str)?.subscribe((res) => (this.result = res.results));
+    this. filterEnabled = true;
+    console.log(str)
+    this.catalog.test(localStorage.getItem('token'), str)?.subscribe((res) => (this.productfilter = res.results));
   }
 }
