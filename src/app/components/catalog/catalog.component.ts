@@ -12,7 +12,7 @@ export class CatalogComponent implements OnInit {
   result: ResultInterface[] = [];
   filterCategory: string[] = [];
   filterEnabled = false;
-  productfilter: CardFilterInterface[]
+  productfilter: CardFilterInterface[];
 
   constructor(private catalog: CatalogService) {}
 
@@ -65,13 +65,13 @@ export class CatalogComponent implements OnInit {
   }
 
   clickSave(): void {
-    let str = 'filter=productType.id:'
+    let str = 'filter=productType.id:';
     for (let i = 0; i < this.filterCategory.length; i++) {
-      if(i+1 === this.filterCategory.length) {
-      str += `"${this.filterCategory[i]}"`;
-    } else {
-      str += `"${this.filterCategory[i]}",`
-    }
+      if (i + 1 === this.filterCategory.length) {
+        str += `"${this.filterCategory[i]}"`;
+      } else {
+        str += `"${this.filterCategory[i]}",`;
+      }
     }
     // const filterRes: ResultInterface[] = [];
     // if (this.filterCategory.length > 0) {
@@ -87,8 +87,8 @@ export class CatalogComponent implements OnInit {
     //   });
 
     // }
-    this. filterEnabled = true;
-    console.log(str)
+    this.filterEnabled = true;
+    console.log(str);
     this.catalog.test(localStorage.getItem('token'), str)?.subscribe((res) => (this.productfilter = res.results));
   }
 }
