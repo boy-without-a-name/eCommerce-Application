@@ -66,30 +66,12 @@ export class CatalogComponent implements OnInit {
   }
 
   clickSave(): void {
-    const str = 'filter=productType.id:' + this.filterCategory.join(',');
-    // for (let i = 0; i < this.filterCategory.length; i++) {
-    //   if (i + 1 === this.filterCategory.length) {
-    //     str += `"${this.filterCategory[i]}"`;
-    //   } else {
-    //     str += `"${this.filterCategory[i]}",`;
-    //   }
-    // }
-    // const filterRes: ResultInterface[] = [];
-    // if (this.filterCategory.length > 0) {
-    //   this.catalog.getProgucts(localStorage.getItem('token'))?.subscribe((res) => {
-    //     res.results.forEach((item) => {
-    //       this.filterCategory.forEach((category) => {
-    //         if (item.productType.id === category) {
-    //           filterRes.push(item);
-    //         }
-    //       });
-    //     });
-    //     this.result = filterRes;
-    //   });
-
-    // }
+    let str ='';
+    if (this.filterCategory.length > 0) {
+      str += 'filter=productType.id:' + this.filterCategory.join(',');
+    }
     this.filterEnabled = true;
-    console.log(str);
     this.catalog.test(localStorage.getItem('token'), str)?.subscribe((res) => (this.productfilter = res.results));
   }
+  
 }
