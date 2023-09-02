@@ -1,7 +1,6 @@
-import { AfterViewInit, Component, Inject, ViewChild } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ITransfer } from '../../models/interface/product.interface';
-import Swiper from 'swiper';
 
 @Component({
   selector: 'app-post-modal-img',
