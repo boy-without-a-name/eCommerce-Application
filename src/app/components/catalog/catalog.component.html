@@ -12,26 +12,24 @@
       </div>
       <div>
         <label for="tablet">
-          <input type="checkbox" name = "tablet" id="tablet"  #checkTablet (click)="clickTablet(checkTablet.checked)" />
+          <input type="checkbox" name="tablet" id="tablet" #checkTablet (click)="clickTablet(checkTablet.checked)" />
           Tablet
-      </label>
+        </label>
       </div>
       <div>
         <label for="laptop">
-        <input type="checkbox" name="laptop" id="laptop" #checkLaptop (click)="clickLaptop(checkLaptop.checked)" />
-        Laptop
-      </label>
+          <input type="checkbox" name="laptop" id="laptop" #checkLaptop (click)="clickLaptop(checkLaptop.checked)" />
+          Laptop
+        </label>
       </div>
       <div>
-        <label for = "watch">
-        <input type="checkbox" name = "watch" id = "watch" #checkWatch (click)="clickWatch(checkWatch.checked)" />
-        Watch
-      </label>
+        <label for="watch">
+          <input type="checkbox" name="watch" id="watch" #checkWatch (click)="clickWatch(checkWatch.checked)" />
+          Watch
+        </label>
       </div>
     </div>
-    <div>
-
-    </div>
+    <div></div>
     <button (click)="clickSave()">Save</button>
     <button type="reset">Reset</button>
   </form>
