@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ResultInterface } from 'src/app/models/interface/result.interfce';
+import { CardFilterInterface } from 'src/app/models/interface/results.filter.intreface';
 @Component({
   selector: 'app-card-filter',
   templateUrl: './card.component.html',
@@ -8,7 +8,7 @@ import { ResultInterface } from 'src/app/models/interface/result.interfce';
 export class CardFilterComponent {
   buttonPosition = false;
 
-  @Input() product: ResultInterface;
+  @Input() product: CardFilterInterface;
 
   clickBtn(): void {
     this.buttonPosition = true;
