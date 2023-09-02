@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CatalogService } from 'src/app/services/catalog/catalog.service';
 import { ResultInterface } from 'src/app/models/interface/result.interfce';
 import { CardFilterInterface } from 'src/app/models/interface/results.filter.intreface';
+import { ProducrTypeId } from 'src/app/models/enums/productTypeId.enum';
 
 @Component({
   selector: 'app-catalog',
@@ -35,44 +36,44 @@ export class CatalogComponent implements OnInit {
 
   clickPhone(value: boolean): void {
     if (value) {
-      this.filterCategory.push('c71e3588-7aee-423e-97cb-9f9b46de215e');
+      this.filterCategory.push(ProducrTypeId.phone);
     } else {
-      this.filterCategory.splice(this.filterCategory.indexOf('c71e3588-7aee-423e-97cb-9f9b46de215e'), 1);
+      this.filterCategory.splice(this.filterCategory.indexOf(ProducrTypeId.phone), 1);
     }
   }
 
   clickTablet(value: boolean): void {
     if (value) {
-      this.filterCategory.push('5c537762-8efb-46bc-9bec-6ef0ac96f5dc');
+      this.filterCategory.push(ProducrTypeId.tablet);
     } else {
-      this.filterCategory.splice(this.filterCategory.indexOf('5c537762-8efb-46bc-9bec-6ef0ac96f5dc'), 1);
+      this.filterCategory.splice(this.filterCategory.indexOf(ProducrTypeId.tablet), 1);
     }
   }
 
   clickLaptop(value: boolean): void {
     if (value) {
-      this.filterCategory.push('f4c79eeb-64d9-4fb5-a55e-2f18a9afdc54');
+      this.filterCategory.push(ProducrTypeId.laptop);
     } else {
-      this.filterCategory.splice(this.filterCategory.indexOf('f4c79eeb-64d9-4fb5-a55e-2f18a9afdc54'), 1);
+      this.filterCategory.splice(this.filterCategory.indexOf(ProducrTypeId.laptop), 1);
     }
   }
   clickWatch(value: boolean): void {
     if (value) {
-      this.filterCategory.push('f0fd682d-ac22-4b4b-a16b-dc53fcb87c77');
+      this.filterCategory.push(ProducrTypeId.watch);
     } else {
-      this.filterCategory.splice(this.filterCategory.indexOf('f0fd682d-ac22-4b4b-a16b-dc53fcb87c77'), 1);
+      this.filterCategory.splice(this.filterCategory.indexOf(ProducrTypeId.watch), 1);
     }
   }
 
   clickSave(): void {
-    let str = 'filter=productType.id:';
-    for (let i = 0; i < this.filterCategory.length; i++) {
-      if (i + 1 === this.filterCategory.length) {
-        str += `"${this.filterCategory[i]}"`;
-      } else {
-        str += `"${this.filterCategory[i]}",`;
-      }
-    }
+    const str = 'filter=productType.id:' + this.filterCategory.join(',')
+    // for (let i = 0; i < this.filterCategory.length; i++) {
+    //   if (i + 1 === this.filterCategory.length) {
+    //     str += `"${this.filterCategory[i]}"`;
+    //   } else {
+    //     str += `"${this.filterCategory[i]}",`;
+    //   }
+    // }
     // const filterRes: ResultInterface[] = [];
     // if (this.filterCategory.length > 0) {
     //   this.catalog.getProgucts(localStorage.getItem('token'))?.subscribe((res) => {
