@@ -40,4 +40,11 @@ export class CatalogService {
       { headers },
     );
   }
+  test(authToken: string | null, value: string): Observable<CatalogInterface> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
+    return this.http.get<CatalogInterface>(
+      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/product-projections/search?${value}`,
+      { headers },
+    );
+  }
 }

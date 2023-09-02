@@ -10,6 +10,7 @@ import { ResultInterface } from 'src/app/models/interface/result.interfce';
 export class CatalogComponent implements OnInit {
   result: ResultInterface[] = [];
   filterCategory: string[] = [];
+  filterEnabled = false;
 
   constructor(private catalog: CatalogService) {}
 
@@ -62,18 +63,24 @@ export class CatalogComponent implements OnInit {
   }
 
   clickSave(): void {
-    const filterRes: ResultInterface[] = [];
-    if (this.filterCategory.length > 0) {
-      this.catalog.getProgucts(localStorage.getItem('token'))?.subscribe((res) => {
-        res.results.forEach((item) => {
-          this.filterCategory.forEach((category) => {
-            if (item.productType.id === category) {
-              filterRes.push(item);
-            }
-          });
-        });
-        this.result = filterRes;
-      });
+    let str = '';
+    for (let i = 0; i < this.filterCategory.length; i++) {
+      str += `filter=productType.id:"${this.filterCategory[i]}"`;
     }
+    // const filterRes: ResultInterface[] = [];
+    // if (this.filterCategory.length > 0) {
+    //   this.catalog.getProgucts(localStorage.getItem('token'))?.subscribe((res) => {
+    //     res.results.forEach((item) => {
+    //       this.filterCategory.forEach((category) => {
+    //         if (item.productType.id === category) {
+    //           filterRes.push(item);
+    //         }
+    //       });
+    //     });
+    //     this.result = filterRes;
+    //   });
+
+    // }
+    this.catalog.test(localStorage.getItem('token'), str)?.subscribe((res) => (this.result = res.results));
   }
 }

@@ -24,6 +24,7 @@ import { CatalogComponent } from './components/catalog/catalog.component';
 import { CardComponent } from './components/card-product/card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProductComponent } from './components/product/product.component';
+import { CardFilterComponent } from './components/card-product-filter/card.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ProductComponent } from './components/product/product.component';
     CatalogComponent,
     CardComponent,
     ProductComponent,
+    CardFilterComponent,
   ],
   imports: [
     BrowserModule,
