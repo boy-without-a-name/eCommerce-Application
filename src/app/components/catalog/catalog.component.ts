@@ -66,12 +66,11 @@ export class CatalogComponent implements OnInit {
   }
 
   clickSave(): void {
-    let str ='';
+    let str = '';
     if (this.filterCategory.length > 0) {
       str += 'filter=productType.id:' + this.filterCategory.join(',');
     }
     this.filterEnabled = true;
     this.catalog.test(localStorage.getItem('token'), str)?.subscribe((res) => (this.productfilter = res.results));
   }
-  
 }
