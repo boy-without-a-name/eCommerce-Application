@@ -14,6 +14,8 @@ export class CatalogComponent implements OnInit {
   filterCategory: string[] = [];
   filterEnabled = false;
   productfilter: CardFilterInterface[];
+  minPrice = '';
+  maxPrice = '';
 
   constructor(private catalog: CatalogService) {}
 
@@ -57,6 +59,7 @@ export class CatalogComponent implements OnInit {
       this.filterCategory.splice(this.filterCategory.indexOf(ProducrTypeId.laptop), 1);
     }
   }
+
   clickWatch(value: boolean): void {
     if (value) {
       this.filterCategory.push(ProducrTypeId.watch);
@@ -65,16 +68,46 @@ export class CatalogComponent implements OnInit {
     }
   }
 
+    getMinPrice(value: string): string {
+     return this.minPrice = value.trim();
+    }
+
+    getMaxPrice(value: string): string {
+     return this.maxPrice = value.trim();
+    }
+
   clickSave(): void {
     let str = '';
     if (this.filterCategory.length > 0) {
       str += 'filter=productType.id:' + this.filterCategory.join(',');
     }
+    if(this.minPrice !== '' && this.maxPrice !== '') {
+      let min ='';
+      let max= '';
+      if (this.minPrice === '') {
+        min = '*'
+      } else {
+        min = (Number(this.minPrice) * 100).toString();
+      }
+      if (this.maxPrice === '') {
+        max = '*'
+      } else {
+        max= (Number(this.maxPrice) * 100).toString();
+      }
+      if(str !== '') {
+        str += '&'
+      }
+      str += `filter=variants.price.centAmount:range (${min} to ${max})`
+    }
     this.filterEnabled = true;
+
     this.catalog.test(localStorage.getItem('token'), str)?.subscribe((res) => (this.productfilter = res.results));
+
   }
 
   clickReset(): void {
+    this.minPrice = '';
+    this.maxPrice = '';
     this.filterEnabled = false;
     this.filterCategory = [];
   }

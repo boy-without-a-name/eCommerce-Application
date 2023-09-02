@@ -35,13 +35,15 @@
         <div>
           <label for="minPrice">
             <p>Min. Price</p>
-            <input type="number" name="minPrice" id="minPrice" />
+            <input type="number" name="minPrice" id="minPrice" #valueMin
+            (input)="getMinPrice(valueMin.value)"/>
           </label>
         </div>
         <div>
           <label for="maxPrice">
             <p>Max. Price</p>
-            <input type="number" name="maxPrice" id="maxPrice" />
+            <input type="number" name="maxPrice" id="maxPrice" #valueMax
+            (input)="getMaxPrice(valueMax.value)"/>
           </label>
         </div>
         <div></div>
