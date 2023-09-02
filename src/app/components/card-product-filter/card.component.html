@@ -1,13 +1,13 @@
 <div class="card-wrapper">
   <div>
-    <img class="card-wrapper__img" [src]="product.variant.images[0].url" alt="phone" />
+    <img class="card-wrapper__img" [src]="product.masterVariant.images[0].url" alt="phone" />
   </div>
   <div class="card-wrapper__info">
-    <h3 class="">{{ product.masterData.staged.name['en-US'] }}</h3>
-    <p class="">{{ product.masterData.staged.description['en-US'] }}</p>
+    <h3 class="">{{ product.name['en-US'] }}</h3>
+    <p class="">{{ product.description['en-US'] }}</p>
     <div class="">
       <span style="font-weight: 700">Price:</span>
-      {{ product.masterData.staged.masterVariant.prices[0].value.centAmount }}
+      {{ product.masterVariant.prices[0].value.centAmount }}
       <span style="font-weight: 700">EUR</span>
     </div>
     <button
