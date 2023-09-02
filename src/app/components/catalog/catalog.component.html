@@ -2,28 +2,39 @@
 <div class="main">
   <app-nav-links></app-nav-links>
   <h2>Catalog</h2>
-  <div class="filter-wrapper">
+  <form class="filter-wrapper">
     <div class="category">
       <div>
-        <input type="checkbox" #checkPhone (click)="clickPhone(checkPhone.checked)" />
-        Phone
+        <label for="phone">
+          <input type="checkbox" name="phone" id="phone" #checkPhone (click)="clickPhone(checkPhone.checked)" />
+          Phone
+        </label>
       </div>
       <div>
-        <input type="checkbox" #checkTablet (click)="clickTablet(checkTablet.checked)" />
-        Tablet
+        <label for="tablet">
+          <input type="checkbox" name = "tablet" id="tablet"  #checkTablet (click)="clickTablet(checkTablet.checked)" />
+          Tablet
+      </label>
       </div>
       <div>
-        <input type="checkbox" #checkLaptop (click)="clickLaptop(checkLaptop.checked)" />
+        <label for="laptop">
+        <input type="checkbox" name="laptop" id="laptop" #checkLaptop (click)="clickLaptop(checkLaptop.checked)" />
         Laptop
+      </label>
       </div>
       <div>
-        <input type="checkbox" #checkWatch (click)="clickWatch(checkWatch.checked)" />
+        <label for = "watch">
+        <input type="checkbox" name = "watch" id = "watch" #checkWatch (click)="clickWatch(checkWatch.checked)" />
         Watch
+      </label>
       </div>
     </div>
+    <div>
+
+    </div>
     <button (click)="clickSave()">Save</button>
-    <button>Reset</button>
-  </div>
+    <button type="reset">Reset</button>
+  </form>
   <div class="test" *ngIf="!filterEnabled">
     <app-card *ngFor="let card of result" [product]="card"> </app-card>
   </div>
