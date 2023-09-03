@@ -89,7 +89,9 @@ export class CatalogComponent implements OnInit {
       str += `filter=variants.price.centAmount:range (${min} to ${max})`;
     }
     this.filterEnabled = true;
-    this.catalog.test(localStorage.getItem('authTokenMain'), str)?.subscribe((res) => (this.productfilter = res.results));
+    this.catalog
+      .test(localStorage.getItem('authTokenMain'), str)
+      ?.subscribe((res) => (this.productfilter = res.results));
   }
 
   clickReset(): void {
