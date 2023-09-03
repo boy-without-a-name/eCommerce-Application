@@ -2,7 +2,59 @@
 <div class="main">
   <app-nav-links></app-nav-links>
   <h2>Catalog</h2>
-  <app-card *ngFor="let card of result" [product]="card"> </app-card>
+  <form class="filter-wrapper">
+    <div class="category">
+      <div>
+        <label for="phone">
+          <input type="checkbox" name="phone" id="phone" #checkPhone (click)="clickPhone(checkPhone.checked)" />
+          Phone
+        </label>
+      </div>
+      <div>
+        <label for="tablet">
+          <input type="checkbox" name="tablet" id="tablet" #checkTablet (click)="clickTablet(checkTablet.checked)" />
+          Tablet
+        </label>
+      </div>
+      <div>
+        <label for="laptop">
+          <input type="checkbox" name="laptop" id="laptop" #checkLaptop (click)="clickLaptop(checkLaptop.checked)" />
+          Laptop
+        </label>
+      </div>
+      <div>
+        <label for="watch">
+          <input type="checkbox" name="watch" id="watch" #checkWatch (click)="clickWatch(checkWatch.checked)" />
+          Watch
+        </label>
+      </div>
+    </div>
+    <div>
+      <p>Price:</p>
+      <div>
+        <div>
+          <label for="minPrice">
+            <p>Min. Price</p>
+            <input type="number" name="minPrice" id="minPrice" #valueMin (input)="getMinPrice(valueMin.value)" />
+          </label>
+        </div>
+        <div>
+          <label for="maxPrice">
+            <p>Max. Price</p>
+            <input type="number" name="maxPrice" id="maxPrice" #valueMax (input)="getMaxPrice(valueMax.value)" />
+          </label>
+        </div>
+        <div></div>
+      </div>
+    </div>
+    <button (click)="clickSave()">Save</button>
+    <button type="reset" (mousedown)="clickReset()">Reset</button>
+  </form>
+  <div class="test" *ngIf="!filterEnabled">
+    <app-card *ngFor="let card of result" [product]="card"> </app-card>
+  </div>
 </div>
-<!--Comit-->
+<div *ngIf="filterEnabled">
+  <app-card-filter *ngFor="let card of productfilter" [productfilter]="card"> </app-card-filter>
+</div>
 <app-footer></app-footer>
