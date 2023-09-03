@@ -4,9 +4,9 @@
   <h2>Catalog</h2>
   <form>
     <label for="sort">Sorting</label>
-    <select #select (change)="sort=select.value" (change)="clickSave()" id="sort" name="sort">
+    <select #select (change)="sort = select.value" (change)="clickSave()" id="sort" name="sort">
       <option value="''">Default</option>
-      <option value ="sort=price asc">Price ascending</option>
+      <option value="sort=price asc">Price ascending</option>
       <option value="sort=price desc">Апdecrement price</option>
       <option value="sort=name.en-US asc">by name from A to Z</option>
       <option value="sort=name.en-US desc">by name from Z to A</option>
