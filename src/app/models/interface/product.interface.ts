@@ -79,3 +79,8 @@ export interface IProduct {
   createdAt: string;
   lastModifiedAt: string;
 }
+
+export interface ITransfer {
+  img: Image[];
+  index: number;
+}

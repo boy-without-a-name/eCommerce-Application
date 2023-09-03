@@ -1,8 +1,11 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { GetProductService } from '../../services/getProduct/get-product.service';
-import { Current } from '../../models/interface/product.interface';
+import { Current, Image } from '../../models/interface/product.interface';
 import { ActivatedRoute } from '@angular/router';
 import { register } from 'swiper/element/bundle';
+import { MatDialog } from '@angular/material/dialog';
+import { PostModalImgComponent } from '../post-modal-img/post-modal-img.component';
+
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
@@ -10,14 +13,17 @@ import { register } from 'swiper/element/bundle';
 })
 export class ProductComponent implements OnInit, AfterViewInit {
   productView!: Current;
-  id: string = '';
+  id = '';
   loading = false;
+
   constructor(
     private product: GetProductService,
     private route: ActivatedRoute,
+    private dialog: MatDialog,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
+    register();
     this.route.params.subscribe((params) => {
       this.id = params['id'];
       this.product.getProduct(this.id).subscribe((obj) => {
@@ -27,7 +33,21 @@ export class ProductComponent implements OnInit, AfterViewInit {
       });
     });
   }
-  ngAfterViewInit() {
-    register();
+
+  openPostModal(img: Image[], i: number): void {
+    console.log(i);
+    const dialogRef = this.dialog.open(PostModalImgComponent, {
+      width: '600px',
+      height: '500px',
+      data: {
+        img: img,
+        index: i,
+      },
+    });
+    dialogRef.afterClosed().subscribe((resp) => {
+      console.log(resp);
+    });
   }
+
+  ngAfterViewInit(): void {}
 }

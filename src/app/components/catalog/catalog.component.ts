@@ -20,19 +20,8 @@ export class CatalogComponent implements OnInit {
   constructor(private catalog: CatalogService) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('email') == (null || undefined)) {
-      this.catalog.getToken()?.subscribe({
-        next: (responce) => {
-          localStorage.setItem('token', `${responce.access_token}`);
-        },
-        error: () => {
-          console.log('error');
-        },
-      });
-    }
-    this.catalog.getProgucts(localStorage.getItem('token'))?.subscribe((res) => {
+    this.catalog.getProgucts(localStorage.getItem('authTokenMain'))?.subscribe((res) => {
       this.result = res.results;
-      console.log(res.results);
     });
   }
 
@@ -100,7 +89,7 @@ export class CatalogComponent implements OnInit {
       str += `filter=variants.price.centAmount:range (${min} to ${max})`;
     }
     this.filterEnabled = true;
-    this.catalog.test(localStorage.getItem('token'), str)?.subscribe((res) => (this.productfilter = res.results));
+    this.catalog.test(localStorage.getItem('authTokenMain'), str)?.subscribe((res) => (this.productfilter = res.results));
   }
 
   clickReset(): void {

@@ -1,22 +1,39 @@
+<app-header />
 <div class>
   <div class="product__container">
-    <h1 style="color: red" *ngIf="!loading">Loading...</h1>
+    <mat-spinner *ngIf="!loading"></mat-spinner>
     <div *ngIf="loading" class="title__container">
       <h2>{{ productView.name['en-US'] }}</h2>
       <swiper-container
         pagination="true"
         pagination-type="progressbar"
         navigation="true"
-        initial-slide="0"
         slides-per-view="1"
+        init="true"
       >
-        <swiper-slide *ngFor="let img of productView.masterVariant.images; let i = index">
+        <swiper-slide
+          *ngFor="let img of productView.masterVariant.images; let i = index"
+          (click)="openPostModal(productView.masterVariant.images, i)"
+        >
           <img src="{{ img.url }}" alt="phone" />
         </swiper-slide>
       </swiper-container>
-      <!--      <img src="{{ productView.masterVariant.images[0].url }}" alt="" />-->
       <p>{{ productView.description['en-US'] }}</p>
-      <h3>{{ productView.masterVariant.prices['0'].value.centAmount | currency }}</h3>
+      <h3>{{ productView.masterVariant.prices['0'].value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2' }}</h3>
+      <div class="btn__form">
+        <button mat-raised-button routerLink="/catalog">Back</button>
+        <button mat-raised-button color="primary">Add to card</button>
+      </div>
     </div>
   </div>
 </div>
+<app-footer />
+<script src="
+https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.js
+"></script>
+<link
+  href="
+https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.css
+"
+  rel="stylesheet"
+/>

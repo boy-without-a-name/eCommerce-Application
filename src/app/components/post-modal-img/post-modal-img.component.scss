@@ -1,25 +1,21 @@
-.product__container {
-  background-color: #febd69;
-  height: 100vh;
-  width: 780px;
-  margin: 0 auto;
-}
-
-.title__container {
-  width: 600px;
-  height: 100vh;
-  margin: 0 auto;
+mat-dialog-content {
+  width: 100%;
+  height: 90%;
   display: flex;
-  flex-direction: column;
-  p {
-    font-size: 1.25rem;
+  justify-content: center;
+  justify-items: center;
+  img {
+    margin: 10% auto;
   }
+}
+mat-dialog-actions {
+  width: 100%;
+  height: 10%;
 }
 
 swiper-container {
   width: 100%;
   height: 400px;
-  overflow: hidden;
 }
 
 swiper-slide {
@@ -41,10 +37,4 @@ swiper-slide img {
   position: absolute;
   left: 50%;
   top: 50%;
-}
-.btn__form {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
 }

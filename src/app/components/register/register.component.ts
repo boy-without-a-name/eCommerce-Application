@@ -6,6 +6,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/loginSevice/login.service';
 import { countries } from '../../models/interface/countries';
+import { DataUser } from 'src/app/models/interface/dataUser.interface';
+import { IAddress } from 'src/app/models/interface/address.interface';
 
 @Component({
   selector: 'app-register',
@@ -72,27 +74,43 @@ export class RegisterComponent {
           const resp = this.http.post(apiUrl, this.registrationForm.value, {
             headers,
           });
-          resp.subscribe(
-            (resp) => {
+          resp.subscribe({
+            next: (resp) => {
               console.log(resp);
               this.login
                 .getToken(this.registrationForm.value.email, this.registrationForm.value.password)
-                ?.subscribe((next) => {
-                  console.log(next);
-                  localStorage.setItem('token', `${access_token}`);
-                  localStorage.setItem('email', `${this.registrationForm.value.email}`);
-                  localStorage.setItem('firstName', `${this.registrationForm.value.firstName}`);
-                  localStorage.setItem('lastName', `${this.registrationForm.value.lastName}`);
-                  localStorage.setItem('isSignedIn', JSON.stringify(true));
+                ?.subscribe((response) => {
+                  console.log(response);
+
+                  localStorage.setItem('token', `${response.access_token}`);
+
+                  // store user data
+                  this.login.getUserData(String(response.access_token))?.subscribe((response: DataUser) => {
+                    const billingAddresses = response.addresses?.filter(
+                      (addressElement: IAddress) => response.billingAddressIds?.includes(addressElement.id as string),
+                    );
+                    const shippingAddresses = response.addresses?.filter(
+                      (address: IAddress) => response.shippingAddressIds?.includes(address.id as string),
+                    );
+                    localStorage.setItem('shippingAddresses', JSON.stringify(shippingAddresses));
+                    localStorage.setItem('billingAddresses', JSON.stringify(billingAddresses));
+                    localStorage.setItem('id', `${response.id}`);
+                    localStorage.setItem('email', `${response.email}`);
+                    localStorage.setItem('version', `${response.version}`);
+                    localStorage.setItem('firstName', `${response.firstName}`);
+                    localStorage.setItem('lastName', `${response.lastName}`);
+                    localStorage.setItem('isSignedIn', JSON.stringify(true));
+                    localStorage.setItem('dateOfBirth', `${this.registrationForm.value.dateOfBirth}`);
+                  });
+
                   this.router.navigate(['/']);
-                  this.router.navigate(['']);
                 });
             },
-            (error) => {
+            error: (error) => {
               this.errorMsg = error.error.message;
               this.error = true;
             },
-          );
+          });
         });
       } else {
         this.error = true;

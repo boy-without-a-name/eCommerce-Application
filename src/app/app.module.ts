@@ -20,11 +20,18 @@ import { RegisterComponent } from './components/register/register.component';
 import { NotFoundViewComponent } from './components/not-found-view/not-found-view.component';
 import { UserIconComponent } from './components/user-icon/user-icon.component';
 import { NavLinksComponent } from './components/nav-links/nav-links.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { CardComponent } from './components/card-product/card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PostModalImgComponent } from './components/post-modal-img/post-modal-img.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 import { ProductComponent } from './components/product/product.component';
 import { CardFilterComponent } from './components/card-product-filter/card.component';
+import { register } from 'swiper/element/bundle';
+
 
 @NgModule({
   declarations: [
@@ -43,10 +50,12 @@ import { CardFilterComponent } from './components/card-product-filter/card.compo
     NotFoundViewComponent,
     UserIconComponent,
     NavLinksComponent,
+    ProfileComponent,
     CatalogComponent,
     CardComponent,
     ProductComponent,
     CardFilterComponent,
+    PostModalImgComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,9 +65,16 @@ import { CardFilterComponent } from './components/card-product-filter/card.compo
     ReactiveFormsModule,
     NgOptimizedImage,
     BrowserAnimationsModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatButtonModule,
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    register();
+  }
+}
