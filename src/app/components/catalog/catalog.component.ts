@@ -68,40 +68,39 @@ export class CatalogComponent implements OnInit {
     }
   }
 
-    getMinPrice(value: string): void {
-     this.minPrice = value.trim();
-    }
+  getMinPrice(value: string): void {
+    this.minPrice = value.trim();
+  }
 
-    getMaxPrice(value: string): void {
-      this.maxPrice = value.trim();
-    }
+  getMaxPrice(value: string): void {
+    this.maxPrice = value.trim();
+  }
 
   clickSave(): void {
     let str = '';
     if (this.filterCategory.length > 0) {
       str += 'filter=productType.id:' + this.filterCategory.join(',');
     }
-    if(this.minPrice !== '' || this.maxPrice !== '') {
-      let min ='';
-      let max= '';
+    if (this.minPrice !== '' || this.maxPrice !== '') {
+      let min = '';
+      let max = '';
       if (this.minPrice === '') {
-        min = '*'
+        min = '*';
       } else {
         min = (Number(this.minPrice) * 100).toString();
       }
       if (this.maxPrice === '') {
-        max = '*'
+        max = '*';
       } else {
         max = (Number(this.maxPrice) * 100).toString();
       }
-      if(str !== '') {
-        str += '&'
+      if (str !== '') {
+        str += '&';
       }
-      str += `filter=variants.price.centAmount:range (${min} to ${max})`
+      str += `filter=variants.price.centAmount:range (${min} to ${max})`;
     }
     this.filterEnabled = true;
     this.catalog.test(localStorage.getItem('token'), str)?.subscribe((res) => (this.productfilter = res.results));
-
   }
 
   clickReset(): void {
