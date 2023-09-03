@@ -16,7 +16,7 @@ export class CatalogComponent implements OnInit {
   productfilter: CardFilterInterface[];
   minPrice = '';
   maxPrice = '';
-
+  sort = '';
   constructor(private catalog: CatalogService) {}
 
   ngOnInit(): void {
@@ -66,6 +66,8 @@ export class CatalogComponent implements OnInit {
   }
 
   clickSave(): void {
+    console.log(1)
+    console.log(this.sort)
     let str = '';
     if (this.filterCategory.length > 0) {
       str += 'filter=productType.id:' + this.filterCategory.join(',');
@@ -87,6 +89,13 @@ export class CatalogComponent implements OnInit {
         str += '&';
       }
       str += `filter=variants.price.centAmount:range (${min} to ${max})`;
+    }
+    if(this.sort !== '') {
+      console.log(1)
+      if (str !== '') {
+        str += '&'
+      }
+      str += this.sort;
     }
     this.filterEnabled = true;
     this.catalog
