@@ -27,7 +27,6 @@ export class CatalogComponent implements OnInit {
     });
   }
 
-
   clickPhone(value: boolean): void {
     if (value) {
       this.filterCategory.push(ProducrTypeId.phone);
@@ -97,20 +96,20 @@ export class CatalogComponent implements OnInit {
       }
       str += this.sort;
     }
-    if (this.searchText!== '' && this.clickSearch === true) {
+    if (this.searchText !== '' && this.clickSearch === true) {
       if (str !== '') {
         str += '&';
       }
-      str += `text.en-US=${this.searchText.toLowerCase()}`
+      str += `text.en-US=${this.searchText.toLowerCase()}`;
       this.clickSearch = false;
     }
     this.filterEnabled = true;
-    this.catalog
-      .test(localStorage.getItem('authTokenMain'), str)
-      ?.subscribe((res) => {this.productfilter = res.results
-        if (res.results.length === 0){
-          alert('По вашему запросу ничего не найдено, попробуйте ввести другие данные')
-        }});
+    this.catalog.test(localStorage.getItem('authTokenMain'), str)?.subscribe((res) => {
+      this.productfilter = res.results;
+      if (res.results.length === 0) {
+        alert('По вашему запросу ничего не найдено, попробуйте ввести другие данные');
+      }
+    });
   }
 
   clickReset(): void {
