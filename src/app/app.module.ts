@@ -32,7 +32,6 @@ import { ProductComponent } from './components/product/product.component';
 import { CardFilterComponent } from './components/card-product-filter/card.component';
 import { register } from 'swiper/element/bundle';
 
-
 @NgModule({
   declarations: [
     AppComponent,
