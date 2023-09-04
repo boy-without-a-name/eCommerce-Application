@@ -9,16 +9,16 @@
       {{ customer.lastName }}
     </h2>
 
-    <app-button *ngIf="!editMode && !changePassMode" (click)="switchToEditMode()" text="Edit"></app-button>
-    <app-button *ngIf="editMode" (click)="saveFormChanges()" text="Save"></app-button>
+    <app-button *ngIf="!editMode && !changePassMode" (click)="switchToEditMode()" text="📝Edit"></app-button>
+    <app-button *ngIf="editMode" (click)="saveFormChanges()" text="✅Save"></app-button>
 
     <app-button
       *ngIf="!editMode && !changePassMode"
       (click)="switchToChangePassMode()"
-      text="Change password"
+      text="🔐Change password"
     ></app-button>
-    <app-button *ngIf="changePassMode" (click)="savePasswordChanges()" text="Change password"></app-button>
-    <app-button *ngIf="changePassMode" (click)="exitChangePassMode()" text=" Back"></app-button>
+    <app-button *ngIf="changePassMode" (click)="savePasswordChanges()" text="🔐Change password"></app-button>
+    <app-button *ngIf="changePassMode" (click)="exitChangePassMode()" text="⬅ Back"></app-button>
   </div>
 
   <div *ngIf="!editMode && !changePassMode" class="user__data">
@@ -137,7 +137,11 @@
       <h4 class="user__data-heading user__data-heading_edit-mode">Building</h4>
       <input class="user__data-content" [(ngModel)]="address.streetNumber" type="text" />
 
-      <app-button class="user__btn-delete-address" text="Delete" (click)="handleDeleteAddress(address.id)"></app-button>
+      <app-button
+        class="user__btn-delete-address"
+        text="❌Delete"
+        (click)="handleDeleteAddress(address.id)"
+      ></app-button>
     </div>
   </div>
 
