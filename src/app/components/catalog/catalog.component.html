@@ -1,7 +1,6 @@
 <app-header></app-header>
 <div class="main">
-  <app-nav-links></app-nav-links>
-  <h2>Catalog</h2>
+  <h2 style="font-size: 2rem; margin-top: 20px">Catalog</h2>
   <div class="search">
     <input class="search__input" type="text" #text (input)="searchText = text.value" placeholder="search products" />
     <button (mousedown)="clickSearch = true" (mouseup)="clickSave()" class="search__btn">
