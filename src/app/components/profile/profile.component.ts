@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { countries } from '../../models/interface/countries';
-import { IAddress } from 'src/app/services/types';
+import { IAddress } from '../../models/interface/address.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DataUser } from 'src/app/models/interface/dataUser.interface';
 import { Observable } from 'rxjs';
 import Toastify from 'toastify-js';
 
 import { validateName, validateDateOfBirth, validateEmail, validatePassword } from './validators';
+import { UpdateAction } from 'src/app/models/interface/updateAction';
 
 @Component({
   selector: 'app-profile',
@@ -85,7 +86,7 @@ export class ProfileComponent implements OnInit {
     this.editMode = true;
   }
 
-  handleDeleteAddress(addressToDeleteId: string): void {
+  handleDeleteAddress(addressToDeleteId: string | undefined): void {
     this.deleteAddress(addressToDeleteId).subscribe({
       next: (response: DataUser) => {
         console.log(response);
@@ -132,7 +133,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  deleteAddress(addressToDeleteId: string): Observable<DataUser> {
+  deleteAddress(addressToDeleteId: string | undefined): Observable<DataUser> {
     const region = 'australia-southeast1';
     const projectKey = 'arandomteam16';
     const customerID = this.customer.id;
@@ -241,9 +242,9 @@ export class ProfileComponent implements OnInit {
           localStorage.setItem('addresses', JSON.stringify(response.addresses));
           localStorage.setItem('billingAddressIds', JSON.stringify(response.billingAddressIds));
           localStorage.setItem('shippingAddressIds', JSON.stringify(response.shippingAddressIds));
-          this.customer.addresses = JSON.parse(localStorage.getItem('addresses') as string);
-          this.customer.billingAddressIds = JSON.parse(localStorage.getItem('billingAddressIds') as string);
-          this.customer.shippingAddressIds = JSON.parse(localStorage.getItem('shippingAddressIds') as string);
+          // this.customer.addresses = JSON.parse(localStorage.getItem('addresses') as string);
+          // this.customer.billingAddressIds = JSON.parse(localStorage.getItem('billingAddressIds') as string);
+          // this.customer.shippingAddressIds = JSON.parse(localStorage.getItem('shippingAddressIds') as string);
 
           this.setAddressTypes();
 
@@ -284,54 +285,53 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  getUpdActionObjectsForAddresses(): UpdateAction[] {
+    const updateActionObjectsForAddresses = this.customer.addresses.map((address: IAddress): UpdateAction => {
+      return {
+        action: 'changeAddress',
+        addressId: address.id,
+        address: {
+          postalCode: address.postalCode,
+          country: address.country,
+          streetName: address.streetName,
+          streetNumber: address.streetNumber,
+          city: address.city,
+        },
+      };
+    });
+    return updateActionObjectsForAddresses;
+  }
+
   updateCustomer(): Observable<DataUser> {
     const region = 'australia-southeast1';
     const projectKey = 'arandomteam16';
     const customerID = this.customer.id;
     const BEARER_TOKEN = this.customer.token;
 
-    const updateActions = [
+    const updateActions: UpdateAction[] = [
       {
         action: 'setFirstName',
-        firstName: this.customer.firstName,
+        firstName: String(this.customer.firstName),
       },
       {
         action: 'setLastName',
-        lastName: this.customer.lastName,
+        lastName: String(this.customer.lastName),
       },
       {
         action: 'changeEmail',
-        email: this.customer.email,
+        email: String(this.customer.email),
       },
       {
         action: 'setDateOfBirth',
-        dateOfBirth: this.customer.dateOfBirth,
+        dateOfBirth: String(this.customer.dateOfBirth),
       },
-      // {
-      //   action: 'changeAddress',
-      // addressId: this.customer.addresses,
-      // address: {
-      //   postalCode: ,
-      //   country: ,
-      //   streetName: ,
-      //   streetNumber: ,
-      //   city: ,
-      // },
     ];
 
-    // },
-    // {
-    // action: 'changeAddress',
-    // addressId: this.customer.shippingAddresses['0'].id,
-    // address: {
-    //   postalCode: this.customer.shippingAddresses['0'].postalCode,
-    //   country: this.customer.shippingAddresses['0'].country,
-    //   streetName: this.customer.shippingAddresses['0'].streetName,
-    //   streetNumber: this.customer.shippingAddresses['0'].streetNumber,
-    //   city: this.customer.shippingAddresses['0'].city,
-    // },
-    // },
-    // ];
+    const updActForAddresses = this.getUpdActionObjectsForAddresses();
+
+    updActForAddresses.forEach((updAction) => {
+      updateActions.push(updAction as UpdateAction);
+    });
 
     const requestBody = {
       version: this.customer.version,

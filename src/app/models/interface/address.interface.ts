@@ -1,5 +1,5 @@
 export interface IAddress {
-  id: string;
+  id?: string;
   city: string;
   country: string;
   streetName: string;
