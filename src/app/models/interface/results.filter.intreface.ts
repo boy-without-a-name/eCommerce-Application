@@ -80,8 +80,8 @@ export interface CardFilterInterface {
           discount: {
             typeId: string;
             id: string;
-          }
-        }
+          };
+        };
       },
     ];
     key: string;
