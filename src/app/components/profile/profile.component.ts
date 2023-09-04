@@ -117,8 +117,6 @@ export class ProfileComponent {
   }
 
   saveFormChanges(): void {
-    // TODO: if there are no changes, do NOT send request & exit edit mode
-
     // Check whether all inputs are valid
     const allFieldsValid = !Object.values(this.isInvalid).some((invalidMsg) => invalidMsg.length !== 0);
     // Check for any changes in inputs
@@ -202,7 +200,6 @@ export class ProfileComponent {
     const customerID = this.customer.id;
     const BEARER_TOKEN = this.customer.token;
 
-    // TODO: update addresses
     const updateActions = [
       {
         action: 'setFirstName',

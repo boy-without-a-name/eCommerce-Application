@@ -7,6 +7,11 @@ function validateName(nameType: string, name: string): string {
     return 'Last name is required.';
   }
 
+  if (!/^[a-zA-Z]+$/.test(name)) {
+    if (nameType === 'first') return 'First name should contain only letters.';
+    return 'Last name should contain only letters.';
+  }
+
   if (name.length < minLength || name.length > maxLength) {
     if (nameType === 'first') return `First name should be between ${minLength} and ${maxLength} characters.`;
     return `Last name should be between ${minLength} and ${maxLength} characters.`;
