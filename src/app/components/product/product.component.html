@@ -4,17 +4,8 @@
     <mat-spinner *ngIf="!loading"></mat-spinner>
     <div *ngIf="loading" class="title__container">
       <h2>{{ productView.name['en-US'] }}</h2>
-      <swiper-container
-        pagination="true"
-        pagination-type="progressbar"
-        navigation="true"
-        slides-per-view="1"
-        init="true"
-      >
-        <swiper-slide
-          *ngFor="let img of productView.masterVariant.images; let i = index"
-          (click)="openPostModal(productView.masterVariant.images, i)"
-        >
+      <swiper-container pagination="true" navigation="true" css-mode="true" *ngIf="loading">
+        <swiper-slide *ngFor="let img of this.dataImg; let i = index" (click)="openPostModal(this.dataImg, i)">
           <img src="{{ img.url }}" alt="phone" />
         </swiper-slide>
       </swiper-container>
