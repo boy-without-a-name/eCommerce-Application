@@ -1,3 +1,13 @@
+// TODO: см где material стили перебивают стили профиля
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
 .nav {
   display: flex;
   justify-content: center;
@@ -15,6 +25,7 @@
   align-items: center;
   margin: 1rem auto;
   color: #000;
+  transition: all 0.15s ease-in-out;
 
   @media screen and (min-width: 481px) {
     flex-direction: row;
@@ -23,7 +34,7 @@
   }
 
   &__btn-delete-address {
-    margin-top: 1rem;
+    margin-top: 0.2rem;
   }
   &__icon-and-name {
     display: flex;
@@ -46,11 +57,9 @@
     display: flex;
     flex-direction: column;
     gap: calc(1rem + 0.5vw);
-    width: calc(250px + 0.5vw);
 
     &_edit-mode {
       gap: calc(0.5rem + 0.5vw);
-      max-width: 300px;
     }
 
     &-item {
@@ -59,6 +68,9 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 1vw;
+      border-radius: 4px;
+      background-color: #f9f9f9;
+      padding: calc(0.2rem + 0.5vw);
 
       &_edit-mode {
         flex-direction: column;
@@ -69,6 +81,7 @@
     &-heading {
       color: #424242;
       font-size: calc(12px + 0.5vw);
+      line-height: 28px;
 
       &_edit-mode {
         color: #6f6f6f;
@@ -80,7 +93,7 @@
       display: flex;
       flex-direction: row;
       gap: 0.2rem;
-      align-items: flex-start;
+      align-items: baseline;
     }
 
     &-content {
@@ -89,9 +102,10 @@
     }
   }
 
-  .shipping .billing {
-    font-size: calc(12px + 0.5vw);
-    margin-left: calc(0.5rem + 0.5vw);
+  .shipping,
+  .billing {
+    font-size: calc(10px + 0.5vw);
+    line-height: 28px;
   }
 
   .shipping {
@@ -104,27 +118,15 @@
 }
 
 .btn {
-  // position: absolute;
   background-color: #fff;
   border: 1px solid #000;
   border-radius: 4px;
   padding: 0.2rem;
   font-size: calc(10px + 0.2vw);
-  // top: 0;
-  // right: 0;
 
   &:hover {
     cursor: pointer;
   }
-
-  &-edit {
-    @media (hover: hover) {
-      // display: none;
-    }
-  }
-
-  // &-save {
-  // }
 }
 
 input,
@@ -145,7 +147,8 @@ input {
 .invalid-msg {
   color: red;
   font-size: calc(8px + 0.5vw);
-  // max-width: 150px;
+  margin-top: calc(0.2rem + 0.5vw);
+  line-height: 1.2;
 }
 
 .invalid-input {
