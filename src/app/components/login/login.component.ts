@@ -170,12 +170,10 @@ export class AppLoginComponent {
 
         this.token.getUserData(localStorage.getItem('token'))?.subscribe((response: DataUser) => {
           console.log(response);
-          const billingAddresses = response.addresses?.filter(
-            (addressElement: IAddress) => response.billingAddressIds?.includes(addressElement.id as string),
-          );
-          const shippingAddresses = response.addresses?.filter(
-            (address: IAddress) => response.shippingAddressIds?.includes(address.id as string),
-          );
+
+          const addresses = response.addresses;
+          const billingAddressIds = response.billingAddressIds;
+          const shippingAddressIds = response.shippingAddressIds;
 
           localStorage.setItem('id', `${response.id}`);
           localStorage.setItem('email', `${response.email}`);
@@ -183,10 +181,9 @@ export class AppLoginComponent {
           localStorage.setItem('firstName', `${response.firstName}`);
           localStorage.setItem('lastName', `${response.lastName}`);
           localStorage.setItem('isSignedIn', JSON.stringify(true));
-          localStorage.setItem('billingAddressesIds', JSON.stringify(response.billingAddressIds));
-          localStorage.setItem('shippingAddressesIds', JSON.stringify(response.shippingAddressIds));
-          localStorage.setItem('shippingAddresses', JSON.stringify(shippingAddresses));
-          localStorage.setItem('billingAddresses', JSON.stringify(billingAddresses));
+          localStorage.setItem('billingAddressIds', JSON.stringify(billingAddressIds));
+          localStorage.setItem('shippingAddressIds', JSON.stringify(shippingAddressIds));
+          localStorage.setItem('addresses', JSON.stringify(addresses));
           localStorage.setItem('dateOfBirth', `${response.dateOfBirth}`);
 
           this.router.navigate(['/']);
