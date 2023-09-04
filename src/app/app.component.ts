@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { RegisterService } from './services/register.service';
-import { register } from 'swiper/element/bundle';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +8,7 @@ import { register } from 'swiper/element/bundle';
 })
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'log-in';
-  constructor(private registerService: RegisterService) {
-    register();
-  }
+  constructor(private registerService: RegisterService) {}
   ngOnInit() {
     this.registerService.createToken();
   }

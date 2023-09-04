@@ -2,7 +2,6 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { GetProductService } from '../../services/getProduct/get-product.service';
 import { Current, Image } from '../../models/interface/product.interface';
 import { ActivatedRoute } from '@angular/router';
-import { register } from 'swiper/element/bundle';
 import { MatDialog } from '@angular/material/dialog';
 import { PostModalImgComponent } from '../post-modal-img/post-modal-img.component';
 
@@ -23,7 +22,6 @@ export class ProductComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
-    register();
     this.route.params.subscribe((params) => {
       this.id = params['id'];
       this.product.getProduct(this.id).subscribe((obj) => {
