@@ -1,4 +1,4 @@
-<app-nav-links class="nav"></app-nav-links>
+<app-header></app-header>
 
 <div class="user">
   <div class="user__icon-and-name">
@@ -9,12 +9,15 @@
       {{ customer.lastName }}
     </h2>
 
-    <app-button *ngIf="!editMode && !changePassMode" (click)="switchToEditMode()" text="📝Edit"></app-button>
-    <app-button *ngIf="editMode" (click)="saveFormChanges()" text="✅Save"></app-button>
+    <app-button *ngIf="!editMode && !changePassMode" (click)="switchToEditMode()" text="📝 Edit"></app-button>
+    <app-button *ngIf="editMode" (click)="saveFormChanges()" text="✅ Save"></app-button>
 
-    <app-button *ngIf="!editMode && !changePassMode" (click)="switchToChangePassMode()"
-      text="🔐Change password"></app-button>
-    <app-button *ngIf="changePassMode" (click)="savePasswordChanges()" text="🔐Change password"></app-button>
+    <app-button
+      *ngIf="!editMode && !changePassMode"
+      (click)="switchToChangePassMode()"
+      text="🔐 Change password"
+    ></app-button>
+    <app-button *ngIf="changePassMode" (click)="savePasswordChanges()" text="🔐 Change password"></app-button>
     <app-button *ngIf="changePassMode" (click)="exitChangePassMode()" text="⬅ Back"></app-button>
   </div>
 
@@ -56,38 +59,61 @@
     <!-- first name -->
     <div class="user__data-item" [ngClass]="{ 'user__data-item_edit-mode': editMode }">
       <h3 class="user__data-heading">First name</h3>
-      <input (blur)="validateFirstNameInput()" [(ngModel)]="customer.firstName" class="user__data-content"
-        [ngClass]="{ 'invalid-input': isInvalid.firstName }" type="text" />
+      <input
+        (blur)="validateFirstNameInput()"
+        [(ngModel)]="customer.firstName"
+        class="user__data-content"
+        [ngClass]="{ 'invalid-input': isInvalid.firstName }"
+        type="text"
+      />
       <span class="invalid-msg" *ngIf="isInvalid.firstName"> {{ isInvalid.firstName }}</span>
     </div>
 
     <!-- last name -->
     <div class="user__data-item" [ngClass]="{ ' user__data-item_edit-mode': editMode }">
       <h3 class="user__data-heading">Last name</h3>
-      <input (blur)="validateLastNameInput()" [(ngModel)]="customer.lastName" class="user__data-content"
-        [ngClass]="{ 'invalid-input': isInvalid.lastName }" type="text" />
+      <input
+        (blur)="validateLastNameInput()"
+        [(ngModel)]="customer.lastName"
+        class="user__data-content"
+        [ngClass]="{ 'invalid-input': isInvalid.lastName }"
+        type="text"
+      />
       <span class="invalid-msg" *ngIf="isInvalid.lastName"> {{ isInvalid.lastName }}</span>
     </div>
 
     <!-- email -->
     <div class="user__data-item" [ngClass]="{ 'user__data-item_edit-mode': editMode }">
       <h3 class="user__data-heading">Email</h3>
-      <input (blur)="validateEmailInput()" [(ngModel)]="customer.email" class="user__data-content"
-        [ngClass]="{ 'invalid-input': isInvalid.email }" type="text" />
+      <input
+        (blur)="validateEmailInput()"
+        [(ngModel)]="customer.email"
+        class="user__data-content"
+        [ngClass]="{ 'invalid-input': isInvalid.email }"
+        type="text"
+      />
       <span class="invalid-msg" *ngIf="isInvalid.email"> {{ isInvalid.email }}</span>
     </div>
 
     <!-- date of birth -->
     <div class="user__data-item" [ngClass]="{ 'user__data-item_edit-mode': editMode }">
       <h3 class="user__data-heading">Date of birth</h3>
-      <input (blur)="validateDateOfBirthInput()" [(ngModel)]="customer.dateOfBirth" class="user__data-content"
-        [ngClass]="{ 'invalid-input': isInvalid.dateOfBirth }" type="date" />
+      <input
+        (blur)="validateDateOfBirthInput()"
+        [(ngModel)]="customer.dateOfBirth"
+        class="user__data-content"
+        [ngClass]="{ 'invalid-input': isInvalid.dateOfBirth }"
+        type="date"
+      />
       <span class="invalid-msg" *ngIf="isInvalid.dateOfBirth"> {{ isInvalid.dateOfBirth }}</span>
     </div>
 
     <!-- Addresses -->
-    <div *ngFor="let address of customer.addresses" class="user__data-item"
-      [ngClass]="{ 'user__data-item_edit-mode': editMode }">
+    <div
+      *ngFor="let address of customer.addresses"
+      class="user__data-item"
+      [ngClass]="{ 'user__data-item_edit-mode': editMode }"
+    >
       <div class="user__data-heading-and-labels">
         <h3 class="user__data-heading">📍 Address</h3>
         <span *ngIf="address.type?.includes('shipping')" class="shipping">shipping</span>
@@ -111,8 +137,11 @@
       <h4 class="user__data-heading user__data-heading_edit-mode">Building</h4>
       <input class="user__data-content" [(ngModel)]="address.streetNumber" type="text" />
 
-      <app-button class="user__btn-delete-address" text="❌Delete"
-        (click)="handleDeleteAddress(address.id)"></app-button>
+      <app-button
+        class="user__btn-delete-address"
+        text="❌Delete"
+        (click)="handleDeleteAddress(address.id)"
+      ></app-button>
     </div>
     <div class="user__data-item user__data-item_edit-mode">
       <app-button text="➕Add address"></app-button>
@@ -124,15 +153,25 @@
     <!-- Old pass -->
     <div class="user__data-item user__data-item_edit-mode">
       <h3 class="user__data-heading">Current password</h3>
-      <input (blur)="validatePassCurrentInput()" [(ngModel)]="customer.password.current" class="user__data-content"
-        [ngClass]="{ 'invalid-input': isPasswordInvalid.current }" type="password" />
+      <input
+        (blur)="validatePassCurrentInput()"
+        [(ngModel)]="customer.password.current"
+        class="user__data-content"
+        [ngClass]="{ 'invalid-input': isPasswordInvalid.current }"
+        type="password"
+      />
       <span class="invalid-msg" *ngIf="isPasswordInvalid.current"> {{ isPasswordInvalid.current }}</span>
     </div>
     <!-- New pass -->
     <div class="user__data-item user__data-item_edit-mode">
       <h3 class="user__data-heading">New password</h3>
-      <input (blur)="validatePassNewInput()" [(ngModel)]="customer.password.new" class="user__data-content"
-        [ngClass]="{ 'invalid-input': isPasswordInvalid.new }" type="password" />
+      <input
+        (blur)="validatePassNewInput()"
+        [(ngModel)]="customer.password.new"
+        class="user__data-content"
+        [ngClass]="{ 'invalid-input': isPasswordInvalid.new }"
+        type="password"
+      />
       <span class="invalid-msg" *ngIf="isPasswordInvalid.new"> {{ isPasswordInvalid.new }}</span>
     </div>
   </div>
