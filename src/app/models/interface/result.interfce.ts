@@ -89,17 +89,19 @@ export interface ResultInterface {
             };
             discounted: {
               value: {
-                  type: string;
-                  currencyCode: string;
-                  centAmount: number;
-                  fractionDigits: number
+                type: string;
+                currencyCode: string;
+                centAmount: number;
+                fractionDigits: number;
               };
               discount: {
-                  typeId: string;
-                  id: string;}
-            id?: string;
+                typeId: string;
+                id: string;
+              };
+              id?: string;
+            };
           },
-      }];
+        ];
       };
       metaDescription?: {
         'en-US'?: string;
