@@ -1,19 +1,17 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RegisterService } from './services/register.service';
-import { register } from 'swiper/element/bundle';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
   title = 'log-in';
-  constructor(private registerService: RegisterService) {
-    register();
-  }
-  ngOnInit() {
+
+  constructor(private registerService: RegisterService) {}
+
+  ngOnInit(): void {
     this.registerService.createToken();
   }
-  ngAfterViewInit() {}
 }
