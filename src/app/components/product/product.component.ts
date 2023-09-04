@@ -4,6 +4,9 @@ import { Current, Image } from '../../models/interface/product.interface';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { PostModalImgComponent } from '../post-modal-img/post-modal-img.component';
+import { register } from 'swiper/element/bundle';
+// register Swiper custom elements
+register();
 
 @Component({
   selector: 'app-product',
