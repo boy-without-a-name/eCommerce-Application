@@ -1,8 +1,8 @@
 <app-logo routerLink="" class="logo"></app-logo>
 
 <div class="buttons">
-  <app-button  routerLink="/main"  text="Main"></app-button>
-  <app-button  routerLink="/catalog"  text="Catalog"></app-button>
+  <app-button routerLink="/main" text="Main"></app-button>
+  <app-button routerLink="/catalog" text="Catalog"></app-button>
   <app-button *ngIf="!isSignedIn" routerLink="/login" text="Sign In"></app-button>
   <app-button *ngIf="!isSignedIn" routerLink="/registration" text="Sign Up"></app-button>
   <app-button (click)="signOutEventHandler()" *ngIf="isSignedIn" text="Sign Out"></app-button>
