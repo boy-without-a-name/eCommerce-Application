@@ -2,7 +2,7 @@
   <div>
     <img class="card-wrapper__img" [src]="product.masterData.staged.masterVariant.images[0].url" alt="phone" />
   </div>
-  <div class="card-wrapper__info" (click)="getProductService.renderProduct(product.id)">
+  <div class="card-wrapper__info" (mousedown)="getProductService.renderProduct(product.id)">
     <h3 class="">{{ product.masterData.staged.name['en-US'] }}</h3>
     <p class="">{{ product.masterData.staged.description['en-US'] }}</p>
     <div class="">

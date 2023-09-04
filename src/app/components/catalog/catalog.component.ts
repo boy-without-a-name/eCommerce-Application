@@ -3,7 +3,7 @@ import { CatalogService } from 'src/app/services/catalog/catalog.service';
 import { ResultInterface } from 'src/app/models/interface/result.interfce';
 import { CardFilterInterface } from 'src/app/models/interface/results.filter.intreface';
 import { ProducrTypeId } from 'src/app/models/enums/productTypeId.enum';
-
+import { isLiteralTypeNode } from 'typescript';
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
@@ -14,6 +14,8 @@ export class CatalogComponent implements OnInit {
   filterCategory: string[] = [];
   filterEnabled = false;
   productfilter: CardFilterInterface[];
+  searchText = '';
+  clickSearch = false;
   minPrice = '';
   maxPrice = '';
   sort = '';
@@ -24,6 +26,7 @@ export class CatalogComponent implements OnInit {
       this.result = res.results;
     });
   }
+
 
   clickPhone(value: boolean): void {
     if (value) {
@@ -66,8 +69,6 @@ export class CatalogComponent implements OnInit {
   }
 
   clickSave(): void {
-    console.log(1);
-    console.log(this.sort);
     let str = '';
     if (this.filterCategory.length > 0) {
       str += 'filter=productType.id:' + this.filterCategory.join(',');
@@ -91,16 +92,25 @@ export class CatalogComponent implements OnInit {
       str += `filter=variants.price.centAmount:range (${min} to ${max})`;
     }
     if (this.sort !== '') {
-      console.log(1);
       if (str !== '') {
         str += '&';
       }
       str += this.sort;
     }
+    if (this.searchText!== '' && this.clickSearch === true) {
+      if (str !== '') {
+        str += '&';
+      }
+      str += `text.en-US=${this.searchText.toLowerCase()}`
+      this.clickSearch = false;
+    }
     this.filterEnabled = true;
     this.catalog
       .test(localStorage.getItem('authTokenMain'), str)
-      ?.subscribe((res) => (this.productfilter = res.results));
+      ?.subscribe((res) => {this.productfilter = res.results
+        if (res.results.length === 0){
+          alert('По вашему запросу ничего не найдено, попробуйте ввести другие данные')
+        }});
   }
 
   clickReset(): void {

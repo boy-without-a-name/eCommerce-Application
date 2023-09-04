@@ -10,3 +10,43 @@
   padding: 0.3rem 0.5rem;
   background-color: #bcc4ce;
 }
+:host {
+  width: 60%;
+  // max-width: 900px;
+  transition: all 0.2s ease-in-out;
+
+  @media screen and (max-width: 767px) {
+    width: 100%;
+  }
+}
+
+.search {
+  display: flex;
+  height: 2.5rem;
+  border: 1px solid black;
+  &__input {
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: none;
+    padding: 0 1rem;
+    background-color: #fff;
+    border-radius: 4px 0 0 4px;
+  }
+
+  &__btn {
+    border: none;
+    border-radius: 0 4px 4px 0;
+    padding: 0 0.2rem;
+    background-color: #febd69;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #eeb161;
+    }
+  }
+}
