@@ -86,14 +86,12 @@ export class RegisterComponent {
 
                   // store user data
                   this.login.getUserData(String(response.access_token))?.subscribe((response: DataUser) => {
-                    const billingAddresses = response.addresses?.filter(
-                      (addressElement: IAddress) => response.billingAddressIds?.includes(addressElement.id as string),
-                    );
-                    const shippingAddresses = response.addresses?.filter(
-                      (address: IAddress) => response.shippingAddressIds?.includes(address.id as string),
-                    );
-                    localStorage.setItem('shippingAddresses', JSON.stringify(shippingAddresses));
-                    localStorage.setItem('billingAddresses', JSON.stringify(billingAddresses));
+                    const addresses = response.addresses;
+                    const billingAddressIds = response.billingAddressIds;
+                    const shippingAddressIds = response.shippingAddressIds;
+                    localStorage.setItem('billingAddressIds', JSON.stringify(billingAddressIds));
+                    localStorage.setItem('shippingAddressIds', JSON.stringify(shippingAddressIds));
+                    localStorage.setItem('addresses', JSON.stringify(addresses));
                     localStorage.setItem('id', `${response.id}`);
                     localStorage.setItem('email', `${response.email}`);
                     localStorage.setItem('version', `${response.version}`);

@@ -22,6 +22,9 @@
     align-items: flex-start;
   }
 
+  &__btn-delete-address {
+    margin-top: 1rem;
+  }
   &__icon-and-name {
     display: flex;
     flex-direction: column;
@@ -73,25 +76,29 @@
       }
     }
 
+    &-heading-and-labels {
+      display: flex;
+      flex-direction: row;
+      gap: 0.2rem;
+      align-items: flex-start;
+    }
+
     &-content {
       color: #6f6f6f;
       font-size: calc(10px + 0.5vw);
     }
   }
 
-  .shipping::after,
-  .billing::after {
+  .shipping .billing {
     font-size: calc(12px + 0.5vw);
     margin-left: calc(0.5rem + 0.5vw);
   }
 
-  .shipping::after {
-    content: 'shipping';
+  .shipping {
     color: blue;
   }
 
-  .billing::after {
-    content: 'billing';
+  .billing {
     color: palevioletred;
   }
 }

@@ -3,7 +3,7 @@ export interface IAddress {
   city: string;
   country: string;
   streetName: string;
-  streetNumber: number;
-  postalCode: number;
-  type?: string;
+  streetNumber: string;
+  postalCode: string;
+  type?: string[];
 }

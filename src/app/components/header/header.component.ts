@@ -25,8 +25,9 @@ export class HeaderComponent implements OnInit {
       'firstName',
       'lastName',
       'isSignedIn',
-      'shippingAddresses',
-      'billingAddresses',
+      'addresses',
+      'shippingAddressIds',
+      'billingAddressIds',
       'dateOfBirth',
     );
 
