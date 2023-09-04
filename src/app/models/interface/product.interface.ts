@@ -19,6 +19,10 @@ export interface PriceValue {
 }
 
 export interface Price {
+  discounted: {
+    value: PriceValue;
+    id: string;
+  };
   value: PriceValue;
   id: string;
 }
