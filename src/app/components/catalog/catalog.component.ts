@@ -3,7 +3,6 @@ import { CatalogService } from 'src/app/services/catalog/catalog.service';
 import { ResultInterface } from 'src/app/models/interface/result.interfce';
 import { CardFilterInterface } from 'src/app/models/interface/results.filter.intreface';
 import { ProducrTypeId } from 'src/app/models/enums/productTypeId.enum';
-import { isLiteralTypeNode } from 'typescript';
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
@@ -113,6 +112,7 @@ export class CatalogComponent implements OnInit {
   }
 
   clickReset(): void {
+
     this.minPrice = '';
     this.maxPrice = '';
     this.filterEnabled = false;

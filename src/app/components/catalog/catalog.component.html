@@ -89,7 +89,13 @@
           </div>
         </div>
         <button class="btn-form" (click)="clickSave()">Save</button>
-        <button class="btn-form" style="margin-left: 15px" type="reset" (mousedown)="clickReset()">Reset</button>
+        <button class="btn-form" style="margin-left: 15px" type="reset"
+        (mousedown)="valueMax.value = ''; valueMin.value = '';
+         checkTablet.checked = false;
+         checkLaptop.checked =false;
+         checkWatch.checked=false;
+         checkPhone.checked = false;
+         clickReset()">Reset</button>
       </form>
     </div>
     <div class="wrapper-card">
