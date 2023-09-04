@@ -112,7 +112,6 @@ export class CatalogComponent implements OnInit {
   }
 
   clickReset(): void {
-
     this.minPrice = '';
     this.maxPrice = '';
     this.filterEnabled = false;
