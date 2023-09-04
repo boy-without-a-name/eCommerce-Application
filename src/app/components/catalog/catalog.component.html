@@ -13,9 +13,11 @@
       </svg>
     </button>
   </div>
-  <form>
-    <label for="sort">Sorting</label>
-    <select #select (change)="sort = select.value" (change)="clickSave()" id="sort" name="sort">
+  <div class="wrapper-main">
+    <div class="wrapper-filter-sort">
+  <form class="sort">
+    <label for="sort" style="font-weight: 1000;">Sorting</label>
+    <select style="font-weight: 700;" #select (change)="sort = select.value" (change)="clickSave()" id="sort" name="sort">
       <option value="''">Default</option>
       <option value="sort=price asc">Price ascending</option>
       <option value="sort=price desc">Апdecrement price</option>
@@ -51,7 +53,7 @@
       </div>
     </div>
     <div>
-      <p>Price:</p>
+      <p style="font-size: 1rem; font-weight: 700; margin-top: 10px;">Price:</p>
       <div>
         <div>
           <label for="minPrice">
@@ -68,14 +70,18 @@
         <div></div>
       </div>
     </div>
-    <button (click)="clickSave()">Save</button>
-    <button type="reset" (mousedown)="clickReset()">Reset</button>
+    <button class="btn-form" (click)="clickSave()">Save</button>
+    <button class="btn-form" style="margin-left: 15px;" type="reset" (mousedown)="clickReset()">Reset</button>
   </form>
-  <div class="test" *ngIf="!filterEnabled">
+</div>
+<div class="wrapper-card"> <div *ngIf="!filterEnabled">
     <app-card *ngFor="let card of result" [product]="card"> </app-card>
   </div>
 </div>
-<div *ngIf="filterEnabled">
+<div  *ngIf="filterEnabled">
   <app-card-filter *ngFor="let card of productfilter" [productfilter]="card"> </app-card-filter>
 </div>
+</div>
+</div>
+
 <app-footer></app-footer>
