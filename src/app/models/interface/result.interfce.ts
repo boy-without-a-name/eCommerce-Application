@@ -84,10 +84,22 @@ export interface ResultInterface {
             value: {
               type?: string;
               fractionDigits?: number;
-              centAmount?: number;
+              centAmount: number;
               currencyCode?: string;
             };
-            id?: string;
+            discounted: {
+              value: {
+                type: string;
+                currencyCode: string;
+                centAmount: number;
+                fractionDigits: number;
+              };
+              discount: {
+                typeId: string;
+                id: string;
+              };
+              id?: string;
+            };
           },
         ];
       };
@@ -114,10 +126,10 @@ export interface ResultInterface {
       variants?: [];
     };
   };
-  priceMode?: string;
-  productType?: {
-    id?: string;
-    typeId?: string;
+  priceMode: string;
+  productType: {
+    id: string;
+    typeId: string;
   };
   version?: string;
   versionModifiedAt?: string;

@@ -2,13 +2,24 @@
   <div>
     <img class="card-wrapper__img" [src]="product.masterData.staged.masterVariant.images[0].url" alt="phone" />
   </div>
-  <div class="card-wrapper__info" (click)="getProductService.renderProduct(product.id)">
-    <h3 class="">{{ product.masterData.staged.name['en-US'] }}</h3>
+  <div class="card-wrapper__info" (mousedown)="getProductService.renderProduct(product.id)">
+    <h3 style="font-weight: 700">{{ product.masterData.staged.name['en-US'] }}</h3>
     <p class="">{{ product.masterData.staged.description['en-US'] }}</p>
     <div class="">
-      <span style="font-weight: 700">Price:</span>
-      {{ product.masterData.staged.masterVariant.prices[0].value.centAmount }}
-      <span style="font-weight: 700">EUR</span>
+      <s>
+        <span style="font-weight: 700">Price:</span>
+        {{
+          product.masterData.staged.masterVariant.prices[0].value.centAmount / 100
+            | currency: 'EUR' : 'symbol' : '1.2-2'
+        }}</s
+      >
+      <div class="discount">
+        <span style="font-weight: 700">Price:</span>
+        {{
+          product.masterData.staged.masterVariant.prices[0].discounted.value.centAmount / 100
+            | currency: 'EUR' : 'symbol' : '1.2-2'
+        }}
+      </div>
     </div>
     <button
       class="card-btn"

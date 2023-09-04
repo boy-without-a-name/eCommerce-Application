@@ -29,6 +29,9 @@ import { PostModalImgComponent } from './components/post-modal-img/post-modal-im
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ProductComponent } from './components/product/product.component';
+import { CardFilterComponent } from './components/card-product-filter/card.component';
+import { register } from 'swiper/element/bundle';
+
 
 @NgModule({
   declarations: [
@@ -51,6 +54,7 @@ import { ProductComponent } from './components/product/product.component';
     CatalogComponent,
     CardComponent,
     ProductComponent,
+    CardFilterComponent,
     PostModalImgComponent,
   ],
   imports: [
