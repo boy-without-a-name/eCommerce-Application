@@ -2,7 +2,7 @@
   <div>
     <img class="card-wrapper__img" [src]="productfilter.masterVariant.images[0].url" alt="phone" />
   </div>
-  <div class="card-wrapper__info">
+  <div class="card-wrapper__info" (mousedown)="getProductService.renderProduct(productfilter.id)">
     <h3 style="font-weight: 700">{{ productfilter.name['en-US'] }}</h3>
     <p class="">{{ productfilter.description['en-US'] }}</p>
     <div class="">
