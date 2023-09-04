@@ -10,21 +10,18 @@
   padding: 0.3rem 0.5rem;
   background-color: #131921;
   z-index: 2;
-  @media screen and (max-width: 481px) {
-    flex-direction: column-reverse;
-  }
+
 }
 
 .logo {
-  display: none;
-
-  @media screen and (min-width: 769px) {
     display: flex;
     align-items: center;
-  }
 
   &:hover {
     cursor: pointer;
+  }
+  @media screen and (max-width: 381px) {
+    display: none;
   }
 }
 
@@ -34,9 +31,9 @@
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  margin-left: 1rem;
 
   @media screen and (max-width: 481px) {
     align-self: flex-end;
+    gap: 1px;
   }
 }
