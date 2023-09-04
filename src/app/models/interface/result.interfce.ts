@@ -84,7 +84,7 @@ export interface ResultInterface {
             value: {
               type?: string;
               fractionDigits?: number;
-              centAmount?: number;
+              centAmount: number;
               currencyCode?: string;
             };
             discounted: {

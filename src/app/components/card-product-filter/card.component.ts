@@ -3,7 +3,7 @@ import { CardFilterInterface } from 'src/app/models/interface/results.filter.int
 @Component({
   selector: 'app-card-filter',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss'],
+  styleUrls: ['../card-product/card.component.scss'],
 })
 export class CardFilterComponent {
   buttonPosition = false;

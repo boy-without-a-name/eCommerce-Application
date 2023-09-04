@@ -6,9 +6,13 @@
     <h3 class="">{{ product.masterData.staged.name['en-US'] }}</h3>
     <p class="">{{ product.masterData.staged.description['en-US'] }}</p>
     <div class="">
+      <s>
       <span style="font-weight: 700">Price:</span>
-      {{ product.masterData.staged.masterVariant.prices[0].value.centAmount }}
-      <span style="font-weight: 700">EUR</span>
+      {{ product.masterData.staged.masterVariant.prices[0].value.centAmount/100 | currency: 'EUR' : 'symbol' : '1.2-2'  }}</s>
+      <div class="discount">
+      <span style="font-weight: 700">Price:</span>
+      {{ product.masterData.staged.masterVariant.prices[0].discounted.value.centAmount/100 | currency: 'EUR' : 'symbol' : '1.2-2' }}
+    </div>
     </div>
     <button
       class="card-btn"

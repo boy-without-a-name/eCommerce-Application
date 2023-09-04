@@ -70,6 +70,18 @@ export interface CardFilterInterface {
           centAmount: number;
           fractionDigits: number;
         };
+        discounted: {
+          value: {
+            type: string;
+            currencyCode: string;
+            centAmount: number;
+            fractionDigits: number;
+          };
+          discount: {
+            typeId: string;
+            id: string;
+          }
+        }
       },
     ];
     key: string;
