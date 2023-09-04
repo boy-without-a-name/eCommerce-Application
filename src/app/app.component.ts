@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RegisterService } from './services/register.service';
 
 @Component({
@@ -6,11 +6,12 @@ import { RegisterService } from './services/register.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit, AfterViewInit {
+export class AppComponent implements OnInit {
   title = 'log-in';
+
   constructor(private registerService: RegisterService) {}
-  ngOnInit() {
+
+  ngOnInit(): void {
     this.registerService.createToken();
   }
-  ngAfterViewInit() {}
 }

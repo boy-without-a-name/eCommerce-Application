@@ -26,7 +26,7 @@ import { CardComponent } from './components/card-product/card.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { PostModalImgComponent } from './components/post-modal-img/post-modal-img.component';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ProductComponent } from './components/product/product.component';
 
@@ -69,6 +69,4 @@ import { ProductComponent } from './components/product/product.component';
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class AppModule {
-  constructor() {}
-}
+export class AppModule {}
