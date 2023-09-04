@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DataUser } from 'src/app/models/interface/dataUser.interface';
 import { Observable } from 'rxjs';
 import Toastify from 'toastify-js';
-
+import { compareAddressesArrays } from './compareAddressesArrays';
 import { validateName, validateDateOfBirth, validateEmail, validatePassword } from './validators';
 import { UpdateAction } from 'src/app/models/interface/updateAction';
 
@@ -66,7 +66,6 @@ export class ProfileComponent implements OnInit {
         addressEl.type.push('billing', 'shipping');
       }
     });
-    console.log(this.customer.addresses);
   }
 
   switchToChangePassMode(): void {
@@ -89,7 +88,6 @@ export class ProfileComponent implements OnInit {
   handleDeleteAddress(addressToDeleteId: string | undefined): void {
     this.deleteAddress(addressToDeleteId).subscribe({
       next: (response: DataUser) => {
-        console.log(response);
         // Update data
         if (response.addresses) this.customer.addresses = response.addresses;
         if (response.shippingAddressIds) this.customer.shippingAddressIds = response.shippingAddressIds;
@@ -171,7 +169,6 @@ export class ProfileComponent implements OnInit {
     if (allPasswordsValid && passwordInputsNotEmpty)
       this.changePassword().subscribe({
         next: (response) => {
-          console.log(response);
           // update customer version
           if (response.version) this.customer.version = response.version;
           this.changePassMode = false;
@@ -220,68 +217,66 @@ export class ProfileComponent implements OnInit {
       this.customer.lastName?.trim() === localStorage.getItem('lastName')?.trim() &&
       this.customer.dateOfBirth?.trim() === localStorage.getItem('dateOfBirth')?.trim() &&
       this.customer.email?.trim() === localStorage.getItem('email')?.trim() &&
-      JSON.stringify(this.customer.addresses) === localStorage.getItem('addresses');
+      compareAddressesArrays(this.customer.addresses, JSON.parse(localStorage.getItem('addresses') as string));
 
     if (fieldsNotChanged) {
       this.editMode = false;
-    }
+    } else {
+      if (allFieldsValid) {
+        // Make request
+        this.updateCustomer().subscribe({
+          next: (response: DataUser) => {
+            // Update data in store
+            if (response.version) this.customer.version = response.version;
+            localStorage.setItem('email', `${response.email?.trim()}`);
+            localStorage.setItem('version', `${response.version}`);
+            localStorage.setItem('firstName', `${response.firstName?.trim()}`);
+            localStorage.setItem('lastName', `${response.lastName?.trim()}`);
+            localStorage.setItem('dateOfBirth', `${response.dateOfBirth?.trim()}`);
+            localStorage.setItem('addresses', JSON.stringify(response.addresses));
+            localStorage.setItem('billingAddressIds', JSON.stringify(response.billingAddressIds));
+            localStorage.setItem('shippingAddressIds', JSON.stringify(response.shippingAddressIds));
+            // this.customer.addresses = JSON.parse(localStorage.getItem('addresses') as string);
+            // this.customer.billingAddressIds = JSON.parse(localStorage.getItem('billingAddressIds') as string);
+            // this.customer.shippingAddressIds = JSON.parse(localStorage.getItem('shippingAddressIds') as string);
 
-    if (allFieldsValid && !fieldsNotChanged) {
-      // Make request
-      this.updateCustomer().subscribe({
-        next: (response: DataUser) => {
-          console.log(response);
+            this.setAddressTypes();
 
-          // Update data in store
-          if (response.version) this.customer.version = response.version;
-          localStorage.setItem('email', `${response.email?.trim()}`);
-          localStorage.setItem('version', `${response.version}`);
-          localStorage.setItem('firstName', `${response.firstName?.trim()}`);
-          localStorage.setItem('lastName', `${response.lastName?.trim()}`);
-          localStorage.setItem('dateOfBirth', `${response.dateOfBirth?.trim()}`);
-          localStorage.setItem('addresses', JSON.stringify(response.addresses));
-          localStorage.setItem('billingAddressIds', JSON.stringify(response.billingAddressIds));
-          localStorage.setItem('shippingAddressIds', JSON.stringify(response.shippingAddressIds));
-          // this.customer.addresses = JSON.parse(localStorage.getItem('addresses') as string);
-          // this.customer.billingAddressIds = JSON.parse(localStorage.getItem('billingAddressIds') as string);
-          // this.customer.shippingAddressIds = JSON.parse(localStorage.getItem('shippingAddressIds') as string);
+            // Exit edit mode
+            this.editMode = false;
 
-          this.setAddressTypes();
+            // Show success toast message
+            Toastify({
+              text: 'Changes saved!',
+              style: {
+                background: 'lightgreen',
+                padding: '0.2rem 0.5rem',
+                'text-align': 'center',
+                'border-radius': '4px',
+                'font-weight': '600',
+              },
+            }).showToast();
+          },
+          error: (error) => {
+            console.error('Error updating customer:', error);
+            if (error.error.message === 'There is already an existing customer with the provided email.') {
+              this.isInvalid.email = 'Email is already registered';
+            }
 
-          // Exit edit mode
-          this.editMode = false;
-
-          // Show success toast message
-          Toastify({
-            text: 'Changes saved!',
-            style: {
-              background: 'lightgreen',
-              padding: '0.2rem 0.5rem',
-              'text-align': 'center',
-              'border-radius': '4px',
-              'font-weight': '600',
-            },
-          }).showToast();
-        },
-        error: (error) => {
-          console.error('Error updating customer:', error);
-          if (error.error.message === 'There is already an existing customer with the provided email.') {
-            this.isInvalid.email = 'Email is already registered';
-          }
-
-          // Show error toast message
-          Toastify({
-            text: `${error.error.message}`,
-            style: {
-              background: 'lightcoral',
-              padding: '0.2rem 0.5rem',
-              'text-align': 'center',
-              'border-radius': '4px',
-              'font-weight': '600',
-            },
-          }).showToast();
-        },
-      });
+            // Show error toast message
+            Toastify({
+              text: `${error.error.message}`,
+              style: {
+                background: 'lightcoral',
+                padding: '0.2rem 0.5rem',
+                'text-align': 'center',
+                'border-radius': '4px',
+                'font-weight': '600',
+              },
+            }).showToast();
+          },
+        });
+      }
     }
   }
 
