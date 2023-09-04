@@ -1,8 +1,9 @@
 export interface IAddress {
-  id: string;
+  id?: string;
   city: string;
   country: string;
   streetName: string;
-  streetNumber: number;
-  postalCode: number;
+  streetNumber: string;
+  postalCode: string;
+  type?: string[];
 }
