@@ -14,7 +14,23 @@ import { validateName, validateDateOfBirth, validateEmail, validatePassword } fr
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.customer.addresses.forEach((addressEl) => {
+      addressEl.type = [];
+      if (
+        this.customer.shippingAddressIds.includes(addressEl.id) &&
+        !this.customer.billingAddressIds.includes(addressEl.id)
+      ) {
+        addressEl.type.push('shipping');
+      }
+      if (
+        this.customer.billingAddressIds.includes(addressEl.id) &&
+        !this.customer.shippingAddressIds.includes(addressEl.id)
+      ) {
+        addressEl.type.push('billing');
+      }
+    });
+  }
 
   countries = countries;
   editMode = false;
@@ -27,8 +43,9 @@ export class ProfileComponent {
     lastName: localStorage.getItem('lastName'),
     dateOfBirth: localStorage.getItem('dateOfBirth'),
     email: localStorage.getItem('email'),
-    billingAddresses: JSON.parse(localStorage.getItem('billingAddresses') as string) as IAddress[],
-    shippingAddresses: JSON.parse(localStorage.getItem('shippingAddresses') as string) as IAddress[],
+    addresses: JSON.parse(localStorage.getItem('addresses') as string) as IAddress[],
+    billingAddressIds: JSON.parse(localStorage.getItem('billingAddressesIds') as string),
+    shippingAddressIds: JSON.parse(localStorage.getItem('shippingAddressesIds') as string),
     password: {
       current: '',
       new: '',
@@ -63,6 +80,46 @@ export class ProfileComponent {
 
   switchToEditMode(): void {
     this.editMode = true;
+  }
+
+  handleDeleteAddress(addressToDeleteId: string): void {
+    this.deleteAddress(addressToDeleteId).subscribe({
+      next: (response: DataUser) => {
+        console.log(response);
+
+        // Update data in store
+      },
+      error: (err) => {
+        console.error('Error deleting address:', err);
+      },
+    });
+  }
+
+  deleteAddress(addressToDeleteId: string): Observable<DataUser> {
+    const region = 'australia-southeast1';
+    const projectKey = 'arandomteam16';
+    const customerID = this.customer.id;
+    const BEARER_TOKEN = this.customer.token;
+
+    const updateActions = [
+      {
+        action: 'removeAddress',
+        addressId: addressToDeleteId,
+      },
+    ];
+
+    const requestBody = {
+      version: this.customer.version,
+      actions: updateActions,
+    };
+
+    const apiUrl = `https://api.${region}.gcp.commercetools.com/${projectKey}/customers/${customerID}`;
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${BEARER_TOKEN}`,
+    });
+
+    return this.http.post(apiUrl, requestBody, { headers });
   }
 
   savePasswordChanges(): void {
@@ -125,8 +182,10 @@ export class ProfileComponent {
       this.customer.lastName?.trim() === localStorage.getItem('lastName')?.trim() &&
       this.customer.dateOfBirth?.trim() === localStorage.getItem('dateOfBirth')?.trim() &&
       this.customer.email?.trim() === localStorage.getItem('email')?.trim() &&
-      JSON.stringify(this.customer.billingAddresses) === localStorage.getItem('billingAddresses') &&
-      JSON.stringify(this.customer.shippingAddresses) === localStorage.getItem('shippingAddresses');
+      JSON.stringify(this.customer.addresses) === localStorage.getItem('addresses');
+    // &&
+    // JSON.stringify(this.customer.billingAddresses) === localStorage.getItem('billingAddresses') &&
+    // JSON.stringify(this.customer.shippingAddresses) === localStorage.getItem('shippingAddresses');
 
     if (fieldsNotChanged) {
       this.editMode = false;
@@ -154,8 +213,8 @@ export class ProfileComponent {
           );
           localStorage.setItem('shippingAddresses', JSON.stringify(shippingAddresses));
           localStorage.setItem('billingAddresses', JSON.stringify(billingAddresses));
-          this.customer.shippingAddresses = JSON.parse(localStorage.getItem('shippingAddresses') as string);
-          this.customer.billingAddresses = JSON.parse(localStorage.getItem('billingAddresses') as string);
+          // this.customer.shippingAddresses = JSON.parse(localStorage.getItem('shippingAddresses') as string);
+          // this.customer.billingAddresses = JSON.parse(localStorage.getItem('billingAddresses') as string);
 
           // Exit edit mode
           this.editMode = false;
@@ -219,25 +278,25 @@ export class ProfileComponent {
       },
       {
         action: 'changeAddress',
-        addressId: this.customer.billingAddresses['0'].id,
-        address: {
-          postalCode: this.customer.billingAddresses['0'].postalCode,
-          country: this.customer.billingAddresses['0'].country,
-          streetName: this.customer.billingAddresses['0'].streetName,
-          streetNumber: this.customer.billingAddresses['0'].streetNumber,
-          city: this.customer.billingAddresses['0'].city,
-        },
+        // addressId: this.customer.billingAddresses['0'].id,
+        // address: {
+        //   postalCode: this.customer.billingAddresses['0'].postalCode,
+        //   country: this.customer.billingAddresses['0'].country,
+        //   streetName: this.customer.billingAddresses['0'].streetName,
+        //   streetNumber: this.customer.billingAddresses['0'].streetNumber,
+        //   city: this.customer.billingAddresses['0'].city,
+        // },
       },
       {
         action: 'changeAddress',
-        addressId: this.customer.shippingAddresses['0'].id,
-        address: {
-          postalCode: this.customer.shippingAddresses['0'].postalCode,
-          country: this.customer.shippingAddresses['0'].country,
-          streetName: this.customer.shippingAddresses['0'].streetName,
-          streetNumber: this.customer.shippingAddresses['0'].streetNumber,
-          city: this.customer.shippingAddresses['0'].city,
-        },
+        // addressId: this.customer.shippingAddresses['0'].id,
+        // address: {
+        //   postalCode: this.customer.shippingAddresses['0'].postalCode,
+        //   country: this.customer.shippingAddresses['0'].country,
+        //   streetName: this.customer.shippingAddresses['0'].streetName,
+        //   streetNumber: this.customer.shippingAddresses['0'].streetNumber,
+        //   city: this.customer.shippingAddresses['0'].city,
+        // },
       },
     ];
 

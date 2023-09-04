@@ -5,4 +5,5 @@ export interface IAddress {
   streetName: string;
   streetNumber: number;
   postalCode: number;
+  type?: string;
 }

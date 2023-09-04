@@ -38,24 +38,18 @@
       </div>
     </div>
 
-    <!-- shipping address -->
-    <div *ngFor="let shippingAddress of customer.shippingAddresses; let i = index" class="user__data-item">
+    <!-- Addresses -->
+    <div *ngFor="let address of customer.addresses; let i = index" class="user__data-item">
       <div>
-        <h3 class="user__data-heading shipping">Address</h3>
+        <h3
+          class="user__data-heading"
+          [ngClass]="{ shipping: address.type?.includes('shipping'), billing: address.type?.includes('billing') }"
+        >
+          Address
+        </h3>
         <span class="user__data-content">
-          {{ shippingAddress.postalCode }}, {{ shippingAddress.country }}, {{ shippingAddress.city }},
-          {{ shippingAddress.streetName }}, {{ shippingAddress.streetNumber }}
-        </span>
-      </div>
-    </div>
-
-    <!-- billing address -->
-    <div *ngFor="let billingAddress of customer.billingAddresses; let i = index" class="user__data-item">
-      <div>
-        <h3 class="user__data-heading billing">Address</h3>
-        <span class="user__data-content"
-          >{{ billingAddress.postalCode }}, {{ billingAddress.country }}, {{ billingAddress.city }},
-          {{ billingAddress.streetName }}, {{ billingAddress.streetNumber }}
+          {{ address.postalCode }}, {{ address.country }}, {{ address.city }}, {{ address.streetName }},
+          {{ address.streetNumber }}
         </span>
       </div>
     </div>
@@ -115,56 +109,35 @@
       <span class="invalid-msg" *ngIf="isInvalid.dateOfBirth"> {{ isInvalid.dateOfBirth }}</span>
     </div>
 
-    <!-- shipping address -->
+    <!-- Addresses -->
     <div
-      *ngFor="let shippingAddress of customer.shippingAddresses"
+      *ngFor="let address of customer.addresses"
       class="user__data-item"
       [ngClass]="{ 'user__data-item_edit-mode': editMode }"
     >
-      <h3 class="user__data-heading shipping">Address</h3>
+      <h3
+        class="user__data-heading"
+        [ngClass]="{ shipping: address.type?.includes('shipping'), billing: address.type?.includes('billing') }"
+      >
+        Address
+      </h3>
 
       <h4 class="user__data-heading user__data-heading_edit-mode">Postal Code</h4>
-      <input class="user__data-content" [(ngModel)]="shippingAddress.postalCode" type="text" />
+      <input class="user__data-content" [(ngModel)]="address.postalCode" type="text" />
 
       <h4 class="user__data-heading user__data-heading_edit-mode">Country</h4>
-      <select class="user__data-content" [(ngModel)]="shippingAddress.country">
+      <select class="user__data-content" [(ngModel)]="address.country">
         <option *ngFor="let country of countries" [value]="country.code">{{ country.name }}</option>
       </select>
 
       <h4 class="user__data-heading user__data-heading_edit-mode">City</h4>
-      <input class="user__data-content" [(ngModel)]="shippingAddress.city" type="text" />
+      <input class="user__data-content" [(ngModel)]="address.city" type="text" />
 
       <h4 class="user__data-heading user__data-heading_edit-mode">Street</h4>
-      <input class="user__data-content" [(ngModel)]="shippingAddress.streetName" type="text" />
+      <input class="user__data-content" [(ngModel)]="address.streetName" type="text" />
 
       <h4 class="user__data-heading user__data-heading_edit-mode">Building</h4>
-      <input class="user__data-content" [(ngModel)]="shippingAddress.streetNumber" type="text" />
-    </div>
-
-    <!-- billing addresses -->
-    <div
-      *ngFor="let billingAddress of customer.billingAddresses"
-      class="user__data-item"
-      [ngClass]="{ 'user__data-item_edit-mode': editMode }"
-    >
-      <h3 class="user__data-heading billing">Address</h3>
-
-      <h4 class="user__data-heading user__data-heading_edit-mode">Postal Code</h4>
-      <input class="user__data-content" [(ngModel)]="billingAddress.postalCode" type="text" />
-
-      <h4 class="user__data-heading user__data-heading_edit-mode">Country</h4>
-      <select class="user__data-content" [(ngModel)]="billingAddress.country">
-        <option *ngFor="let country of countries" [value]="country.code">{{ country.name }}</option>
-      </select>
-
-      <h4 class="user__data-heading user__data-heading_edit-mode">City</h4>
-      <input class="user__data-content" [(ngModel)]="billingAddress.city" type="text" />
-
-      <h4 class="user__data-heading user__data-heading_edit-mode">Street</h4>
-      <input class="user__data-content" [(ngModel)]="billingAddress.streetName" type="text" />
-
-      <h4 class="user__data-heading user__data-heading_edit-mode">Building</h4>
-      <input class="user__data-content" [(ngModel)]="billingAddress.streetNumber" type="text" />
+      <input class="user__data-content" [(ngModel)]="address.streetNumber" type="text" />
     </div>
   </div>
 
