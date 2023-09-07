@@ -1,8 +1,14 @@
 <mat-dialog-content>
   <mat-spinner *ngIf="!loading"></mat-spinner>
-  <swiper-container *ngIf="loading" pagination="true" pagination-clickable="true" navigation="true" slides-per-view="1">
+  <swiper-container *ngIf="loading"
+                    pagination="true"
+                    pagination-clickable="true"
+                    navigation="true"
+                    slides-per-view="1"
+                    zoom = 'true'
+  >
     <swiper-slide *ngFor="let img of this.transfer.img; let i = index">
-      <img src="{{ img.url }}" alt="Phone" />
+      <img src="{{ img.url }}" alt="Phone" style=''/>
     </swiper-slide>
   </swiper-container>
 </mat-dialog-content>

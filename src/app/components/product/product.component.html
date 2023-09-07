@@ -1,4 +1,17 @@
-<app-header />
+<style>
+  .navigation:hover {
+    cursor: pointer;
+    color:  #ffa751;
+  }
+</style>
+<app-header></app-header>
+<div class="main">
+  <ul style="display: flex; list-style-type: none; font-weight: 700;">
+    <li class="navigation" style="margin-left: 10px;" routerLink="/main">Home</li>
+    <li class="navigation" routerLink="/catalog">/Catalog</li>
+    <li *ngIf='loading'>/{{productView.name['en-US']}}</li>
+  </ul>
+</div>
 <div class>
   <div class="product__container">
     <mat-spinner *ngIf="!loading"></mat-spinner>

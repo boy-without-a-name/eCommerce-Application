@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { GetProductService } from '../../services/getProduct/get-product.service';
 import { Current, Image } from '../../models/interface/product.interface';
 import { ActivatedRoute } from '@angular/router';
@@ -14,7 +14,7 @@ register();
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss'],
 })
-export class ProductComponent implements OnInit, AfterViewInit {
+export class ProductComponent implements OnInit {
   productView!: Current;
   id = '';
   loading = false;
@@ -60,8 +60,4 @@ export class ProductComponent implements OnInit, AfterViewInit {
       console.log(resp);
     });
   }
-
-  activateSlider(): void {}
-
-  ngAfterViewInit(): void {}
 }
