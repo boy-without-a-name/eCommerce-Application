@@ -115,6 +115,6 @@ export class CatalogComponent implements OnInit {
     this.minPrice = '';
     this.maxPrice = '';
     this.filterCategory = [];
-    this.clickSave()
+    this.clickSave();
   }
 }
