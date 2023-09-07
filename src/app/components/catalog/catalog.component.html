@@ -1,5 +1,15 @@
+<style>
+  .navigation:hover {
+    cursor: pointer;
+    color:  #ffa751;
+  }
+</style>
 <app-header></app-header>
 <div class="main">
+  <ul style="display: flex; list-style-type: none; font-weight: 700; position: absolute; left: 10px; top: 5px">
+    <li class="navigation" routerLink="/main">Home</li>
+    <li class="navigation"  routerLink="/catalog">/Catalog</li>
+  </ul>
   <h2 style="font-size: 2rem; margin-top: 20px">Catalog</h2>
   <div class="search">
     <input class="search__input" type="text" #text (input)="searchText = text.value" placeholder="search products" />
