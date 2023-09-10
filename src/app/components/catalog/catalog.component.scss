@@ -40,6 +40,10 @@
   font-size: 1rem;
   font-weight: 700;
 }
+.navigation:hover {
+  cursor: pointer;
+  color: #ffa751;
+}
 
 :host {
   width: 100%;

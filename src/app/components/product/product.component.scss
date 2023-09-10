@@ -52,6 +52,11 @@ swiper-slide img {
   z-index: 2;
 }
 
+.navigation:hover {
+  cursor: pointer;
+  color: #ffa751;
+}
+
 @media screen and (max-width: 780px) {
   .product__container {
     width: 100%;
