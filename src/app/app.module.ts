@@ -31,6 +31,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ProductComponent } from './components/product/product.component';
 import { CardFilterComponent } from './components/card-product-filter/card.component';
 import { register } from 'swiper/element/bundle';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { register } from 'swiper/element/bundle';
     ProductComponent,
     CardFilterComponent,
     PostModalImgComponent,
+    AboutUsComponent,
   ],
   imports: [
     BrowserModule,
