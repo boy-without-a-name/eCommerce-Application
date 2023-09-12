@@ -21,4 +21,13 @@ export class CartService {
       { headers },
     );
   }
+
+
+  getCart(id:string | null, token: string | null): Observable<CartInterface> | null {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<CartInterface>(
+      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/${id}`,
+      { headers },
+    );
+  }
 }
