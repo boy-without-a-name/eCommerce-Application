@@ -11,13 +11,14 @@ export class CartService {
 
   createCart(token: string | null): Observable<CartInterface> | null {
     const data = new URLSearchParams();
-    data.append('currency' , 'EUR');
+    data.append('currency', 'EUR');
 
-    const headers = new HttpHeaders()
-       .set('Authorization', `Bearer ${token}`)
-       .set('Content-Type', 'application/json');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Content-Type', 'application/json');
 
-    return this.http.post<CartInterface>('https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/', data.toString(), { headers });
+    return this.http.post<CartInterface>(
+      'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/',
+      data.toString(),
+      { headers },
+    );
   }
-
 }
