@@ -30,23 +30,30 @@ export class CartService {
     );
   }
 
-  addLineItem(token: string | null, productId: string, version: number, idCart:string): Observable<CartInterface> | null {
+  addLineItem(
+    token: string | null,
+    productId: string,
+    version: number,
+    idCart: string,
+  ): Observable<CartInterface> | null {
     const data = new URLSearchParams();
     data.append('version', `${version}`);
-    data.append('actions',`[{
+    data.append(
+      'actions',
+      `[{
       "action": "addLineItem",
       "productId": ${productId},
       "variantId": 1,
       "quantity": 1 }
-    }]`)
+    }]`,
+    );
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Content-Type', 'application/json');
 
     return this.http.post<CartInterface>(
-      'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/',
+      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/${idCart}`,
       data.toString(),
       { headers },
     );
   }
-
 }
