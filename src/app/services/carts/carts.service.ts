@@ -36,27 +36,18 @@ export class CartService {
     version: number,
     idCart: string,
   ): Observable<CartInterface> | null {
-    // const obj = new URLSearchParams()
-    //   obj.append('action', "addLineItem")
-    //   obj.append('productId', `${productId}`)
-    //   obj.append('variantId', '1')
-    //   obj.append('quantity', '1')
-
-    // const data = new URLSearchParams();
-    // data.append('version', `${version}`);
-    // data.append('actions', `obj` )
 
     const body = {
-      version: `${version}`,
+      version: version,
       actions: [
         {
           action: 'addLineItem',
           productId: `${productId}`,
           variantId: 1,
-          quantity: 1,
-        },
-      ],
-    };
+          quantity: 1
+        }]
+    }
+
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Content-Type', 'application/json');
 
     return this.http.post<CartInterface>(
@@ -72,22 +63,21 @@ export class CartService {
     version: number,
     idCart: string,
   ): Observable<CartInterface> | null {
-    const data = new URLSearchParams();
-    data.append('version', `${version}`);
-    data.append(
-      'actions',
-      `[{
-      'action', 'removeLineItem',
-      'lineItemId', ${lineItemId},
-      'quantity, 1 }
-    }]`,
-    );
+    const body = {
+      version: version,
+      actions: [
+        {
+          action: 'removeLineItem',
+          lineItemId: `${lineItemId}`,
+          quantity: 1
+        }]
+    }
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Content-Type', 'application/json');
 
     return this.http.post<CartInterface>(
       `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/${idCart}`,
-      data.toString(),
+      JSON.stringify(body),
       { headers },
     );
   }

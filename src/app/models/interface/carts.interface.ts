@@ -1,3 +1,5 @@
+import { ProductCart } from "./cartProduct.interface";
+
 export interface CartInterface {
   type: string;
   id: string;
@@ -22,7 +24,7 @@ export interface CartInterface {
       id: string;
     };
   };
-  lineItems: [];
+  lineItems: ProductCart[];
   cartState: string;
   totalPrice: {
     type: string;

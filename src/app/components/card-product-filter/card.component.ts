@@ -20,6 +20,8 @@ export class CardFilterComponent {
     this.cart.getCart('97fde447-d06d-4168-afd7-72f50fd196cf', localStorage.getItem('token'))?.subscribe({
       next: (response) => {
         console.log(response);
+        console.log(productId)
+        console.log(response.version)
         this.cart
           .addLineItem(
             localStorage.getItem('token'),
