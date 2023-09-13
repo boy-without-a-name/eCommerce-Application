@@ -1,7 +1,7 @@
-export interface ImageCart  {
+export interface ImageCart {
   url: string;
   dimensions: {
-      w: number;
-      h: number;
-  }
+    w: number;
+    h: number;
+  };
 }
