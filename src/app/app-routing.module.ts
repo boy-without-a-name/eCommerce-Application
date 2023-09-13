@@ -9,6 +9,7 @@ import { authenticatedGuard } from './shared/functions/auth.guard';
 import { unauthenticatedGuard } from './shared/functions/unauth.guard';
 import { CatalogComponent } from './components/catalog/catalog.component';
 import { ProductComponent } from './components/product/product.component';
+import { BasketComponent } from './components/basket/basket.component';
 
 const routes: Routes = [
   { path: '', component: MainViewComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'registration', component: RegisterComponent, canActivate: [authenticatedGuard()] },
   { path: 'profile', component: ProfileComponent, canActivate: [unauthenticatedGuard()] },
   { path: 'product/:id', component: ProductComponent },
+  { path: 'basket', component: BasketComponent },
   { path: '**', component: NotFoundViewComponent },
 ];
 
