@@ -1,102 +1,102 @@
 <app-header></app-header>
-<div class='main'>
-  <ul style='display: flex; list-style-type: none; font-weight: 700; position: absolute; left: 10px; top: 5px'>
-    <li class='navigation' routerLink='/main'>Home</li>
-    <li class='navigation' routerLink='/catalog'>/Catalog</li>
+<div class="main">
+  <ul style="display: flex; list-style-type: none; font-weight: 700; position: absolute; left: 10px; top: 5px">
+    <li class="navigation" routerLink="/main">Home</li>
+    <li class="navigation" routerLink="/catalog">/Catalog</li>
   </ul>
-  <h2 style='font-size: 2rem; margin-top: 20px'>Catalog</h2>
-  <div class='search'>
-    <input class='search__input' type='text' #text (input)='searchText = text.value' placeholder='search products' />
-    <button (mousedown)='clickSearch = true' (mouseup)='clickSave()' class='search__btn'>
-      <svg class='search__icon' xmlns='http://www.w3.org/2000/svg' width='24' height='24'>
+  <h2 style="font-size: 2rem; margin-top: 20px">Catalog</h2>
+  <div class="search">
+    <input class="search__input" type="text" #text (input)="searchText = text.value" placeholder="search products" />
+    <button (mousedown)="clickSearch = true" (mouseup)="clickSave()" class="search__btn">
+      <svg class="search__icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24">
         <path
-          fill='#000'
-          d='M11 5a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm-8 6a8 8 0 1 1 14.281 4.955l4.419 4.33a1 1 0 1 1-1.4 1.43l-4.444-4.357A8 8 0 0 1 3 11Z'
+          fill="#000"
+          d="M11 5a6 6 0 1 0 0 12 6 6 0 0 0 0-12Zm-8 6a8 8 0 1 1 14.281 4.955l4.419 4.33a1 1 0 1 1-1.4 1.43l-4.444-4.357A8 8 0 0 1 3 11Z"
         ></path>
       </svg>
     </button>
   </div>
-  <div class='wrapper-main'>
-    <div class='wrapper-filter-sort'>
-      <form class='sort'>
-        <label for='sort' style='font-weight: 1000'>Sorting</label>
+  <div class="wrapper-main">
+    <div class="wrapper-filter-sort">
+      <form class="sort">
+        <label for="sort" style="font-weight: 1000">Sorting</label>
         <select
-          style='font-weight: 700'
+          style="font-weight: 700"
           #select
-          (change)='sort = select.value'
-          (change)='clickSave()'
-          id='sort'
-          name='sort'
+          (change)="sort = select.value"
+          (change)="clickSave()"
+          id="sort"
+          name="sort"
         >
           <option value="''">Default</option>
-          <option value='sort=price asc'>Price ascending</option>
-          <option value='sort=price desc'>Апdecrement price</option>
-          <option value='sort=name.en-US asc'>by name from A to Z</option>
-          <option value='sort=name.en-US desc'>by name from Z to A</option>
+          <option value="sort=price asc">Price ascending</option>
+          <option value="sort=price desc">Апdecrement price</option>
+          <option value="sort=name.en-US asc">by name from A to Z</option>
+          <option value="sort=name.en-US desc">by name from Z to A</option>
         </select>
       </form>
-      <form class='filter-wrapper'>
-        <div class='category'>
+      <form class="filter-wrapper">
+        <div class="category">
           <div>
-            <label for='phone'>
-              <input type='checkbox' name='phone' id='phone' #checkPhone (click)='clickPhone(checkPhone.checked)' />
+            <label for="phone">
+              <input type="checkbox" name="phone" id="phone" #checkPhone (click)="clickPhone(checkPhone.checked)" />
               Phone
             </label>
           </div>
           <div>
-            <label for='tablet'>
+            <label for="tablet">
               <input
-                type='checkbox'
-                name='tablet'
-                id='tablet'
+                type="checkbox"
+                name="tablet"
+                id="tablet"
                 #checkTablet
-                (click)='clickTablet(checkTablet.checked)'
+                (click)="clickTablet(checkTablet.checked)"
               />
               Tablet
             </label>
           </div>
           <div>
-            <label for='laptop'>
+            <label for="laptop">
               <input
-                type='checkbox'
-                name='laptop'
-                id='laptop'
+                type="checkbox"
+                name="laptop"
+                id="laptop"
                 #checkLaptop
-                (click)='clickLaptop(checkLaptop.checked)'
+                (click)="clickLaptop(checkLaptop.checked)"
               />
               Laptop
             </label>
           </div>
           <div>
-            <label for='watch'>
-              <input type='checkbox' name='watch' id='watch' #checkWatch (click)='clickWatch(checkWatch.checked)' />
+            <label for="watch">
+              <input type="checkbox" name="watch" id="watch" #checkWatch (click)="clickWatch(checkWatch.checked)" />
               Watch
             </label>
           </div>
         </div>
         <div>
-          <p style='font-size: 1rem; font-weight: 700; margin-top: 10px'>Price:</p>
+          <p style="font-size: 1rem; font-weight: 700; margin-top: 10px">Price:</p>
           <div>
             <div>
-              <label for='minPrice'>
+              <label for="minPrice">
                 <p>Min. Price</p>
-                <input type='number' name='minPrice' id='minPrice' #valueMin (input)='getMinPrice(valueMin.value)' />
+                <input type="number" name="minPrice" id="minPrice" #valueMin (input)="getMinPrice(valueMin.value)" />
               </label>
             </div>
             <div>
-              <label for='maxPrice'>
+              <label for="maxPrice">
                 <p>Max. Price</p>
-                <input type='number' name='maxPrice' id='maxPrice' #valueMax (input)='getMaxPrice(valueMax.value)' />
+                <input type="number" name="maxPrice" id="maxPrice" #valueMax (input)="getMaxPrice(valueMax.value)" />
               </label>
             </div>
             <div></div>
           </div>
         </div>
-        <button class='btn-form' (click)='clickSave()'>Save</button>
+        <button class="btn-form" (click)="clickSave()">Save</button>
         <button
-          class='btn-form'
-          style='margin-left: 15px'
-          type='reset'
+          class="btn-form"
+          style="margin-left: 15px"
+          type="reset"
           (mousedown)="
             valueMax.value = '';
             valueMin.value = '';
@@ -112,23 +112,23 @@
         </button>
       </form>
     </div>
-    <div class='wrapper-card'>
-      <div *ngIf='!filterEnabled'>
-        <app-card *ngFor='let card of result' [product]='card'></app-card>
+    <div class="wrapper-card">
+      <div *ngIf="!filterEnabled">
+        <app-card *ngFor="let card of result" [product]="card"></app-card>
       </div>
     </div>
-    <div *ngIf='filterEnabled'>
-      <app-card-filter *ngFor='let card of productfilter' [productfilter]='card'></app-card-filter>
+    <div *ngIf="filterEnabled">
+      <app-card-filter *ngFor="let card of productfilter" [productfilter]="card"></app-card-filter>
     </div>
   </div>
   <mat-paginator
-    [length]='pageLength'
-    [pageSize]='pageSized'
-    [hidePageSize]='true'
-    [pageIndex]='pageNo'
-    (page)='pageChanged($event)'
-    *ngIf='!filterEnabled'
-    aria-label='Select page'
+    [length]="pageLength"
+    [pageSize]="pageSized"
+    [hidePageSize]="true"
+    [pageIndex]="pageNo"
+    (page)="pageChanged($event)"
+    *ngIf="!filterEnabled"
+    aria-label="Select page"
   >
   </mat-paginator>
 </div>
