@@ -23,17 +23,27 @@ export class CatalogComponent implements OnInit {
 
   pageSized: number;
   pageNo: number;
+  pageOffset = 0;
   pageLength: number;
 
   constructor(private catalog: CatalogService) {}
 
   ngOnInit(): void {
+    this.getLengthPage();
     this.pageSized = 2;
     this.pageNo = 0;
-    this.catalog.getProgucts(localStorage.getItem('authTokenMain'))?.subscribe((res) => {
-      this.result = res.results;
-      console.log(this.result);
-    });
+    this.pageOffset = this.pageSized * this.pageOffset;
+
+    console.log(this.pageSized);
+    console.log(this.pageNo);
+    console.log(this.pageSized * this.pageNo);
+    console.log(this.pageOffset);
+    this.catalog
+      .getProgucts(localStorage.getItem('authTokenMain'), this.pageSized, this.pageOffset)
+      ?.subscribe((res) => {
+        this.result = res.results;
+        console.log(this.result);
+      });
   }
 
   clickPhone(value: boolean): void {
@@ -125,13 +135,30 @@ export class CatalogComponent implements OnInit {
     this.minPrice = '';
     this.maxPrice = '';
     this.filterCategory = [];
-    this.clickSave();
+    this.filterEnabled = false;
+  }
+
+  getLengthPage(): void {
+    this.catalog.getProgucts(localStorage.getItem('authTokenMain'))?.subscribe((res) => {
+      this.pageLength = res.results.length;
+    });
+  }
+
+  getNewProducts(): void {
+    this.catalog
+      .getProgucts(localStorage.getItem('authTokenMain'), this.pageSized, this.pageOffset)
+      ?.subscribe((res) => {
+        this.result = res.results;
+        console.log(this.result);
+      });
   }
 
   pageChanged(event: PageEvent): void {
     if (event.pageIndex != this.pageNo) {
       console.log(event.pageIndex);
       this.pageNo = event.pageIndex;
+      this.pageOffset = this.pageNo * this.pageSized;
+      this.getNewProducts();
     } else {
       console.log('else', event.pageIndex);
     }

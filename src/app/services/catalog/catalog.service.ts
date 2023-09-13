@@ -34,10 +34,10 @@ export class CatalogService {
     });
   }
 
-  getProgucts(authToken: string | null): Observable<CatalogInterface> | null {
+  getProgucts(authToken: string | null, pageSize = 100, pageOffset = 0): Observable<CatalogInterface> | null {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
     return this.http.get<CatalogInterface>(
-      'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/products/?limit=2&offset=0',
+      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/products/?limit=${pageSize}&offset=${pageOffset}`,
       { headers },
     );
   }
