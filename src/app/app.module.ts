@@ -31,6 +31,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { ProductComponent } from './components/product/product.component';
 import { CardFilterComponent } from './components/card-product-filter/card.component';
 import { register } from 'swiper/element/bundle';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { register } from 'swiper/element/bundle';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatButtonModule,
+    MatPaginatorModule,
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],

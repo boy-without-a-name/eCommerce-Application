@@ -3,6 +3,8 @@ import { CatalogService } from 'src/app/services/catalog/catalog.service';
 import { ResultInterface } from 'src/app/models/interface/result.interfce';
 import { CardFilterInterface } from 'src/app/models/interface/results.filter.intreface';
 import { ProducrTypeId } from 'src/app/models/enums/productTypeId.enum';
+import { PageEvent } from '@angular/material/paginator';
+
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
@@ -18,11 +20,19 @@ export class CatalogComponent implements OnInit {
   minPrice = '';
   maxPrice = '';
   sort = '';
+
+  pageSized: number;
+  pageNo: number;
+  pageLength: number;
+
   constructor(private catalog: CatalogService) {}
 
   ngOnInit(): void {
+    this.pageSized = 2;
+    this.pageNo = 0;
     this.catalog.getProgucts(localStorage.getItem('authTokenMain'))?.subscribe((res) => {
       this.result = res.results;
+      console.log(this.result);
     });
   }
 
@@ -116,5 +126,14 @@ export class CatalogComponent implements OnInit {
     this.maxPrice = '';
     this.filterCategory = [];
     this.clickSave();
+  }
+
+  pageChanged(event: PageEvent): void {
+    if (event.pageIndex != this.pageNo) {
+      console.log(event.pageIndex);
+      this.pageNo = event.pageIndex;
+    } else {
+      console.log('else', event.pageIndex);
+    }
   }
 }

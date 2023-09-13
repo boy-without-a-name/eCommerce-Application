@@ -4,8 +4,9 @@ import { Observable } from 'rxjs';
 
 import { CatalogInterface } from 'src/app/models/interface/catalog.interface';
 import { AccessTokenResponse } from 'src/app/models/interface/AnswerTokenResponseInterface';
-import { scope, clientId, clientSecret } from 'src/app/models/constants/constants';
+import { clientId, clientSecret, scope } from 'src/app/models/constants/constants';
 import { AnswerFilterInterface } from 'src/app/models/interface/asnwerfilter.interface';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -36,10 +37,11 @@ export class CatalogService {
   getProgucts(authToken: string | null): Observable<CatalogInterface> | null {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
     return this.http.get<CatalogInterface>(
-      'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/products',
+      'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/products/?limit=2&offset=0',
       { headers },
     );
   }
+
   test(authToken: string | null, value: string): Observable<AnswerFilterInterface> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
     return this.http.get<AnswerFilterInterface>(
