@@ -36,7 +36,6 @@ export class CartService {
     version: number,
     idCart: string,
   ): Observable<CartInterface> | null {
-
     const body = {
       version: version,
       actions: [
@@ -44,9 +43,10 @@ export class CartService {
           action: 'addLineItem',
           productId: `${productId}`,
           variantId: 1,
-          quantity: 1
-        }]
-    }
+          quantity: 1,
+        },
+      ],
+    };
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Content-Type', 'application/json');
 
@@ -69,9 +69,10 @@ export class CartService {
         {
           action: 'removeLineItem',
           lineItemId: `${lineItemId}`,
-          quantity: 1
-        }]
-    }
+          quantity: 1,
+        },
+      ],
+    };
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Content-Type', 'application/json');
 
