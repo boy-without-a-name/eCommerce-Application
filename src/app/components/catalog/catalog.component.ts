@@ -151,9 +151,7 @@ export class CatalogComponent implements OnInit {
 
   pageChanged(event: PageEvent): void {
     if (event.pageIndex != this.pageNo) {
-      console.log(event.pageIndex);
       this.pageNo = event.pageIndex;
-      this.catalog.setPageNo(this.pageNo);
       this.pageOffset = this.pageNo * this.pageSized;
       this.getNewProducts();
     } else {
