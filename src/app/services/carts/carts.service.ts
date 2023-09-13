@@ -36,7 +36,6 @@ export class CartService {
     version: number,
     idCart: string,
   ): Observable<CartInterface> | null {
-
     // const obj = new URLSearchParams()
     //   obj.append('action', "addLineItem")
     //   obj.append('productId', `${productId}`)
@@ -47,15 +46,17 @@ export class CartService {
     // data.append('version', `${version}`);
     // data.append('actions', `obj` )
 
-    const body ={
-      "version" : `${version}`,
-      "actions" : [ {
-      "action": "addLineItem",
-      "productId": `${productId}`,
-      "variantId": 1,
-      "quantity": 1 }
-     ]
-    }
+    const body = {
+      version: `${version}`,
+      actions: [
+        {
+          action: 'addLineItem',
+          productId: `${productId}`,
+          variantId: 1,
+          quantity: 1,
+        },
+      ],
+    };
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Content-Type', 'application/json');
 
     return this.http.post<CartInterface>(

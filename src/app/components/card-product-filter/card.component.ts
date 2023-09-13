@@ -9,19 +9,26 @@ import { CartService } from 'src/app/services/carts/carts.service';
 })
 export class CardFilterComponent {
   buttonPosition = false;
-  constructor(public getProductService: GetProductService, private cart: CartService) {}
+  constructor(
+    public getProductService: GetProductService,
+    private cart: CartService,
+  ) {}
   @Input() productfilter: CardFilterInterface;
 
-  clickBtn(productId:string): void {
+  clickBtn(productId: string): void {
     this.buttonPosition = true;
     this.cart.getCart('97fde447-d06d-4168-afd7-72f50fd196cf', localStorage.getItem('token'))?.subscribe({
-      next: (response)=> {
-        console.log(response)
-        this.cart.addLineItem(localStorage.getItem('token'),
-        productId,
-        response.version,
-        '97fde447-d06d-4168-afd7-72f50fd196cf')?.subscribe((response)=>console.log(response))
-      }
-    })
+      next: (response) => {
+        console.log(response);
+        this.cart
+          .addLineItem(
+            localStorage.getItem('token'),
+            productId,
+            response.version,
+            '97fde447-d06d-4168-afd7-72f50fd196cf',
+          )
+          ?.subscribe((response) => console.log(response));
+      },
+    });
   }
 }
