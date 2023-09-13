@@ -125,6 +125,7 @@
     [length]='pageLength'
     [pageSize]='pageSized'
     [hidePageSize]='true'
+    [pageIndex]='pageNo'
     (page)='pageChanged($event)'
     *ngIf='!filterEnabled'
     aria-label='Select page'

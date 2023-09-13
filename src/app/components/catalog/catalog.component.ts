@@ -25,19 +25,16 @@ export class CatalogComponent implements OnInit {
   pageNo: number;
   pageOffset = 0;
   pageLength: number;
+  loading = true;
 
   constructor(private catalog: CatalogService) {}
 
   ngOnInit(): void {
     this.getLengthPage();
     this.pageSized = 2;
-    this.pageNo = 0;
-    this.pageOffset = this.pageSized * this.pageOffset;
+    this.pageNo = this.catalog.getPageNo();
+    this.pageOffset = this.pageSized * this.pageNo;
 
-    console.log(this.pageSized);
-    console.log(this.pageNo);
-    console.log(this.pageSized * this.pageNo);
-    console.log(this.pageOffset);
     this.catalog
       .getProgucts(localStorage.getItem('authTokenMain'), this.pageSized, this.pageOffset)
       ?.subscribe((res) => {
@@ -149,7 +146,6 @@ export class CatalogComponent implements OnInit {
       .getProgucts(localStorage.getItem('authTokenMain'), this.pageSized, this.pageOffset)
       ?.subscribe((res) => {
         this.result = res.results;
-        console.log(this.result);
       });
   }
 
@@ -157,6 +153,7 @@ export class CatalogComponent implements OnInit {
     if (event.pageIndex != this.pageNo) {
       console.log(event.pageIndex);
       this.pageNo = event.pageIndex;
+      this.catalog.setPageNo(this.pageNo);
       this.pageOffset = this.pageNo * this.pageSized;
       this.getNewProducts();
     } else {

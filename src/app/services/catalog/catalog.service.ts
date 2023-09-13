@@ -17,8 +17,17 @@ export class CatalogService {
     scope: '',
     token_type: '',
   };
+  pageNo = 0;
 
   constructor(private http: HttpClient) {}
+
+  setPageNo(no: number): void {
+    this.pageNo = no;
+  }
+
+  getPageNo(): number {
+    return this.pageNo;
+  }
 
   getToken(): Observable<AccessTokenResponse> | null {
     const data = new URLSearchParams();
