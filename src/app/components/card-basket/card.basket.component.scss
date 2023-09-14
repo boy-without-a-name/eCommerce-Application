@@ -1,0 +1,28 @@
+.wrapper-card-basket {
+  display: flex;
+  padding: 0.3rem 0.5rem;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 50px;
+}
+
+.wrapper-card-basket__img {
+  width: 100%;
+  max-width: 120px;
+  height: auto;
+}
+
+.wrapper-card-basket__price_name {
+  margin-left: 5%;
+}
+
+.wrapper-card-basket__discount {
+  color: rgb(180, 33, 33);
+  font-weight: 600;
+}
+
+.wrapper-card-basket__total-price {
+  font-weight: 800;
+}

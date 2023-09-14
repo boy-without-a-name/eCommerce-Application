@@ -1,14 +1,18 @@
-<div>
+<div class="wrapper-card-basket">
   <div>
-    <img [src]="product.variant.images[0].url" [alt]="product.name['en-US']" />
+    <img class="wrapper-card-basket__img" [src]="product.variant.images[0].url" [alt]="product.name['en-US']" />
   </div>
-  <div>
+  <div class="wrapper-card-basket__price_name">
     <h2>{{ product.name['en-US'] }}</h2>
-    <p>Price: {{ product.price.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2' }}</p>
-    <p *ngIf="product.price.discounted">
+    <p [style]="product.price.discounted ? 'text-decoration:line-through' : ''">
+      Price: {{ product.price.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2' }}
+    </p>
+    <p class="wrapper-card-basket__discount" *ngIf="product.price.discounted">
       Price: {{ product.price.discounted.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2' }}
     </p>
-    <p>Sum Price: {{ product.totalPrice.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2' }}</p>
+    <p class="wrapper-card-basket__total-price">
+      Total price {{ product.totalPrice.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2' }}
+    </p>
   </div>
 
   <div></div>
