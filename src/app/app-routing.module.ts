@@ -12,7 +12,6 @@ import { ProductComponent } from './components/product/product.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { BasketComponent } from './components/basket/basket.component';
 
-
 const routes: Routes = [
   { path: '', component: MainViewComponent },
   { path: 'about', component: AboutUsComponent },
