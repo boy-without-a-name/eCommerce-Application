@@ -14,13 +14,13 @@ export class BasketComponent implements OnInit {
   showOrderingBlock = false;
   products: ProductCart[] = [];
   totalPrice: number;
+  disabledBtnRemoveCart = false;
 
   constructor(private carts: CartService) {}
 
   ngOnInit(): void {
-    localStorage.setItem('idCart', '97fde447-d06d-4168-afd7-72f50fd196cf');
     if (localStorage.getItem('idCart') !== null) {
-      this.carts.getCart('97fde447-d06d-4168-afd7-72f50fd196cf', localStorage.getItem('token'))?.subscribe({
+      this.carts.getCart(localStorage.getItem('idCart'), localStorage.getItem('token'))?.subscribe({
         next: (response) => {
           if (response.lineItems.length === 0) {
             this.showLinkCatalog = true;
@@ -38,7 +38,6 @@ export class BasketComponent implements OnInit {
   }
 
   clickMinus(valueInput: string, lineItemId: string): void {
-    localStorage.setItem('idCart', '97fde447-d06d-4168-afd7-72f50fd196cf');
     if (Number(valueInput) - 1 > 0) {
       this.disabledBtn = true;
       this.carts
@@ -96,6 +95,29 @@ export class BasketComponent implements OnInit {
           this.products = res.lineItems;
           this.totalPrice = res.totalPrice.centAmount;
         },
+      });
+  }
+
+  clickRemoveCart(): void {
+    this.disabledBtnRemoveCart = true;
+    this.carts
+      .deleteCart(
+        localStorage.getItem('token'),
+        Number(localStorage.getItem('version')),
+        localStorage.getItem('idCart'),
+      )
+      ?.subscribe((res) => {
+        localStorage.removeItem('version');
+        localStorage.removeItem('idCart');
+        this.products = res.lineItems;
+        this.showLinkCatalog = true;
+        this.showOrderingBlock = false;
+        const Div = document.querySelector('.basket__items') as HTMLDivElement;
+        while (Div.firstChild) {
+          if (Div.lastChild) {
+            Div.removeChild(Div.lastChild);
+          }
+        }
       });
   }
 }

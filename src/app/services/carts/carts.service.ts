@@ -12,6 +12,7 @@ export class CartService {
   createCart(token: string | null): Observable<CartInterface> | null {
     const data = new URLSearchParams();
     data.append('currency', 'EUR');
+    data.append('taxMode', 'Disabled');
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Content-Type', 'application/json');
 
