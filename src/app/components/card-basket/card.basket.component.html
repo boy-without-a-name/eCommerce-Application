@@ -8,6 +8,7 @@
     <p *ngIf="product.price.discounted">
       Price: {{ product.price.discounted.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2' }}
     </p>
+    <p>Sum Price: {{ product.totalPrice.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2' }}</p>
   </div>
 
   <div></div>

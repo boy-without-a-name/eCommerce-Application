@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="basket">
+<!-- <div class="basket">
   <div class="basket__items">
     <div class="basket__item">
       <img
@@ -97,4 +97,7 @@
     <div class="basket__price basket__price-complete">$1600</div>
     <app-button text="К оформлению"></app-button>
   </div>
+</div> -->
+<div>
+  <app-card-basket *ngFor="let card of product" [product]="card"> </app-card-basket>
 </div>
