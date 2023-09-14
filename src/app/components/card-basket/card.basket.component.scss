@@ -66,6 +66,12 @@ input[type='number'] {
   background-color: #ffffff;
   color: #000000;
 }
+
+.wrapper-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
 .btn__quantity {
   width: 27px;
   height: 27px;
@@ -100,4 +106,8 @@ input[type='number'] {
   background-color: #e74b4b;
   border: none;
   border-radius: 5px;
+
+  &:hover {
+    cursor: pointer;
+  }
 }
