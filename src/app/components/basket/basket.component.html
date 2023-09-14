@@ -1,8 +1,9 @@
 <app-header></app-header>
 <div class="basket">
   <div class="basket__items">
-    <div *ngIf="showLinkCatalog">
-      You have so much money and this basket is still empty. Go to the catalog and choose something for yourself
+    <div *ngIf="showLinkCatalog" class="wrapper-link-catalog">
+      You have so much money and this basket is still empty. Go to the
+      <span class="routerlink" routerLink="/catalog">catalog</span> and choose something for yourself!
     </div>
     <div class="wrapper-card-basket" *ngFor="let product of products">
       <div>
