@@ -1,0 +1,14 @@
+<div>
+  <div>
+    <img [src]="product.variant.images[0].url" [alt]="product.name['en-US']" />
+  </div>
+  <div>
+    <h2>{{ product.name['en-US'] }}</h2>
+    <p>Price: {{ product.price.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2' }}</p>
+    <p *ngIf="product.price.discounted">
+      Price: {{ product.price.discounted.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2' }}
+    </p>
+  </div>
+
+  <div></div>
+</div>
