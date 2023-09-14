@@ -142,7 +142,11 @@ export class CatalogComponent implements OnInit {
     this.maxPrice = '';
     this.filterCategory = [];
     this.filterEnabled = false;
+    this.pageNo = 0;
+    this.pageOffset = this.pageSized * this.pageNo;
     this.reset = true;
+    this.loading = true;
+    this.getNewProducts();
   }
 
   getLengthPage(): void {
