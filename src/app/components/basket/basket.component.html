@@ -1,103 +1,57 @@
 <app-header></app-header>
-<!-- <div class="basket">
+<div class="basket">
   <div class="basket__items">
-    <div class="basket__item">
-      <img
-        class="basket__image"
-        src="https://6939f98a27e35af086aa-c03bcf86d21f29c86f52fb0df0bb0b7f.ssl.cf5.rackcdn.com/e2189f90f9088975c553-spHuU24c.jpeg"
-        alt="product-image"
-      />
-      <div class="basket__name-and-description">
-        <h2 class="basket__name">iPhone SE 2016 256GB</h2>
-        <div class="basket__description">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis veniam eum ipsam id a reiciendis fuga omnis
-          eos temporibus architecto.
+    <div class="wrapper-card-basket" *ngFor="let product of products">
+      <div>
+        <img class="wrapper-card-basket__img" [src]="product.variant.images[0].url" [alt]="product.name['en-US']" />
+      </div>
+      <div class="wrapper-card-basket__price_name">
+        <h2>{{ product.name['en-US'] }}</h2>
+        <p [style]="product.price.discounted ? 'text-decoration:line-through' : ''">
+          Price: {{ product.price.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
+        </p>
+        <p class="wrapper-card-basket__discount" *ngIf="product.price.discounted">
+          Price: {{ product.price.discounted.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
+        </p>
+        <p class="wrapper-card-basket__total-price">
+          Total price: {{ product.totalPrice.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
+        </p>
+      </div>
+      <div class="wrapper-btn">
+        <div class="basket__amount">
+          <button
+            class="btn__quantity minus"
+            [disabled]="disabledBtn === true"
+            (click)="clickMinus(quantity.value, product.id)"
+          >
+            -
+          </button>
+          <input
+            class="basket__amount-input"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            min="1"
+            disabled="true"
+            max="100"
+            type="number"
+            value="{{ product.quantity }}"
+            #quantity
+          />
+          <button
+            class="btn__quantity plus"
+            [disabled]="disabledBtn === true"
+            (click)="clickPlus(quantity.value, product.id)"
+          >
+            +
+          </button>
         </div>
-      </div>
-      <div class="basket__price">$600</div>
-      <div class="basket__amount">
-        <app-button text="-"></app-button>
-        <input
-          class="basket__amount-input"
-          inputmode="numeric"
-          pattern="[0-9]*"
-          min="1"
-          max="100"
-          type="number"
-          value="1"
-        />
-        <app-button text="+"></app-button>
-      </div>
-    </div>
-    <div class="basket__item">
-      <img
-        class="basket__image"
-        src="https://6939f98a27e35af086aa-c03bcf86d21f29c86f52fb0df0bb0b7f.ssl.cf5.rackcdn.com/mac-p2dCwtqQ.jpeg"
-        alt="product-image"
-      />
-      <div class="basket__name-and-description">
-        <h2 class="basket__name">iPhone SE 2016 256GB</h2>
-        <div class="basket__description">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus sit at accusamus adipisci! Rem sint
-          assumenda quibusdam, ducimus velit non asperiores, labore eveniet provident id reprehenderit ullam, in
-          deserunt soluta laborum necessitatibus quidem debitis laboriosam quo repellendus iure nihil. Beatae dolore aut
-          eveniet similique quos nesciunt rerum labore nam sapiente?
-        </div>
-      </div>
-      <div class="basket__price">$600</div>
-      <div class="basket__amount">
-        <app-button text="-"></app-button>
-        <input
-          class="basket__amount-input"
-          inputmode="numeric"
-          pattern="[0-9]*"
-          min="1"
-          max="100"
-          type="number"
-          value="1"
-        />
-        <app-button text="+"></app-button>
-      </div>
-    </div>
-    <div class="basket__item">
-      <img
-        class="basket__image"
-        src="https://6939f98a27e35af086aa-c03bcf86d21f29c86f52fb0df0bb0b7f.ssl.cf5.rackcdn.com/ipad-567ays23.jpeg"
-        alt="product-image"
-      />
-      <div class="basket__name-and-description">
-        <h2 class="basket__name">Lorem, ipsum dolor sit amet consectetur adipisicing elit.</h2>
-        <div class="basket__description">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus sit at accusamus adipisci! Rem sint
-          assumenda quibusdam, ducimus velit non asperiores, labore eveniet provident id reprehenderit ullam, in
-          deserunt soluta laborum necessitatibus quidem debitis laboriosam quo repellendus iure nihil. Beatae dolore aut
-          eveniet similique quos nesciunt rerum labore nam sapiente? Lorem ipsum dolor sit amet, consectetur adipisicing
-          elit. Nesciunt dignissimos saepe consectetur odio ex! Quae aspernatur debitis consectetur aliquam numquam
-          atque cumque quis ducimus ex explicabo esse necessitatibus illum, autem fuga dolor nisi aut ad rem incidunt
-          minus voluptatum, in reprehenderit. Molestiae numquam architecto at? Dolorum impedit alias quam illum!
-        </div>
-      </div>
-      <div class="basket__price">$1600</div>
-      <div class="basket__amount">
-        <app-button text="-"></app-button>
-        <input
-          class="basket__amount-input"
-          inputmode="numeric"
-          pattern="[0-9]*"
-          min="1"
-          max="100"
-          type="number"
-          value="1"
-        />
-        <app-button text="+"></app-button>
+        <button class="remove" (click)="clickRemove(product.id, quantity.value)">Remove Item</button>
       </div>
     </div>
   </div>
+
   <div class="basket__complete">
     <div class="basket__price basket__price-complete">$1600</div>
     <app-button text="К оформлению"></app-button>
   </div>
-</div> -->
-<div>
-  <app-card-basket *ngFor="let card of product" [product]="card"> </app-card-basket>
 </div>

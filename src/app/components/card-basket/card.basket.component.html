@@ -1,4 +1,4 @@
-<div class="wrapper-card-basket" *ngIf="showCard">
+<div class="wrapper-card-basket">
   <div>
     <img class="wrapper-card-basket__img" [src]="product.variant.images[0].url" [alt]="product.name['en-US']" />
   </div>
@@ -11,13 +11,7 @@
       Price: {{ product.price.discounted.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
     </p>
     <p class="wrapper-card-basket__total-price">
-      Total price: €
-      <input
-        type="number"
-        class="wrapper-card-basket__total-price_inptut"
-        [disabled]="true"
-        value="{{ showTotalPrice ? product.totalPrice.centAmount / 100 : totalPrice }}"
-      />
+      Total price: {{ product.totalPrice.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
     </p>
   </div>
   <div class="wrapper-btn">
