@@ -11,6 +11,7 @@ export class CardBasketComponent {
   showTotalPrice = true;
   showQuantity = true;
   totalPrice = '';
+  disabledBtn = false;
   curentQuantity = '';
   constructor(private carts: CartService) {}
   @Input() product: ProductCart;
@@ -18,6 +19,7 @@ export class CardBasketComponent {
   clickMinus(valueInput: string, lineItemId: string): void {
     localStorage.setItem('idCart', '97fde447-d06d-4168-afd7-72f50fd196cf');
     if (Number(valueInput) - 1 > 0) {
+      this.disabledBtn = true;
       this.carts
         .changeLineItemQuantity(
           localStorage.getItem('token'),
@@ -35,11 +37,12 @@ export class CardBasketComponent {
           this.totalPrice = (
             res.lineItems.filter((item) => item.id === lineItemId)[0].totalPrice.centAmount / 100
           ).toString();
+          this.disabledBtn = false;
         });
     }
   }
   clickPlus(valueInput: string, lineItemId: string): void {
-    localStorage.setItem('idCart', '97fde447-d06d-4168-afd7-72f50fd196cf');
+    this.disabledBtn = true;
     this.carts
       .changeLineItemQuantity(
         localStorage.getItem('token'),
@@ -57,6 +60,7 @@ export class CardBasketComponent {
         this.totalPrice = (
           res.lineItems.filter((item) => item.id === lineItemId)[0].totalPrice.centAmount / 100
         ).toString();
+        this.disabledBtn = false;
       });
   }
 }

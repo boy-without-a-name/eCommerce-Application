@@ -22,18 +22,31 @@
   </div>
   <div>
     <div class="basket__amount">
-      <app-button text="-" (click)="clickMinus(quantity.value, product.id)"></app-button>
+      <button
+        class="btn__quantity minus"
+        [disabled]="disabledBtn === true || quantity.value === '1'"
+        (click)="clickMinus(quantity.value, product.id)"
+      >
+        -
+      </button>
       <input
         class="basket__amount-input"
         inputmode="numeric"
         pattern="[0-9]*"
         min="1"
+        disabled="true"
         max="100"
         type="number"
         value="{{ showTotalPrice ? product.quantity : curentQuantity }}"
         #quantity
       />
-      <app-button text="+" (click)="clickPlus(quantity.value, product.id)"></app-button>
+      <button
+        class="btn__quantity plus"
+        [disabled]="disabledBtn === true"
+        (click)="clickPlus(quantity.value, product.id)"
+      >
+        +
+      </button>
     </div>
   </div>
 </div>

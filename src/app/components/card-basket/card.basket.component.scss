@@ -66,3 +66,30 @@ input[type='number'] {
   background-color: #ffffff;
   color: #000000;
 }
+.btn__quantity {
+  width: 27px;
+  height: 27px;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+.minus {
+  border-color: #e74b4b;
+
+  &:disabled {
+    border-color: #a8a1a1;
+  }
+}
+
+.plus {
+  border-color: #70db45;
+
+  &:disabled {
+    border-color: #a8a1a1;
+  }
+}
