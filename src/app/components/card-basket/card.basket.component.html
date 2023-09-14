@@ -33,7 +33,7 @@
         value="{{ showTotalPrice ? product.quantity : curentQuantity }}"
         #quantity
       />
-      <app-button text="+"></app-button>
+      <app-button text="+" (click)="clickPlus(quantity.value, product.id)"></app-button>
     </div>
   </div>
 </div>
