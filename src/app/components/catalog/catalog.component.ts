@@ -26,6 +26,7 @@ export class CatalogComponent implements OnInit {
   pageOffset = 0;
   pageLength: number;
   loading = true;
+  reset = true;
 
   constructor(private catalog: CatalogService) {}
 
@@ -84,6 +85,11 @@ export class CatalogComponent implements OnInit {
   }
 
   clickSave(): void {
+    if (this.reset) {
+      this.pageNo = 0;
+      this.pageOffset = this.pageNo * this.pageSized;
+    }
+
     let str = '';
     if (this.filterCategory.length > 0) {
       str += 'filter=productType.id:' + this.filterCategory.join(',');
@@ -120,8 +126,9 @@ export class CatalogComponent implements OnInit {
       this.clickSearch = false;
     }
     this.filterEnabled = true;
-    this.catalog.test(localStorage.getItem('authTokenMain'), str)?.subscribe((res) => {
+    this.catalog.test(localStorage.getItem('authTokenMain'), str, this.pageSized, this.pageOffset)?.subscribe((res) => {
       this.productfilter = res.results;
+      this.reset = false;
       if (res.results.length === 0) {
         alert('По вашему запросу ничего не найдено, попробуйте ввести другие данные');
       }
@@ -133,6 +140,7 @@ export class CatalogComponent implements OnInit {
     this.maxPrice = '';
     this.filterCategory = [];
     this.filterEnabled = false;
+    this.reset = true;
   }
 
   getLengthPage(): void {
@@ -156,6 +164,14 @@ export class CatalogComponent implements OnInit {
       this.getNewProducts();
     } else {
       console.log('else', event.pageIndex);
+    }
+  }
+
+  pageChangedFiltered(event: PageEvent): void {
+    if (event.pageIndex != this.pageNo) {
+      this.pageNo = event.pageIndex;
+      this.pageOffset = this.pageNo * this.pageSized;
+      this.clickSave();
     }
   }
 }

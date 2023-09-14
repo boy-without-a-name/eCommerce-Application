@@ -46,15 +46,20 @@ export class CatalogService {
   getProgucts(authToken: string | null, pageSize = 100, pageOffset = 0): Observable<CatalogInterface> | null {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
     return this.http.get<CatalogInterface>(
-      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/products/?limit=${pageSize}&offset=${pageOffset}`,
+      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/products/?&limit=${pageSize}&offset=${pageOffset}`,
       { headers },
     );
   }
 
-  test(authToken: string | null, value: string): Observable<AnswerFilterInterface> {
+  test(
+    authToken: string | null,
+    value: string,
+    pageSized: number,
+    pageOffset: number,
+  ): Observable<AnswerFilterInterface> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
     return this.http.get<AnswerFilterInterface>(
-      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/product-projections/search?${value}`,
+      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/product-projections/search?${value}&limit=${pageSized}&offset=${pageOffset}`,
       { headers },
     );
   }
