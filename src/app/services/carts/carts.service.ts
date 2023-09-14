@@ -62,6 +62,7 @@ export class CartService {
     lineItemId: string,
     version: number,
     idCart: string | null,
+    quantity = 1,
   ): Observable<CartInterface> | null {
     const body = {
       version: version,
@@ -69,7 +70,7 @@ export class CartService {
         {
           action: 'removeLineItem',
           lineItemId: `${lineItemId}`,
-          quantity: 1,
+          quantity: quantity,
         },
       ],
     };
