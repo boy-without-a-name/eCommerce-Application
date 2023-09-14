@@ -34,7 +34,6 @@ import { AboutUsComponent } from './components/about-us/about-us.component';
 import { MatCardModule } from '@angular/material/card';
 import { register } from 'swiper/element/bundle';
 import { BasketComponent } from './components/basket/basket.component';
-import { CardBasketComponent } from './components/card-basket/card.basket.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +60,6 @@ import { CardBasketComponent } from './components/card-basket/card.basket.compon
     PostModalImgComponent,
     AboutUsComponent,
     BasketComponent,
-    CardBasketComponent,
   ],
   imports: [
     BrowserModule,
