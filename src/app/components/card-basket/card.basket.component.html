@@ -14,6 +14,19 @@
       Total price {{ product.totalPrice.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2' }}
     </p>
   </div>
-
-  <div></div>
+  <div>
+    <div class="basket__amount">
+      <app-button text="-"></app-button>
+      <input
+        class="basket__amount-input"
+        inputmode="numeric"
+        pattern="[0-9]*"
+        min="1"
+        max="100"
+        type="number"
+        value="{{ product.quantity }}"
+      />
+      <app-button text="+"></app-button>
+    </div>
+  </div>
 </div>
