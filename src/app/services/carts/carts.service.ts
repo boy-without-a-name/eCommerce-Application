@@ -82,4 +82,39 @@ export class CartService {
       { headers },
     );
   }
+  changeLineItemQuantity(
+    token: string | null,
+    lineItemId: string,
+    version: number,
+    quantity: number,
+    idCart: string,
+    step?: number,
+  ): Observable<CartInterface> | null {
+    let num: number;
+    if (step === undefined) {
+      num = quantity;
+    } else if (step > 0) {
+      num = quantity + 1;
+    } else {
+      num = quantity - 1;
+    }
+    const body = {
+      version: version,
+      actions: [
+        {
+          action: 'changeLineItemQuantity',
+          lineItemId: `${lineItemId}`,
+          quantity: num,
+        },
+      ],
+    };
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Content-Type', 'application/json');
+
+    return this.http.post<CartInterface>(
+      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/${idCart}`,
+      JSON.stringify(body),
+      { headers },
+    );
+  }
 }
