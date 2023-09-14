@@ -169,6 +169,7 @@ export class CatalogComponent implements OnInit {
       this.loading = true;
       this.pageNo = event.pageIndex;
       this.pageOffset = this.pageNo * this.pageSized;
+      this.catalog.setPageNo(this.pageNo);
       this.getNewProducts();
     } else {
       console.log('else', event.pageIndex);
