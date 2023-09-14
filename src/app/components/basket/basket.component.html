@@ -51,7 +51,9 @@
   </div>
 
   <div class="basket__complete">
-    <div class="basket__price basket__price-complete">$1600</div>
+    <div class="basket__price basket__price-complete">
+      Total Price: {{ totalPrice / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
+    </div>
     <app-button text="К оформлению"></app-button>
   </div>
 </div>

@@ -12,6 +12,7 @@ export class BasketComponent implements OnInit {
   showQuantity = true;
   disabledBtn = false;
   products: ProductCart[] = [];
+  totalPrice: number;
 
   constructor(private carts: CartService) {}
 
@@ -22,6 +23,7 @@ export class BasketComponent implements OnInit {
           this.showLinkCatalog = true;
         } else {
           this.products = response.lineItems;
+          this.totalPrice = response.totalPrice.centAmount;
           localStorage.setItem('version', `${response.version}`);
         }
       },
@@ -43,6 +45,7 @@ export class BasketComponent implements OnInit {
         ?.subscribe((res) => {
           localStorage.version = res.version;
           this.products = res.lineItems;
+          this.totalPrice = res.totalPrice.centAmount;
           this.disabledBtn = false;
         });
     }
@@ -62,6 +65,7 @@ export class BasketComponent implements OnInit {
         localStorage.version = res.version;
         console.log(res.version);
         this.products = res.lineItems;
+        this.totalPrice = res.totalPrice.centAmount;
         this.disabledBtn = false;
       });
   }
@@ -78,6 +82,7 @@ export class BasketComponent implements OnInit {
         next: (res) => {
           localStorage.version = res.version;
           this.products = res.lineItems;
+          this.totalPrice = res.totalPrice.centAmount;
         },
       });
   }
