@@ -11,23 +11,27 @@ export class BasketComponent implements OnInit {
   showCard = true;
   showQuantity = true;
   disabledBtn = false;
+  showOrderingBlock = false;
   products: ProductCart[] = [];
   totalPrice: number;
 
   constructor(private carts: CartService) {}
 
   ngOnInit(): void {
-    this.carts.getCart('97fde447-d06d-4168-afd7-72f50fd196cf', localStorage.getItem('token'))?.subscribe({
-      next: (response) => {
-        if (response.lineItems.length === 0) {
-          this.showLinkCatalog = true;
-        } else {
-          this.products = response.lineItems;
-          this.totalPrice = response.totalPrice.centAmount;
-          localStorage.setItem('version', `${response.version}`);
-        }
-      },
-    });
+    if (localStorage.getItem('idCart') !== null) {
+      this.carts.getCart('97fde447-d06d-4168-afd7-72f50fd196cf', localStorage.getItem('token'))?.subscribe({
+        next: (response) => {
+          if (response.lineItems.length === 0) {
+            this.showLinkCatalog = true;
+          } else {
+            this.products = response.lineItems;
+            this.totalPrice = response.totalPrice.centAmount;
+            this.showOrderingBlock = true;
+            localStorage.setItem('version', `${response.version}`);
+          }
+        },
+      });
+    }
   }
   clickMinus(valueInput: string, lineItemId: string): void {
     localStorage.setItem('idCart', '97fde447-d06d-4168-afd7-72f50fd196cf');
@@ -83,6 +87,7 @@ export class BasketComponent implements OnInit {
           localStorage.version = res.version;
           if (res.lineItems.length === 0) {
             this.showLinkCatalog = true;
+            this.showOrderingBlock = false;
           }
           this.products = res.lineItems;
           this.totalPrice = res.totalPrice.centAmount;

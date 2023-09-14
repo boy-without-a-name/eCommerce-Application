@@ -54,7 +54,7 @@
     </div>
   </div>
 
-  <div *ngIf="!showLinkCatalog" class="basket__complete">
+  <div *ngIf="showOrderingBlock" class="basket__complete">
     <div class="basket__price basket__price-complete">
       Total Price: {{ totalPrice / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
     </div>
