@@ -18,6 +18,7 @@ export class BasketComponent implements OnInit {
   constructor(private carts: CartService) {}
 
   ngOnInit(): void {
+    localStorage.setItem('idCart', '97fde447-d06d-4168-afd7-72f50fd196cf');
     if (localStorage.getItem('idCart') !== null) {
       this.carts.getCart('97fde447-d06d-4168-afd7-72f50fd196cf', localStorage.getItem('token'))?.subscribe({
         next: (response) => {
@@ -31,8 +32,11 @@ export class BasketComponent implements OnInit {
           }
         },
       });
+    } else {
+      this.showLinkCatalog = true;
     }
   }
+
   clickMinus(valueInput: string, lineItemId: string): void {
     localStorage.setItem('idCart', '97fde447-d06d-4168-afd7-72f50fd196cf');
     if (Number(valueInput) - 1 > 0) {

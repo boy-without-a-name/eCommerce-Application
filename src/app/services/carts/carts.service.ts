@@ -118,4 +118,12 @@ export class CartService {
       { headers },
     );
   }
+
+  deleteCart(token: string | null, version: number, idCart: string | null): Observable<CartInterface> | null {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete<CartInterface>(
+      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/${idCart}?version=${version}`,
+      { headers },
+    );
+  }
 }
