@@ -5,18 +5,24 @@
   <div class="wrapper-card-basket__price_name">
     <h2>{{ product.name['en-US'] }}</h2>
     <p [style]="product.price.discounted ? 'text-decoration:line-through' : ''">
-      Price: {{ product.price.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2' }}
+      Price: {{ product.price.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
     </p>
     <p class="wrapper-card-basket__discount" *ngIf="product.price.discounted">
-      Price: {{ product.price.discounted.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2' }}
+      Price: {{ product.price.discounted.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
     </p>
     <p class="wrapper-card-basket__total-price">
-      Total price {{ product.totalPrice.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2' }}
+      Total price: €
+      <input
+        type="number"
+        class="wrapper-card-basket__total-price_inptut"
+        [disabled]="true"
+        value="{{ showTotalPrice ? product.totalPrice.centAmount / 100 : totalPrice }}"
+      />
     </p>
   </div>
   <div>
     <div class="basket__amount">
-      <app-button text="-"></app-button>
+      <app-button text="-" (click)="clickMinus(quantity.value, product.id)"></app-button>
       <input
         class="basket__amount-input"
         inputmode="numeric"
@@ -24,7 +30,8 @@
         min="1"
         max="100"
         type="number"
-        value="{{ product.quantity }}"
+        value="{{ showTotalPrice ? product.quantity : curentQuantity }}"
+        #quantity
       />
       <app-button text="+"></app-button>
     </div>

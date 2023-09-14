@@ -34,7 +34,7 @@ export class CartService {
     token: string | null,
     productId: string,
     version: number,
-    idCart: string,
+    idCart: string | null,
   ): Observable<CartInterface> | null {
     const body = {
       version: version,
@@ -61,7 +61,7 @@ export class CartService {
     token: string | null,
     lineItemId: string,
     version: number,
-    idCart: string,
+    idCart: string | null,
   ): Observable<CartInterface> | null {
     const body = {
       version: version,
@@ -87,7 +87,7 @@ export class CartService {
     lineItemId: string,
     version: number,
     quantity: number,
-    idCart: string,
+    idCart: string | null,
     step?: number,
   ): Observable<CartInterface> | null {
     let num: number;

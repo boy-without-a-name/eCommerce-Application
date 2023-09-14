@@ -32,6 +32,7 @@
   justify-content: center;
   gap: 1rem;
   padding: 1rem;
+
   &__amount {
     display: flex;
     flex-direction: row;
@@ -54,4 +55,14 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
   appearance: textfield;
   -moz-appearance: textfield;
+}
+
+.wrapper-card-basket__total-price_inptut {
+  outline: none;
+  border: none;
+  height: 20px;
+  font-size: 15px;
+  font-weight: 800;
+  background-color: #ffffff;
+  color: #000000;
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/carts/carts.service';
 import { ProductCart } from 'src/app/models/interface/cartProduct.interface';
+import { version } from 'typescript';
 @Component({
   selector: 'app-basket',
   templateUrl: './basket.component.html',
@@ -19,6 +20,7 @@ export class BasketComponent implements OnInit {
           this.showLinkCatalog = true;
         } else {
           this.product = response.lineItems;
+          localStorage.setItem('version', `${response.version}`);
         }
       },
     });
