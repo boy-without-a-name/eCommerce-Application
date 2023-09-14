@@ -40,7 +40,7 @@ export class CatalogComponent implements OnInit {
       .getProgucts(localStorage.getItem('authTokenMain'), this.pageSized, this.pageOffset)
       ?.subscribe((res) => {
         this.result = res.results;
-        console.log(this.result);
+        this.loading = false;
       });
   }
 
@@ -85,6 +85,7 @@ export class CatalogComponent implements OnInit {
   }
 
   clickSave(): void {
+    this.loading = true;
     if (this.reset) {
       this.pageNo = 0;
       this.pageOffset = this.pageNo * this.pageSized;
@@ -129,6 +130,7 @@ export class CatalogComponent implements OnInit {
     this.catalog.test(localStorage.getItem('authTokenMain'), str, this.pageSized, this.pageOffset)?.subscribe((res) => {
       this.productfilter = res.results;
       this.reset = false;
+      this.loading = false;
       if (res.results.length === 0) {
         alert('По вашему запросу ничего не найдено, попробуйте ввести другие данные');
       }
@@ -154,11 +156,13 @@ export class CatalogComponent implements OnInit {
       .getProgucts(localStorage.getItem('authTokenMain'), this.pageSized, this.pageOffset)
       ?.subscribe((res) => {
         this.result = res.results;
+        this.loading = false;
       });
   }
 
   pageChanged(event: PageEvent): void {
     if (event.pageIndex != this.pageNo) {
+      this.loading = true;
       this.pageNo = event.pageIndex;
       this.pageOffset = this.pageNo * this.pageSized;
       this.getNewProducts();
@@ -169,6 +173,7 @@ export class CatalogComponent implements OnInit {
 
   pageChangedFiltered(event: PageEvent): void {
     if (event.pageIndex != this.pageNo) {
+      this.loading = true;
       this.pageNo = event.pageIndex;
       this.pageOffset = this.pageNo * this.pageSized;
       this.clickSave();
