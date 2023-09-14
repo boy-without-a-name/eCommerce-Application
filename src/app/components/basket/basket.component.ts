@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/carts/carts.service';
 import { ProductCart } from 'src/app/models/interface/cartProduct.interface';
-import { version } from 'typescript';
 @Component({
   selector: 'app-basket',
   templateUrl: './basket.component.html',

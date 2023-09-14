@@ -64,18 +64,20 @@ export class CardBasketComponent {
         this.disabledBtn = false;
       });
   }
-  clickRemove(id:string, quantity:string): void {
-    this.carts.removeLineItem(
-      localStorage.getItem('token'),
-      id,
-      Number(localStorage.getItem('version')),
-      localStorage.getItem('idCart'),
-      Number(quantity)
-    )?.subscribe({
-      next: (res) => {
-        localStorage.version = res.version;
-        this.showCard = false;
-      }
-    })
+  clickRemove(id: string, quantity: string): void {
+    this.carts
+      .removeLineItem(
+        localStorage.getItem('token'),
+        id,
+        Number(localStorage.getItem('version')),
+        localStorage.getItem('idCart'),
+        Number(quantity),
+      )
+      ?.subscribe({
+        next: (res) => {
+          localStorage.version = res.version;
+          this.showCard = false;
+        },
+      });
   }
 }

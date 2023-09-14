@@ -24,7 +24,7 @@
     <div class="basket__amount">
       <button
         class="btn__quantity minus"
-        [disabled]="disabledBtn === true || quantity.value === '1'"
+        [disabled]="disabledBtn === true"
         (click)="clickMinus(quantity.value, product.id)"
       >
         -
@@ -48,7 +48,6 @@
         +
       </button>
     </div>
-    <button class="remove"
-    (click)="clickRemove(product.id, quantity.value)">Remove Item</button>
+    <button class="remove" (click)="clickRemove(product.id, quantity.value)">Remove Item</button>
   </div>
 </div>
