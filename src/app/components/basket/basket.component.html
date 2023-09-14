@@ -1,6 +1,9 @@
 <app-header></app-header>
 <div class="basket">
   <div class="basket__items">
+    <div *ngIf="showLinkCatalog">
+      You have so much money and this basket is still empty. Go to the catalog and choose something for yourself
+    </div>
     <div class="wrapper-card-basket" *ngFor="let product of products">
       <div>
         <img class="wrapper-card-basket__img" [src]="product.variant.images[0].url" [alt]="product.name['en-US']" />
@@ -50,7 +53,7 @@
     </div>
   </div>
 
-  <div class="basket__complete">
+  <div *ngIf="!showLinkCatalog" class="basket__complete">
     <div class="basket__price basket__price-complete">
       Total Price: {{ totalPrice / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
     </div>

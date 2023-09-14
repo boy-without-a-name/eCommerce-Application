@@ -81,6 +81,9 @@ export class BasketComponent implements OnInit {
       ?.subscribe({
         next: (res) => {
           localStorage.version = res.version;
+          if (res.lineItems.length === 0) {
+            this.showLinkCatalog = true;
+          }
           this.products = res.lineItems;
           this.totalPrice = res.totalPrice.centAmount;
         },
