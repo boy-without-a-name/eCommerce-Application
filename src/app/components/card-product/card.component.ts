@@ -16,8 +16,33 @@ export class CardComponent {
   @Input() product: ResultInterface;
 
   clickBtn(productId: string): void {
-
-
+    if (localStorage.getItem('idCart') == null) {
+      this.carts.createCart(localStorage.getItem('token'))?.subscribe((res) => {
+        localStorage.setItem('idCart', `${res.id}`);
+        localStorage.setItem('version', `${res.version}`);
+        this.carts
+          .addLineItem(
+            localStorage.getItem('token'),
+            productId,
+            Number(localStorage.getItem('version')),
+            localStorage.getItem('idCart'),
+          )
+          ?.subscribe((res) => {
+            localStorage.version = res.version;
+          });
+      });
+    } else {
+      this.carts
+        .addLineItem(
+          localStorage.getItem('token'),
+          productId,
+          Number(localStorage.getItem('version')),
+          localStorage.getItem('idCart'),
+        )
+        ?.subscribe((res) => {
+          localStorage.version = res.version;
+        });
+    }
     this.buttonPosition = true;
   }
 }
