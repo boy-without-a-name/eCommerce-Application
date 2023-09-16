@@ -10,14 +10,16 @@ export class CartService {
   constructor(private http: HttpClient) {}
 
   createCart(token: string | null): Observable<CartInterface> | null {
-    const data = new URLSearchParams();
-    data.append('currency', 'EUR');
+    const body = {
+      currency: 'EUR',
+      taxMode: 'Disabled',
+    };
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Content-Type', 'application/json');
 
     return this.http.post<CartInterface>(
       'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/',
-      data.toString(),
+      JSON.stringify(body),
       { headers },
     );
   }
@@ -34,7 +36,7 @@ export class CartService {
     token: string | null,
     productId: string,
     version: number,
-    idCart: string,
+    idCart: string | null,
   ): Observable<CartInterface> | null {
     const body = {
       version: version,
@@ -61,7 +63,8 @@ export class CartService {
     token: string | null,
     lineItemId: string,
     version: number,
-    idCart: string,
+    idCart: string | null,
+    quantity = 1,
   ): Observable<CartInterface> | null {
     const body = {
       version: version,
@@ -69,7 +72,7 @@ export class CartService {
         {
           action: 'removeLineItem',
           lineItemId: `${lineItemId}`,
-          quantity: 1,
+          quantity: quantity,
         },
       ],
     };
@@ -79,6 +82,49 @@ export class CartService {
     return this.http.post<CartInterface>(
       `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/${idCart}`,
       JSON.stringify(body),
+      { headers },
+    );
+  }
+  changeLineItemQuantity(
+    token: string | null,
+    lineItemId: string,
+    version: number,
+    quantity: number,
+    idCart: string | null,
+    step?: number,
+  ): Observable<CartInterface> | null {
+    let num: number;
+    if (step === undefined) {
+      num = quantity;
+    } else if (step > 0) {
+      num = quantity + 1;
+    } else {
+      num = quantity - 1;
+    }
+    const body = {
+      version: version,
+      actions: [
+        {
+          action: 'changeLineItemQuantity',
+          lineItemId: `${lineItemId}`,
+          quantity: num,
+        },
+      ],
+    };
+
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Content-Type', 'application/json');
+
+    return this.http.post<CartInterface>(
+      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/${idCart}`,
+      JSON.stringify(body),
+      { headers },
+    );
+  }
+
+  deleteCart(token: string | null, version: number, idCart: string | null): Observable<CartInterface> | null {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete<CartInterface>(
+      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/${idCart}?version=${version}`,
       { headers },
     );
   }
