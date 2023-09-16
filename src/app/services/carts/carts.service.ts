@@ -10,15 +10,16 @@ export class CartService {
   constructor(private http: HttpClient) {}
 
   createCart(token: string | null): Observable<CartInterface> | null {
-    const data = new URLSearchParams();
-    data.append('currency', 'EUR');
-    data.append('taxMode', 'Disabled');
+    const body = {
+      currency: 'EUR',
+      taxMode: 'Disabled',
+    };
 
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Content-Type', 'application/json');
 
     return this.http.post<CartInterface>(
       'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/',
-      data.toString(),
+      JSON.stringify(body),
       { headers },
     );
   }
