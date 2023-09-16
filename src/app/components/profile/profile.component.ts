@@ -8,6 +8,7 @@ import Toastify from 'toastify-js';
 import { compareAddressesArrays } from './compareAddressesArrays';
 import { validateName, validateDateOfBirth, validateEmail, validatePassword } from './validators';
 import { UpdateAction } from 'src/app/models/interface/updateAction';
+import { LoginService } from 'src/app/services/loginSevice/login.service';
 
 @Component({
   selector: 'app-profile',
@@ -15,7 +16,10 @@ import { UpdateAction } from 'src/app/models/interface/updateAction';
   styleUrls: ['./profile.component.scss'],
 })
 export class ProfileComponent implements OnInit {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private login: LoginService,
+  ) {}
 
   countries = countries;
   editMode = false;
@@ -34,7 +38,6 @@ export class ProfileComponent implements OnInit {
     password: {
       current: '',
       new: '',
-      newRepeated: '',
     },
   };
 
@@ -172,13 +175,18 @@ export class ProfileComponent implements OnInit {
           // update customer version
           if (response.version) this.customer.version = response.version;
           this.changePassMode = false;
-          // reset pass data
-          this.customer.password.current = '';
-          this.customer.password.new = '';
 
-          // TODO: re-authentication (new token needed)
+          // get new token
+          this.login.getToken(this.customer.email as string, this.customer.password.new)?.subscribe({
+            next: (response) => {
+              this.customer.token = response.access_token as string;
+              localStorage.setItem('token', `${response.access_token}`);
+            },
+            error: (errorResponse) => {
+              console.log(errorResponse.error.message);
+            },
+          });
 
-          // Show success toast message
           Toastify({
             text: 'New password has been set',
             style: {
@@ -189,11 +197,13 @@ export class ProfileComponent implements OnInit {
               'font-weight': '600',
             },
           }).showToast();
+
+          this.customer.password.current = '';
+          this.customer.password.new = '';
         },
         error: (errorResponse) => {
           if (errorResponse.error.statusCode === 400) this.isPasswordInvalid.current = errorResponse.error.message;
           console.error('Error changing password:', errorResponse);
-          // Show error toast message
           Toastify({
             text: errorResponse.error.message,
             style: {
@@ -236,9 +246,6 @@ export class ProfileComponent implements OnInit {
             localStorage.setItem('addresses', JSON.stringify(response.addresses));
             localStorage.setItem('billingAddressIds', JSON.stringify(response.billingAddressIds));
             localStorage.setItem('shippingAddressIds', JSON.stringify(response.shippingAddressIds));
-            // this.customer.addresses = JSON.parse(localStorage.getItem('addresses') as string);
-            // this.customer.billingAddressIds = JSON.parse(localStorage.getItem('billingAddressIds') as string);
-            // this.customer.shippingAddressIds = JSON.parse(localStorage.getItem('shippingAddressIds') as string);
 
             this.setAddressTypes();
 
@@ -392,7 +399,7 @@ export class ProfileComponent implements OnInit {
     this.isPasswordInvalid.new = validationMsg;
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.setAddressTypes();
   }
 }

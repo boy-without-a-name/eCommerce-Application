@@ -30,8 +30,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ProductComponent } from './components/product/product.component';
 import { CardFilterComponent } from './components/card-product-filter/card.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
+import { MatCardModule } from '@angular/material/card';
 import { register } from 'swiper/element/bundle';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { BasketComponent } from './components/basket/basket.component';
+
 
 @NgModule({
   declarations: [
@@ -56,6 +60,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ProductComponent,
     CardFilterComponent,
     PostModalImgComponent,
+    AboutUsComponent,
+    BasketComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,6 +75,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatDialogModule,
     MatButtonModule,
     MatPaginatorModule,
+    MatCardModule,
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
