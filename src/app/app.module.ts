@@ -33,7 +33,9 @@ import { CardFilterComponent } from './components/card-product-filter/card.compo
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { MatCardModule } from '@angular/material/card';
 import { register } from 'swiper/element/bundle';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { BasketComponent } from './components/basket/basket.component';
+
 
 @NgModule({
   declarations: [
@@ -72,6 +74,7 @@ import { BasketComponent } from './components/basket/basket.component';
     MatProgressSpinnerModule,
     MatDialogModule,
     MatButtonModule,
+    MatPaginatorModule,
     MatCardModule,
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],

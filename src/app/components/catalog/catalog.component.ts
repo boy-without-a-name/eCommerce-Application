@@ -3,6 +3,8 @@ import { CatalogService } from 'src/app/services/catalog/catalog.service';
 import { ResultInterface } from 'src/app/models/interface/result.interfce';
 import { CardFilterInterface } from 'src/app/models/interface/results.filter.intreface';
 import { ProducrTypeId } from 'src/app/models/enums/productTypeId.enum';
+import { PageEvent } from '@angular/material/paginator';
+
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
@@ -18,12 +20,28 @@ export class CatalogComponent implements OnInit {
   minPrice = '';
   maxPrice = '';
   sort = '';
+
+  pageSized: number;
+  pageNo: number;
+  pageOffset = 0;
+  pageLength: number;
+  loading = true;
+  reset = true;
+
   constructor(private catalog: CatalogService) {}
 
   ngOnInit(): void {
-    this.catalog.getProgucts(localStorage.getItem('authTokenMain'))?.subscribe((res) => {
-      this.result = res.results;
-    });
+    this.getLengthPage();
+    this.pageSized = 2;
+    this.pageNo = this.catalog.getPageNo();
+    this.pageOffset = this.pageSized * this.pageNo;
+
+    this.catalog
+      .getProgucts(localStorage.getItem('authTokenMain'), this.pageSized, this.pageOffset)
+      ?.subscribe((res) => {
+        this.result = res.results;
+        this.loading = false;
+      });
   }
 
   clickPhone(value: boolean): void {
@@ -67,6 +85,12 @@ export class CatalogComponent implements OnInit {
   }
 
   clickSave(): void {
+    this.loading = true;
+    if (this.reset) {
+      this.pageNo = 0;
+      this.pageOffset = this.pageNo * this.pageSized;
+    }
+
     let str = '';
     if (this.filterCategory.length > 0) {
       str += 'filter=productType.id:' + this.filterCategory.join(',');
@@ -103,8 +127,10 @@ export class CatalogComponent implements OnInit {
       this.clickSearch = false;
     }
     this.filterEnabled = true;
-    this.catalog.test(localStorage.getItem('authTokenMain'), str)?.subscribe((res) => {
+    this.catalog.test(localStorage.getItem('authTokenMain'), str, this.pageSized, this.pageOffset)?.subscribe((res) => {
       this.productfilter = res.results;
+      this.reset = false;
+      this.loading = false;
       if (res.results.length === 0) {
         alert('По вашему запросу ничего не найдено, попробуйте ввести другие данные');
       }
@@ -115,6 +141,47 @@ export class CatalogComponent implements OnInit {
     this.minPrice = '';
     this.maxPrice = '';
     this.filterCategory = [];
-    this.clickSave();
+    this.filterEnabled = false;
+    this.pageNo = 0;
+    this.pageOffset = this.pageSized * this.pageNo;
+    this.reset = true;
+    this.loading = true;
+    this.getNewProducts();
+  }
+
+  getLengthPage(): void {
+    this.catalog.getProgucts(localStorage.getItem('authTokenMain'))?.subscribe((res) => {
+      this.pageLength = res.results.length;
+    });
+  }
+
+  getNewProducts(): void {
+    this.catalog
+      .getProgucts(localStorage.getItem('authTokenMain'), this.pageSized, this.pageOffset)
+      ?.subscribe((res) => {
+        this.result = res.results;
+        this.loading = false;
+      });
+  }
+
+  pageChanged(event: PageEvent): void {
+    if (event.pageIndex != this.pageNo) {
+      this.loading = true;
+      this.pageNo = event.pageIndex;
+      this.pageOffset = this.pageNo * this.pageSized;
+      this.catalog.setPageNo(this.pageNo);
+      this.getNewProducts();
+    } else {
+      console.log('else', event.pageIndex);
+    }
+  }
+
+  pageChangedFiltered(event: PageEvent): void {
+    if (event.pageIndex != this.pageNo) {
+      this.loading = true;
+      this.pageNo = event.pageIndex;
+      this.pageOffset = this.pageNo * this.pageSized;
+      this.clickSave();
+    }
   }
 }
