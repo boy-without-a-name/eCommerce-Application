@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/carts/carts.service';
 import { ProductCart } from 'src/app/models/interface/cartProduct.interface';
+
 @Component({
   selector: 'app-basket',
   templateUrl: './basket.component.html',
@@ -18,6 +19,11 @@ export class BasketComponent implements OnInit {
 
   constructor(private carts: CartService) {}
 
+  updateCartQuantity(totalLineItemQuantity: number): void {
+    localStorage.setItem('totalLineItemQuantity', totalLineItemQuantity.toString());
+    this.carts.updateTotalQuantity(totalLineItemQuantity);
+  }
+
   ngOnInit(): void {
     if (localStorage.getItem('idCart') !== null) {
       this.carts.getCart(localStorage.getItem('idCart'), localStorage.getItem('token'))?.subscribe({
@@ -30,6 +36,7 @@ export class BasketComponent implements OnInit {
             this.showOrderingBlock = true;
             localStorage.setItem('version', `${response.version}`);
           }
+          this.updateCartQuantity(response.totalLineItemQuantity);
         },
       });
     } else {
@@ -54,6 +61,8 @@ export class BasketComponent implements OnInit {
           this.products = res.lineItems;
           this.totalPrice = res.totalPrice.centAmount;
           this.disabledBtn = false;
+
+          this.updateCartQuantity(res.totalLineItemQuantity);
         });
     }
   }
@@ -74,6 +83,8 @@ export class BasketComponent implements OnInit {
         this.products = res.lineItems;
         this.totalPrice = res.totalPrice.centAmount;
         this.disabledBtn = false;
+
+        this.updateCartQuantity(res.totalLineItemQuantity);
       });
   }
   clickRemove(id: string, quantity: string): void {
@@ -94,6 +105,8 @@ export class BasketComponent implements OnInit {
           }
           this.products = res.lineItems;
           this.totalPrice = res.totalPrice.centAmount;
+
+          this.updateCartQuantity(res.totalLineItemQuantity);
         },
       });
   }
@@ -118,6 +131,7 @@ export class BasketComponent implements OnInit {
             Div.removeChild(Div.lastChild);
           }
         }
+        this.updateCartQuantity(res.totalLineItemQuantity);
       });
   }
 }
