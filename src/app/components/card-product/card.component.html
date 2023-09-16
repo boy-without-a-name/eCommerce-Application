@@ -21,17 +21,16 @@
         }}
       </div>
     </div>
-    <div style="display: flex; align-items: baseline;">   <button
-      class="card-btn"
-      [style]="buttonPosition ? 'transform:translate(4px, 8px);' : ''"
-      (mousedown)="clickBtn(product.id)"
-      (mouseup)="buttonPosition = false"
-    >
-      Add to cart
-    </button>
-    <p class="more-info"
-    (mousedown)="getProductService.renderProduct(product.id)">More infarmation</p>
-  </div>
-
+    <div style="display: flex; align-items: baseline">
+      <button
+        class="card-btn"
+        [style]="buttonPosition ? 'transform:translate(4px, 8px);' : ''"
+        (mousedown)="clickBtn(product.id)"
+        (mouseup)="buttonPosition = false"
+      >
+        Add to cart
+      </button>
+      <p class="more-info" (mousedown)="getProductService.renderProduct(product.id)">More infarmation</p>
+    </div>
   </div>
 </div>
