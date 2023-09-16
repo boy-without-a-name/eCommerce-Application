@@ -2,12 +2,20 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CartInterface } from 'src/app/models/interface/carts.interface';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   constructor(private http: HttpClient) {}
+
+  private totalQuantitySubject = new BehaviorSubject<number>(0);
+  totalQuantity$ = this.totalQuantitySubject.asObservable();
+
+  updateTotalQuantity(quantity: number): void {
+    this.totalQuantitySubject.next(quantity);
+  }
 
   createCart(token: string | null): Observable<CartInterface> | null {
     const body = {

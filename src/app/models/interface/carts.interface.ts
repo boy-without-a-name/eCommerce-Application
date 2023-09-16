@@ -45,4 +45,5 @@ export interface CartInterface {
   refusedGifts: [];
   origin: string;
   itemShippingAddresses: [];
+  totalLineItemQuantity: number;
 }
