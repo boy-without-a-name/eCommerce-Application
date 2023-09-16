@@ -7,7 +7,7 @@ export interface ResultInterface {
       typeId?: string;
     };
   };
-  id?: string;
+  id: string;
   lastMessageSequenceNumber?: number;
   lastModifiedAt: string;
   lastModifiedBy?: {
