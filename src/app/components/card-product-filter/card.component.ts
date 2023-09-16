@@ -11,26 +11,38 @@ export class CardFilterComponent {
   buttonPosition = false;
   constructor(
     public getProductService: GetProductService,
-    private cart: CartService,
+    private carts: CartService,
   ) {}
   @Input() productfilter: CardFilterInterface;
 
   clickBtn(productId: string): void {
-    this.buttonPosition = true;
-    this.cart.getCart('97fde447-d06d-4168-afd7-72f50fd196cf', localStorage.getItem('token'))?.subscribe({
-      next: (response) => {
-        console.log(response);
-        console.log(productId);
-        console.log(response.version);
-        this.cart
+    if (localStorage.getItem('idCart') == null) {
+      this.carts.createCart(localStorage.getItem('token'))?.subscribe((res) => {
+        localStorage.setItem('idCart', `${res.id}`);
+        localStorage.setItem('version', `${res.version}`);
+        this.carts
           .addLineItem(
             localStorage.getItem('token'),
             productId,
-            response.version,
-            '97fde447-d06d-4168-afd7-72f50fd196cf',
+            Number(localStorage.getItem('version')),
+            localStorage.getItem('idCart'),
           )
-          ?.subscribe((response) => console.log(response));
-      },
-    });
+          ?.subscribe((res) => {
+            localStorage.version = res.version;
+          });
+      });
+    } else {
+      this.carts
+        .addLineItem(
+          localStorage.getItem('token'),
+          productId,
+          Number(localStorage.getItem('version')),
+          localStorage.getItem('idCart'),
+        )
+        ?.subscribe((res) => {
+          localStorage.version = res.version;
+        });
+    }
+    this.buttonPosition = true;
   }
 }
