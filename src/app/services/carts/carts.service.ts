@@ -136,4 +136,27 @@ export class CartService {
       { headers },
     );
   }
+
+  addDiscountCode(
+    token: string | null,
+    version: number,
+    nameDiscount: string,
+    idCart: string | null,
+  ): Observable<CartInterface> {
+    const body = {
+      version: version,
+      actions: [
+        {
+          action: 'addDiscountCode',
+          code: `${nameDiscount}`,
+        },
+      ],
+    };
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Content-Type', 'application/json');
+    return this.http.post<CartInterface>(
+      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/${idCart}`,
+      JSON.stringify(body),
+      { headers },
+    );
+  }
 }
