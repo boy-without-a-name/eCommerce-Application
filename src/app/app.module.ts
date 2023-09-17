@@ -36,7 +36,6 @@ import { register } from 'swiper/element/bundle';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BasketComponent } from './components/basket/basket.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
