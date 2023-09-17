@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/carts/carts.service';
 import { ProductCart } from 'src/app/models/interface/cartProduct.interface';
+import { CardEvent } from 'src/app/shared/class/cardEvent';
 
 @Component({
   selector: 'app-basket',
@@ -17,7 +18,10 @@ export class BasketComponent implements OnInit {
   totalPrice: number;
   disabledBtnRemoveCart = false;
 
-  constructor(private carts: CartService) {}
+  constructor(
+    private carts: CartService,
+    private event: CardEvent,
+  ) {}
 
   updateCartQuantity(totalLineItemQuantity: number): void {
     localStorage.setItem('totalLineItemQuantity', totalLineItemQuantity.toString());
@@ -87,7 +91,7 @@ export class BasketComponent implements OnInit {
         this.updateCartQuantity(res.totalLineItemQuantity);
       });
   }
-  clickRemove(id: string, quantity: string): void {
+  clickRemove(id: string, quantity: string, productId: string): void {
     this.carts
       .removeLineItem(
         localStorage.getItem('token'),
@@ -99,6 +103,7 @@ export class BasketComponent implements OnInit {
       ?.subscribe({
         next: (res) => {
           localStorage.version = res.version;
+          this.event.removeProductIdinLS(productId);
           if (res.lineItems.length === 0) {
             this.showLinkCatalog = true;
             this.showOrderingBlock = false;
@@ -122,6 +127,7 @@ export class BasketComponent implements OnInit {
       ?.subscribe((res) => {
         localStorage.removeItem('version');
         localStorage.removeItem('idCart');
+        localStorage.removeItem('cartsProductId');
         this.products = res.lineItems;
         this.showLinkCatalog = true;
         this.showOrderingBlock = false;

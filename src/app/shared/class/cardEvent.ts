@@ -35,6 +35,12 @@ export class CardEvent {
       });
   }
 
+  removeProductIdinLS(productId: string): void {
+    const data = JSON.parse(localStorage.getItem('cartsProductId') as string);
+    delete data[productId];
+    localStorage.cartsProductId = JSON.stringify(data);
+  }
+
   clickBtn(productId: string): void {
     if (localStorage.getItem('idCart') == null) {
       this.carts.createCart(localStorage.getItem('token'))?.subscribe((res) => {
