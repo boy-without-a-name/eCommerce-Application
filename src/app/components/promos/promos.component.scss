@@ -1,0 +1,36 @@
+.promos {
+  background-color: #febd69;
+  padding: 1rem;
+  border-radius: 1rem;
+  max-width: 500px;
+
+  &__title {
+    line-height: 1;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+  &__code {
+    text-align: center;
+    background-color: #000;
+    border-radius: 1rem;
+    color: #fff;
+    padding: 0.2rem 0.5rem;
+    cursor: pointer;
+  }
+}
