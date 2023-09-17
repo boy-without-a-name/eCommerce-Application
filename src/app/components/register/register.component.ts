@@ -7,7 +7,6 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../services/loginSevice/login.service';
 import { countries } from '../../models/interface/countries';
 import { DataUser } from 'src/app/models/interface/dataUser.interface';
-import { IAddress } from 'src/app/models/interface/address.interface';
 
 @Component({
   selector: 'app-register',

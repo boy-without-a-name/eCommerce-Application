@@ -6,8 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./promos.component.scss'],
 })
 export class PromosComponent {
-  promos = [
-    { name: '10% off each cart item (for carts > 3000 USD)', code: 'massive-discount' },
-    { name: 'name', code: 'code' },
-  ];
+  promos = [{ name: '10% off each cart item (for carts > 3000 USD)', code: 'massive-discount' }];
 }

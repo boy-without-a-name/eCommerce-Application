@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/carts/carts.service';
 import { ProductCart } from 'src/app/models/interface/cartProduct.interface';
+import { FormBuilder, Validators } from '@angular/forms';
+import Toastify from 'toastify-js';
 
 @Component({
   selector: 'app-basket',
@@ -16,8 +18,17 @@ export class BasketComponent implements OnInit {
   products: ProductCart[] = [];
   totalPrice: number;
   disabledBtnRemoveCart = false;
+  newTotalPrice: number;
+  discountCodeForm;
 
-  constructor(private carts: CartService) {}
+  constructor(
+    private carts: CartService,
+    private formBuilder: FormBuilder,
+  ) {
+    this.discountCodeForm = this.formBuilder.group({
+      discountCode: ['', Validators.required],
+    });
+  }
 
   updateCartQuantity(totalLineItemQuantity: number): void {
     localStorage.setItem('totalLineItemQuantity', totalLineItemQuantity.toString());
@@ -132,6 +143,55 @@ export class BasketComponent implements OnInit {
           }
         }
         this.updateCartQuantity(res.totalLineItemQuantity);
+      });
+  }
+
+  applyPromo(): void {
+    this.disabledBtn = true;
+
+    this.carts
+      .addDiscountCode(
+        String(localStorage.getItem('token')),
+        Number(localStorage.getItem('version')),
+        String(localStorage.getItem('idCart')),
+        this.discountCodeForm.value.discountCode as string,
+      )
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+
+          localStorage.setItem('version', `${response.version}`);
+          this.totalPrice = response.totalPrice.centAmount;
+
+          Toastify({
+            text: 'Promo code successfully applied ✅',
+            style: {
+              background: 'lightgreen',
+              padding: '0.2rem 0.5rem',
+              'text-align': 'center',
+              'border-radius': '4px',
+              'font-weight': '600',
+            },
+          }).showToast();
+
+          this.disabledBtn = false;
+        },
+        error: (error) => {
+          console.log(error.error.message);
+
+          Toastify({
+            text: `${error.error.message} ❌`,
+            style: {
+              background: 'lightcoral',
+              padding: '0.2rem 0.5rem',
+              'text-align': 'center',
+              'border-radius': '4px',
+              'font-weight': '600',
+            },
+          }).showToast();
+
+          this.disabledBtn = false;
+        },
       });
   }
 }

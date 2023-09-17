@@ -87,9 +87,11 @@ input[type='number'] {
   background-color: #e74b4b;
   border: none;
   border-radius: 5px;
+  transition: background-color 0.2s ease-in-out;
 
   &:hover {
     cursor: pointer;
+    background-color: #cb4141;
   }
 }
 .wrapper-link-catalog {
@@ -108,7 +110,8 @@ input[type='number'] {
   }
 }
 
-.remove-cart {
+.remove-cart,
+.apply-promo-btn {
   color: #ffffff;
   background-color: #e01b1b;
   border-radius: 4px;
@@ -118,7 +121,21 @@ input[type='number'] {
   padding: 0.5rem;
   white-space: nowrap;
   transition: background-color 0.2s ease-in-out;
-  &:hover {
+
+  &:hover:enabled {
     cursor: pointer;
+    background-color: #ba1515;
+  }
+
+  &:disabled {
+    background-color: #c3c3c3;
+    color: #dadada;
+  }
+}
+
+.apply-promo-btn {
+  background-color: #129845;
+  &:hover:enabled {
+    background-color: #0d7133;
   }
 }

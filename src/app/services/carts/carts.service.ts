@@ -140,15 +140,15 @@ export class CartService {
   addDiscountCode(
     token: string | null,
     version: number,
-    nameDiscount: string,
     idCart: string | null,
+    discountCode: string,
   ): Observable<CartInterface> {
     const body = {
       version: version,
       actions: [
         {
           action: 'addDiscountCode',
-          code: `${nameDiscount}`,
+          code: `${discountCode}`,
         },
       ],
     };
