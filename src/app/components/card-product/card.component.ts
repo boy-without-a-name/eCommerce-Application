@@ -7,7 +7,7 @@ import { CartService } from 'src/app/services/carts/carts.service';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent   {
+export class CardComponent {
   buttonPosition = false;
   btnDisabled = false;
   constructor(
@@ -64,7 +64,7 @@ export class CardComponent   {
   disabled(productId: string): boolean {
     if (localStorage.getItem('cartsProductId')) {
       const data = JSON.parse(localStorage.getItem('cartsProductId') as string);
-      if(data[productId]){
+      if (data[productId]) {
         return true;
       }
     }
