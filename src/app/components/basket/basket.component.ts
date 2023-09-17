@@ -177,6 +177,7 @@ export class BasketComponent implements OnInit {
           }).showToast();
 
           this.disabledBtn = false;
+          this.discountCodeForm.value.discountCode = '';
         },
         error: (error) => {
           console.log(error.error.message);
@@ -193,6 +194,7 @@ export class BasketComponent implements OnInit {
           }).showToast();
 
           this.disabledBtn = false;
+          this.discountCodeForm.value.discountCode = '';
         },
       });
   }

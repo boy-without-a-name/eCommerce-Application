@@ -23,33 +23,18 @@
       </div>
       <div class="wrapper-btn">
         <div class="basket__amount">
-          <button
-            class="btn__quantity minus"
-            [disabled]="disabledBtn === true"
-            (click)="clickMinus(quantity.value, product.id)"
-          >
+          <button class="btn__quantity minus" [disabled]="disabledBtn === true"
+            (click)="clickMinus(quantity.value, product.id)">
             -
           </button>
-          <input
-            class="basket__amount-input"
-            inputmode="numeric"
-            pattern="[0-9]*"
-            min="1"
-            disabled="true"
-            max="100"
-            type="number"
-            value="{{ product.quantity }}"
-            #quantity
-          />
-          <button
-            class="btn__quantity plus"
-            [disabled]="disabledBtn === true"
-            (click)="clickPlus(quantity.value, product.id)"
-          >
+          <input class="basket__amount-input" inputmode="numeric" pattern="[0-9]*" min="1" disabled="true" max="100"
+            type="number" value="{{ product.quantity }}" #quantity />
+          <button class="btn__quantity plus" [disabled]="disabledBtn === true"
+            (click)="clickPlus(quantity.value, product.id)">
             +
           </button>
         </div>
-        <button class="remove" (click)="clickRemove(product.id, quantity.value)">Remove Item</button>
+        <button class="remove" (click)="clickRemove(product.id, quantity.value)">Remove</button>
       </div>
     </div>
   </div>
@@ -58,7 +43,6 @@
     <div class="basket__complete">
       <div class="basket__price basket__price-complete">
         <div>Total: {{ totalPrice / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}</div>
-        <!-- <div *ngIf="newTotalPrice">New Total: {{ newTotalPrice / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}</div> -->
       </div>
       <app-button text="К оформлению"></app-button>
       <button class="remove-cart" (click)="clickRemoveCart()" [disabled]="disabledBtnRemoveCart === true">
@@ -68,7 +52,7 @@
 
     <form class="basket__promo" [formGroup]="discountCodeForm" (ngSubmit)="applyPromo()">
       <div class="basket__promo-title">Промокод:</div>
-      <input formControlName="discountCode" type="text" />
+      <input formControlName="discountCode" type="text" [(ngModel)]="discountCodeForm.value.discountCode" />
       <button class="apply-promo-btn" [disabled]="!discountCodeForm.valid">Применить</button>
     </form>
   </div>
