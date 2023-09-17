@@ -1,11 +1,12 @@
 .wrapper-card-basket {
   display: flex;
+  justify-content: space-between;
   padding: 0.3rem 0.5rem;
-  border: 2px solid #000000;
+  border: 1px solid #000000;
   border-radius: 5px;
   width: 100%;
   max-width: 600px;
-  margin-top: 50px;
+  margin: 0 auto;
 }
 
 .wrapper-card-basket__img {
@@ -26,27 +27,7 @@
 .wrapper-card-basket__total-price {
   font-weight: 800;
 }
-.basket {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1rem;
 
-  &__amount {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  &__amount-input {
-    padding: 0.3rem 0.2rem;
-    width: 4em;
-    text-align: center;
-  }
-}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
