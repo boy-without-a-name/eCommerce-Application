@@ -7,13 +7,25 @@ import { CartService } from 'src/app/services/carts/carts.service';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent {
+export class CardComponent   {
   buttonPosition = false;
+  btnDisabled = false;
   constructor(
     public getProductService: GetProductService,
     private carts: CartService,
   ) {}
   @Input() product: ResultInterface;
+
+  saveLocalStorage(productId: string): void {
+    if (localStorage.getItem('cartsProductId') == null) {
+      localStorage.setItem('cartsProductId', '{}');
+    }
+    const data = JSON.parse(localStorage.getItem('cartsProductId') as string);
+    if (data[`${productId}`] == undefined) {
+      data[`${productId}`] = productId;
+    }
+    localStorage.cartsProductId = JSON.stringify(data);
+  }
 
   clickBtn(productId: string): void {
     if (localStorage.getItem('idCart') == null) {
@@ -29,6 +41,7 @@ export class CardComponent {
           )
           ?.subscribe((res) => {
             localStorage.version = res.version;
+            this.saveLocalStorage(productId);
           });
       });
     } else {
@@ -41,8 +54,20 @@ export class CardComponent {
         )
         ?.subscribe((res) => {
           localStorage.version = res.version;
+          this.saveLocalStorage(productId);
         });
     }
     this.buttonPosition = true;
+    this.btnDisabled = true;
+  }
+
+  disabled(productId: string): boolean {
+    if (localStorage.getItem('cartsProductId')) {
+      const data = JSON.parse(localStorage.getItem('cartsProductId') as string);
+      if(data[productId]){
+        return true;
+      }
+    }
+    return false;
   }
 }
