@@ -77,6 +77,7 @@ export class BasketComponent implements OnInit {
         });
     }
   }
+
   clickPlus(valueInput: string, lineItemId: string): void {
     this.disabledBtn = true;
     this.carts
@@ -98,6 +99,7 @@ export class BasketComponent implements OnInit {
         this.updateCartQuantity(res.totalLineItemQuantity);
       });
   }
+
   clickRemove(id: string, quantity: string): void {
     this.carts
       .removeLineItem(

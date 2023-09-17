@@ -23,14 +23,29 @@
       </div>
       <div class="wrapper-btn">
         <div class="basket__amount">
-          <button class="btn__quantity minus" [disabled]="disabledBtn === true"
-            (click)="clickMinus(quantity.value, product.id)">
+          <button
+            class="btn__quantity minus"
+            [disabled]="disabledBtn === true"
+            (click)="clickMinus(quantity.value, product.id)"
+          >
             -
           </button>
-          <input class="basket__amount-input" inputmode="numeric" pattern="[0-9]*" min="1" disabled="true" max="100"
-            type="number" value="{{ product.quantity }}" #quantity />
-          <button class="btn__quantity plus" [disabled]="disabledBtn === true"
-            (click)="clickPlus(quantity.value, product.id)">
+          <input
+            class="basket__amount-input"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            min="1"
+            disabled="true"
+            max="100"
+            type="number"
+            value="{{ product.quantity }}"
+            #quantity
+          />
+          <button
+            class="btn__quantity plus"
+            [disabled]="disabledBtn === true"
+            (click)="clickPlus(quantity.value, product.id)"
+          >
             +
           </button>
         </div>
@@ -56,6 +71,5 @@
       <input formControlName="discountCode" type="text" />
       <button class="apply-promo-btn" [disabled]="!discountCodeForm.valid">Применить</button>
     </form>
-
   </div>
 </div>
