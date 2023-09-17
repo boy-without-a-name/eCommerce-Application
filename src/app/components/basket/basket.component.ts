@@ -19,11 +19,6 @@ export class BasketComponent implements OnInit {
 
   constructor(private carts: CartService) {}
 
-  updateCartQuantity(totalLineItemQuantity: number): void {
-    localStorage.setItem('totalLineItemQuantity', totalLineItemQuantity.toString());
-    this.carts.updateTotalQuantity(totalLineItemQuantity);
-  }
-
   ngOnInit(): void {
     if (localStorage.getItem('idCart') !== null) {
       this.carts.getCart(localStorage.getItem('idCart'), localStorage.getItem('token'))?.subscribe({
@@ -36,7 +31,7 @@ export class BasketComponent implements OnInit {
             this.showOrderingBlock = true;
             localStorage.setItem('version', `${response.version}`);
           }
-          this.updateCartQuantity(response.totalLineItemQuantity);
+          this.carts.updateTotalQuantity(response.totalLineItemQuantity);
         },
       });
     } else {
@@ -62,7 +57,7 @@ export class BasketComponent implements OnInit {
           this.totalPrice = res.totalPrice.centAmount;
           this.disabledBtn = false;
 
-          this.updateCartQuantity(res.totalLineItemQuantity);
+          this.carts.updateTotalQuantity(res.totalLineItemQuantity);
         });
     }
   }
@@ -84,7 +79,7 @@ export class BasketComponent implements OnInit {
         this.totalPrice = res.totalPrice.centAmount;
         this.disabledBtn = false;
 
-        this.updateCartQuantity(res.totalLineItemQuantity);
+        this.carts.updateTotalQuantity(res.totalLineItemQuantity);
       });
   }
   clickRemove(id: string, quantity: string): void {
@@ -106,7 +101,7 @@ export class BasketComponent implements OnInit {
           this.products = res.lineItems;
           this.totalPrice = res.totalPrice.centAmount;
 
-          this.updateCartQuantity(res.totalLineItemQuantity);
+          this.carts.updateTotalQuantity(res.totalLineItemQuantity);
         },
       });
   }
@@ -131,7 +126,8 @@ export class BasketComponent implements OnInit {
             Div.removeChild(Div.lastChild);
           }
         }
-        this.updateCartQuantity(res.totalLineItemQuantity);
+
+        this.carts.updateTotalQuantity(undefined);
       });
   }
 }

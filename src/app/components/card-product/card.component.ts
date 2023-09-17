@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ResultInterface } from 'src/app/models/interface/result.interfce';
 import { GetProductService } from '../../services/getProduct/get-product.service';
 import { CartService } from 'src/app/services/carts/carts.service';
+
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -29,6 +30,7 @@ export class CardComponent {
           )
           ?.subscribe((res) => {
             localStorage.version = res.version;
+            this.carts.updateTotalQuantity(res.totalLineItemQuantity);
           });
       });
     } else {
@@ -39,8 +41,14 @@ export class CardComponent {
           Number(localStorage.getItem('version')),
           localStorage.getItem('idCart'),
         )
-        ?.subscribe((res) => {
-          localStorage.version = res.version;
+        ?.subscribe({
+          next: (res) => {
+            localStorage.version = res.version;
+            this.carts.updateTotalQuantity(res.totalLineItemQuantity);
+          },
+          error: (err) => {
+            console.log(err.error.message);
+          },
         });
     }
     this.buttonPosition = true;
