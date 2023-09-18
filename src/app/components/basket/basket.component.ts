@@ -4,6 +4,7 @@ import { ProductCart } from 'src/app/models/interface/cartProduct.interface';
 import { FormBuilder, Validators } from '@angular/forms';
 import Toastify from 'toastify-js';
 import { CartInterface } from 'src/app/models/interface/carts.interface';
+import { CardEvent } from 'src/app/shared/class/cardEvent';
 
 @Component({
   selector: 'app-basket',
@@ -27,11 +28,13 @@ export class BasketComponent implements OnInit {
   constructor(
     private carts: CartService,
     private formBuilder: FormBuilder,
+    private event: CardEvent,
   ) {
     this.discountCodeForm = this.formBuilder.group({
       discountCode: ['', Validators.required],
     });
   }
+
 
   updateCartQuantity(totalLineItemQuantity: number): void {
     localStorage.setItem('totalLineItemQuantity', totalLineItemQuantity.toString());
@@ -129,7 +132,7 @@ export class BasketComponent implements OnInit {
       });
   }
 
-  clickRemove(id: string, quantity: string): void {
+  clickRemove(id: string, quantity: string, productId: string): void {
     this.carts
       .removeLineItem(
         localStorage.getItem('token'),
@@ -141,6 +144,7 @@ export class BasketComponent implements OnInit {
       ?.subscribe({
         next: (res) => {
           localStorage.version = res.version;
+          this.event.removeProductIdinLS(productId);
           if (res.lineItems.length === 0) {
             this.showLinkCatalog = true;
             this.showOrderingBlock = false;
@@ -166,6 +170,7 @@ export class BasketComponent implements OnInit {
       ?.subscribe((res) => {
         localStorage.removeItem('version');
         localStorage.removeItem('idCart');
+        localStorage.removeItem('cartsProductId');
         this.products = res.lineItems;
         this.showLinkCatalog = true;
         this.showOrderingBlock = false;

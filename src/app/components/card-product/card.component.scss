@@ -37,10 +37,14 @@
   border: 0px solid;
   background: linear-gradient(to right, #ffe259, #ffa751);
   font-size: 1rem;
-}
 
-.card-btn:hover {
-  cursor: pointer;
+  &:disabled {
+    background: #5c635f;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .discount {
