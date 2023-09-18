@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { IAddress } from 'src/app/models/interface/address.interface';
 import { DataUser } from 'src/app/models/interface/dataUser.interface';
 import { LoginService } from 'src/app/services/loginSevice/login.service';
+import { ReRecordCart } from 'src/app/shared/class/reRecordCart';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +28,7 @@ export class AppLoginComponent {
   constructor(
     private token: LoginService,
     private router: Router,
+    private replice: ReRecordCart,
   ) {}
 
   showPassword(a: string[]): string {
@@ -185,7 +186,7 @@ export class AppLoginComponent {
           localStorage.setItem('shippingAddressIds', JSON.stringify(shippingAddressIds));
           localStorage.setItem('addresses', JSON.stringify(addresses));
           localStorage.setItem('dateOfBirth', `${response.dateOfBirth}`);
-
+          this.replice.reRecordCart();
           this.router.navigate(['/']);
         });
       },

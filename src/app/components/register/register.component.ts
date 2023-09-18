@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../services/loginSevice/login.service';
 import { countries } from '../../models/interface/countries';
 import { DataUser } from 'src/app/models/interface/dataUser.interface';
-import { IAddress } from 'src/app/models/interface/address.interface';
+import { ReRecordCart } from 'src/app/shared/class/reRecordCart';
 
 @Component({
   selector: 'app-register',
@@ -30,6 +30,7 @@ export class RegisterComponent {
     private http: HttpClient,
     private login: LoginService,
     private router: Router,
+    private replice: ReRecordCart,
   ) {
     this.registrationForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.pattern(/^[A-Za-zА-Яа-я]+$/)]],
@@ -99,6 +100,7 @@ export class RegisterComponent {
                     localStorage.setItem('lastName', `${response.lastName}`);
                     localStorage.setItem('isSignedIn', JSON.stringify(true));
                     localStorage.setItem('dateOfBirth', `${this.registrationForm.value.dateOfBirth}`);
+                    this.replice.reRecordCart();
                   });
 
                   this.router.navigate(['/']);
