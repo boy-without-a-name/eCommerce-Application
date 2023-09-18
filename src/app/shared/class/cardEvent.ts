@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CartService } from 'src/app/services/carts/carts.service';
 import { GetProductService } from 'src/app/services/getProduct/get-product.service';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -61,5 +62,23 @@ export class CardEvent {
       }
     }
     return false;
+  }
+
+  removeCard(productId: string): void {
+    this.carts.getCart(localStorage.getItem('idCart'), localStorage.getItem('token'))?.subscribe((res) => {
+      const array = res.lineItems.filter((value) => value.productId === productId);
+      this.carts
+        .removeLineItem(
+          localStorage.getItem('token'),
+          array[0].id,
+          Number(localStorage.getItem('version')),
+          localStorage.getItem('idCart'),
+          array[0].quantity,
+        )
+        ?.subscribe((res) => {
+          localStorage.version = res.version;
+          this.removeProductIdinLS(productId);
+        });
+    });
   }
 }

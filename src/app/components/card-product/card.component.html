@@ -22,9 +22,10 @@
       </div>
     </div>
     <div style="display: flex; align-items: baseline">
+      <mat-spinner *ngIf="loading"></mat-spinner>
       <button
         class="card-btn"
-        [style]="buttonPosition ? 'transform:translate(4px, 8px);' : ''"
+        [style]="loading ? 'display: none' : ''"
         (mousedown)="clickBtn(product.id)"
         (mouseup)="buttonPosition = false"
         [disabled]="disabled(product.id)"

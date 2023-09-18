@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { CartInterface } from 'src/app/models/interface/carts.interface';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -94,6 +93,7 @@ export class CartService {
       { headers },
     );
   }
+
   changeLineItemQuantity(
     token: string | null,
     lineItemId: string,

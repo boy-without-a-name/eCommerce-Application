@@ -25,6 +25,7 @@ export class CatalogComponent implements OnInit {
   pageNo: number;
   pageOffset = 0;
   pageLength: number;
+  pageLengthFilter = 0;
   loading = true;
   reset = true;
 
@@ -84,6 +85,11 @@ export class CatalogComponent implements OnInit {
 
   clickSave(): void {
     this.loading = true;
+
+    this.pageNo = 0;
+    this.pageOffset = 0;
+    this.filterEnabled = false;
+
     if (this.reset) {
       this.pageNo = 0;
       this.pageOffset = this.pageNo * this.pageSized;
@@ -125,7 +131,13 @@ export class CatalogComponent implements OnInit {
       this.clickSearch = false;
     }
     this.filterEnabled = true;
-    this.catalog.test(localStorage.getItem('token'), str, this.pageSized, this.pageOffset)?.subscribe((res) => {
+
+    this.catalog.test(localStorage.getItem('authTokenMain'), str)?.subscribe((res) => {
+      this.pageLengthFilter = res.results.length;
+      this.filterEnabled = true;
+      console.log(this.pageLengthFilter);
+    });
+    this.catalog.test(localStorage.getItem('authTokenMain'), str, this.pageSized, this.pageOffset)?.subscribe((res) => {
       this.productfilter = res.results;
       this.reset = false;
       this.loading = false;

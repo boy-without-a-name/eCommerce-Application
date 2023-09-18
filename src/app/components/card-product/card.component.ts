@@ -9,16 +9,27 @@ import { CardEvent } from 'src/app/shared/class/cardEvent';
 })
 export class CardComponent {
   buttonPosition = false;
+  loading = false;
+
   constructor(
     private cardEvent: CardEvent,
     public getProductService: GetProductService,
   ) {}
+
   @Input() product: ResultInterface;
 
   clickBtn(productId: string): void {
+    this.loading = true;
     this.cardEvent.clickBtn(productId);
     this.buttonPosition = true;
+    this.loadingTrue();
   }
+
+  loadingTrue(): void {
+    setTimeout(() => {
+      this.loading = false;
+    }, 1000);
+
 
   disabled(productId: string): boolean {
     return this.cardEvent.disabled(productId);

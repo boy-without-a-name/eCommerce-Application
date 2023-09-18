@@ -24,9 +24,27 @@
           productView.masterVariant.prices['0'].discounted.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2'
         }}
       </h3>
+      <mat-spinner *ngIf="smallLoading"></mat-spinner>
       <div class="btn__form">
         <button mat-raised-button routerLink="/catalog">Back</button>
-        <button mat-raised-button color="primary">Add to card</button>
+        <button
+          mat-raised-button
+          *ngIf="removeBtn"
+          (click)="removeBtnClick()"
+          [disabled]="smallLoading === true"
+          color="warn"
+        >
+          Remove
+        </button>
+        <button
+          mat-raised-button
+          *ngIf="!removeBtn"
+          (click)="addCartClick()"
+          [disabled]="smallLoading === true"
+          color="primary"
+        >
+          Add to card
+        </button>
       </div>
     </div>
   </div>

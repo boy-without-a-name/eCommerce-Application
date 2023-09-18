@@ -51,12 +51,7 @@ export class CatalogService {
     );
   }
 
-  test(
-    authToken: string | null,
-    value: string,
-    pageSized: number,
-    pageOffset: number,
-  ): Observable<AnswerFilterInterface> {
+  test(authToken: string | null, value: string, pageSized = 100, pageOffset = 0): Observable<AnswerFilterInterface> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
     return this.http.get<AnswerFilterInterface>(
       `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/product-projections/search?${value}&limit=${pageSized}&offset=${pageOffset}`,

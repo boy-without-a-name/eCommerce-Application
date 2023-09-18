@@ -5,6 +5,7 @@
     <span class="routerlink" routerLink="/catalog">catalog</span> and choose something for yourself!
   </div>
   <div class="basket__items">
+    <mat-spinner *ngIf="loading" />
     <div class="wrapper-card-basket" *ngFor="let product of products">
       <div>
         <img class="wrapper-card-basket__img" [src]="product.variant.images[0].url" [alt]="product.name['en-US']" />
@@ -50,7 +51,13 @@
           </button>
         </div>
 
-        <button class="remove" (click)="clickRemove(product.id, quantity.value, product.productId)">Remove Item</button>
+        <button
+          class="remove"
+          [disabled]="loading"
+          (click)="clickRemove(product.id, quantity.value, product.productId)"
+        >
+          Remove Item
+        </button>
       </div>
     </div>
   </div>
