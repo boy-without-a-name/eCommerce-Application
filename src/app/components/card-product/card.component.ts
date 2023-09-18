@@ -12,10 +12,13 @@ import { CardEvent } from 'src/app/shared/class/cardEvent';
 })
 export class CardComponent {
   buttonPosition = false;
+
   constructor(
     private cardEvent: CardEvent,
     public getProductService: GetProductService,
+    public carts: CartService,
   ) {}
+
   @Input() product: ResultInterface;
 
   clickBtn(productId: string): void {
@@ -55,7 +58,6 @@ export class CardComponent {
     }
 
     this.cardEvent.clickBtn(productId);
-
   }
 
   disabled(productId: string): boolean {
