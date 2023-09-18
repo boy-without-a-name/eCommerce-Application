@@ -27,6 +27,7 @@
         [style]="buttonPosition ? 'transform:translate(4px, 8px);' : ''"
         (mousedown)="clickBtn(product.id)"
         (mouseup)="buttonPosition = false"
+        [disabled]="disabled(product.id)"
       >
         Add to cart
       </button>
