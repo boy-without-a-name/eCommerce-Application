@@ -138,7 +138,6 @@ export class CartService {
     );
   }
 
-
   replicateCart(token: string | null, idCart: string | null): Observable<CartInterface> | null {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     const body = {
