@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AnonymousService } from './services/anonymous/anonymous';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,8 +13,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     if (!localStorage.getItem('token')) {
-      this.anonym.getToken()?.subscribe((res)=>
-      localStorage.setItem('token',`${res.access_token}`))
+      this.anonym.getToken()?.subscribe((res) => localStorage.setItem('token', `${res.access_token}`));
     }
   }
 }

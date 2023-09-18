@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AccessTokenResponse } from 'src/app/models/interface/AnswerTokenResponseInterface';
-import { scope, clientId, clientSecret,} from 'src/app/models/constants/constants';
+import { scope, clientId, clientSecret } from 'src/app/models/constants/constants';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +26,10 @@ export class AnonymousService {
       .set('Authorization', `Basic ${btoa(`${clientId}:${clientSecret}`)}`)
       .set('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this.http.post('https://https://auth.australia-southeast1.gcp.commercetools.com/oauth/arandomteam16/anonymous/token', data.toString(), { headers });
+    return this.http.post(
+      'https://https://auth.australia-southeast1.gcp.commercetools.com/oauth/arandomteam16/anonymous/token',
+      data.toString(),
+      { headers },
+    );
   }
 }
