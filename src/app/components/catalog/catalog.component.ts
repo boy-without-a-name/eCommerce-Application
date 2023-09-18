@@ -36,12 +36,10 @@ export class CatalogComponent implements OnInit {
     this.pageNo = this.catalog.getPageNo();
     this.pageOffset = this.pageSized * this.pageNo;
 
-    this.catalog
-      .getProgucts(localStorage.getItem('authTokenMain'), this.pageSized, this.pageOffset)
-      ?.subscribe((res) => {
-        this.result = res.results;
-        this.loading = false;
-      });
+    this.catalog.getProgucts(localStorage.getItem('token'), this.pageSized, this.pageOffset)?.subscribe((res) => {
+      this.result = res.results;
+      this.loading = false;
+    });
   }
 
   clickPhone(value: boolean): void {
@@ -127,7 +125,7 @@ export class CatalogComponent implements OnInit {
       this.clickSearch = false;
     }
     this.filterEnabled = true;
-    this.catalog.test(localStorage.getItem('authTokenMain'), str, this.pageSized, this.pageOffset)?.subscribe((res) => {
+    this.catalog.test(localStorage.getItem('token'), str, this.pageSized, this.pageOffset)?.subscribe((res) => {
       this.productfilter = res.results;
       this.reset = false;
       this.loading = false;
@@ -150,18 +148,16 @@ export class CatalogComponent implements OnInit {
   }
 
   getLengthPage(): void {
-    this.catalog.getProgucts(localStorage.getItem('authTokenMain'))?.subscribe((res) => {
+    this.catalog.getProgucts(localStorage.getItem('token'))?.subscribe((res) => {
       this.pageLength = res.results.length;
     });
   }
 
   getNewProducts(): void {
-    this.catalog
-      .getProgucts(localStorage.getItem('authTokenMain'), this.pageSized, this.pageOffset)
-      ?.subscribe((res) => {
-        this.result = res.results;
-        this.loading = false;
-      });
+    this.catalog.getProgucts(localStorage.getItem('token'), this.pageSized, this.pageOffset)?.subscribe((res) => {
+      this.result = res.results;
+      this.loading = false;
+    });
   }
 
   pageChanged(event: PageEvent): void {

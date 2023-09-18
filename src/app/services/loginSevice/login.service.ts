@@ -30,7 +30,7 @@ export class LoginService {
       .set('Authorization', `Basic ${btoa(`${clientId}:${clientSecret}`)}`)
       .set('Content-Type', 'application/x-www-form-urlencoded');
 
-    return this.http.post(tokenUrlLogin, data.toString(), { headers });
+    return this.http.post<AccessTokenResponse>(tokenUrlLogin, data.toString(), { headers });
   }
 
   getUserData(authToken: string | null): Observable<DataUser> | null {

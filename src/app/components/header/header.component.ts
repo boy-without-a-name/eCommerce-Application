@@ -1,13 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { AnonymosService } from 'src/app/services/anonymos';
 import { NavService } from 'src/app/services/navService/nav.service';
+import { ReRecordCart } from 'src/app/shared/class/reRecordCart';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
-  constructor(private navService: NavService) {
+export class HeaderComponent {
+  constructor(
+    private navService: NavService,
+    private anonym: AnonymosService,
+    private replice: ReRecordCart,
+  ) {
     if (localStorage.getItem('isSignedIn')) {
       this.navService.setSignedInState(true);
     }
@@ -32,6 +38,10 @@ export class HeaderComponent implements OnInit {
     );
 
     this.isSignedIn = false;
+    this.anonym.getToken()?.subscribe((res) => {
+      localStorage.setItem('token', `${res.access_token}`);
+      this.replice.reRecordCart();
+    });
   }
 
   removeItemsFromLocalStorage(...items: string[]): void {
@@ -39,5 +49,4 @@ export class HeaderComponent implements OnInit {
       localStorage.removeItem(item);
     }
   }
-  ngOnInit() {}
 }
