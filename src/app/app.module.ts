@@ -36,7 +36,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { BasketComponent } from './components/basket/basket.component';
 import { PromosComponent } from './components/promos/promos.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -10,10 +10,10 @@ import { BehaviorSubject } from 'rxjs';
 export class CartService {
   constructor(private http: HttpClient) {}
 
-  private totalQuantitySubject = new BehaviorSubject<number>(0);
+  private totalQuantitySubject = new BehaviorSubject<number | undefined>(0);
   totalQuantity$ = this.totalQuantitySubject.asObservable();
 
-  updateTotalQuantity(quantity: number): void {
+  updateTotalQuantity(quantity: number | undefined): void {
     this.totalQuantitySubject.next(quantity);
   }
 
