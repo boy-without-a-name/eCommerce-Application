@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { AnonymosService } from 'src/app/services/anonymos';
 import { NavService } from 'src/app/services/navService/nav.service';
-import { RegisterService } from 'src/app/services/register.service';
+import { ReRecordCart } from 'src/app/shared/class/reRecordCart';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,8 @@ import { RegisterService } from 'src/app/services/register.service';
 export class HeaderComponent {
   constructor(
     private navService: NavService,
-    private registr: RegisterService,
+    private anonym: AnonymosService,
+    private replice: ReRecordCart,
   ) {
     if (localStorage.getItem('isSignedIn')) {
       this.navService.setSignedInState(true);
@@ -36,7 +38,10 @@ export class HeaderComponent {
     );
 
     this.isSignedIn = false;
-    this.registr.createToken();
+    this.anonym.getToken()?.subscribe((res) => {
+      localStorage.setItem('token', `${res.access_token}`);
+      this.replice.reRecordCart();
+    });
   }
 
   removeItemsFromLocalStorage(...items: string[]): void {
