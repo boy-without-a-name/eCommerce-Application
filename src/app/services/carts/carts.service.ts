@@ -45,6 +45,7 @@ export class CartService {
     productId: string,
     version: number,
     idCart: string | null,
+    quantity = 1,
   ): Observable<CartInterface> | null {
     const body = {
       version: version,
@@ -53,7 +54,7 @@ export class CartService {
           action: 'addLineItem',
           productId: `${productId}`,
           variantId: 1,
-          quantity: 1,
+          quantity: quantity,
         },
       ],
     };

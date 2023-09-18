@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
 import { NavService } from 'src/app/services/navService/nav.service';
+import { RegisterService } from 'src/app/services/register.service';
+
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent  {
-  constructor(private navService: NavService) {
+export class HeaderComponent {
+  constructor(
+    private navService: NavService,
+    private registr: RegisterService
+  ) {
     if (localStorage.getItem('isSignedIn')) {
       this.navService.setSignedInState(true);
     }
@@ -32,6 +37,8 @@ export class HeaderComponent  {
     );
 
     this.isSignedIn = false;
+    this.registr.createToken();
+
   }
 
   removeItemsFromLocalStorage(...items: string[]): void {
