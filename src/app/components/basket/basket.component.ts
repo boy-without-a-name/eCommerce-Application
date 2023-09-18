@@ -35,8 +35,6 @@ export class BasketComponent implements OnInit {
     });
   }
 
-
-
   updateCartQuantity(totalLineItemQuantity: number): void {
     localStorage.setItem('totalLineItemQuantity', totalLineItemQuantity.toString());
     this.carts.updateTotalQuantity(totalLineItemQuantity);
@@ -102,7 +100,6 @@ export class BasketComponent implements OnInit {
           this.totalPrice = res.totalPrice.centAmount;
           this.disabledBtn = false;
 
-
           this.carts.updateTotalQuantity(res.totalLineItemQuantity);
 
           this.updateCartQuantity(res.totalLineItemQuantity);
@@ -130,13 +127,11 @@ export class BasketComponent implements OnInit {
         this.totalPrice = res.totalPrice.centAmount;
         this.disabledBtn = false;
 
-
         this.carts.updateTotalQuantity(res.totalLineItemQuantity);
 
         this.updateCartQuantity(res.totalLineItemQuantity);
         this.calculateTotalPriceBeforePromo(res);
         this.setIsAtLeastOnePromoMatchesCart(res);
-
       });
   }
 
@@ -160,13 +155,11 @@ export class BasketComponent implements OnInit {
           this.products = res.lineItems;
           this.totalPrice = res.totalPrice.centAmount;
 
-
           this.carts.updateTotalQuantity(res.totalLineItemQuantity);
 
           this.updateCartQuantity(res.totalLineItemQuantity);
           this.calculateTotalPriceBeforePromo(res);
           this.setIsAtLeastOnePromoMatchesCart(res);
-
         },
       });
   }

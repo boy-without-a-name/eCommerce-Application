@@ -1,46 +1,44 @@
 <app-header></app-header>
-<div class='main'>
-  <ul style='display: flex; list-style-type: none; font-weight: 700'>
-    <li class='navigation' style='margin-left: 10px' routerLink='/main'>Home</li>
-    <li class='navigation' routerLink='/catalog'>/Catalog</li>
-    <li *ngIf='loading'>/{{ productView.name['en-US'] }}</li>
+<div class="main">
+  <ul style="display: flex; list-style-type: none; font-weight: 700">
+    <li class="navigation" style="margin-left: 10px" routerLink="/main">Home</li>
+    <li class="navigation" routerLink="/catalog">/Catalog</li>
+    <li *ngIf="loading">/{{ productView.name['en-US'] }}</li>
   </ul>
 </div>
 <div class>
-  <div class='product__container'>
-    <mat-spinner *ngIf='!loading'></mat-spinner>
-    <div *ngIf='loading' class='title__container'>
+  <div class="product__container">
+    <mat-spinner *ngIf="!loading"></mat-spinner>
+    <div *ngIf="loading" class="title__container">
       <h2>{{ productView.name['en-US'] }}</h2>
-      <swiper-container pagination='true' navigation='true' css-mode='true' *ngIf='loading'>
-        <swiper-slide *ngFor='let img of this.dataImg; let i = index' (click)='openPostModal(this.dataImg, i)'>
-          <img src='{{ img.url }}' alt='phone' />
+      <swiper-container pagination="true" navigation="true" css-mode="true" *ngIf="loading">
+        <swiper-slide *ngFor="let img of this.dataImg; let i = index" (click)="openPostModal(this.dataImg, i)">
+          <img src="{{ img.url }}" alt="phone" />
         </swiper-slide>
       </swiper-container>
       <p>{{ productView.description['en-US'] }}</p>
       <h3>{{ productView.masterVariant.prices['0'].value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2' }}</h3>
-      <h3 style='color: red; font-weight: bold'>
+      <h3 style="color: red; font-weight: bold">
         Discount:
         {{
-        productView.masterVariant.prices['0'].discounted.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2'
+          productView.masterVariant.prices['0'].discounted.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2'
         }}
       </h3>
-      <div class='btn__form'>
-        <button mat-raised-button routerLink='/catalog'>Back</button>
-        <button mat-raised-button *ngIf='removeBtn' (click)='removeBtnClick()' color='warn'>Remove</button>
-        <button mat-raised-button color='primary'
-        >Add to card
-        </button>
+      <div class="btn__form">
+        <button mat-raised-button routerLink="/catalog">Back</button>
+        <button mat-raised-button *ngIf="removeBtn" (click)="removeBtnClick()" color="warn">Remove</button>
+        <button mat-raised-button color="primary">Add to card</button>
       </div>
     </div>
   </div>
 </div>
 <app-footer />
-<script src='
+<script src="
 https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.js
-'></script>
+"></script>
 <link
-  href='
+  href="
 https://cdn.jsdelivr.net/npm/swiper@10.2.0/swiper-bundle.min.css
-'
-  rel='stylesheet'
+"
+  rel="stylesheet"
 />
