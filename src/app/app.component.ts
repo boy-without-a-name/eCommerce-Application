@@ -9,11 +9,11 @@ import { RegisterService } from './services/register.service';
 export class AppComponent implements OnInit {
   title = 'log-in';
 
-  constructor(private anonym:RegisterService) {}
+  constructor(private anonym: RegisterService) {}
 
   ngOnInit(): void {
     if (!localStorage.getItem('token')) {
-      this.anonym.createToken()
+      this.anonym.createToken();
     }
   }
 }
