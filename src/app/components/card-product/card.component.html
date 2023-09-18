@@ -1,0 +1,38 @@
+<div class="card-wrapper">
+  <div>
+    <img class="card-wrapper__img" [src]="product.masterData.staged.masterVariant.images[0].url" alt="phone" />
+  </div>
+  <div class="card-wrapper__info">
+    <h3 style="font-weight: 700">{{ product.masterData.staged.name['en-US'] }}</h3>
+    <p class="">{{ product.masterData.staged.description['en-US'] }}</p>
+    <div class="">
+      <s>
+        <span style="font-weight: 700">Price:</span>
+        {{
+          product.masterData.staged.masterVariant.prices[0].value.centAmount / 100
+            | currency: 'EUR' : 'symbol' : '1.2-2'
+        }}</s
+      >
+      <div class="discount">
+        <span style="font-weight: 700">Price:</span>
+        {{
+          product.masterData.staged.masterVariant.prices[0].discounted.value.centAmount / 100
+            | currency: 'EUR' : 'symbol' : '1.2-2'
+        }}
+      </div>
+    </div>
+    <div style="display: flex; align-items: baseline">
+      <mat-spinner *ngIf="loading"></mat-spinner>
+      <button
+        class="card-btn"
+        [style]="loading ? 'display: none' : ''"
+        (mousedown)="clickBtn(product.id)"
+        (mouseup)="buttonPosition = false"
+        [disabled]="disabled(product.id)"
+      >
+        Add to cart
+      </button>
+      <p class="more-info" (mousedown)="getProductService.renderProduct(product.id)">More infarmation</p>
+    </div>
+  </div>
+</div>

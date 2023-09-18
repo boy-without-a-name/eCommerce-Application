@@ -1,0 +1,33 @@
+<div class="card-wrapper">
+  <div>
+    <img class="card-wrapper__img" [src]="productfilter.masterVariant.images[0].url" alt="phone" />
+  </div>
+  <div class="card-wrapper__info">
+    <h3 style="font-weight: 700">{{ productfilter.name['en-US'] }}</h3>
+    <p class="">{{ productfilter.description['en-US'] }}</p>
+    <div class="">
+      <s>
+        <span style="font-weight: 700">Price:</span>
+        {{ productfilter.masterVariant.prices[0].value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2' }}
+      </s>
+      <div class="discount">
+        <span style="font-weight: 700">Price:</span>
+        {{
+          productfilter.masterVariant.prices[0].discounted.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.2-2'
+        }}
+      </div>
+    </div>
+    <div style="display: flex; align-items: baseline">
+      <button
+        class="card-btn"
+        [style]="buttonPosition ? 'transform:translate(4px, 8px);' : ''"
+        (mousedown)="clickBtn(productfilter.id)"
+        (mouseup)="buttonPosition = false"
+        [disabled]="disabled(productfilter.id)"
+      >
+        Add to cart
+      </button>
+      <p class="more-info" (mousedown)="getProductService.renderProduct(productfilter.id)">More infarmation</p>
+    </div>
+  </div>
+</div>

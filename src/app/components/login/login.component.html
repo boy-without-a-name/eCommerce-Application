@@ -1,0 +1,70 @@
+<div class="login-wrapper">
+  <div class="information-wrapper">
+    <div class="information-wrapper__background"></div>
+    <img routerLink="/main" class="information-wrapper__img" src="../../../assets/img/im-fine.svg" alt="" />
+    <p class="information-wrapper__text">
+      Hi there, do you have money? Tell me how much, i will give you things you need
+    </p>
+    <button routerLink="" class="return-main-page">
+      <img routerLink="/" src="../../../assets/img/Vector.svg" alt="" />
+      <p>Go back to main page</p>
+    </button>
+  </div>
+  <div class="login-form">
+    <div class="form-wrapper">
+      <div class="form">
+        <div class="email">
+          <input
+            class="form-wrapper__email"
+            #login_email
+            type="text"
+            placeholder="Email"
+            (focus)="showErrorEmail = false"
+            (focus)="errorAuthText = false"
+            (input)="checkEmail(login_email.value)"
+            (blur)="checkEmail(login_email.value)"
+          />
+          <div class="error-email" *ngIf="showErrorEmail">
+            {{ [textErrorEmail] }}
+          </div>
+        </div>
+        <div class="password">
+          <input
+            class="password__input"
+            #login_password
+            [type]="showPassword(typeInput)"
+            placeholder="Password"
+            (input)="checkPassword(login_password.value)"
+            (focus)="checkRulesPassword = false"
+            (focus)="errorAuthText = false"
+            (blur)="checkPassword(login_password.value)"
+          />
+          <img
+            class="password__img"
+            [src]="showPassword(linkImg)"
+            (mousedown)="showPasswordBoolean = !showPasswordBoolean"
+            alt=""
+          />
+        </div>
+        <div class="error-password" *ngIf="checkRulesPassword">{{ [text] }}</div>
+        <p class="errorAuth" *ngIf="errorAuthText">Неверный логин или пароль</p>
+
+        <button
+          class="form-wrapper__btn"
+          [disabled]="
+            showErrorEmail === true ||
+            checkRulesPassword === true ||
+            login_email.value === '' ||
+            login_password.value === '' ||
+            checkClickBtnSubmit === true
+          "
+          (mousedown)="clickButtonSubmit(login_email.value, login_password.value)"
+          (mouseup)="checkClickBtnSubmit = true"
+        >
+          Sign in
+        </button>
+      </div>
+      <p routerLink="/registration" class="link-registration">Register on the site</p>
+    </div>
+  </div>
+</div>

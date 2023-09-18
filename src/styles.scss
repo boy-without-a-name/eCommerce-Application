@@ -1,1 +1,36 @@
-/* You can add global styles to this file, and also import other style files */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 0.2rem;
+  height: 0.2rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffedd5;
+  border-radius: 0.1rem;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #febd69;
+  border-radius: 0.1rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #febd69;
+}
