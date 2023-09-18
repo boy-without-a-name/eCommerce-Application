@@ -60,6 +60,11 @@ export class ProductComponent implements OnInit {
     this.cardEvent.removeCard(this.id);
   }
 
+  addCartClick(): void {
+    this.cardEvent.clickBtn(this.id);
+    this.removeBtn = true;
+  }
+
   openPostModal(img: Image[], i: number): void {
     console.log(i);
     const dialogRef = this.dialog.open(PostModalImgComponent, {
