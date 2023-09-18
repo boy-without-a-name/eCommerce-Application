@@ -2,7 +2,6 @@ import { Component, Input } from '@angular/core';
 import { ResultInterface } from 'src/app/models/interface/result.interfce';
 import { GetProductService } from 'src/app/services/getProduct/get-product.service';
 import { CardEvent } from 'src/app/shared/class/cardEvent';
-
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -30,7 +29,7 @@ export class CardComponent {
     setTimeout(() => {
       this.loading = false;
     }, 1000);
-  }
+
 
   disabled(productId: string): boolean {
     return this.cardEvent.disabled(productId);

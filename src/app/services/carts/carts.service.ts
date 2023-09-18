@@ -44,6 +44,7 @@ export class CartService {
     productId: string,
     version: number,
     idCart: string | null,
+    quantity = 1,
   ): Observable<CartInterface> | null {
     const body = {
       version: version,
@@ -52,7 +53,7 @@ export class CartService {
           action: 'addLineItem',
           productId: `${productId}`,
           variantId: 1,
-          quantity: 1,
+          quantity: quantity,
         },
       ],
     };
@@ -136,6 +137,18 @@ export class CartService {
       { headers },
     );
   }
+
+
+  replicateCart(token: string | null, idCart: string | null): Observable<CartInterface> | null {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const body = {
+      reference: {
+        id: `${idCart}`,
+        typeId: 'cart',
+      },
+    };
+    return this.http.post<CartInterface>(
+      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/replicate`,
 
   addDiscountCode(
     token: string | null,

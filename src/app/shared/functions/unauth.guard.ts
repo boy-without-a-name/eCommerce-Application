@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 
 export function unauthenticatedGuard(): CanActivateFn {
   return () => {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem('id')) {
       return true;
     }
     inject(Router).navigate(['/']);

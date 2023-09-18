@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterService } from './services/register.service';
+import { AnonymosService } from './services/anonymos';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +9,11 @@ import { RegisterService } from './services/register.service';
 export class AppComponent implements OnInit {
   title = 'log-in';
 
-  constructor(private registerService: RegisterService) {}
+  constructor(private anonym: AnonymosService) {}
 
   ngOnInit(): void {
-    this.registerService.createToken();
+    if (!localStorage.getItem('token')) {
+      this.anonym.getToken()?.subscribe((res) => localStorage.setItem('token', `${res.access_token}`));
+    }
   }
 }
