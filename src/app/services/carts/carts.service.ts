@@ -137,4 +137,19 @@ export class CartService {
       { headers },
     );
   }
+
+  replicateCart(token: string | null, idCart: string | null): Observable<CartInterface> | null {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const body = {
+      reference: {
+        id: `${idCart}`,
+        typeId: 'cart',
+      },
+    };
+    return this.http.post<CartInterface>(
+      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/replicate`,
+      JSON.stringify(body),
+      { headers },
+    );
+  }
 }
