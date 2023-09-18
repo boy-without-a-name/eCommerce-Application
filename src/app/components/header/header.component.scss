@@ -38,10 +38,27 @@
   gap: 1rem;
 
   @media screen and (max-width: 481px) {
+    gap: 0.3rem;
     align-self: flex-end;
   }
+}
+button {
+  color: #000;
+  background-color: #fff;
+  border-radius: 4px;
+  font-weight: 600;
+  line-height: 1;
+  border: 1px solid #131921;
+  padding: 0.5rem;
+  white-space: nowrap;
+  transition: background-color 0.2s ease-in-out;
 
-  @media screen and (max-width: 381px) {
-    gap: 0.3rem;
+  &:hover {
+    cursor: pointer;
+    background-color: #febd69;
+  }
+  @media screen and (max-width: 481px) {
+    line-height: 0.8;
+    padding: 0.5rem 0.1rem;
   }
 }
