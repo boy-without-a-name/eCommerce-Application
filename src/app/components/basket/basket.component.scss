@@ -69,6 +69,29 @@
     font-weight: 600;
     text-align: center;
 
+    &_before-promo {
+      background-color: #ffeed7;
+      color: lightgray;
+      text-decoration: line-through;
+      position: relative;
+      rotate: -3deg;
+
+      &::before {
+        content: 'before promo';
+        position: absolute;
+        top: -0.8rem;
+        left: 0;
+        font-size: 10px;
+        font-weight: 400;
+        color: #000;
+        background-color: #fff;
+        border: 1px dashed #febd69;
+        border-radius: 0.5rem;
+        padding: 0 0.2rem;
+        rotate: 3deg;
+      }
+    }
+
     &-complete {
       font-size: 1.5rem;
     }

@@ -3,6 +3,7 @@ import { CartService } from 'src/app/services/carts/carts.service';
 import { ProductCart } from 'src/app/models/interface/cartProduct.interface';
 import { FormBuilder, Validators } from '@angular/forms';
 import Toastify from 'toastify-js';
+import { CartInterface } from 'src/app/models/interface/carts.interface';
 
 @Component({
   selector: 'app-basket',
@@ -17,9 +18,11 @@ export class BasketComponent implements OnInit {
   showOrderingBlock = false;
   products: ProductCart[] = [];
   totalPrice: number;
+  totalPriceBeforePromo: number;
   disabledBtnRemoveCart = false;
   newTotalPrice: number;
   discountCodeForm;
+  atLeastOnePromoMatchesCart: boolean;
 
   constructor(
     private carts: CartService,
@@ -35,6 +38,26 @@ export class BasketComponent implements OnInit {
     this.carts.updateTotalQuantity(totalLineItemQuantity);
   }
 
+  setIsAtLeastOnePromoMatchesCart(cart: CartInterface): void {
+    this.atLeastOnePromoMatchesCart = cart.discountCodes.some((code) => code.state === 'MatchesCart');
+  }
+
+  calculateTotalPriceBeforePromo(cart: CartInterface): void {
+    // Total price before promo = initial total base price (if there are no discounted products in the cart)
+    // Total price before promo is NOT the initial total base price (if one or more items in the cart had product discounts applied previously)
+
+    if (cart.lineItems.length) {
+      this.totalPriceBeforePromo = 0;
+      cart.lineItems.forEach((item) => {
+        if (item.price.discounted) {
+          this.totalPriceBeforePromo += item.price.discounted.value.centAmount * item.quantity;
+        } else {
+          this.totalPriceBeforePromo += item.price.value.centAmount * item.quantity;
+        }
+      });
+    }
+  }
+
   ngOnInit(): void {
     if (localStorage.getItem('idCart') !== null) {
       this.carts.getCart(localStorage.getItem('idCart'), localStorage.getItem('token'))?.subscribe({
@@ -46,6 +69,8 @@ export class BasketComponent implements OnInit {
             this.totalPrice = response.totalPrice.centAmount;
             this.showOrderingBlock = true;
             localStorage.setItem('version', `${response.version}`);
+            this.calculateTotalPriceBeforePromo(response);
+            this.setIsAtLeastOnePromoMatchesCart(response);
           }
           this.updateCartQuantity(response.totalLineItemQuantity);
         },
@@ -74,6 +99,8 @@ export class BasketComponent implements OnInit {
           this.disabledBtn = false;
 
           this.updateCartQuantity(res.totalLineItemQuantity);
+          this.calculateTotalPriceBeforePromo(res);
+          this.setIsAtLeastOnePromoMatchesCart(res);
         });
     }
   }
@@ -97,6 +124,8 @@ export class BasketComponent implements OnInit {
         this.disabledBtn = false;
 
         this.updateCartQuantity(res.totalLineItemQuantity);
+        this.calculateTotalPriceBeforePromo(res);
+        this.setIsAtLeastOnePromoMatchesCart(res);
       });
   }
 
@@ -120,6 +149,8 @@ export class BasketComponent implements OnInit {
           this.totalPrice = res.totalPrice.centAmount;
 
           this.updateCartQuantity(res.totalLineItemQuantity);
+          this.calculateTotalPriceBeforePromo(res);
+          this.setIsAtLeastOnePromoMatchesCart(res);
         },
       });
   }
@@ -164,9 +195,19 @@ export class BasketComponent implements OnInit {
 
           localStorage.setItem('version', `${response.version}`);
           this.totalPrice = response.totalPrice.centAmount;
+          this.calculateTotalPriceBeforePromo(response);
+          this.setIsAtLeastOnePromoMatchesCart(response);
 
+          let toastMsg = '';
+          if (this.atLeastOnePromoMatchesCart) {
+            toastMsg = 'Promo code successfully applied to your cart✅';
+          } else {
+            // promocode can be applied to cart, but not impact the total price (in case the cart doesnot match the promo requirements)
+            // it will impact the total price as soon as the requirements are met (e.g. certain total cart price)
+            toastMsg = 'Promo successfully applied, but no applied codes currently match your cart 😓';
+          }
           Toastify({
-            text: 'Promo code successfully applied ✅',
+            text: `${toastMsg}`,
             style: {
               background: 'lightgreen',
               padding: '0.2rem 0.5rem',
@@ -174,6 +215,7 @@ export class BasketComponent implements OnInit {
               'border-radius': '4px',
               'font-weight': '600',
             },
+            duration: 4000,
           }).showToast();
 
           this.disabledBtn = false;

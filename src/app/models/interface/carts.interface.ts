@@ -1,4 +1,5 @@
 import { ProductCart } from './cartProduct.interface';
+import { DiscountCodeInterface } from './discountCode.interface';
 
 export interface CartInterface {
   type: string;
@@ -35,7 +36,7 @@ export interface CartInterface {
   shippingMode: string;
   shipping: [];
   customLineItems: [];
-  discountCodes: [];
+  discountCodes: DiscountCodeInterface[];
   directDiscounts: [];
   inventoryMode: string;
   taxMode: string;

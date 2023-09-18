@@ -56,9 +56,14 @@
 
   <div class="basket__complete-and-promo" *ngIf="showOrderingBlock">
     <div class="basket__complete">
-      <div class="basket__price basket__price-complete">
-        <div>Total: {{ totalPrice / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}</div>
+      <div class="basket__price basket__price-complete basket__price_before-promo" *ngIf="atLeastOnePromoMatchesCart">
+        Total: {{ totalPriceBeforePromo / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
       </div>
+
+      <div class="basket__price basket__price-complete">
+        Total: {{ totalPrice / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
+      </div>
+
       <app-button text="К оформлению"></app-button>
       <button class="remove-cart" (click)="clickRemoveCart()" [disabled]="disabledBtnRemoveCart === true">
         Remove Cart
