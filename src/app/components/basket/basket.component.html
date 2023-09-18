@@ -18,7 +18,7 @@
           Price: {{ product.price.discounted.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
         </p>
         <p class="wrapper-card-basket__total-price">
-          Total price: {{ product.totalPrice.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
+          Total: {{ product.totalPrice.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
         </p>
       </div>
       <div class="wrapper-btn">
@@ -49,18 +49,32 @@
             +
           </button>
         </div>
+
         <button class="remove" (click)="clickRemove(product.id, quantity.value, product.productId)">Remove Item</button>
       </div>
     </div>
   </div>
 
-  <div *ngIf="showOrderingBlock" class="basket__complete">
-    <div class="basket__price basket__price-complete">
-      Total Price: {{ totalPrice / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
+  <div class="basket__complete-and-promo" *ngIf="showOrderingBlock">
+    <div class="basket__complete">
+      <div class="basket__price basket__price-complete basket__price_before-promo" *ngIf="atLeastOnePromoMatchesCart">
+        Total: {{ totalPriceBeforePromo / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
+      </div>
+
+      <div class="basket__price basket__price-complete">
+        Total: {{ totalPrice / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
+      </div>
+
+      <app-button text="К оформлению"></app-button>
+      <button class="remove-cart" (click)="clickRemoveCart()" [disabled]="disabledBtnRemoveCart === true">
+        Remove Cart
+      </button>
     </div>
-    <app-button text="К оформлению"></app-button>
-    <button class="remove-cart" (click)="clickRemoveCart()" [disabled]="disabledBtnRemoveCart === true">
-      Remove Cart
-    </button>
+
+    <form class="basket__promo" [formGroup]="discountCodeForm" (ngSubmit)="applyPromo()">
+      <div class="basket__promo-title">Промокод:</div>
+      <input formControlName="discountCode" type="text" [(ngModel)]="discountCodeForm.value.discountCode" />
+      <button class="apply-promo-btn" [disabled]="!discountCodeForm.valid">Применить</button>
+    </form>
   </div>
 </div>

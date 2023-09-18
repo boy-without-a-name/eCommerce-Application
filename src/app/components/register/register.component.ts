@@ -9,6 +9,7 @@ import { countries } from '../../models/interface/countries';
 import { DataUser } from 'src/app/models/interface/dataUser.interface';
 import { ReRecordCart } from 'src/app/shared/class/reRecordCart';
 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',

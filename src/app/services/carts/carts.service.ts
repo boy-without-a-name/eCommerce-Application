@@ -10,10 +10,10 @@ import { BehaviorSubject } from 'rxjs';
 export class CartService {
   constructor(private http: HttpClient) {}
 
-  private totalQuantitySubject = new BehaviorSubject<number>(0);
+  private totalQuantitySubject = new BehaviorSubject<number | undefined>(0);
   totalQuantity$ = this.totalQuantitySubject.asObservable();
 
-  updateTotalQuantity(quantity: number): void {
+  updateTotalQuantity(quantity: number | undefined): void {
     this.totalQuantitySubject.next(quantity);
   }
 
@@ -138,6 +138,7 @@ export class CartService {
     );
   }
 
+
   replicateCart(token: string | null, idCart: string | null): Observable<CartInterface> | null {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     const body = {
@@ -148,6 +149,47 @@ export class CartService {
     };
     return this.http.post<CartInterface>(
       `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/replicate`,
+
+  addDiscountCode(
+    token: string | null,
+    version: number,
+    idCart: string | null,
+    discountCode: string,
+  ): Observable<CartInterface> {
+    const body = {
+      version: version,
+      actions: [
+        {
+          action: 'addDiscountCode',
+          code: `${discountCode}`,
+        },
+      ],
+    };
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Content-Type', 'application/json');
+    return this.http.post<CartInterface>(
+      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/${idCart}`,
+      JSON.stringify(body),
+      { headers },
+    );
+  }
+
+  removeDiscountCode(
+    token: string | null,
+    version: number,
+    idCart: string | null,
+    discountCodeId: string,
+  ): Observable<CartInterface> {
+    const body = {
+      version: version,
+      action: 'removeDiscountCode',
+      discountCode: {
+        typeId: 'discount-code',
+        id: `${discountCodeId}`,
+      },
+    };
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`).set('Content-Type', 'application/json');
+    return this.http.post<CartInterface>(
+      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/${idCart}`,
       JSON.stringify(body),
       { headers },
     );
