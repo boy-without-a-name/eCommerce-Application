@@ -12,6 +12,8 @@ export class AppComponent implements OnInit {
   constructor(private registerService: RegisterService) {}
 
   ngOnInit(): void {
-
+    if (!localStorage.getItem('token')) {
+      this.registerService.createToken();
+    }
   }
 }
