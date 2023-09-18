@@ -36,12 +36,10 @@ export class CatalogComponent implements OnInit {
     this.pageNo = this.catalog.getPageNo();
     this.pageOffset = this.pageSized * this.pageNo;
 
-    this.catalog
-      .getProgucts(localStorage.getItem('token'), this.pageSized, this.pageOffset)
-      ?.subscribe((res) => {
-        this.result = res.results;
-        this.loading = false;
-      });
+    this.catalog.getProgucts(localStorage.getItem('token'), this.pageSized, this.pageOffset)?.subscribe((res) => {
+      this.result = res.results;
+      this.loading = false;
+    });
   }
 
   clickPhone(value: boolean): void {
@@ -156,12 +154,10 @@ export class CatalogComponent implements OnInit {
   }
 
   getNewProducts(): void {
-    this.catalog
-      .getProgucts(localStorage.getItem('token'), this.pageSized, this.pageOffset)
-      ?.subscribe((res) => {
-        this.result = res.results;
-        this.loading = false;
-      });
+    this.catalog.getProgucts(localStorage.getItem('token'), this.pageSized, this.pageOffset)?.subscribe((res) => {
+      this.result = res.results;
+      this.loading = false;
+    });
   }
 
   pageChanged(event: PageEvent): void {
