@@ -32,9 +32,10 @@ import { ProductComponent } from './components/product/product.component';
 import { CardFilterComponent } from './components/card-product-filter/card.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { MatCardModule } from '@angular/material/card';
-import { register } from 'swiper/element/bundle';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BasketComponent } from './components/basket/basket.component';
+import { PromosComponent } from './components/promos/promos.component';
+
 
 @NgModule({
   declarations: [
@@ -61,6 +62,7 @@ import { BasketComponent } from './components/basket/basket.component';
     PostModalImgComponent,
     AboutUsComponent,
     BasketComponent,
+    PromosComponent,
   ],
   imports: [
     BrowserModule,

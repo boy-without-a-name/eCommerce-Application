@@ -1,0 +1,9 @@
+<div class="promos">
+  <h2 class="promos__title">Feel free to use our promos 😊</h2>
+  <div class="promos__list">
+    <div class="promos__item" *ngFor="let promo of promos">
+      <span class="promos__name">{{ promo.name }}</span>
+      <button class="promos__code" #promoCode (click)="copyPromoCode(promo.code)">{{ promo.code }}</button>
+    </div>
+  </div>
+</div>
