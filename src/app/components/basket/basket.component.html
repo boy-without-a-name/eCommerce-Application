@@ -1,80 +1,86 @@
 <app-header></app-header>
-<div class="basket">
-  <div *ngIf="showLinkCatalog" class="wrapper-link-catalog">
+<div class='basket'>
+  <div *ngIf='showLinkCatalog' class='wrapper-link-catalog'>
     You have so much money and this basket is still empty. Go to the
-    <span class="routerlink" routerLink="/catalog">catalog</span> and choose something for yourself!
+    <span class='routerlink' routerLink='/catalog'>catalog</span> and choose something for yourself!
   </div>
-  <div class="basket__items">
-    <div class="wrapper-card-basket" *ngFor="let product of products">
+  <div class='basket__items'>
+    <mat-spinner
+      *ngIf='loading'
+    />
+    <div class='wrapper-card-basket' *ngFor='let product of products'>
       <div>
-        <img class="wrapper-card-basket__img" [src]="product.variant.images[0].url" [alt]="product.name['en-US']" />
+        <img class='wrapper-card-basket__img' [src]='product.variant.images[0].url' [alt]="product.name['en-US']" />
       </div>
-      <div class="wrapper-card-basket__price_name">
+      <div class='wrapper-card-basket__price_name'>
         <h2>{{ product.name['en-US'] }}</h2>
         <p [style]="product.price.discounted ? 'text-decoration:line-through' : ''">
           Price: {{ product.price.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
         </p>
-        <p class="wrapper-card-basket__discount" *ngIf="product.price.discounted">
+        <p class='wrapper-card-basket__discount' *ngIf='product.price.discounted'>
           Price: {{ product.price.discounted.value.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
         </p>
-        <p class="wrapper-card-basket__total-price">
+        <p class='wrapper-card-basket__total-price'>
           Total: {{ product.totalPrice.centAmount / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
         </p>
       </div>
-      <div class="wrapper-btn">
-        <div class="basket__amount">
+      <div class='wrapper-btn'>
+        <div class='basket__amount'>
           <button
-            class="btn__quantity minus"
-            [disabled]="disabledBtn === true"
-            (click)="clickMinus(quantity.value, product.id)"
+            class='btn__quantity minus'
+            [disabled]='disabledBtn === true'
+            (click)='clickMinus(quantity.value, product.id)'
           >
             -
           </button>
           <input
-            class="basket__amount-input"
-            inputmode="numeric"
-            pattern="[0-9]*"
-            min="1"
-            disabled="true"
-            max="100"
-            type="number"
-            value="{{ product.quantity }}"
+            class='basket__amount-input'
+            inputmode='numeric'
+            pattern='[0-9]*'
+            min='1'
+            disabled='true'
+            max='100'
+            type='number'
+            value='{{ product.quantity }}'
             #quantity
           />
           <button
-            class="btn__quantity plus"
-            [disabled]="disabledBtn === true"
-            (click)="clickPlus(quantity.value, product.id)"
+            class='btn__quantity plus'
+            [disabled]='disabledBtn === true'
+            (click)='clickPlus(quantity.value, product.id)'
           >
             +
           </button>
         </div>
 
-        <button class="remove" (click)="clickRemove(product.id, quantity.value, product.productId)">Remove Item</button>
+        <button class='remove'
+                [disabled]='loading'
+                (click)='clickRemove(product.id, quantity.value, product.productId)'>Remove Item
+        </button>
       </div>
     </div>
   </div>
 
-  <div class="basket__complete-and-promo" *ngIf="showOrderingBlock">
-    <div class="basket__complete">
-      <div class="basket__price basket__price-complete basket__price_before-promo" *ngIf="atLeastOnePromoMatchesCart">
+  <div class='basket__complete-and-promo' *ngIf='showOrderingBlock'>
+    <div class='basket__complete'>
+      <div class='basket__price basket__price-complete basket__price_before-promo' *ngIf='atLeastOnePromoMatchesCart'>
         Total: {{ totalPriceBeforePromo / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
       </div>
 
-      <div class="basket__price basket__price-complete">
+      <div class='basket__price basket__price-complete'>
         Total: {{ totalPrice / 100 | currency: 'EUR' : 'symbol' : '1.0-0' }}
       </div>
 
-      <app-button text="К оформлению"></app-button>
-      <button class="remove-cart" (click)="clickRemoveCart()" [disabled]="disabledBtnRemoveCart === true">
+      <app-button text='К оформлению'></app-button>
+      <button class='remove-cart' (click)='clickRemoveCart()' [disabled]='disabledBtnRemoveCart === true'>
         Remove Cart
       </button>
     </div>
 
-    <form class="basket__promo" [formGroup]="discountCodeForm" (ngSubmit)="applyPromo()">
-      <div class="basket__promo-title">Промокод:</div>
-      <input formControlName="discountCode" type="text" [(ngModel)]="discountCodeForm.value.discountCode" />
-      <button class="apply-promo-btn" [disabled]="!discountCodeForm.valid">Применить</button>
+    <form class='basket__promo' [formGroup]='discountCodeForm' (ngSubmit)='applyPromo()'>
+      <div class='basket__promo-title'>Промокод:</div>
+      <input formControlName='discountCode' type='text' [(ngModel)]='discountCodeForm.value.discountCode' />
+      <button class='apply-promo-btn' [disabled]='!discountCodeForm.valid'>Применить</button>
     </form>
   </div>
 </div>

@@ -25,6 +25,8 @@ export class BasketComponent implements OnInit {
   discountCodeForm;
   atLeastOnePromoMatchesCart: boolean;
 
+  loading = false;
+
   constructor(
     private carts: CartService,
     private formBuilder: FormBuilder,
@@ -136,6 +138,7 @@ export class BasketComponent implements OnInit {
   }
 
   clickRemove(id: string, quantity: string, productId: string): void {
+    this.loading = true;
     this.carts
       .removeLineItem(
         localStorage.getItem('token'),
@@ -146,6 +149,7 @@ export class BasketComponent implements OnInit {
       )
       ?.subscribe({
         next: (res) => {
+          this.loading = false;
           localStorage.version = res.version;
           this.event.removeProductIdinLS(productId);
           if (res.lineItems.length === 0) {

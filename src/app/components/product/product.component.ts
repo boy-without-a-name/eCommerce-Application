@@ -20,6 +20,8 @@ export class ProductComponent implements OnInit {
   productView!: Current;
   id = '';
   loading = false;
+  smallLoading = false;
+
   removeBtn = false;
   show = true;
   dataImg: Image[];
@@ -56,13 +58,23 @@ export class ProductComponent implements OnInit {
   }
 
   removeBtnClick(): void {
+    this.smallLoading = true;
     this.removeBtn = false;
     this.cardEvent.removeCard(this.id);
+    this.loadingTrue();
   }
 
   addCartClick(): void {
+    this.smallLoading = true;
     this.cardEvent.clickBtn(this.id);
     this.removeBtn = true;
+    this.loadingTrue();
+  }
+
+  loadingTrue(): void {
+    setTimeout(() => {
+      this.smallLoading = false;
+    }, 1000);
   }
 
   openPostModal(img: Image[], i: number): void {
