@@ -149,6 +149,10 @@ export class CartService {
     };
     return this.http.post<CartInterface>(
       `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/carts/replicate`,
+      JSON.stringify(body),
+      { headers },
+    );
+  }
 
   addDiscountCode(
     token: string | null,

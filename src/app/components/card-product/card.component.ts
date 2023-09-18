@@ -29,7 +29,7 @@ export class CardComponent {
     setTimeout(() => {
       this.loading = false;
     }, 1000);
-
+  }
 
   disabled(productId: string): boolean {
     return this.cardEvent.disabled(productId);
