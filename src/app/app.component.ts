@@ -12,6 +12,6 @@ export class AppComponent implements OnInit {
   constructor(private registerService: RegisterService) {}
 
   ngOnInit(): void {
-    this.registerService.createToken();
+
   }
 }
