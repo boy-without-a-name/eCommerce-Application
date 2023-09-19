@@ -29,7 +29,7 @@ export class GetProductService {
     const authToken = this.register.getAuthToken();
     console.log(authToken);
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${localStorage.getItem('authTokenMain')}`,
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
       'Content-type': 'application/json',
     });
     return this.http.get<IProduct>(`${this.apiUrl}${id}`, { headers });
