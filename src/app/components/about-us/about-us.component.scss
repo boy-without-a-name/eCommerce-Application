@@ -7,6 +7,18 @@
   background-size: cover;
 }
 
+.alexMur {
+  background-image: url('../../../assets/img/PhotoTeam/iconMur.png');
+  background-size: cover;
+}
+
+a:active,
+a:hover,
+a {
+  text-decoration: none;
+  color: #300a88;
+  font-weight: 500;
+}
 .about__wrapper {
   width: 100%;
   height: 100%;
