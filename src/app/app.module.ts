@@ -35,6 +35,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BasketComponent } from './components/basket/basket.component';
 import { PromosComponent } from './components/promos/promos.component';
+import { BurgerIconComponent } from './components/burger-icon/burger-icon.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { PromosComponent } from './components/promos/promos.component';
     AboutUsComponent,
     BasketComponent,
     PromosComponent,
+    BurgerIconComponent,
   ],
   imports: [
     BrowserModule,

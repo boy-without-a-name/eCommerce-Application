@@ -19,7 +19,16 @@ export class HeaderComponent {
     }
   }
 
+  isMenuActive: boolean;
   isSignedIn = Boolean(localStorage.getItem('isSignedIn'));
+
+  toggleMenu(): void {
+    if (this.isMenuActive) {
+      this.isMenuActive = false;
+    } else {
+      this.isMenuActive = true;
+    }
+  }
 
   signOutEventHandler(): void {
     this.navService.setSignedInState(false);

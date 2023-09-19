@@ -7,14 +7,11 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0.3rem 0.5rem;
+  padding: 0 0.5rem;
   background-color: #131921;
   z-index: 2;
   transition: all 0.5s ease-in-out;
-
-  @media screen and (max-width: 381px) {
-    flex-direction: row-reverse;
-  }
+  height: 45px;
 }
 
 .logo {
@@ -24,24 +21,94 @@
   &:hover {
     cursor: pointer;
   }
-
-  @media screen and (max-width: 381px) {
-    display: none;
-  }
 }
 
-.buttons {
+.links {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
+  height: 100%;
 
-  @media screen and (max-width: 481px) {
-    align-self: flex-end;
+  &__burger {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    background-color: #131921;
+    justify-content: space-between;
+    transition: all 0.2s ease-in-out;
+
+    @media screen and (max-width: 768px) {
+      border: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 200px;
+      height: 100vh;
+      transform: translateX(101%);
+    }
+
+    &_active {
+      transform: translateX(0);
+      z-index: 2;
+    }
   }
 
-  @media screen and (max-width: 381px) {
-    gap: 0.3rem;
+  &__link {
+    display: flex;
+    align-items: center;
+    background-color: #131921;
+    border-left: 1px solid #414141;
+    padding: 0 0.5rem;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+
+    &:last-child {
+      border-right: 1px solid #414141;
+
+      @media screen and (max-width: 768px) {
+        border-right: none;
+      }
+    }
+
+    &:hover {
+      background-color: #414141;
+    }
+
+    @media screen and (max-width: 768px) {
+      width: 100%;
+      padding: 1rem 0;
+      border-left: none;
+      justify-content: center;
+      background-color: initial;
+
+      &:hover {
+        background-color: #414141;
+      }
+
+      &_sign-out {
+        color: #febd69;
+      }
+    }
   }
+}
+
+.burger-icon {
+  transition: rotate 0.2s ease-in-out;
+
+  &_active {
+    rotate: -90deg;
+    z-index: 99;
+  }
+}
+
+.cart,
+.user-icon {
+  z-index: 2;
 }

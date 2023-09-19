@@ -1,12 +1,23 @@
 <app-logo routerLink="" class="logo"></app-logo>
 
-<div class="buttons">
-  <app-button routerLink="/main" text="Main"></app-button>
-  <app-button routerLink="/catalog" text="Catalog"></app-button>
-  <app-button *ngIf="!isSignedIn" routerLink="/login" text="Sign In"></app-button>
-  <app-button *ngIf="!isSignedIn" routerLink="/registration" text="Sign Up"></app-button>
-  <app-button (click)="signOutEventHandler()" *ngIf="isSignedIn" text="Sign Out"></app-button>
-  <app-button routerLink="/about" text="About"></app-button>
-  <app-user-icon routerLink="/profile" *ngIf="isSignedIn"></app-user-icon>
-  <app-cart></app-cart>
+<div class="links">
+  <div class="links__burger" (mousedown)="toggleMenu()" [ngClass]="{ links__burger_active: isMenuActive }">
+    <a class="links__link" routerLink="/main">Main</a>
+    <a class="links__link" routerLink="/catalog">Catalog</a>
+    <a class="links__link" *ngIf="!isSignedIn" routerLink="/login">Sign In</a>
+    <a class="links__link" *ngIf="!isSignedIn" routerLink="/registration">Sign Up</a>
+    <a class="links__link" routerLink="/about">About</a>
+    <a class="links__link links__link_sign-out" routerLink="/" (click)="signOutEventHandler()" *ngIf="isSignedIn"
+      >Sign out</a
+    >
+  </div>
+
+  <app-user-icon class="user-icon" routerLink="/profile" *ngIf="isSignedIn"></app-user-icon>
+  <app-cart class="cart"></app-cart>
+
+  <app-burger-icon
+    class="burger-icon"
+    [ngClass]="{ 'burger-icon_active': isMenuActive }"
+    (click)="toggleMenu()"
+  ></app-burger-icon>
 </div>
