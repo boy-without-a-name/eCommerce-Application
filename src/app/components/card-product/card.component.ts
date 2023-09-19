@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { ResultInterface } from 'src/app/models/interface/result.interfce';
 import { GetProductService } from 'src/app/services/getProduct/get-product.service';
 import { CardEvent } from 'src/app/shared/class/cardEvent';
+
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',

@@ -33,6 +33,7 @@ export class CardEvent {
       ?.subscribe((res) => {
         localStorage.version = res.version;
         this.saveLocalStorage(productId);
+        this.carts.updateTotalQuantity(res.totalLineItemQuantity);
       });
   }
 
@@ -78,6 +79,7 @@ export class CardEvent {
         ?.subscribe((res) => {
           localStorage.version = res.version;
           this.removeProductIdinLS(productId);
+          this.carts.updateTotalQuantity(res.totalLineItemQuantity);
         });
     });
   }
