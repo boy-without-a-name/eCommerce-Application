@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IRegisterData } from './services/types';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'eCommerce-application';
+  title = 'log-in';
 }
