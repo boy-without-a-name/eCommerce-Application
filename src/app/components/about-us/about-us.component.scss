@@ -39,8 +39,11 @@ a {
 
 @media screen and (max-width: 1050px) {
   .about__container {
-    width: 640px;
+    width: 100%;
+    margin: 50px auto;
+    max-width: 640px;
     flex-direction: column;
+    padding: 30px;
   }
   .example-card {
     max-width: 500px;
@@ -51,9 +54,11 @@ a {
 @media screen and (max-width: 670px) {
   .about__container {
     width: 380px;
+    padding: 20px;
   }
   .example-card {
-    width: 380px;
+    width: 100%;
+    max-width: 380px;
   }
 }
 
