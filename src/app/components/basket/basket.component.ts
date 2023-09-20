@@ -169,6 +169,8 @@ export class BasketComponent implements OnInit {
   }
 
   clickRemoveCart(): void {
+    const answer = confirm('Do you really want to delete the shopping cart?');
+    if(answer === true) {
     this.disabledBtnRemoveCart = true;
     this.carts
       .deleteCart(
@@ -192,6 +194,7 @@ export class BasketComponent implements OnInit {
 
         this.carts.updateTotalQuantity(undefined);
       });
+    }
   }
 
   applyPromo(): void {
