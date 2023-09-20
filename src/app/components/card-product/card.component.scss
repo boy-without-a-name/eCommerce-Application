@@ -10,7 +10,7 @@
 
 .card-wrapper:hover {
   background-color: rgb(238, 227, 227);
-  transform: scale(1.2);
+  transform: scale(1.05);
   box-shadow: 10px 5px 5px rgba(51, 50, 50, 0.6);
 }
 
@@ -68,7 +68,11 @@
   .card-wrapper {
     padding: 0.3rem 0.5rem;
     min-width: 380px;
-    margin: 0 40px 30px;
+  }
+  .card-wrapper:hover {
+
+    transform: scale(1.01);
+
   }
 
   .card-wrapper__img {
@@ -90,7 +94,6 @@
   .card-wrapper {
     padding: 0.3rem 0.5rem;
     min-width: 240px;
-    margin: 0 40px 30px;
   }
   .card-wrapper__info {
     line-height: 1rem;
