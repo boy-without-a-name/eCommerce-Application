@@ -170,30 +170,30 @@ export class BasketComponent implements OnInit {
 
   clickRemoveCart(): void {
     const answer = confirm('Do you really want to delete the shopping cart?');
-    if(answer === true) {
-    this.disabledBtnRemoveCart = true;
-    this.carts
-      .deleteCart(
-        localStorage.getItem('token'),
-        Number(localStorage.getItem('version')),
-        localStorage.getItem('idCart'),
-      )
-      ?.subscribe((res) => {
-        localStorage.removeItem('version');
-        localStorage.removeItem('idCart');
-        localStorage.removeItem('cartsProductId');
-        this.products = res.lineItems;
-        this.showLinkCatalog = true;
-        this.showOrderingBlock = false;
-        const Div = document.querySelector('.basket__items') as HTMLDivElement;
-        while (Div.firstChild) {
-          if (Div.lastChild) {
-            Div.removeChild(Div.lastChild);
+    if (answer === true) {
+      this.disabledBtnRemoveCart = true;
+      this.carts
+        .deleteCart(
+          localStorage.getItem('token'),
+          Number(localStorage.getItem('version')),
+          localStorage.getItem('idCart'),
+        )
+        ?.subscribe((res) => {
+          localStorage.removeItem('version');
+          localStorage.removeItem('idCart');
+          localStorage.removeItem('cartsProductId');
+          this.products = res.lineItems;
+          this.showLinkCatalog = true;
+          this.showOrderingBlock = false;
+          const Div = document.querySelector('.basket__items') as HTMLDivElement;
+          while (Div.firstChild) {
+            if (Div.lastChild) {
+              Div.removeChild(Div.lastChild);
+            }
           }
-        }
 
-        this.carts.updateTotalQuantity(undefined);
-      });
+          this.carts.updateTotalQuantity(undefined);
+        });
     }
   }
 
