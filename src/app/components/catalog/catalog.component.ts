@@ -87,7 +87,6 @@ export class CatalogComponent implements OnInit {
     this.loading = true;
 
     this.pageNo = 0;
-    this.pageOffset = 0;
     this.filterEnabled = false;
 
     if (this.reset) {
