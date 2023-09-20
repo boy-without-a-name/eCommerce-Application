@@ -37,10 +37,14 @@
   border: 0px solid;
   background: linear-gradient(to right, #ffe259, #ffa751);
   font-size: 1rem;
-}
 
-.card-btn:hover {
-  cursor: pointer;
+  &:disabled {
+    background: #5c635f;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .discount {
@@ -49,6 +53,17 @@
   color: rgb(180, 33, 33);
   font-weight: 600;
 }
+.more-info {
+  color: #1339e2;
+  text-decoration: underline;
+  margin-left: 20px;
+  font-size: 1rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
 @media (max-width: 768px) {
   .card-wrapper {
     padding: 0.3rem 0.5rem;

@@ -33,7 +33,7 @@ export class RegisterService {
   createToken() {
     this.getToken()?.subscribe((obj: AccessTokenResponse) => {
       this.access_token = obj.access_token;
-      localStorage.setItem('authTokenMain', `${obj.access_token}`);
+      localStorage.setItem('token', `${obj.access_token}`);
     });
   }
 

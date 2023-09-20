@@ -10,6 +10,11 @@
   padding: 0.3rem 0.5rem;
   background-color: #131921;
   z-index: 2;
+  transition: all 0.5s ease-in-out;
+
+  @media screen and (max-width: 381px) {
+    flex-direction: row-reverse;
+  }
 }
 
 .logo {
@@ -19,6 +24,7 @@
   &:hover {
     cursor: pointer;
   }
+
   @media screen and (max-width: 381px) {
     display: none;
   }
@@ -33,6 +39,9 @@
 
   @media screen and (max-width: 481px) {
     align-self: flex-end;
-    gap: 1px;
+  }
+
+  @media screen and (max-width: 381px) {
+    gap: 0.3rem;
   }
 }

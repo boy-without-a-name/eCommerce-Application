@@ -113,14 +113,36 @@
       </form>
     </div>
     <div class="wrapper-card">
+      <mat-spinner *ngIf="loading" />
       <div *ngIf="!filterEnabled">
-        <app-card *ngFor="let card of result" [product]="card"> </app-card>
+        <app-card *ngFor="let card of result" [product]="card"></app-card>
       </div>
     </div>
     <div *ngIf="filterEnabled">
-      <app-card-filter *ngFor="let card of productfilter" [productfilter]="card"> </app-card-filter>
+      <app-card-filter *ngFor="let card of productfilter" [productfilter]="card"></app-card-filter>
     </div>
   </div>
+  <mat-paginator
+    [length]="pageLength"
+    [pageSize]="pageSized"
+    [hidePageSize]="true"
+    [pageIndex]="pageNo"
+    (page)="pageChanged($event)"
+    *ngIf="!filterEnabled"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+
+  <mat-paginator
+    [length]="pageLengthFilter"
+    [pageSize]="pageSized"
+    [hidePageSize]="true"
+    [pageIndex]="pageNo"
+    (page)="pageChangedFiltered($event)"
+    *ngIf="filterEnabled"
+    aria-label="Select page"
+  >
+  </mat-paginator>
 </div>
 
 <app-footer></app-footer>

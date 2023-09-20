@@ -1,0 +1,141 @@
+.wrapper-card-basket {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.wrapper-card-basket__img {
+  width: 100%;
+  max-width: 120px;
+  height: auto;
+}
+
+.wrapper-card-basket__price_name {
+  margin-left: 5%;
+}
+
+.wrapper-card-basket__discount {
+  color: rgb(180, 33, 33);
+  font-weight: 600;
+}
+
+.wrapper-card-basket__total-price {
+  font-weight: 800;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.wrapper-card-basket__total-price_inptut {
+  outline: none;
+  border: none;
+  height: 20px;
+  font-size: 15px;
+  font-weight: 800;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.wrapper-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.btn__quantity {
+  width: 27px;
+  height: 27px;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+.minus {
+  border-color: #e74b4b;
+
+  &:disabled {
+    border-color: #a8a1a1;
+  }
+}
+
+.plus {
+  border-color: #70db45;
+
+  &:disabled {
+    border-color: #a8a1a1;
+  }
+}
+
+.remove {
+  padding: 4px;
+  color: #ffffff;
+  background-color: #e74b4b;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #cb4141;
+  }
+}
+.wrapper-link-catalog {
+  width: 100%;
+  max-width: 700px;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  text-align: center;
+}
+.routerlink {
+  font-size: 1.3em;
+  color: #0d21d4;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.remove-cart,
+.apply-promo-btn {
+  color: #ffffff;
+  background-color: #e01b1b;
+  border-radius: 4px;
+  font-weight: 600;
+  line-height: 1;
+  border: none;
+  padding: 0.5rem;
+  white-space: nowrap;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover:enabled {
+    cursor: pointer;
+    background-color: #ba1515;
+  }
+
+  &:disabled {
+    background-color: #c3c3c3;
+    color: #dadada;
+  }
+}
+
+.apply-promo-btn {
+  background-color: #129845;
+  &:hover:enabled {
+    background-color: #0d7133;
+  }
+}

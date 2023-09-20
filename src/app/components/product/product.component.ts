@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { PostModalImgComponent } from '../post-modal-img/post-modal-img.component';
 import { register } from 'swiper/element/bundle';
 import Swiper from 'swiper';
+import { CartService } from '../../services/carts/carts.service';
+import { CardEvent } from '../../shared/class/cardEvent';
 
 register();
 
@@ -18,6 +20,9 @@ export class ProductComponent implements OnInit {
   productView!: Current;
   id = '';
   loading = false;
+  smallLoading = false;
+
+  removeBtn = false;
   show = true;
   dataImg: Image[];
   @ViewChild('swiper') swiperRef: ElementRef<HTMLElement & { swiper?: Swiper } & { initialize: () => void }>;
@@ -27,10 +32,11 @@ export class ProductComponent implements OnInit {
     private product: GetProductService,
     private route: ActivatedRoute,
     private dialog: MatDialog,
+    private cardService: CartService,
+    private cardEvent: CardEvent,
   ) {}
 
   ngOnInit(): void {
-    register();
     this.route.params.subscribe((params) => {
       this.id = params['id'];
       this.product.getProduct(this.id).subscribe((obj) => {
@@ -44,6 +50,31 @@ export class ProductComponent implements OnInit {
         }, 2000);
       });
     });
+    const local = localStorage.getItem('cartsProductId');
+    if (local) {
+      const obj = JSON.parse(local);
+      this.removeBtn = Object.hasOwn(obj, this.id);
+    }
+  }
+
+  removeBtnClick(): void {
+    this.smallLoading = true;
+    this.removeBtn = false;
+    this.cardEvent.removeCard(this.id);
+    this.loadingTrue();
+  }
+
+  addCartClick(): void {
+    this.smallLoading = true;
+    this.cardEvent.clickBtn(this.id);
+    this.removeBtn = true;
+    this.loadingTrue();
+  }
+
+  loadingTrue(): void {
+    setTimeout(() => {
+      this.smallLoading = false;
+    }, 1000);
   }
 
   openPostModal(img: Image[], i: number): void {

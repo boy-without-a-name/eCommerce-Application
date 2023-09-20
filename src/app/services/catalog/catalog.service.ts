@@ -4,8 +4,9 @@ import { Observable } from 'rxjs';
 
 import { CatalogInterface } from 'src/app/models/interface/catalog.interface';
 import { AccessTokenResponse } from 'src/app/models/interface/AnswerTokenResponseInterface';
-import { scope, clientId, clientSecret } from 'src/app/models/constants/constants';
+import { clientId, clientSecret, scope } from 'src/app/models/constants/constants';
 import { AnswerFilterInterface } from 'src/app/models/interface/asnwerfilter.interface';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -16,8 +17,17 @@ export class CatalogService {
     scope: '',
     token_type: '',
   };
+  pageNo = 0;
 
   constructor(private http: HttpClient) {}
+
+  setPageNo(no: number): void {
+    this.pageNo = no;
+  }
+
+  getPageNo(): number {
+    return this.pageNo;
+  }
 
   getToken(): Observable<AccessTokenResponse> | null {
     const data = new URLSearchParams();
@@ -33,17 +43,18 @@ export class CatalogService {
     });
   }
 
-  getProgucts(authToken: string | null): Observable<CatalogInterface> | null {
+  getProgucts(authToken: string | null, pageSize = 100, pageOffset = 0): Observable<CatalogInterface> | null {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
     return this.http.get<CatalogInterface>(
-      'https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/products',
+      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/products/?&limit=${pageSize}&offset=${pageOffset}`,
       { headers },
     );
   }
-  test(authToken: string | null, value: string): Observable<AnswerFilterInterface> {
+
+  test(authToken: string | null, value: string, pageSized = 100, pageOffset = 0): Observable<AnswerFilterInterface> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${authToken}`);
     return this.http.get<AnswerFilterInterface>(
-      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/product-projections/search?${value}`,
+      `https://api.australia-southeast1.gcp.commercetools.com/arandomteam16/product-projections/search?${value}&limit=${pageSized}&offset=${pageOffset}`,
       { headers },
     );
   }
