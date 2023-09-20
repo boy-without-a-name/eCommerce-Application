@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { AppLoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy, NgOptimizedImage } from '@angular/common';
 import { MainComponent } from './components/main/main.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CartComponent } from './components/cart/cart.component';
@@ -20,6 +20,17 @@ import { RegisterComponent } from './components/register/register.component';
 import { NotFoundViewComponent } from './components/not-found-view/not-found-view.component';
 import { UserIconComponent } from './components/user-icon/user-icon.component';
 import { NavLinksComponent } from './components/nav-links/nav-links.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { CatalogComponent } from './components/catalog/catalog.component';
+import { CardComponent } from './components/card-product/card.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PostModalImgComponent } from './components/post-modal-img/post-modal-img.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { ProductComponent } from './components/product/product.component';
+import { CardFilterComponent } from './components/card-product-filter/card.component';
+import { register } from 'swiper/element/bundle';
 
 @NgModule({
   declarations: [
@@ -38,9 +49,27 @@ import { NavLinksComponent } from './components/nav-links/nav-links.component';
     NotFoundViewComponent,
     UserIconComponent,
     NavLinksComponent,
+    ProfileComponent,
+    CatalogComponent,
+    CardComponent,
+    ProductComponent,
+    CardFilterComponent,
+    PostModalImgComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgOptimizedImage,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule,
+    MatDialogModule,
+    MatButtonModule,
+  ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}

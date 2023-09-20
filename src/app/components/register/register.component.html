@@ -1,7 +1,7 @@
 <div class="register__layout">
   <div class="information-wrapper">
     <div class="information-wrapper__background"></div>
-    <img class="information-wrapper__img" src="../../../assets/img/im-fine.svg" alt="" />
+    <img routerLink="/main" class="information-wrapper__img" src="../../../assets/img/im-fine.svg" alt="" />
     <p class="information-wrapper__text">
       Hi there, do you have money? Tell me how much, i will give you things you need
     </p>
@@ -23,8 +23,8 @@
         <input type="email" placeholder="Email" formControlName="email" />
         <p style="color: white">Date of birth</p>
 
-        <input type="date" formControlName="date" />
-        <p *ngIf="sumbitted && registrationForm.get('date')?.invalid">Invalid date name.</p>
+        <input type="date" formControlName="dateOfBirth" />
+        <p *ngIf="sumbitted && registrationForm.get('dateOfBirth')?.invalid">Invalid date name.</p>
         <p *ngIf="errorMsgAge">You are not yet 13 years old</p>
         <div formArrayName="addresses">
           <div *ngFor="let addressForm of adresses.controls; let i = index" [formGroupName]="i" class="address">

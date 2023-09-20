@@ -6,6 +6,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/loginSevice/login.service';
 import { countries } from '../../models/interface/countries';
+import { DataUser } from 'src/app/models/interface/dataUser.interface';
+import { IAddress } from 'src/app/models/interface/address.interface';
 
 @Component({
   selector: 'app-register',
@@ -42,7 +44,7 @@ export class RegisterComponent {
           Validators.pattern(/^[^\s].*[^\s]$/),
         ],
       ],
-      date: ['', [Validators.required]],
+      dateOfBirth: ['', [Validators.required]],
       addresses: this.fb.array([this.createAddressFormGroup()]),
     });
   }
@@ -72,26 +74,41 @@ export class RegisterComponent {
           const resp = this.http.post(apiUrl, this.registrationForm.value, {
             headers,
           });
-          resp.subscribe(
-            (resp) => {
+          resp.subscribe({
+            next: (resp) => {
               console.log(resp);
               this.login
                 .getToken(this.registrationForm.value.email, this.registrationForm.value.password)
-                ?.subscribe((next) => {
-                  console.log(next);
-                  localStorage.setItem('email', `${this.registrationForm.value.email}`);
-                  localStorage.setItem('firstName', `${this.registrationForm.value.firstName}`);
-                  localStorage.setItem('lastName', `${this.registrationForm.value.lastName}`);
-                  localStorage.setItem('isSignedIn', JSON.stringify(true));
+                ?.subscribe((response) => {
+                  console.log(response);
+
+                  localStorage.setItem('token', `${response.access_token}`);
+
+                  // store user data
+                  this.login.getUserData(String(response.access_token))?.subscribe((response: DataUser) => {
+                    const addresses = response.addresses;
+                    const billingAddressIds = response.billingAddressIds;
+                    const shippingAddressIds = response.shippingAddressIds;
+                    localStorage.setItem('billingAddressIds', JSON.stringify(billingAddressIds));
+                    localStorage.setItem('shippingAddressIds', JSON.stringify(shippingAddressIds));
+                    localStorage.setItem('addresses', JSON.stringify(addresses));
+                    localStorage.setItem('id', `${response.id}`);
+                    localStorage.setItem('email', `${response.email}`);
+                    localStorage.setItem('version', `${response.version}`);
+                    localStorage.setItem('firstName', `${response.firstName}`);
+                    localStorage.setItem('lastName', `${response.lastName}`);
+                    localStorage.setItem('isSignedIn', JSON.stringify(true));
+                    localStorage.setItem('dateOfBirth', `${this.registrationForm.value.dateOfBirth}`);
+                  });
+
                   this.router.navigate(['/']);
-                  this.router.navigate(['']);
                 });
             },
-            (error) => {
+            error: (error) => {
               this.errorMsg = error.error.message;
               this.error = true;
             },
-          );
+          });
         });
       } else {
         this.error = true;
@@ -129,7 +146,7 @@ export class RegisterComponent {
   }
 
   isOld(): boolean {
-    const currentAge = 2023 - this.registrationForm.value.date.slice(0, 4);
+    const currentAge = 2023 - this.registrationForm.value.dateOfBirth.slice(0, 4);
     if (currentAge <= 13) {
       return false;
     } else {

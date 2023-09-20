@@ -1,0 +1,49 @@
+ <svg
+      class="user__icon"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      width="40px"
+      height="40px"
+      viewBox="0 0 40 40"
+      version="1.1"
+      stroke="#000"
+    >
+      <g id="surface1">
+        <path
+          style="
+            fill: none;
+            stroke-width: 40;
+            stroke-linecap: butt;
+            stroke-linejoin: miter;
+            stroke-opacity: 1;
+            stroke-miterlimit: 4;
+          "
+          d="M 564.961163 300.00012 C 564.961163 446.367366 446.367366 564.961163 300.00012 564.961163 C 153.632874 564.961163 35.039077 446.367366 35.039077 300.00012 C 35.039077 153.632874 153.632874 35.039077 300.00012 35.039077 C 446.367366 35.039077 564.961163 153.632874 564.961163 300.00012 Z M 564.961163 300.00012 "
+          transform="matrix(0.0666666,0,0,0.0666666,0,0)"
+        />
+        <path
+          style="
+            fill: none;
+            stroke-width: 40;
+            stroke-linecap: butt;
+            stroke-linejoin: miter;
+            stroke-opacity: 1;
+            stroke-miterlimit: 4;
+          "
+          d="M 414.961103 230.039155 C 414.961103 293.554805 363.51577 345.000138 300.00012 345.000138 C 236.48447 345.000138 185.039137 293.554805 185.039137 230.039155 C 185.039137 166.523504 236.48447 114.960983 300.00012 114.960983 C 363.51577 114.960983 414.961103 166.523504 414.961103 230.039155 Z M 414.961103 230.039155 "
+          transform="matrix(0.0666666,0,0,0.0666666,0,0)"
+        />
+        <path
+          style="
+            fill: none;
+            stroke-width: 40;
+            stroke-linecap: butt;
+            stroke-linejoin: miter;
+            stroke-opacity: 1;
+            stroke-miterlimit: 4;
+          "
+          d="M 106.816449 481.406443 C 135.820367 399.609535 213.222742 345.000138 300.00012 345.000138 C 386.777498 345.000138 464.179873 399.609535 493.183791 481.406443 "
+          transform="matrix(0.0666666,0,0,0.0666666,0,0)"
+        />
+      </g>
+    </svg>

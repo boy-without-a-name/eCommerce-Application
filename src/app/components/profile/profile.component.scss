@@ -1,0 +1,156 @@
+// TODO: см где material стили перебивают стили профиля
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  margin-top: calc(1rem + 1vw);
+  margin-bottom: calc(1rem + 2vw);
+}
+
+.user {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(1rem + 1vw);
+  padding: 1rem;
+  max-width: calc(900px + 1vw);
+  align-items: center;
+  margin: 1rem auto;
+  color: #000;
+  transition: all 0.15s ease-in-out;
+
+  @media screen and (min-width: 481px) {
+    flex-direction: row;
+    justify-items: center;
+    align-items: flex-start;
+  }
+
+  &__btn-delete-address {
+    margin-top: 0.2rem;
+  }
+  &__icon-and-name {
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+    align-items: center;
+  }
+
+  &__icon {
+    width: calc(40px + 2vw);
+    height: calc(40px + 2vw);
+  }
+
+  &__name {
+    font-size: calc(16px + 0.5vw);
+    text-align: center;
+  }
+
+  &__data {
+    display: flex;
+    flex-direction: column;
+    gap: calc(1rem + 0.5vw);
+
+    &_edit-mode {
+      gap: calc(0.5rem + 0.5vw);
+    }
+
+    &-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1vw;
+      border-radius: 4px;
+      background-color: #f9f9f9;
+      padding: calc(0.2rem + 0.5vw);
+
+      &_edit-mode {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+
+    &-heading {
+      color: #424242;
+      font-size: calc(12px + 0.5vw);
+      line-height: 28px;
+
+      &_edit-mode {
+        color: #6f6f6f;
+        font-size: calc(8px + 0.5vw);
+      }
+    }
+
+    &-heading-and-labels {
+      display: flex;
+      flex-direction: row;
+      gap: 0.2rem;
+      align-items: baseline;
+    }
+
+    &-content {
+      color: #6f6f6f;
+      font-size: calc(10px + 0.5vw);
+    }
+  }
+
+  .shipping,
+  .billing {
+    font-size: calc(10px + 0.5vw);
+    line-height: 28px;
+  }
+
+  .shipping {
+    color: blue;
+  }
+
+  .billing {
+    color: palevioletred;
+  }
+}
+
+.btn {
+  background-color: #fff;
+  border: 1px solid #000;
+  border-radius: 4px;
+  padding: 0.2rem;
+  font-size: calc(10px + 0.2vw);
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+input,
+select {
+  padding: 0 0.2rem;
+  width: 100%;
+}
+
+label {
+  font-weight: 600;
+}
+
+label,
+input {
+  font-size: calc(12px + 0.5vw);
+}
+
+.invalid-msg {
+  color: red;
+  font-size: calc(8px + 0.5vw);
+  margin-top: calc(0.2rem + 0.5vw);
+  line-height: 1.2;
+}
+
+.invalid-input {
+  border: 1px solid red;
+}

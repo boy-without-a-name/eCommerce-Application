@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { IAddress } from 'src/app/models/interface/address.interface';
+import { DataUser } from 'src/app/models/interface/dataUser.interface';
 import { LoginService } from 'src/app/services/loginSevice/login.service';
 
 @Component({
@@ -162,13 +164,28 @@ export class AppLoginComponent {
   }
   clickButtonSubmit(email: string, password: string): void {
     this.token.getToken(email, password)?.subscribe({
-      next: (responce) => {
-        localStorage.setItem('token', `${responce.access_token}`);
-        this.token.getUserData(localStorage.getItem('token'))?.subscribe((responce) => {
-          localStorage.setItem('email', `${responce.email}`);
-          localStorage.setItem('firstName', `${responce.firstName}`);
-          localStorage.setItem('lastName', `${responce.lastName}`);
+      next: (response) => {
+        console.log(response);
+        localStorage.setItem('token', `${response.access_token}`);
+
+        this.token.getUserData(localStorage.getItem('token'))?.subscribe((response: DataUser) => {
+          console.log(response);
+
+          const addresses = response.addresses;
+          const billingAddressIds = response.billingAddressIds;
+          const shippingAddressIds = response.shippingAddressIds;
+
+          localStorage.setItem('id', `${response.id}`);
+          localStorage.setItem('email', `${response.email}`);
+          localStorage.setItem('version', `${response.version}`);
+          localStorage.setItem('firstName', `${response.firstName}`);
+          localStorage.setItem('lastName', `${response.lastName}`);
           localStorage.setItem('isSignedIn', JSON.stringify(true));
+          localStorage.setItem('billingAddressIds', JSON.stringify(billingAddressIds));
+          localStorage.setItem('shippingAddressIds', JSON.stringify(shippingAddressIds));
+          localStorage.setItem('addresses', JSON.stringify(addresses));
+          localStorage.setItem('dateOfBirth', `${response.dateOfBirth}`);
+
           this.router.navigate(['/']);
         });
       },
