@@ -132,12 +132,12 @@ export class CatalogComponent implements OnInit {
     }
     this.filterEnabled = true;
 
-    this.catalog.test(localStorage.getItem('authTokenMain'), str)?.subscribe((res) => {
+    this.catalog.test(localStorage.getItem('token'), str)?.subscribe((res) => {
       this.pageLengthFilter = res.results.length;
       this.filterEnabled = true;
       console.log(this.pageLengthFilter);
     });
-    this.catalog.test(localStorage.getItem('authTokenMain'), str, this.pageSized, this.pageOffset)?.subscribe((res) => {
+    this.catalog.test(localStorage.getItem('token'), str, this.pageSized, this.pageOffset)?.subscribe((res) => {
       this.productfilter = res.results;
       this.reset = false;
       this.loading = false;
